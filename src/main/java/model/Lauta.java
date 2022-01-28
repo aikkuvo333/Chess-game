@@ -28,18 +28,21 @@ public class Lauta {
 		return lauta[x][y].getNappula().getSiirrot(new Ruutu(x,y));
 	}
 
-	public void siirra(int mistaX, int mistaY, int mihinX, int mihinY) {
+	public boolean siirra(int mistaX, int mistaY, int mihinX, int mihinY) {
 		Nappula nappula = lauta[mistaX][mistaY].poistaNappula();
 		lauta[mihinX][mihinY].setNappula(nappula);
+		if(nappula instanceof Sotilas) {
+			((Sotilas) nappula).ensimmaineSiirtoTehty();
+		}
+		return true;
 	}
 	
-	public void asetaNappulat() {
+	public boolean asetaNappulat() {
 		for (int x = 0; x < 8; x++) {
 			lauta[x][1].setNappula(new Sotilas(NappulanVari.VALKOINEN));
 			lauta[x][6].setNappula(new Sotilas(NappulanVari.MUSTA));
 		}
+		return true;
 	}
 	
-	
-
 }
