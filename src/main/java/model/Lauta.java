@@ -13,9 +13,9 @@ public class Lauta {
 	public Lauta() {
 		this.lauta = new Ruutu[8][8];
 
-		for (int y = 1; y <= 8; y++) {
-			for (int x = 1; x <= 8; x++) {
-				lauta[x][y] = new Ruutu(x, y);
+		for (int y = 0; y < 8; y++) {
+			for (int x = 0; x < 8; x++) {
+				lauta[x][y] = new Ruutu(x+1, y+1);
 			}
 		}
 	}
@@ -29,14 +29,14 @@ public class Lauta {
 	}
 
 	public void siirra(int mistaX, int mistaY, int mihinX, int mihinY) {
-		Nappula nappula = lauta[mistaX][mistaY].getNappula();
+		Nappula nappula = lauta[mistaX][mistaY].poistaNappula();
 		lauta[mihinX][mihinY].setNappula(nappula);
 	}
 	
 	public void asetaNappulat() {
-		for (int x = 1; x <= 8; x++) {
-			lauta[x][2].setNappula(new Sotilas(NappulanVari.VALKOINEN));
-			lauta[x][7].setNappula(new Sotilas(NappulanVari.MUSTA));
+		for (int x = 0; x < 8; x++) {
+			lauta[x][1].setNappula(new Sotilas(NappulanVari.VALKOINEN));
+			lauta[x][6].setNappula(new Sotilas(NappulanVari.MUSTA));
 		}
 	}
 	

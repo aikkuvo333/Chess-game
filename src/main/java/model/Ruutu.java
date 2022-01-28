@@ -19,8 +19,10 @@ public class Ruutu {
 		this.nappula = nappula;
 	}
 	
-	public void poistaNappua() {
+	public Nappula poistaNappula() {
+		Nappula palautettava = this.nappula;
 		this.nappula = null;
+		return palautettava;
 	}
 	
 	public int getX() {
