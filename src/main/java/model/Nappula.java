@@ -9,4 +9,5 @@ import java.util.ArrayList;
 public abstract class Nappula {
 	
 	public abstract ArrayList<Ruutu> getSiirrot(Ruutu Ruutu);
+	public abstract NappulanVari getVari();
 }
