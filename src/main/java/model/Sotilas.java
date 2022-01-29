@@ -39,6 +39,10 @@ public class Sotilas extends Nappula{
 	public void ensimmaineSiirtoTehty() {
 		this.ekaSiirto = true;
 	}
+	
+	public boolean getEkaSiirto() {
+		return this.ekaSiirto;
+	}
 
 	@Override
 	public NappulanVari getVari() {
