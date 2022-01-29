@@ -12,12 +12,8 @@ public class Lauta {
 
 	public Lauta() {
 		this.lauta = new Ruutu[8][8];
-
-		for (int y = 0; y < 8; y++) {
-			for (int x = 0; x < 8; x++) {
-				lauta[x][y] = new Ruutu(x+1, y+1);
-			}
-		}
+		this.luoRuudut();
+		this.asetaNappulat();
 	}
 	
 	public Ruutu[][] getLauta(){
@@ -37,12 +33,19 @@ public class Lauta {
 		return true;
 	}
 	
-	public boolean asetaNappulat() {
+	public void asetaNappulat() {
 		for (int x = 0; x < 8; x++) {
 			lauta[x][1].setNappula(new Sotilas(NappulanVari.VALKOINEN));
 			lauta[x][6].setNappula(new Sotilas(NappulanVari.MUSTA));
 		}
-		return true;
+	}
+	
+	public void luoRuudut() {
+		for (int y = 0; y < 8; y++) {
+			for (int x = 0; x < 8; x++) {
+				lauta[x][y] = new Ruutu(x+1, y+1);
+			}
+		}
 	}
 	
 }

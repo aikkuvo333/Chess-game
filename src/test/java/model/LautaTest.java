@@ -1,5 +1,6 @@
 package model;
 
+
 /**
 * @author Elmo Vahvaselkä 27.1.2022
 */
@@ -18,7 +19,6 @@ class LautaTest {
 	@BeforeEach 
 	public void setUp() {
 		lauta = new Lauta();
-		lauta.asetaNappulat();
 	}
 	
 	@Test
