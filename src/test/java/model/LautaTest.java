@@ -18,8 +18,8 @@ class LautaTest {
 	@BeforeEach 
 	public void setUp() {
 		lauta = new Lauta();
+		lauta.asetaNappulat();
 	}
-	
 	
 	@Test
 	@DisplayName("Ensimmäinen ruutu on oikein")
@@ -37,28 +37,24 @@ class LautaTest {
 	@Test
 	@DisplayName("Laudan nappulat on asetettu oikein")
 	public void laudaNappuloidenAsettaminenToimiiOikein() {
-		lauta = new Lauta();
-		lauta.asetaNappulat();
-		assertTrue("Ruudut on numeroitu väärin", testaaNappulat(lauta));
+		assertTrue("Nappulat on asetettu väärin", testaaNappulat(lauta));
 	}
 	
 	@Test
 	@DisplayName("Liikuttamaton Sotilas palauttaa kaksi siirtoa")
 	public void palauttaaKaksiSiirtoa() {
-		lauta.asetaNappulat();
 		assertEquals(2, lauta.getSiirrot(0,1).size(), "Siirtoja palautui väärä määrä");
 	}
 	
 	@Test
 	@DisplayName("Valkoinen sotilas siirtyy kaksi ruutua ja palauttaa enää vain yhden siirron")
 	public void valkoinenSotilasSiirtyyOiken() {
-		lauta.asetaNappulat();
-		lauta.siirra(0, 1, 2, 1);
-		assertTrue("Sotilas ei siirtynyt sinne minne piti", lauta.getLauta()[3][1].getNappula() instanceof Sotilas);
-		assertEquals(1, lauta.getSiirrot(2,1).size(), "Siirtoja palautui väärä määrä");
+		lauta.siirra(0, 1, 0, 3);
+		assertTrue("Sotilas ei siirtynyt sinne minne piti", lauta.getLauta()[0][3].getNappula() instanceof Sotilas);
+		assertEquals(1, lauta.getSiirrot(0,3).size(), "Siirtoja palautui väärä määrä");
+		assertTrue("Ruutu josta sotilas lähti on tyhjä", lauta.getLauta()[0][1].getNappula() == null);
+		assertEquals(16, laskeSotilaat(lauta), "Sotilaita on väärä määrä");
 	}
-	
-	
 	
 	private boolean testaaRuudut(Lauta lauta) {
 		for (int y = 0; y < 8; y++) {
@@ -83,6 +79,18 @@ class LautaTest {
 			} 
 		}
 		return true;
+	}
+	
+	private int laskeSotilaat(Lauta lauta) {
+		int sotilaita = 0;
+		for (int y = 0; y < 8; y++) {
+			for (int x = 0; x < 8; x++) {
+				if(lauta.getLauta()[x][y].getNappula() instanceof Sotilas) {
+					sotilaita++;
+				}
+			}
+		}
+		return sotilaita;
 	}
 
 }
