@@ -56,7 +56,7 @@ public class Shakkipeli implements IShakkipeli {
 
 	private boolean onkoSiirtoSallittu(int mistaX, int mistaY, int mihinX, int mihinY) {
 		ArrayList<Ruutu> siirrot = this.lauta.getLauta()[mistaX][mistaY].getNappula()
-				.getSiirrot(new Ruutu(mistaX, mistaY));
+				.getSiirrot(new Ruutu(mistaX, mistaY), this.lauta.getLauta());
 		for (Ruutu siirto : siirrot) {
 			if (siirto.getX() == mihinX && siirto.getY() == mihinY) {
 				return true;

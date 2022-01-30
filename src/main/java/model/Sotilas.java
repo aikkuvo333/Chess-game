@@ -16,7 +16,7 @@ public class Sotilas extends Nappula{
 	}
 
 	@Override
-	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu) {
+	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu, Ruutu[][] lauta) {
 		ArrayList<Ruutu> siirrot = new ArrayList<>();
 		
 		if(vari == NappulanVari.VALKOINEN && ruutu.getY() +1 < 8) {

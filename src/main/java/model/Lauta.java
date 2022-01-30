@@ -21,7 +21,7 @@ public class Lauta {
 	}
 
 	public ArrayList<Ruutu> getSiirrot(int x, int y){
-		return lauta[x][y].getNappula().getSiirrot(new Ruutu(x,y));
+		return lauta[x][y].getNappula().getSiirrot(new Ruutu(x,y), this.lauta);
 	}
 
 	public boolean siirra(int mistaX, int mistaY, int mihinX, int mihinY) {

@@ -17,7 +17,7 @@ public class Torni extends Nappula{
 	}
 	
 	@Override
-	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu) {
+	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu, Ruutu[][] lauta) {
 		ArrayList<Ruutu> siirrot = new ArrayList<>(); {
 			
 			for (int x = ruutu.getX(); x < 7; x++) {
