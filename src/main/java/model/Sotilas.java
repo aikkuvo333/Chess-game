@@ -6,10 +6,10 @@ package model;
 
 import java.util.ArrayList;
 
-public class Sotilas extends Nappula{
+public class Sotilas extends Nappula {
 	NappulanVari vari;
 	private boolean ekaSiirto;
-	
+
 	public Sotilas(NappulanVari vari) {
 		this.vari = vari;
 		this.ekaSiirto = false;
@@ -18,28 +18,63 @@ public class Sotilas extends Nappula{
 	@Override
 	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu, Ruutu[][] lauta) {
 		ArrayList<Ruutu> siirrot = new ArrayList<>();
-		
-		if(vari == NappulanVari.VALKOINEN && ruutu.getY() +1 < 8) {
-			siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY()+1));
-			if(!ekaSiirto) {
-				siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY()+2));
+
+		if (vari == NappulanVari.VALKOINEN && ruutu.getY() + 1 < 7) {
+			siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY() + 1));
+
+			// Sotilaan ensimmäinen siirto voi olla kaksi ruutua
+			if (!ekaSiirto) {
+				siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY() + 2));
+			}
+
+			// Syötävä nappula etuoikealla, sotilaan menosuuntaan
+			if (ruutu.getX() < 7) {
+				if (lauta[ruutu.getX() + 1][ruutu.getY() + 1].getNappula() instanceof Nappula
+						&& lauta[ruutu.getX() + 1][ruutu.getY() + 1].getNappula().getVari() == NappulanVari.MUSTA) {
+					siirrot.add(new Ruutu(ruutu.getX() + 1, ruutu.getY() + 1));
+				}
+			}
+			// Syötävä nappula etuvasemmalla, sotilaan menosuuntaan
+			if (ruutu.getX() > 0) {
+				if (lauta[ruutu.getX() - 1][ruutu.getY() + 1].getNappula() instanceof Nappula
+						&& lauta[ruutu.getX() - 1][ruutu.getY() + 1].getNappula().getVari() == NappulanVari.MUSTA) {
+					siirrot.add(new Ruutu(ruutu.getX() - 1, ruutu.getY() + 1));
+				}
+			}
+
+		}
+
+		if (vari == NappulanVari.MUSTA && ruutu.getY() - 1 > 0){
+			siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY() - 1));
+
+			// Sotilaan ensimmäinen ruutu voi olla kaksi siirtoa
+			if (!ekaSiirto) {
+				siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY() - 2));
+			}
+
+			// Syötävä nappula etuoikealla, sotilaan menosuuntaan
+			if (ruutu.getX() > 0) {
+				if (lauta[ruutu.getX() - 1][ruutu.getY() - 1].getNappula() instanceof Nappula
+						&& lauta[ruutu.getX() - 1][ruutu.getY() - 1].getNappula().getVari() == NappulanVari.VALKOINEN) {
+					siirrot.add(new Ruutu(ruutu.getX() - 1, ruutu.getY() - 1));
+				}
+			}
+			
+			// Syötävä nappula etuvasemmalla, sotilaan menosuuntaan
+			if (ruutu.getX() < 7) {
+				if (lauta[ruutu.getX() + 1][ruutu.getY() - 1].getNappula() instanceof Nappula
+						&& lauta[ruutu.getX() + 1][ruutu.getY() - 1].getNappula().getVari() == NappulanVari.VALKOINEN) {
+					siirrot.add(new Ruutu(ruutu.getX() + 1, ruutu.getY() - 1));
+				}
 			}
 		}
-		
-		if(vari == NappulanVari.MUSTA && ruutu.getY() - 1 > 0) {
-			siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY()-1));
-			if(!ekaSiirto) {
-				siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY()-2));
-			}
-		}
-		
 		return siirrot;
 	}
-	
-	public void ensimmaineSiirtoTehty() {
+
+	public void ekaSiirtoTehty() {
 		this.ekaSiirto = true;
 	}
-	
+
 	public boolean getEkaSiirto() {
 		return this.ekaSiirto;
 	}

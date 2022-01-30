@@ -28,7 +28,7 @@ public class Lauta {
 		Nappula nappula = lauta[mistaX][mistaY].poistaNappula();
 		lauta[mihinX][mihinY].setNappula(nappula);
 		if(nappula instanceof Sotilas) {
-			((Sotilas) nappula).ensimmaineSiirtoTehty();
+			((Sotilas) nappula).ekaSiirtoTehty();
 		}
 		return true;
 	}
