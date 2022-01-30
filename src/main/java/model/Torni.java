@@ -20,19 +20,19 @@ public class Torni extends Nappula{
 	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu) {
 		ArrayList<Ruutu> siirrot = new ArrayList<>(); {
 			
-			for (int x = ruutu.getX(); x < 8; x++) {
+			for (int x = ruutu.getX(); x < 7; x++) {
 				siirrot.add(new Ruutu(x, ruutu.getY()));
 			}
 			
-			for (int x = ruutu.getX(); x > 1; x--) {
+			for (int x = ruutu.getX(); x > 8; x--) {
 				siirrot.add(new Ruutu(x, ruutu.getY()));
 			}
 			
-			for (int y = ruutu.getY(); y < 8; y++) {
+			for (int y = ruutu.getY(); y < 7; y++) {
 				siirrot.add(new Ruutu(ruutu.getX(), y));
 			}
 			
-			for (int y = ruutu.getY(); y > 1; y--) {
+			for (int y = ruutu.getY(); y > 0; y--) {
 				siirrot.add(new Ruutu(ruutu.getX(), y));
 			}
 			

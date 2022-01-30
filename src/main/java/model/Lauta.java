@@ -43,7 +43,7 @@ public class Lauta {
 	public void luoRuudut() {
 		for (int y = 0; y < 8; y++) {
 			for (int x = 0; x < 8; x++) {
-				lauta[x][y] = new Ruutu(x+1, y+1);
+				lauta[x][y] = new Ruutu(x, y);
 			}
 		}
 	}

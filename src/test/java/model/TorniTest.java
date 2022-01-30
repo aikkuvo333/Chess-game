@@ -1,5 +1,9 @@
 package model;
 
+/**
+* @author Elmo Vahvaselkä 29.1.2022
+*/
+
 import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,7 +19,7 @@ class TorniTest {
 	@Test
 	@DisplayName("Torni ei palauta yli rajojen meneviä siirtoja")
 	public void testaaTorninRajat() {
-		ruutu = new Ruutu(1,1);
+		ruutu = new Ruutu(0,0);
 		torni = new Torni(NappulanVari.VALKOINEN);
 		assertEquals(14, torni.getSiirrot(ruutu).size(), "siirtoja tuli väärä määrä");
 		assertFalse("Siirto laudan ulkopuolella", menikoYli(torni.getSiirrot(ruutu)));
@@ -23,7 +27,7 @@ class TorniTest {
 	
 	private boolean menikoYli(ArrayList<Ruutu> siirrot) {
 		for(Ruutu ruutu: siirrot) {
-			if(ruutu.getX() > 8 || ruutu.getX() < 1 || ruutu.getY() > 8 || ruutu.getY() < 1) {
+			if(ruutu.getX() > 7 || ruutu.getX() < 0 || ruutu.getY() > 7 || ruutu.getY() < 0) {
 				return true;
 			}
 		}

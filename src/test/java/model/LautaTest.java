@@ -23,8 +23,8 @@ class LautaTest {
 	@Test
 	@DisplayName("Ensimmäinen ruutu on oikein")
 	public void ensimmäinenRuutuOnAsetettuOikein() {
-		assertEquals(1, lauta.getLauta()[0][0].getX(), "Ensimmäisen ruudun x-koordinaatti on väärin");
-		assertEquals(1, lauta.getLauta()[0][0].getY(), "Ensimmäisen ruudun y-koordinaatti on väärin");
+		assertEquals(0, lauta.getLauta()[0][0].getX(), "Ensimmäisen ruudun x-koordinaatti on väärin");
+		assertEquals(0, lauta.getLauta()[0][0].getY(), "Ensimmäisen ruudun y-koordinaatti on väärin");
 	}
 	
 	@Test
@@ -58,7 +58,7 @@ class LautaTest {
 	private boolean testaaRuudut(Lauta lauta) {
 		for (int y = 0; y < 8; y++) {
 			for (int x = 0; x < 8; x++) {
-				if(lauta.getLauta()[x][y].getX() != x+1 || lauta.getLauta()[x][y].getY() != y+1) {
+				if(lauta.getLauta()[x][y].getX() != x || lauta.getLauta()[x][y].getY() != y) {
 					return false;
 				}
 			}

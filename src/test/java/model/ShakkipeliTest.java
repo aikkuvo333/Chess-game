@@ -24,7 +24,7 @@ class ShakkipeliTest {
 	@Test
 	@DisplayName("Peli ei hyväksy laintonta siirtoa Sotilaalla")
 	public void sotilastaEiSaaSiirtääVaarin() {
-		assertFalse("Siirto ei onnistunut", peli.siirra(1, 2, 1, 6));
+		assertFalse("Siirto ei onnistunut", peli.siirra(0, 1, 0, 5));
 		assertFalse("Sotilas siirtyi", peli.getPelitilanne()[0][5].getNappula() instanceof Sotilas);
 		assertTrue("Sotilas ei ole enää alkuruudussa", peli.getPelitilanne()[0][1].getNappula() instanceof Sotilas);
 		assertEquals(16, laskeSotilaat(peli.getPelitilanne()), "Sotilaita on väärä määrä");
@@ -34,11 +34,11 @@ class ShakkipeliTest {
 	@Test
 	@DisplayName("Peli ei anna siirtää väärää väriä")
 	public void vaaraaVariaEiSaaSiirtaa() {
-		assertFalse("Mustan siirto onnistui aloituksessa", peli.siirra(1, 7, 1, 6));
-		assertTrue("Valkoisen siirto ei onnistunut aloituksessa", peli.siirra(1, 2, 1, 4));
+		assertFalse("Mustan siirto onnistui aloituksessa", peli.siirra(0, 6, 0, 5));
+		assertTrue("Valkoisen siirto ei onnistunut aloituksessa", peli.siirra(0, 1, 0, 3));
 		assertTrue("Valkoinen ei ole oikeassa ruudussa", peli.getPelitilanne()[0][3].getNappula() instanceof Sotilas);
-		assertFalse("Valkoista siirrettiin kaksi kertaa peräkkäin", peli.siirra(2, 2, 2, 1));
-		assertTrue("Mustan siirto ei onnistunut", peli.siirra(1, 7, 1, 6));
+		assertFalse("Valkoista siirrettiin kaksi kertaa peräkkäin", peli.siirra(1, 1, 1, 0));
+		assertTrue("Mustan siirto ei onnistunut", peli.siirra(0, 6, 0, 5));
 		assertTrue("Musta ei ole oikeassa ruudussa", peli.getPelitilanne()[0][5].getNappula() instanceof Sotilas);
 		assertEquals(16, laskeSotilaat(peli.getPelitilanne()), "Sotilaita on väärä määrä");
 	}

@@ -19,14 +19,14 @@ public class Sotilas extends Nappula{
 	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu) {
 		ArrayList<Ruutu> siirrot = new ArrayList<>();
 		
-		if(vari == NappulanVari.VALKOINEN && ruutu.getY() +1 <= 8) {
+		if(vari == NappulanVari.VALKOINEN && ruutu.getY() +1 < 8) {
 			siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY()+1));
 			if(!ekaSiirto) {
 				siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY()+2));
 			}
 		}
 		
-		if(vari == NappulanVari.MUSTA && ruutu.getY() - 1 >= 1) {
+		if(vari == NappulanVari.MUSTA && ruutu.getY() - 1 > 0) {
 			siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY()-1));
 			if(!ekaSiirto) {
 				siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY()-2));

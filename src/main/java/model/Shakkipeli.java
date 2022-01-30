@@ -31,7 +31,7 @@ public class Shakkipeli implements IShakkipeli {
 
 	public boolean siirra(int mistaX, int mistaY, int mihinX, int mihinY) {
 		if (siirretaankoOikeataVaria(mistaX, mistaY) && onkoSiirtoSallittu(mistaX, mistaY, mihinX, mihinY)) {
-			this.lauta.siirra(mistaX-1, mistaY-1, mihinX-1, mihinY-1);
+			this.lauta.siirra(mistaX, mistaY, mihinX, mihinY);
 			this.vaihdaVuoro();
 			return true;
 		}
@@ -51,11 +51,11 @@ public class Shakkipeli implements IShakkipeli {
 	}
 
 	public boolean siirretaankoOikeataVaria(int mistaX, int mistaY) {
-		return this.lauta.getLauta()[mistaX - 1][mistaY - 1].getNappula().getVari() == this.vuorossa;
+		return this.lauta.getLauta()[mistaX][mistaY].getNappula().getVari() == this.vuorossa;
 	}
 
 	private boolean onkoSiirtoSallittu(int mistaX, int mistaY, int mihinX, int mihinY) {
-		ArrayList<Ruutu> siirrot = this.lauta.getLauta()[mistaX - 1][mistaY - 1].getNappula()
+		ArrayList<Ruutu> siirrot = this.lauta.getLauta()[mistaX][mistaY].getNappula()
 				.getSiirrot(new Ruutu(mistaX, mistaY));
 		for (Ruutu siirto : siirrot) {
 			if (siirto.getX() == mihinX && siirto.getY() == mihinY) {
