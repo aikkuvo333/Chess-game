@@ -1,5 +1,8 @@
 package model;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 /**
 * @author Elmo Vahvaselkä 27.1.2022
 */
@@ -65,7 +68,7 @@ class SotilasTest {
 	}
 
 	@Test
-	@DisplayName("Valkoista nappulaa ei voi siirtää reunan yli")
+	@DisplayName("Valkoista sotilasta ei voi siirtää reunan yli")
 	public void valkoinenSotilasReunanYli() {
 		lauta.getLauta()[0][7].setNappula(new Sotilas(NappulanVari.VALKOINEN));
 		ArrayList<Ruutu> siirrot = lauta.getSiirrot(0, 7);
@@ -73,7 +76,7 @@ class SotilasTest {
 	}
 
 	@Test
-	@DisplayName("Mustaa nappulaa ei voi siirtää reunan yli")
+	@DisplayName("Mustaa sotilasta ei voi siirtää reunan yli")
 	public void mustaSotilasReunanYli() {
 		lauta.getLauta()[0][1].setNappula(new Sotilas(NappulanVari.MUSTA));
 		ArrayList<Ruutu> siirrot = lauta.getSiirrot(0, 1);
@@ -136,5 +139,17 @@ class SotilasTest {
 		lauta.getLauta()[0][5].setNappula(new Sotilas(NappulanVari.VALKOINEN));
 		siirrot = lauta.getSiirrot(0, 6);
 		assertEquals(0, siirrot.size(), "Palautti väärän määrän siirtoja, kun nappula on edessä");
+	}
+	
+	@Test
+	@DisplayName("getEkaSiirto-metodin testaus")
+	public void getEkaSiirot() {
+		assertFalse("Valkoinen sotilas palauttaa true", ((Sotilas)lauta.getLauta()[0][1].getNappula()).getEkaSiirto());
+		lauta.siirra(0, 1, 0, 2);
+		assertTrue("Valkoinen liikutettu sotilas palauttaa false", ((Sotilas)lauta.getLauta()[0][2].getNappula()).getEkaSiirto());
+		
+		assertFalse("Musta sotilas palauttaa true", ((Sotilas)lauta.getLauta()[0][6].getNappula()).getEkaSiirto());
+		lauta.siirra(0, 6, 0, 5);
+		assertTrue("Musta liikutettu sotilas palauttaa false", ((Sotilas)lauta.getLauta()[0][5].getNappula()).getEkaSiirto());
 	}
 }
