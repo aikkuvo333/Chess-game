@@ -115,7 +115,7 @@ public class Torni extends Nappula {
 		return this.vari;
 	}
 
-	public void ensimmaineSiirtoTehty() {
+	public void ekaSiirtoTehty() {
 		this.ekaSiirto = true;
 	}
 

@@ -36,6 +36,9 @@ public class Lauta {
 		if (nappula instanceof Sotilas) {
 			((Sotilas) nappula).ekaSiirtoTehty();
 		}
+		if (nappula instanceof Torni) {
+			((Torni) nappula).ekaSiirtoTehty();
+		}
 		return true;
 	}
 
