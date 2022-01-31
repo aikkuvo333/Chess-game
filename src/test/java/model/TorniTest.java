@@ -13,26 +13,42 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class TorniTest {
-	private Ruutu ruutu;
-	private Torni torni;
-	private Ruutu[][] lauta;
+	private Lauta lauta;
 
 	@Test
 	@DisplayName("Torni ei palauta yli rajojen meneviä siirtoja")
 	public void testaaTorninRajat() {
-		lauta = new Ruutu[8][8];
-		ruutu = new Ruutu(0,0);
-		torni = new Torni(NappulanVari.VALKOINEN);
-		assertFalse("Siirto laudan ulkopuolella", menikoYli(torni.getSiirrot(ruutu, lauta)));
+		lauta = new Lauta(true);
+		lauta.getLauta()[4][5].setNappula(new Torni(NappulanVari.VALKOINEN));
+		ArrayList<Ruutu> siirrot = lauta.getSiirrot(4, 5);
+		assertFalse("Siirto laudan ulkopuolella", menikoYli(siirrot));
 	}
 	
 	@Test
-	@DisplayName("Torni palauttaa oikean määrän siirtoja")
+	@DisplayName("Torni palauttaa oikean määrän siirtoja tyhjällä laudalla")
 	public void testaaTorninSiirtojenMaara() {
-		lauta = new Ruutu[8][8];
-		ruutu = new Ruutu(0,0);
-		torni = new Torni(NappulanVari.VALKOINEN);
-		assertEquals(14, torni.getSiirrot(ruutu, lauta).size(), "siirtoja tuli väärä määrä");
+		lauta = new Lauta(true);
+		lauta.getLauta()[4][5].setNappula(new Torni(NappulanVari.VALKOINEN));
+		ArrayList<Ruutu> siirrot = lauta.getSiirrot(4, 5);
+		assertEquals(14, siirrot.size(), "siirtoja tuli väärä määrä");
+	}
+	
+	@Test
+	@DisplayName("Torni palauttaa oikean määrän siirtoja keskellä lautaa")
+	public void testaaSiirtojenNappuloidenKanssa() {
+		/*Torni on nyt kahden sotilas rivin välissä
+		 *pitäis pystyä syömään yksi musta, mutta ei mennä omien päälle
+		 */
+		lauta = new Lauta();
+		//Testataan valkoisella
+		lauta.getLauta()[4][5].setNappula(new Torni(NappulanVari.VALKOINEN));
+		ArrayList<Ruutu> siirrot = lauta.getSiirrot(4, 5);
+		assertEquals(11, siirrot.size(), "siirtoja tuli väärä määrä");
+		
+		//Testataan mustalla
+		lauta.getLauta()[4][5].setNappula(new Torni(NappulanVari.MUSTA));
+		siirrot = lauta.getSiirrot(4, 5);
+		assertEquals(11, siirrot.size(), "siirtoja tuli väärä määrä");
 	}
 	
 	private boolean menikoYli(ArrayList<Ruutu> siirrot) {

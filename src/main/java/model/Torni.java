@@ -6,36 +6,106 @@ package model;
 
 import java.util.ArrayList;
 
-public class Torni extends Nappula{
-	
+public class Torni extends Nappula {
+
 	private NappulanVari vari;
 	private boolean ekaSiirto;
 
-	public Torni (NappulanVari vari) {
+	public Torni(NappulanVari vari) {
 		this.vari = vari;
 		this.ekaSiirto = false;
 	}
-	
+
 	@Override
 	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu, Ruutu[][] lauta) {
-		ArrayList<Ruutu> siirrot = new ArrayList<>(); {
-			
-			for (int x = ruutu.getX(); x < 7; x++) {
+		ArrayList<Ruutu> siirrot = new ArrayList<>();
+		{
+
+			// Siirrot tornin ruudusta ylöspäin
+			int x = ruutu.getX();
+			while (x < 7) {
+				x++;
+
+				if (lauta[x][ruutu.getY()].getNappula() != null) {
+					// onko ruudussa oman värinen
+					if (lauta[x][ruutu.getY()].getNappula().getVari() == vari) {
+						break;
+					}
+
+					// onko ruudussa vihollinen
+					if (lauta[x][ruutu.getY()].getNappula().getVari() != vari) {
+						siirrot.add(new Ruutu(x, ruutu.getY()));
+						break;
+					}
+				}
 				siirrot.add(new Ruutu(x, ruutu.getY()));
 			}
-			
-			for (int x = ruutu.getX(); x > 8; x--) {
+
+			// Siirrot tornin ruudusta alaspäin
+			x = ruutu.getX();
+			while (x > 0) {
+				x--;
+
+				if (lauta[x][ruutu.getY()].getNappula() != null) {
+					// onko ruudussa oman värinen
+					if (lauta[x][ruutu.getY()].getNappula().getVari() != null) {
+						if (lauta[x][ruutu.getY()].getNappula().getVari() == vari) {
+							break;
+						}
+
+						// onko ruudussa vihollinen
+						if (lauta[x][ruutu.getY()].getNappula().getVari() != vari) {
+							siirrot.add(new Ruutu(x, ruutu.getY()));
+							break;
+						}
+					}
+				}
 				siirrot.add(new Ruutu(x, ruutu.getY()));
 			}
-			
-			for (int y = ruutu.getY(); y < 7; y++) {
+
+			//Siirrot tornin ruudusta oikealle
+			int y = ruutu.getY();
+			while (y < 7) {
+				y++;
+
+				if (lauta[ruutu.getX()][y].getNappula() != null) {
+					// onko ruudussa oman värinen
+					if (lauta[ruutu.getX()][y].getNappula().getVari() != null) {
+						if (lauta[ruutu.getX()][y].getNappula().getVari() == vari) {
+							break;
+						}
+
+						// onko ruudussa vihollinen
+						if (lauta[ruutu.getX()][y].getNappula().getVari() != vari) {
+							siirrot.add(new Ruutu(ruutu.getX(), y));
+							break;
+						}
+					}
+				}
 				siirrot.add(new Ruutu(ruutu.getX(), y));
 			}
 			
-			for (int y = ruutu.getY(); y > 0; y--) {
+			//Siirrot tornin ruudusta vasemmalle
+			y = ruutu.getY();
+			while ( y > 0) {
+				y--;
+
+				if (lauta[ruutu.getX()][y].getNappula() != null) {
+					// onko ruudussa oman värinen
+					if (lauta[ruutu.getX()][y].getNappula().getVari() != null) {
+						if (lauta[ruutu.getX()][y].getNappula().getVari() == vari) {
+							break;
+						}
+
+						// onko ruudussa vihollinen
+						if (lauta[ruutu.getX()][y].getNappula().getVari() != vari) {
+							siirrot.add(new Ruutu(ruutu.getX(), y));
+							break;
+						}
+					}
+				}
 				siirrot.add(new Ruutu(ruutu.getX(), y));
 			}
-			
 		}
 		return siirrot;
 	}
@@ -44,11 +114,11 @@ public class Torni extends Nappula{
 	public NappulanVari getVari() {
 		return this.vari;
 	}
-	
+
 	public void ensimmaineSiirtoTehty() {
 		this.ekaSiirto = true;
 	}
-	
+
 	public boolean getEkaSiirto() {
 		return this.ekaSiirto;
 	}
