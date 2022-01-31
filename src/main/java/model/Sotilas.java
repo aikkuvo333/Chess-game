@@ -20,11 +20,15 @@ public class Sotilas extends Nappula {
 		ArrayList<Ruutu> siirrot = new ArrayList<>();
 
 		if (vari == NappulanVari.VALKOINEN && ruutu.getY() + 1 < 7) {
-			siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY() + 1));
 
-			// Sotilaan ensimmäinen siirto voi olla kaksi ruutua
-			if (!ekaSiirto) {
-				siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY() + 2));
+			//Onko sotilaan edessä olevassa ruudussa tilaa
+			if (lauta[ruutu.getX()][ruutu.getY() + 1].getNappula() == null) {
+				siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY() + 1));
+
+				// Sotilaan ensimmäinen siirto voi olla kaksi ruutua. Onko siinä ruudussa tilaa.
+				if (!ekaSiirto && lauta[ruutu.getX()][ruutu.getY() + 2].getNappula() == null) {
+					siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY() + 2));
+				}
 			}
 
 			// Syötävä nappula etuoikealla, sotilaan menosuuntaan
@@ -34,6 +38,7 @@ public class Sotilas extends Nappula {
 					siirrot.add(new Ruutu(ruutu.getX() + 1, ruutu.getY() + 1));
 				}
 			}
+			
 			// Syötävä nappula etuvasemmalla, sotilaan menosuuntaan
 			if (ruutu.getX() > 0) {
 				if (lauta[ruutu.getX() - 1][ruutu.getY() + 1].getNappula() instanceof Nappula
@@ -41,15 +46,18 @@ public class Sotilas extends Nappula {
 					siirrot.add(new Ruutu(ruutu.getX() - 1, ruutu.getY() + 1));
 				}
 			}
-
 		}
 
-		if (vari == NappulanVari.MUSTA && ruutu.getY() - 1 > 0){
-			siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY() - 1));
+		if (vari == NappulanVari.MUSTA && ruutu.getY() - 1 > 0 ) {
+			
+			//Onko sotilaan edessä tilaa
+			if (lauta[ruutu.getX()][ruutu.getY() - 1].getNappula() == null) {
+				siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY() - 1));
 
-			// Sotilaan ensimmäinen ruutu voi olla kaksi siirtoa
-			if (!ekaSiirto) {
-				siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY() - 2));
+				// Sotilaan ensimmäinen ruutu voi olla kaksi siirtoa. Onko siinä ruudussa tilaa.
+				if (!ekaSiirto && lauta[ruutu.getX()][ruutu.getY() - 2].getNappula() == null) {
+					siirrot.add(new Ruutu(ruutu.getX(), ruutu.getY() - 2));
+				}
 			}
 
 			// Syötävä nappula etuoikealla, sotilaan menosuuntaan
@@ -59,7 +67,7 @@ public class Sotilas extends Nappula {
 					siirrot.add(new Ruutu(ruutu.getX() - 1, ruutu.getY() - 1));
 				}
 			}
-			
+
 			// Syötävä nappula etuvasemmalla, sotilaan menosuuntaan
 			if (ruutu.getX() < 7) {
 				if (lauta[ruutu.getX() + 1][ruutu.getY() - 1].getNappula() instanceof Nappula

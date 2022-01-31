@@ -14,10 +14,7 @@ import org.junit.jupiter.api.Test;
 
 class SotilasTest {
 	
-	private Sotilas sotilas;
-	private Ruutu ruutu;
 	private Lauta lauta;
-
 	
 	@BeforeEach 
 	public void setUp() {
