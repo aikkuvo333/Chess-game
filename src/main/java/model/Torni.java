@@ -26,17 +26,17 @@ public class Torni extends Nappula {
 			while (x < 7) {
 				x++;
 
+				// onko ruudussa nappula
 				if (lauta[x][ruutu.getY()].getNappula() != null) {
+
 					// onko ruudussa oman värinen
 					if (lauta[x][ruutu.getY()].getNappula().getVari() == vari) {
 						break;
 					}
 
-					// onko ruudussa vihollinen
-					if (lauta[x][ruutu.getY()].getNappula().getVari() != vari) {
-						siirrot.add(new Ruutu(x, ruutu.getY()));
-						break;
-					}
+					// Jos ei oma -> vihollinen
+					siirrot.add(new Ruutu(x, ruutu.getY()));
+					break;
 				}
 				siirrot.add(new Ruutu(x, ruutu.getY()));
 			}
@@ -46,68 +46,63 @@ public class Torni extends Nappula {
 			while (x > 0) {
 				x--;
 
+				// onko ruudussa nappula
 				if (lauta[x][ruutu.getY()].getNappula() != null) {
-					// onko ruudussa oman värinen
-					if (lauta[x][ruutu.getY()].getNappula().getVari() != null) {
-						if (lauta[x][ruutu.getY()].getNappula().getVari() == vari) {
-							break;
-						}
 
-						// onko ruudussa vihollinen
-						if (lauta[x][ruutu.getY()].getNappula().getVari() != vari) {
-							siirrot.add(new Ruutu(x, ruutu.getY()));
-							break;
-						}
+					// onko ruudussa oman värinen
+					if (lauta[x][ruutu.getY()].getNappula().getVari() == vari) {
+						break;
 					}
+
+					// jos ei oma -> vihollinen
+					siirrot.add(new Ruutu(x, ruutu.getY()));
+					break;
 				}
 				siirrot.add(new Ruutu(x, ruutu.getY()));
 			}
 
-			//Siirrot tornin ruudusta oikealle
+			// Siirrot tornin ruudusta oikealle
 			int y = ruutu.getY();
 			while (y < 7) {
 				y++;
 
+				// onko ruudussa nappula
 				if (lauta[ruutu.getX()][y].getNappula() != null) {
-					// onko ruudussa oman värinen
-					if (lauta[ruutu.getX()][y].getNappula().getVari() != null) {
-						if (lauta[ruutu.getX()][y].getNappula().getVari() == vari) {
-							break;
-						}
 
-						// onko ruudussa vihollinen
-						if (lauta[ruutu.getX()][y].getNappula().getVari() != vari) {
-							siirrot.add(new Ruutu(ruutu.getX(), y));
-							break;
-						}
+					// onko ruudussa oman värinen
+					if (lauta[ruutu.getX()][y].getNappula().getVari() == vari) {
+						break;
 					}
+
+					// jos ei oma -> vihollinen
+					siirrot.add(new Ruutu(ruutu.getX(), y));
+					break;
 				}
 				siirrot.add(new Ruutu(ruutu.getX(), y));
 			}
-			
-			//Siirrot tornin ruudusta vasemmalle
+
+			// Siirrot tornin ruudusta vasemmalle
 			y = ruutu.getY();
-			while ( y > 0) {
+			while (y > 0) {
 				y--;
 
+				// Onko ruudussa nappula
 				if (lauta[ruutu.getX()][y].getNappula() != null) {
-					// onko ruudussa oman värinen
-					if (lauta[ruutu.getX()][y].getNappula().getVari() != null) {
-						if (lauta[ruutu.getX()][y].getNappula().getVari() == vari) {
-							break;
-						}
 
-						// onko ruudussa vihollinen
-						if (lauta[ruutu.getX()][y].getNappula().getVari() != vari) {
-							siirrot.add(new Ruutu(ruutu.getX(), y));
-							break;
-						}
+					// onko ruudussa oman värinen
+					if (lauta[ruutu.getX()][y].getNappula().getVari() == vari) {
+						break;
 					}
+
+					// jos ei oma -> vihollinen
+					siirrot.add(new Ruutu(ruutu.getX(), y));
+					break;
 				}
 				siirrot.add(new Ruutu(ruutu.getX(), y));
 			}
 		}
 		return siirrot;
+
 	}
 
 	@Override

@@ -35,25 +35,53 @@ class TorniTest {
 	}
 
 	@Test
-	@DisplayName("Torni palauttaa oikean määrän siirtoja keskellä lautaa")
-	public void testaaSiirtojenNappuloidenKanssa() {
-		/*
-		 * Torni on nyt kahden sotilas rivin välissä pitäis pystyä syömään yksi musta,
-		 * mutta ei mennä omien päälle
-		 */
-		lauta = new Lauta();
-		lauta.getLauta()[0][5].setNappula(new Sotilas(NappulanVari.VALKOINEN));
-		lauta.getLauta()[7][5].setNappula(new Sotilas(NappulanVari.MUSTA));
+	@DisplayName("Palauttaa oikean määrän siirtoja omien ympäröimänä")
+	public void omienYmparoimana() {
 
-		// Testataan valkoisella
-		lauta.getLauta()[4][5].setNappula(new Torni(NappulanVari.VALKOINEN));
-		ArrayList<Ruutu> siirrot = lauta.getSiirrot(4, 5);
-		assertEquals(10, siirrot.size(), "siirtoja tuli väärä määrä");
+		// Testataan valkoinen
+		lauta = new Lauta(true);
+		lauta.getLauta()[4][4].setNappula(new Torni(NappulanVari.VALKOINEN));
+		lauta.getLauta()[5][4].setNappula(new Sotilas(NappulanVari.VALKOINEN));
+		lauta.getLauta()[4][5].setNappula(new Sotilas(NappulanVari.VALKOINEN));
+		lauta.getLauta()[3][4].setNappula(new Sotilas(NappulanVari.VALKOINEN));
+		lauta.getLauta()[4][3].setNappula(new Sotilas(NappulanVari.VALKOINEN));
+		ArrayList<Ruutu> siirrot = lauta.getSiirrot(4, 4);
+		assertEquals(0, siirrot.size(), "Valkoinen torni palautti liikaa siirtoja");
 
-		// Testataan mustalla
-		lauta.getLauta()[4][5].setNappula(new Torni(NappulanVari.MUSTA));
-		siirrot = lauta.getSiirrot(4, 5);
-		assertEquals(10, siirrot.size(), "siirtoja tuli väärä määrä");
+		// Testataan musta
+		lauta = new Lauta(true);
+		lauta.getLauta()[4][4].setNappula(new Torni(NappulanVari.MUSTA));
+		lauta.getLauta()[5][4].setNappula(new Sotilas(NappulanVari.MUSTA));
+		lauta.getLauta()[4][5].setNappula(new Sotilas(NappulanVari.MUSTA));
+		lauta.getLauta()[3][4].setNappula(new Sotilas(NappulanVari.MUSTA));
+		lauta.getLauta()[4][3].setNappula(new Sotilas(NappulanVari.MUSTA));
+		siirrot = lauta.getSiirrot(4, 4);
+		assertEquals(0, siirrot.size(), "Musta torni palautti liikaa siirtoja");
+	}
+
+	@Test
+	@DisplayName("Palauttaa oikean määrän siirtoja vihollisten ympäröimänä")
+	public void vihollistenYmparoimana() {
+
+		// Testataan valkoinen Kuningas
+		lauta = new Lauta(true);
+		lauta.getLauta()[4][4].setNappula(new Torni(NappulanVari.VALKOINEN));
+		lauta.getLauta()[5][4].setNappula(new Sotilas(NappulanVari.MUSTA));
+		lauta.getLauta()[4][5].setNappula(new Sotilas(NappulanVari.MUSTA));
+		lauta.getLauta()[3][4].setNappula(new Sotilas(NappulanVari.MUSTA));
+		lauta.getLauta()[4][3].setNappula(new Sotilas(NappulanVari.MUSTA));
+		ArrayList<Ruutu>  siirrot = lauta.getSiirrot(4, 4);
+		assertEquals(4, siirrot.size(), "Valmoinen torni palautti liikaa siirtoja");
+
+		// Testataan musta Kuningas
+		lauta = new Lauta(true);
+		lauta.getLauta()[4][4].setNappula(new Torni(NappulanVari.MUSTA));
+		lauta.getLauta()[5][4].setNappula(new Sotilas(NappulanVari.VALKOINEN));
+		lauta.getLauta()[4][5].setNappula(new Sotilas(NappulanVari.VALKOINEN));
+		lauta.getLauta()[3][4].setNappula(new Sotilas(NappulanVari.VALKOINEN));
+		lauta.getLauta()[4][3].setNappula(new Sotilas(NappulanVari.VALKOINEN));
+		siirrot = lauta.getSiirrot(4, 4);
+		assertEquals(4, siirrot.size(), "Musta torni palautti liikaa siirtoja");
 	}
 
 	@Test
