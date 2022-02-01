@@ -7,7 +7,7 @@ package model;
 import java.util.ArrayList;
 
 public class Sotilas extends Nappula {
-	NappulanVari vari;
+	private NappulanVari vari;
 	private boolean ekaSiirto;
 
 	public Sotilas(NappulanVari vari) {
