@@ -23,46 +23,108 @@ public class Ratsu extends Nappula{
 		ArrayList<Ruutu> siirrot = new ArrayList<>();
 		
 		/* Kun siirtyy ylös oikealle */
-		if ((ruutu.getY() +2 >= 0 && ruutu.getY() +2 < 8) && (ruutu.getX() +1 >= 0 && ruutu.getX() +1 < 8)) { //jos ratsu pääsee 2 ruutua ylös JA oikealle niin lisätään mahdolliseksi siirtovaihtoehdoksi listaan
-			siirrot.add(new Ruutu(ruutu.getX()+1, ruutu.getY()+2));
+		if ((ruutu.getY() +2 >= 0 && ruutu.getY() +2 < 8) && (ruutu.getX() +1 >= 0 && ruutu.getX() +1 < 8)) { //jos ratsu on laudan sisällä
+			
+			if(lauta[ruutu.getX()+1][ruutu.getY()+2].getNappula() == null) { //tarkista onko ruudussa nappuloita, mikäli ei ole 
+				siirrot.add(new Ruutu(ruutu.getX()+1, ruutu.getY()+2));	//..niin lisää ratsun mahdolliseksi siirtopaikaksi
+			} else { //mikäli ruudussa on nappula
+				if (lauta[ruutu.getX()+1][ruutu.getY()+2].getNappula().getVari() != vari) {
+					siirrot.add(new Ruutu(ruutu.getX()+1, ruutu.getY()+2));	
+				}
+			}
 		}
 		
+			
 		/* Kun siirtyy ylös vasemmalle */
 		if ((ruutu.getY() +2 >= 0 && ruutu.getY() +2 < 8) && (ruutu.getX() -1 >= 0 && ruutu.getX() -1 < 8)) { 
-			siirrot.add(new Ruutu(ruutu.getX()-1, ruutu.getY()+2));
+			
+			if(lauta[ruutu.getX()-1][ruutu.getY()+2].getNappula() == null) { 
+				siirrot.add(new Ruutu(ruutu.getX()-1, ruutu.getY()+2));
+			} else { 
+				if (lauta[ruutu.getX()-1][ruutu.getY()+2].getNappula().getVari() != vari) {
+					siirrot.add(new Ruutu(ruutu.getX()-1, ruutu.getY()+2));
+				}
+			}
 		}
 		
 		
 		/* Kun siirtyy oikealle ylös */
 		if ((ruutu.getX() +2 >= 0 && ruutu.getX() +2 < 8) && (ruutu.getY() +1 >= 0 && ruutu.getY() +1 < 8) ) { 
-			siirrot.add(new Ruutu(ruutu.getX()+2, ruutu.getY()+1));
+			
+			if(lauta[ruutu.getX()+2][ruutu.getY()+1].getNappula() == null) { 
+				siirrot.add(new Ruutu(ruutu.getX()+2, ruutu.getY()+1));
+			} else { 
+				if (lauta[ruutu.getX()+2][ruutu.getY()+1].getNappula().getVari() != vari) {
+					siirrot.add(new Ruutu(ruutu.getX()+2, ruutu.getY()+1));
+				}
+			}
 		}
 		
 		/* Kun siirtyy oikealle alas */
 		if ((ruutu.getX() +2 >= 0 && ruutu.getX() +2 < 8) && (ruutu.getY() -1 >= 0 && ruutu.getY() -1 < 8) ) { 
-			siirrot.add(new Ruutu(ruutu.getX()+2, ruutu.getY()-1));
+			
+			
+			if(lauta[ruutu.getX()+2][ruutu.getY()-1].getNappula() == null) { 
+				siirrot.add(new Ruutu(ruutu.getX()+2, ruutu.getY()-1));
+			} else { 
+				if (lauta[ruutu.getX()+2][ruutu.getY()-1].getNappula().getVari() != vari) {
+					siirrot.add(new Ruutu(ruutu.getX()+2, ruutu.getY()-1));
+				}
+			}
 		}
 		
 		
 		/* Kun siirtyy alas oikelle */
 		if ((ruutu.getY() -2 >= 0 && ruutu.getY() -2 < 8) && (ruutu.getX() +1 >= 0 && ruutu.getX() +1 < 8)) { 
-			siirrot.add(new Ruutu(ruutu.getX()+1, ruutu.getY()-2));
+			
+			
+			if(lauta[ruutu.getX()+1][ruutu.getY()-2].getNappula() == null) { 
+				siirrot.add(new Ruutu(ruutu.getX()+1, ruutu.getY()-2));
+			} else { 
+				if (lauta[ruutu.getX()+1][ruutu.getY()-2].getNappula().getVari() != vari) {
+					siirrot.add(new Ruutu(ruutu.getX()+1, ruutu.getY()-2));
+				}
+			}
 		}
 		
 		/* Kun siirtyy alas vasemmalle */
 		if ((ruutu.getY() -2 >= 0 && ruutu.getY() -2 < 8) && (ruutu.getX() -1 >= 0 && ruutu.getX() -1 < 8)) { 
-			siirrot.add(new Ruutu(ruutu.getX()-1, ruutu.getY()-2));
+			
+			
+			if(lauta[ruutu.getX()-1][ruutu.getY()-2].getNappula() == null) { 
+				siirrot.add(new Ruutu(ruutu.getX()-1, ruutu.getY()-2));
+			} else { 
+				if (lauta[ruutu.getX()-1][ruutu.getY()-2].getNappula().getVari() != vari) {
+					siirrot.add(new Ruutu(ruutu.getX()-1, ruutu.getY()-2));
+				}
+			}
 		}
 
 		
 		/* Kun siirtyy vasemmalle ylös */
 		if ((ruutu.getX() -2 >= 0 && ruutu.getX() -2 < 8) && (ruutu.getY() +1 >= 0 && ruutu.getY() +1 < 8) ) { 
-			siirrot.add(new Ruutu(ruutu.getX()-2, ruutu.getY()+1));
+			
+			
+			if(lauta[ruutu.getX()-2][ruutu.getY()+1].getNappula() == null) { 
+				siirrot.add(new Ruutu(ruutu.getX()-2, ruutu.getY()+1));
+			} else { 
+				if (lauta[ruutu.getX()-2][ruutu.getY()+1].getNappula().getVari() != vari) {
+					siirrot.add(new Ruutu(ruutu.getX()-2, ruutu.getY()+1));
+				}
+			}
 		}
 		
 		/* Kun siirtyy vasemmalle alas */
 		if ((ruutu.getX() -2 >= 0 && ruutu.getX() -2 < 8) && (ruutu.getY() -1 >= 0 && ruutu.getY() -1 < 8) ) { 
-			siirrot.add(new Ruutu(ruutu.getX()-2, ruutu.getY()-1));
+			
+			
+			if(lauta[ruutu.getX()-2][ruutu.getY()-1].getNappula() == null) { 
+				siirrot.add(new Ruutu(ruutu.getX()-2, ruutu.getY()-1));
+			} else { 
+				if (lauta[ruutu.getX()-2][ruutu.getY()-1].getNappula().getVari() != vari) {
+					siirrot.add(new Ruutu(ruutu.getX()-2, ruutu.getY()-1));
+				}
+			}
 		}
 			
 		return siirrot;
