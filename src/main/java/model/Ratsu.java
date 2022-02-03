@@ -14,7 +14,12 @@ public class Ratsu extends Nappula{
 	}
 
 	@Override
-	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu) {
+	public NappulanVari getVari() {
+		return this.vari;
+	}
+
+	@Override
+	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu, Ruutu[][] lauta) {
 		ArrayList<Ruutu> siirrot = new ArrayList<>();
 		
 		/* Kun siirtyy ylös oikealle */
@@ -61,11 +66,6 @@ public class Ratsu extends Nappula{
 		}
 			
 		return siirrot;
-	}
-
-	@Override
-	public NappulanVari getVari() {
-		return this.vari;
 	}
 	
 }
