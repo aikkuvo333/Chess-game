@@ -52,7 +52,7 @@ public class Kuningas extends Nappula {
 
 			// Tarkastetaan alavasen ruutu
 			if (ruutu.getX() > 0 && (lauta[ruutu.getX() - 1][ruutu.getY() - 1].getNappula() == null
-					|| lauta[ruutu.getX() - 1][ruutu.getY() + 1].getNappula().getVari() != this.vari)) {
+					|| lauta[ruutu.getX() - 1][ruutu.getY() - 1].getNappula().getVari() != this.vari)) {
 				siirrot.add(new Ruutu(ruutu.getX() - 1, ruutu.getY() - 1));
 			}
 		}
