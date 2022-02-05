@@ -10,28 +10,32 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.ArrayList;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class KuningasTest {
 	private Lauta lauta;
+	
+	@BeforeEach 
+	public void setUp() {
+		lauta = new Lauta(true);
+	}
 
 	@Test
 	@DisplayName("Kuningas palauttaa oikean varin")
-	public void gerVari() {
-		lauta = new Lauta(true);
+	public void getVari() {
 		lauta.getLauta()[4][5].setNappula(new Kuningas(NappulanVari.VALKOINEN));
 		assertTrue("Valkoinen Kuningas ei palauttanut oikeata variä",
 				((Kuningas) lauta.getLauta()[4][5].getNappula()).getVari() == NappulanVari.VALKOINEN);
 		lauta.getLauta()[4][5].setNappula(new Kuningas(NappulanVari.MUSTA));
-		assertTrue("Valkoinen Kuningas ei palauttanut oikeata variä",
+		assertTrue("Musta Kuningas ei palauttanut oikeata variä",
 				((Kuningas) lauta.getLauta()[4][5].getNappula()).getVari() == NappulanVari.MUSTA);
 	}
 
 	@Test
 	@DisplayName("getEkaSiirto metodin testaus")
 	public void getEkaSiirto() {
-		lauta = new Lauta();
 		lauta.getLauta()[4][5].setNappula(new Kuningas(NappulanVari.VALKOINEN));
 		assertFalse("Valkoinen Kuningas ei palauttanut false",
 				((Kuningas) lauta.getLauta()[4][5].getNappula()).getEkaSiirto());
@@ -51,7 +55,6 @@ class KuningasTest {
 	@Test
 	@DisplayName("Kuningas ei palauta yli rajojen meneviä siirtoja")
 	public void testaaRajatKuninkaalla() {
-		lauta = new Lauta(true);
 		lauta.getLauta()[0][0].setNappula(new Kuningas(NappulanVari.VALKOINEN));
 		ArrayList<Ruutu> siirrot = lauta.getSiirrot(0, 0);
 		assertFalse("Siirto laudan ulkopuolella vasemmassa alanurkassa", menikoYli(siirrot));
@@ -81,7 +84,6 @@ class KuningasTest {
 	public void omienYmparoimana() {
 
 		// Testataan valkoinen
-		lauta = new Lauta(true);
 		lauta.getLauta()[4][4].setNappula(new Kuningas(NappulanVari.VALKOINEN));
 		lauta.getLauta()[5][4].setNappula(new Sotilas(NappulanVari.VALKOINEN));
 		lauta.getLauta()[5][5].setNappula(new Sotilas(NappulanVari.VALKOINEN));
@@ -114,7 +116,6 @@ class KuningasTest {
 	public void vihollistenYmparoimana() {
 
 		// Testataan valkoinen Kuningas
-		lauta = new Lauta(true);
 		lauta.getLauta()[4][4].setNappula(new Kuningas(NappulanVari.VALKOINEN));
 		lauta.getLauta()[5][4].setNappula(new Sotilas(NappulanVari.MUSTA));
 		lauta.getLauta()[5][5].setNappula(new Sotilas(NappulanVari.MUSTA));
