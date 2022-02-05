@@ -8,15 +8,18 @@ import java.util.ArrayList;
 
 import controller.IKontrolleri;
 
+//Luokka huolehtii säännösitä
 public class Shakkipeli implements IShakkipeli {
 	private IKontrolleri kontrolleri;
 	private Lauta lauta;
 	private NappulanVari vuorossa;
+	private boolean shakattu;
 
 	public Shakkipeli(IKontrolleri kontrolleri) {
 		this.kontrolleri = kontrolleri;
 		this.lauta = new Lauta();
 		this.vuorossa = NappulanVari.VALKOINEN;
+		this.shakattu = false;
 	}
 
 	// konstruktori testeille
@@ -30,8 +33,19 @@ public class Shakkipeli implements IShakkipeli {
 	}
 
 	public boolean siirra(int mistaX, int mistaY, int mihinX, int mihinY) {
-		if (siirretaankoOikeataVaria(mistaX, mistaY) && onkoSiirtoSallittu(mistaX, mistaY, mihinX, mihinY)) {
+		if (siirtyykoOikeaVari(mistaX, mistaY) && onkoSiirtoListalla(mistaX, mistaY, mihinX, mihinY)) {
+
+			//if (shakattu) {}
+
+			if (lauta.getRuutu(mistaX, mistaY).getNappula() instanceof Kuningas) {
+				if (this.kuningasVaarantaaItsensa(mihinX, mihinY)) {
+					return false;
+				}
+			}
+
 			this.lauta.siirra(mistaX, mistaY, mihinX, mihinY);
+			// ilmoita shakista käyttäjälle.
+			this.tarkistaShakkasiko(mihinX, mihinY);
 			this.vaihdaVuoro();
 			return true;
 		}
@@ -50,12 +64,12 @@ public class Shakkipeli implements IShakkipeli {
 		}
 	}
 
-	public boolean siirretaankoOikeataVaria(int mistaX, int mistaY) {
+	public boolean siirtyykoOikeaVari(int mistaX, int mistaY) {
 		return this.lauta.getLauta()[mistaX][mistaY].getNappula().getVari() == this.vuorossa;
 	}
 
-	private boolean onkoSiirtoSallittu(int mistaX, int mistaY, int mihinX, int mihinY) {
-		ArrayList<Ruutu> siirrot = this.lauta.getLauta()[mistaX][mistaY].getNappula()
+	private boolean onkoSiirtoListalla(int mistaX, int mistaY, int mihinX, int mihinY) {
+		ArrayList<Ruutu> siirrot = this.lauta.getRuutu(mistaX, mistaY).getNappula()
 				.getSiirrot(new Ruutu(mistaX, mistaY), this.lauta.getLauta());
 		for (Ruutu siirto : siirrot) {
 			if (siirto.getX() == mihinX && siirto.getY() == mihinY) {
@@ -65,4 +79,42 @@ public class Shakkipeli implements IShakkipeli {
 		return false;
 	}
 
+	private boolean tarkistaShakkasiko(int mihinX, int mihinY) {
+
+		ArrayList<Ruutu> siirrot = this.lauta.getLauta()[mihinX][mihinY].getNappula()
+				.getSiirrot(new Ruutu(mihinX, mihinY), this.lauta.getLauta());
+
+		for (Ruutu siirto : siirrot) {
+			if (siirto.getNappula() != null) {
+				if (siirto.getNappula().getVari() != vuorossa && siirto.getNappula() instanceof Kuningas) {
+					this.shakattu = true;
+				}
+			}
+		}
+		return false;
+	}
+	
+	private boolean kuningasVaarantaaItsensa(int mihinX, int mihinY) {
+		for (int y = 0; y < 8; y++) {
+			for (int x = 0; x < 8; x++) {
+				if (lauta.getRuutu(x,y).getNappula() instanceof Nappula) {
+					if (lauta.getRuutu(x,y).getNappula().getVari() != vuorossa) {
+						ArrayList<Ruutu> siirrot = lauta.getRuutu(x,y).getNappula().getSiirrot(new Ruutu(x,y), this.getPelitilanne());
+						
+						for(Ruutu siirto: siirrot) {
+							if (siirto.getX() == mihinX && siirto.getY() == mihinY) {
+								return true;
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		return false;
+	}
+
+	private boolean tarkistaPoistuikoShakista(int mistaX, int mistaY, int mihinX, int mihinY) {
+		return false;
+	}
 }

@@ -43,6 +43,17 @@ class ShakkipeliTest {
 		assertEquals(16, laskeSotilaat(peli.getPelitilanne()), "Sotilaita on väärä määrä");
 	}
 	
+	@Test
+	@DisplayName("Kuningasta ei voi siirtää vastustajan tornin linjalle")
+	public void kuningasEiVoiTapattaaItseansa() {
+		assertTrue("Valkoinen sotilas ei siirtynyt",peli.siirra(7, 1, 7, 3));
+		assertTrue("Musta sotilas ei siirtynyt",peli.siirra(3, 6, 3, 4));
+		assertTrue("Valkoinen torni ei siirtynyt",peli.siirra(7, 0, 7, 2));
+		assertTrue("Musta Kuningas ei siirtynyt",peli.siirra(3, 7, 3, 6));
+		assertTrue("Valkoinen torni ei siirtynyt 2",peli.siirra(7, 2, 4, 2));
+		assertFalse("Kuningas siirtyi itsetuhoisesti",peli.siirra(3, 6, 4, 5));
+	}
+	
 	private int laskeSotilaat(Ruutu[][] lauta) {
 		int sotilaita = 0;
 		for (int y = 0; y < 8; y++) {
