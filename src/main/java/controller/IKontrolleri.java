@@ -14,5 +14,6 @@ public interface IKontrolleri {
 	public Ruutu[][] getPelitilanne();
 	public ArrayList<Ruutu> getSiirrotNappulalle(int x, int y);
 	public boolean teeSiirto(int mistaX, int mistaY, int mihinX, int mihinY);
-	
+	public void siirtoEiPoistaShakkia();
+	public void siirtoAiheuttiShakin();
 }
