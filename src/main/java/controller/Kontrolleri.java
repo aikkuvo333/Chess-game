@@ -15,7 +15,7 @@ public class Kontrolleri implements IKontrolleri{
 	private Shakkipeli peli;
 	private IPelinakyma pelinakyma;
 	
-	public Kontrolleri(IPelinakyma pelinäkymä) {
+	public Kontrolleri(IPelinakyma pelinakyma) {
 		this.pelinakyma = pelinakyma;
 	}
 	
