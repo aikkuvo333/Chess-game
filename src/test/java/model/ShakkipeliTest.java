@@ -87,6 +87,20 @@ class ShakkipeliTest {
 		assertFalse("Shakki purettu", peli.getShakattu());
 	}
 	
+	@Test
+	@DisplayName("Peli ei anna siirtää Kuninkaan suojana olevaa nappulaa")
+	public void kuninkaanLihakilpieaEiSaaLiikuttaa() {
+		assertFalse("Peli ei ole shakatussa tilassa", peli.getShakattu());
+		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(7, 1, 7, 3));
+		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(4, 6, 4, 5));
+		assertTrue("Valkoinen torni ei siirtynyt", peli.siirra(7, 0, 7, 2));
+		assertTrue("Musta Kuningas ei siirtynyt", peli.siirra(4, 7, 4, 6));
+		assertTrue("Valkoinen torni ei siirtynyt 2", peli.siirra(7, 2, 5, 2));
+		assertTrue("Musta Kuningas ei siirtynyt 2", peli.siirra(4, 6, 3, 5));
+		assertTrue("Valkoinen torni siirtyi mustan sotilaan viereen", peli.siirra(5, 2, 5, 5));;
+		assertFalse("Sotila siirtyi pois suojaamasta Kuningasta",peli.siirra(4, 5, 4, 4));
+	}
+	
 	private int laskeSotilaat(Ruutu[][] lauta) {
 		int sotilaita = 0;
 		for (int y = 0; y < 8; y++) {

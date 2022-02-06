@@ -39,20 +39,14 @@ public class Shakkipeli implements IShakkipeli {
 	public boolean siirra(int mistaX, int mistaY, int mihinX, int mihinY) {
 		if (siirtyykoOikeaVari(mistaX, mistaY) && onkoSiirtoListalla(mistaX, mistaY, mihinX, mihinY)) {
 
-			if (shakattu) {
-				tarkistaShakki(mistaX, mistaY, mihinX, mihinY);
-				if(shakattu) {
-					return false;
-				}
-			}
+			this.varmistaSiirronTurvallisuus(mistaX, mistaY, mihinX, mihinY);
 
-			if (lauta.getRuutu(mistaX, mistaY).getNappula() instanceof Kuningas) {
-				if (this.vaarantuukoKuningas(mihinX, mihinY)) {
-					return false;
-				}
+			if (shakattu) {
+				return false;
 			}
 
 			this.lauta.siirra(mistaX, mistaY, mihinX, mihinY);
+
 			this.tarkistaShakkasiko(mihinX, mihinY);
 			this.vaihdaVuoro();
 			return true;
@@ -92,16 +86,18 @@ public class Shakkipeli implements IShakkipeli {
 	}
 
 	private boolean tarkistaShakkasiko(int x, int y) {
-		
-		//Haetaan siirretyn nappulan mahdolliset seuraavat siirrot
+
+		// Haetaan siirretyn nappulan mahdolliset seuraavat siirrot
 		ArrayList<Ruutu> siirrot = this.getRuudunNappula(x, y).getSiirrot(new Ruutu(x, y), this.getPelitilanne());
 
-		//Käydään läpi siirrot ja tarkisteen voiko joku siirto osua vastustajan kuninkaan päälle.
+		// Käydään läpi siirrot ja tarkisteen voiko joku siirto osua vastustajan
+		// kuninkaan päälle.
 		for (Ruutu siirto : siirrot) {
 			if (this.getRuudunNappula(siirto.getX(), siirto.getY()) != null) {
-				if (this.getRuudunNappula(siirto.getX(), siirto.getY()).getVari() != vuorossa && this.getRuudunNappula(siirto.getX(), siirto.getY()) instanceof Kuningas) {
+				if (this.getRuudunNappula(siirto.getX(), siirto.getY()).getVari() != vuorossa
+						&& this.getRuudunNappula(siirto.getX(), siirto.getY()) instanceof Kuningas) {
 					this.shakattu = true;
-					if(!this.testi) {
+					if (!this.testi) {
 						this.kontrolleri.siirtoAiheuttiShakin();
 					}
 				}
@@ -129,11 +125,11 @@ public class Shakkipeli implements IShakkipeli {
 		}
 		return false;
 	}
-	
-	private void tarkistaShakki(int mistaX, int mistaY, int mihinX, int mihinY) {
+
+	private void varmistaSiirronTurvallisuus(int mistaX, int mistaY, int mihinX, int mihinY) {
 		this.lauta.siirra(mistaX, mistaY, mihinX, mihinY);
-		if(this.vuorossa == NappulanVari.VALKOINEN) {
-			shakattu = vaarantuukoKuningas(lauta.getValkoinenKuningas().getX(), lauta.getValkoinenKuningas().getY());			
+		if (this.vuorossa == NappulanVari.VALKOINEN) {
+			shakattu = vaarantuukoKuningas(lauta.getValkoinenKuningas().getX(), lauta.getValkoinenKuningas().getY());
 		} else {
 			shakattu = vaarantuukoKuningas(lauta.getMustaKuningas().getX(), lauta.getMustaKuningas().getY());
 		}
