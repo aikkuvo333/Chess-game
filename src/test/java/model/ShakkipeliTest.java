@@ -67,7 +67,24 @@ class ShakkipeliTest {
 		assertTrue("Torni siirtyi kuninkaan viereen", peli.siirra(5, 2, 5, 5));
 		assertTrue("Torni shakkasi", peli.getShakattu());
 		assertFalse("Kuninkaan siirto ei purkanut shakkia", peli.siirra(4, 5, 3, 5));
-		
+		assertTrue("Musta Kuningas siirtyi turvaan", peli.siirra(4, 5, 3, 4));
+		assertFalse("Shakki purettu", peli.getShakattu());
+	}
+	
+	@Test
+	@DisplayName("Shakin purkaminen, kun shakkaava nappula syödään")
+	public void pelaajaSoiItsensaPoisShakista() {
+		assertFalse("Peli ei ole shakatussa tilassa", peli.getShakattu());
+		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(7, 1, 7, 3));
+		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(4, 6, 4, 4));
+		assertTrue("Valkoinen torni ei siirtynyt", peli.siirra(7, 0, 7, 2));
+		assertTrue("Musta Kuningas ei siirtynyt", peli.siirra(4, 7, 4, 6));
+		assertTrue("Valkoinen torni ei siirtynyt 2", peli.siirra(7, 2, 5, 2));
+		assertTrue("Musta Kuningas ei siirtynyt 2", peli.siirra(4, 6, 4, 5));
+		assertTrue("Torni siirtyi kuninkaan viereen", peli.siirra(5, 2, 5, 5));
+		assertTrue("Torni shakkasi", peli.getShakattu());
+		assertTrue("Sotilas ei syönyt tornia", peli.siirra(6, 6, 5,5));
+		assertFalse("Shakki purettu", peli.getShakattu());
 	}
 	
 	private int laskeSotilaat(Ruutu[][] lauta) {
