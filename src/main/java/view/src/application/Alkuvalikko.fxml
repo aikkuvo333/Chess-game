@@ -1,22 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #661E1E;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #661E1E;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.src.application.Alkuvalikko_kontrolleri">
    <children>
-      <Button layoutX="201.0" layoutY="208.0" mnemonicParsing="false" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px;" text="Tilastot" />
-      <Button layoutX="201.0" layoutY="161.0" mnemonicParsing="false" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px;" text="Tilastoitu peli" />
-      <Button layoutX="200.0" layoutY="115.0" mnemonicParsing="false" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px;" text="Anonyymi peli" />
-      <Button layoutX="200.0" layoutY="253.0" mnemonicParsing="false" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px;" text="Luo tunnus" />
-      <Button layoutX="200.0" layoutY="298.0" mnemonicParsing="false" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px;" text="Sulje sovellus" />
-      <Button layoutX="7.0" layoutY="12.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="100.0" style="-fx-background-color: #EEEEEE; -fx-opacity: 0.70; -fx-background-radius: 8px; -fx-text-fill: black;" text="Leaderboard" textAlignment="CENTER" AnchorPane.bottomAnchor="357.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="490.0" AnchorPane.topAnchor="10.0" />
-      <Text fill="WHITE" layoutX="264.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valikko">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Text>
+      <AnchorPane prefHeight="56.0" prefWidth="600.0" style="-fx-background-color: #241919;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <StackPane layoutX="263.0" layoutY="12.796875" AnchorPane.bottomAnchor="14.703125" AnchorPane.leftAnchor="263.0" AnchorPane.rightAnchor="263.5" AnchorPane.topAnchor="12.796875">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Valikko" textAlignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </StackPane>
+            <Button fx:id="leaderboardBtn" layoutX="8.0" layoutY="12.0" mnemonicParsing="false" onAction="#leaderboard" prefHeight="33.0" prefWidth="100.0" style="-fx-background-color: #EEEEEE; -fx-opacity: 0.70; -fx-background-radius: 8px; -fx-text-fill: black;" text="Leaderboard" textAlignment="CENTER" />
+         </children></AnchorPane>
+      <StackPane layoutX="195.89999389648438" layoutY="111.9000015258789" AnchorPane.bottomAnchor="63.099998474121094" AnchorPane.leftAnchor="195.89999389648438" AnchorPane.rightAnchor="204.10000610351562" AnchorPane.topAnchor="111.9000015258789">
+         <children>
+            <VBox alignment="CENTER" prefHeight="225.0" prefWidth="200.0" spacing="10.0" style="-fx-alignment: s;">
+               <children>
+                  <Button fx:id="tilastotBtn" alignment="CENTER" mnemonicParsing="false" onAction="#tilastot" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Tilastot" textFill="WHITE" />
+                  <Button fx:id="tilastoituPeliBtn" alignment="CENTER" mnemonicParsing="false" onAction="#TilastoituPeli" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Tilastoitu peli" textFill="WHITE" />
+                  <Button fx:id="tilastoimatonPeliBtn" alignment="CENTER" mnemonicParsing="false" onAction="#TilastoimatonPeli" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Tilastoimaton peli" textFill="WHITE"/>
+                  <Button fx:id="luoTunnusBtn" alignment="CENTER" mnemonicParsing="false" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Luo tunnus" textFill="WHITE"/>
+                  <Button fx:id="suljeSobellusBtn" alignment="CENTER" mnemonicParsing="false" onAction="#suljeSovellus" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Sulje sovellus" textFill="WHITE" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </VBox>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>
