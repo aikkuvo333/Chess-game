@@ -85,8 +85,8 @@ public class Lauta {
 		
 		lauta[4][0].setNappula(new Kuningas(NappulanVari.VALKOINEN));
 		this.setValkoinenKuningas(new Ruutu(4,0));
-		lauta[3][7].setNappula(new Kuningas(NappulanVari.MUSTA));
-		this.setMustaKuningas(new Ruutu(3,7));
+		lauta[4][7].setNappula(new Kuningas(NappulanVari.MUSTA));
+		this.setMustaKuningas(new Ruutu(4,7));
 		lauta[0][0].setNappula(new Torni(NappulanVari.VALKOINEN));
 		lauta[7][0].setNappula(new Torni(NappulanVari.VALKOINEN));
 		lauta[0][7].setNappula(new Torni(NappulanVari.MUSTA));

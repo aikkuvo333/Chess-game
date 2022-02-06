@@ -61,21 +61,21 @@ class LautaTest {
 		//tarkastetaan lähtötilanne
 		assertEquals(4, lauta.getValkoinenKuningas().getX(), "Valkoisen Kuninkaan aloitus x-koordinaatti väärin");
 		assertEquals(0, lauta.getValkoinenKuningas().getY(), "Valkoisen Kuninkaan aloitus y-koordinaatti väärin");
-		assertEquals(3, lauta.getMustaKuningas().getX(), "Mustan Kuninkaan aloitus x-koordinaatti väärin");
+		assertEquals(4, lauta.getMustaKuningas().getX(), "Mustan Kuninkaan aloitus x-koordinaatti väärin");
 		assertEquals(7, lauta.getMustaKuningas().getY(), "Mustan Kuninkaan aloitus y-koordinaatti väärin");
 		
 		//siirretään sotilaat pois kuninkaiden edestä.
 		lauta.siirra(4, 1, 4, 3);
-		lauta.siirra(3, 6, 3, 4);
+		lauta.siirra(4, 6, 4, 4);
 		
 		//siirretään kuninkaita
 		lauta.siirra(4, 0, 4, 1);
-		lauta.siirra(3, 7, 3, 6);
+		lauta.siirra(4, 7, 4, 6);
 		
 		//tarkastetaan lopputilanne
 		assertEquals(4, lauta.getValkoinenKuningas().getX(), "Valkoisen Kuninkaan lopetus x-koordinaatti väärin");
 		assertEquals(1, lauta.getValkoinenKuningas().getY(), "Valkoisen Kuninkaan lopetus y-koordinaatti väärin");
-		assertEquals(3, lauta.getMustaKuningas().getX(), "Mustan Kuninkaan lopetus x-koordinaatti väärin");
+		assertEquals(4, lauta.getMustaKuningas().getX(), "Mustan Kuninkaan lopetus x-koordinaatti väärin");
 		assertEquals(6, lauta.getMustaKuningas().getY(), "Mustan Kuninkaan lopetus y-koordinaatti väärin");
 		
 	}
