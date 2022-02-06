@@ -46,12 +46,28 @@ class ShakkipeliTest {
 	@Test
 	@DisplayName("Kuningasta ei voi siirtää vastustajan tornin linjalle")
 	public void kuningasEiVoiTapattaaItseansa() {
-		assertTrue("Valkoinen sotilas ei siirtynyt",peli.siirra(7, 1, 7, 3));
-		assertTrue("Musta sotilas ei siirtynyt",peli.siirra(3, 6, 3, 4));
-		assertTrue("Valkoinen torni ei siirtynyt",peli.siirra(7, 0, 7, 2));
-		assertTrue("Musta Kuningas ei siirtynyt",peli.siirra(3, 7, 3, 6));
-		assertTrue("Valkoinen torni ei siirtynyt 2",peli.siirra(7, 2, 4, 2));
-		assertFalse("Kuningas siirtyi itsetuhoisesti",peli.siirra(3, 6, 4, 5));
+		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(7, 1, 7, 3));
+		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(4, 6, 4, 4));
+		assertTrue("Valkoinen torni ei siirtynyt", peli.siirra(7, 0, 7, 2));
+		assertTrue("Musta Kuningas ei siirtynyt", peli.siirra(4, 7, 4, 6));
+		assertTrue("Valkoinen torni ei siirtynyt 2", peli.siirra(7, 2, 5, 2));
+		assertFalse("Kuningas siirtyi itsetuhoisesti", peli.siirra(4, 6, 5, 5));
+	}
+	
+	@Test
+	@DisplayName("Pelaaja ei voi tehdä siirtoa, joka ei poista shakkia")
+	public void pelaajanOnPoisttutavaShakista() {
+		assertFalse("Peli ei ole shakatussa tilassa", peli.getShakattu());
+		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(7, 1, 7, 3));
+		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(4, 6, 4, 4));
+		assertTrue("Valkoinen torni ei siirtynyt", peli.siirra(7, 0, 7, 2));
+		assertTrue("Musta Kuningas ei siirtynyt", peli.siirra(4, 7, 4, 6));
+		assertTrue("Valkoinen torni ei siirtynyt 2", peli.siirra(7, 2, 5, 2));
+		assertTrue("Musta Kuningas ei siirtynyt 2", peli.siirra(4, 6, 4, 5));
+		assertTrue("Torni siirtyi kuninkaan viereen", peli.siirra(5, 2, 5, 5));
+		assertTrue("Torni shakkasi", peli.getShakattu());
+		assertFalse("Kuninkaan siirto ei purkanut shakkia", peli.siirra(4, 5, 3, 5));
+		
 	}
 	
 	private int laskeSotilaat(Ruutu[][] lauta) {
