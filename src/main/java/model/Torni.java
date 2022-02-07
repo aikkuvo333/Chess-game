@@ -21,7 +21,7 @@ public class Torni extends Nappula {
 		ArrayList<Ruutu> siirrot = new ArrayList<>();
 		{
 
-			// Siirrot tornin ruudusta ylöspäin
+			// Siirrot tornin ruudusta oikealle
 			int x = ruutu.getX();
 			while (x < 7) {
 				x++;
@@ -41,7 +41,7 @@ public class Torni extends Nappula {
 				siirrot.add(new Ruutu(x, ruutu.getY()));
 			}
 
-			// Siirrot tornin ruudusta alaspäin
+			// Siirrot tornin ruudusta vasemmalle
 			x = ruutu.getX();
 			while (x > 0) {
 				x--;
@@ -61,7 +61,7 @@ public class Torni extends Nappula {
 				siirrot.add(new Ruutu(x, ruutu.getY()));
 			}
 
-			// Siirrot tornin ruudusta oikealle
+			// Siirrot tornin ruudusta ylöspäin
 			int y = ruutu.getY();
 			while (y < 7) {
 				y++;
@@ -81,7 +81,7 @@ public class Torni extends Nappula {
 				siirrot.add(new Ruutu(ruutu.getX(), y));
 			}
 
-			// Siirrot tornin ruudusta vasemmalle
+			// Siirrot tornin ruudusta alaspäin
 			y = ruutu.getY();
 			while (y > 0) {
 				y--;
