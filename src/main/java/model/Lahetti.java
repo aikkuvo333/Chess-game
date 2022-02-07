@@ -2,37 +2,87 @@ package model;
 
 import java.util.ArrayList;
 
-//* @author Oliver Hamberg 28/01/22 *//
+//* @author Oliver Hamberg*//
 
 
 public class Lahetti extends Nappula{
 	NappulanVari vari;
+	int x,y;
 	public Lahetti(NappulanVari vari) {
 		this.vari = vari;
 	}
 	@Override
-	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu) {
+	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu, Ruutu[][] lauta) {
 		ArrayList<Ruutu> siirrot = new ArrayList<>();
 		
 		//Kun lähetti siirtyy ylös vasemmalle
-		while(ruutu.getX() > 0 && ruutu.getY() > 0) {
-			siirrot.add(new Ruutu(ruutu.getX()- 1, ruutu.getY()-1));
+		x = ruutu.getX();
+		y = ruutu.getY();
+		while(x > 0 && y < 7) {
+			//Jos ruudussa on jo jotain
+			if(lauta[x-1][y+1].getNappula() != null) {
+				//Jos ruudussa on vastustaja
+				if(lauta[x-1][y + 1].getNappula().getVari() != this.vari) {
+					siirrot.add(new Ruutu(x-1, y+1));
+				}
+				break;
+			}
+			x--;
+			y++;
+			siirrot.add(new Ruutu(x-1, y+1));
 		}
 		
 		//Kun lähetti siirtyy alas oikealle
-		while(ruutu.getX() <= 8 && ruutu.getY() <= 8) {
-			siirrot.add(new Ruutu(ruutu.getX()+1, ruutu.getY()+1));
+		x = ruutu.getX();
+		y = ruutu.getY();
+		while(x < 7 && y > 0) {
+			//Jos ruudussa on jo jotain
+			if(lauta[x+1][y-1].getNappula() != null) {
+				//Jos ruudussa on vastustaja
+				if(lauta[x+1][y-1].getNappula().getVari() != this.vari) {
+					siirrot.add(new Ruutu(x+1, y-1));
+				}
+				break;
+			}
+			x++;
+			y--;
+			siirrot.add(new Ruutu(x+1, y-1));
 		}
 		
 		//Kun lähetti siirtyy alas vasemmalle
-		while(ruutu.getY() <= 8 && ruutu.getX() > 0) {
-			siirrot.add(new Ruutu(ruutu.getX()-1, ruutu.getY()+1));
+		x = ruutu.getX();
+		y = ruutu.getY();
+		while(x > 0 && y > 0) {
+			//Jos ruudussa on jo jotain
+			if(lauta[x-1][y-1].getNappula() != null) {
+				//Jos ruudussa on vastustaja
+				if(lauta[x-1][y-1].getNappula().getVari() != this.vari) {
+					siirrot.add(new Ruutu(x-1, y-1));
+				}
+				break;
+			}
+			x--;
+			y--;
+			siirrot.add(new Ruutu(ruutu.getX()-1, ruutu.getY()-1));
 		}
 		
 		//Kun lähetti siirtyy ylös oikealle
-		while(ruutu.getY() > 0 && ruutu.getX() <= 8) {
-			siirrot.add(new Ruutu(ruutu.getX()+1, ruutu.getY()-1));
+		x = ruutu.getX();
+		y = ruutu.getY();
+		while(x < 7 && y < 7) {
+			//Jos ruudussa on jo jotain
+			if(lauta[x+1][y+1].getNappula() != null) {
+				//Jos ruudussa on vastustaja
+				if(lauta[x+1][y+1].getNappula().getVari() != this.vari) {
+					siirrot.add(new Ruutu(x+1, y+1));
+				}
+				break;
+			}
+			x++;
+			y++;
+			siirrot.add(new Ruutu(x+1, y+1));
 		}
+		
 		return siirrot;
 	}
 
@@ -40,5 +90,6 @@ public class Lahetti extends Nappula{
 	public NappulanVari getVari() {
 		return this.vari; 
 	}
+
 
 }
