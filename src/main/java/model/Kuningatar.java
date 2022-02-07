@@ -85,7 +85,7 @@ public class Kuningatar extends Nappula{
 		x = ruutu.getX();
 		y = ruutu.getY();
 		while (y > 0) {
-			x--;
+			y--;
 			//Jos ruudussa on jo jotain
 			if (lauta[x][y].getNappula() != null) {
 				//Jos ruudussa on vastustaja
