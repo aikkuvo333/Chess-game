@@ -91,6 +91,16 @@ public class Lauta {
 		lauta[7][0].setNappula(new Torni(NappulanVari.VALKOINEN));
 		lauta[0][7].setNappula(new Torni(NappulanVari.MUSTA));
 		lauta[7][7].setNappula(new Torni(NappulanVari.MUSTA));
+		lauta[1][0].setNappula(new Ratsu(NappulanVari.VALKOINEN));
+		lauta[6][0].setNappula(new Ratsu(NappulanVari.VALKOINEN));
+		lauta[1][7].setNappula(new Ratsu(NappulanVari.MUSTA));
+		lauta[6][7].setNappula(new Ratsu(NappulanVari.MUSTA));
+		lauta[2][0].setNappula(new Lahetti(NappulanVari.VALKOINEN));
+		lauta[5][0].setNappula(new Lahetti(NappulanVari.VALKOINEN));
+		lauta[2][7].setNappula(new Lahetti(NappulanVari.MUSTA));
+		lauta[5][7].setNappula(new Lahetti(NappulanVari.MUSTA));
+		lauta[3][0].setNappula(new Kuningatar(NappulanVari.VALKOINEN));
+		lauta[3][7].setNappula(new Kuningatar(NappulanVari.MUSTA));
 	}
 
 	private void luoRuudut() {
