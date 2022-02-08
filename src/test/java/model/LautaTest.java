@@ -23,8 +23,8 @@ class LautaTest {
 	@Test
 	@DisplayName("Ensimmäinen ruutu on oikein")
 	public void ensimmäinenRuutuOnAsetettuOikein() {
-		assertEquals(0, lauta.getLauta()[0][0].getX(), "Ensimmäisen ruudun x-koordinaatti on väärin");
-		assertEquals(0, lauta.getLauta()[0][0].getY(), "Ensimmäisen ruudun y-koordinaatti on väärin");
+		assertEquals(0, lauta.getRuutu(0, 0).getX(), "Ensimmäisen ruudun x-koordinaatti on väärin");
+		assertEquals(0, lauta.getRuutu(0, 0).getY(), "Ensimmäisen ruudun y-koordinaatti on väärin");
 	}
 	
 	@Test
@@ -37,6 +37,8 @@ class LautaTest {
 	@DisplayName("Laudan nappulat on asetettu oikein")
 	public void laudaNappuloidenAsettaminenToimiiOikein() {
 		assertTrue("Nappulat on asetettu väärin", testaaNappulat(lauta));
+		assertEquals(32, laskeNappulat(lauta), "Nappuloita väärä määrä");
+		assertEquals(16, laskeSotilaat(lauta), "Sotilaita väärä määrä");
 	}
 	
 	@Test
@@ -109,12 +111,24 @@ class LautaTest {
 		int sotilaita = 0;
 		for (int y = 0; y < 8; y++) {
 			for (int x = 0; x < 8; x++) {
-				if(lauta.getLauta()[x][y].getNappula() instanceof Sotilas) {
+				if(lauta.getRuutu(x, y).getNappula() instanceof Sotilas) {
 					sotilaita++;
 				}
 			}
 		}
 		return sotilaita;
+	}
+	
+	private int laskeNappulat(Lauta lauta) {
+		int nappuloita = 0;
+		for (int y = 0; y < 8; y++) {
+			for (int x = 0; x < 8; x++) {
+				if(lauta.getRuutu(x, y).getNappula() != null) {
+					nappuloita++;
+				}
+			}
+		}
+		return nappuloita;
 	}
 
 }
