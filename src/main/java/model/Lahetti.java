@@ -27,9 +27,9 @@ public class Lahetti extends Nappula{
 				}
 				break;
 			}
+			siirrot.add(new Ruutu(x-1, y+1));
 			x--;
 			y++;
-			siirrot.add(new Ruutu(x-1, y+1));
 		}
 		
 		//Kun lähetti siirtyy alas oikealle
@@ -44,9 +44,9 @@ public class Lahetti extends Nappula{
 				}
 				break;
 			}
+			siirrot.add(new Ruutu(x+1, y-1));
 			x++;
 			y--;
-			siirrot.add(new Ruutu(x+1, y-1));
 		}
 		
 		//Kun lähetti siirtyy alas vasemmalle
@@ -61,9 +61,9 @@ public class Lahetti extends Nappula{
 				}
 				break;
 			}
+			siirrot.add(new Ruutu(x-1, y-1));
 			x--;
 			y--;
-			siirrot.add(new Ruutu(ruutu.getX()-1, ruutu.getY()-1));
 		}
 		
 		//Kun lähetti siirtyy ylös oikealle
@@ -78,11 +78,10 @@ public class Lahetti extends Nappula{
 				}
 				break;
 			}
+			siirrot.add(new Ruutu(x+1, y+1));
 			x++;
 			y++;
-			siirrot.add(new Ruutu(x+1, y+1));
 		}
-		
 		return siirrot;
 	}
 
