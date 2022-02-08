@@ -19,68 +19,68 @@ public class Lahetti extends Nappula{
 		x = ruutu.getX();
 		y = ruutu.getY();
 		while(x > 0 && y < 7) {
+			x--;
+			y++;
 			//Jos ruudussa on jo jotain
-			if(lauta[x-1][y+1].getNappula() != null) {
+			if(lauta[x][y].getNappula() != null) {
 				//Jos ruudussa on vastustaja
-				if(lauta[x-1][y + 1].getNappula().getVari() != this.vari) {
-					siirrot.add(new Ruutu(x-1, y+1));
+				if(lauta[x][y].getNappula().getVari() != this.vari) {
+					siirrot.add(new Ruutu(x, y));
 				}
 				break;
 			}
-			siirrot.add(new Ruutu(x-1, y+1));
-			x--;
-			y++;
+			siirrot.add(new Ruutu(x, y));
 		}
 		
 		//Kun lähetti siirtyy alas oikealle
 		x = ruutu.getX();
 		y = ruutu.getY();
 		while(x < 7 && y > 0) {
+			x++;
+			y--;
 			//Jos ruudussa on jo jotain
-			if(lauta[x+1][y-1].getNappula() != null) {
+			if(lauta[x][y].getNappula() != null) {
 				//Jos ruudussa on vastustaja
-				if(lauta[x+1][y-1].getNappula().getVari() != this.vari) {
-					siirrot.add(new Ruutu(x+1, y-1));
+				if(lauta[x][y].getNappula().getVari() != this.vari) {
+					siirrot.add(new Ruutu(x, y));
 				}
 				break;
 			}
-			siirrot.add(new Ruutu(x+1, y-1));
-			x++;
-			y--;
+			siirrot.add(new Ruutu(x, y));
 		}
 		
 		//Kun lähetti siirtyy alas vasemmalle
 		x = ruutu.getX();
 		y = ruutu.getY();
 		while(x > 0 && y > 0) {
+			x--;
+			y--;
 			//Jos ruudussa on jo jotain
-			if(lauta[x-1][y-1].getNappula() != null) {
+			if(lauta[x][y].getNappula() != null) {
 				//Jos ruudussa on vastustaja
-				if(lauta[x-1][y-1].getNappula().getVari() != this.vari) {
-					siirrot.add(new Ruutu(x-1, y-1));
+				if(lauta[x][y].getNappula().getVari() != this.vari) {
+					siirrot.add(new Ruutu(x, y));
 				}
 				break;
 			}
-			siirrot.add(new Ruutu(x-1, y-1));
-			x--;
-			y--;
+			siirrot.add(new Ruutu(x, y));
 		}
 		
 		//Kun lähetti siirtyy ylös oikealle
 		x = ruutu.getX();
 		y = ruutu.getY();
 		while(x < 7 && y < 7) {
+			x++;
+			y++;
 			//Jos ruudussa on jo jotain
-			if(lauta[x+1][y+1].getNappula() != null) {
+			if(lauta[x][y].getNappula() != null) {
 				//Jos ruudussa on vastustaja
-				if(lauta[x+1][y+1].getNappula().getVari() != this.vari) {
-					siirrot.add(new Ruutu(x+1, y+1));
+				if(lauta[x][y].getNappula().getVari() != this.vari) {
+					siirrot.add(new Ruutu(x, y));
 				}
 				break;
 			}
-			siirrot.add(new Ruutu(x+1, y+1));
-			x++;
-			y++;
+			siirrot.add(new Ruutu(x, y));
 		}
 		return siirrot;
 	}

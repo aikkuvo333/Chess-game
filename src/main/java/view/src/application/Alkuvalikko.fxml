@@ -21,16 +21,15 @@
                   </Text>
                </children>
             </StackPane>
-            <Button fx:id="leaderboardBtn" layoutX="8.0" layoutY="12.0" mnemonicParsing="false" onAction="#leaderboard" prefHeight="33.0" prefWidth="100.0" style="-fx-background-color: #EEEEEE; -fx-opacity: 0.70; -fx-background-radius: 8px; -fx-text-fill: black;" text="Leaderboard" textAlignment="CENTER" />
          </children></AnchorPane>
       <StackPane layoutX="195.89999389648438" layoutY="111.9000015258789" AnchorPane.bottomAnchor="63.099998474121094" AnchorPane.leftAnchor="195.89999389648438" AnchorPane.rightAnchor="204.10000610351562" AnchorPane.topAnchor="111.9000015258789">
          <children>
             <VBox alignment="CENTER" prefHeight="225.0" prefWidth="200.0" spacing="10.0" style="-fx-alignment: s;">
                <children>
-                  <Button fx:id="tilastotBtn" alignment="CENTER" mnemonicParsing="false" onAction="#tilastot" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Tilastot" textFill="WHITE" />
+                  <Button fx:id="tilastoimatonPeliBtn" alignment="CENTER" mnemonicParsing="false" onAction="#TilastoimatonPeli" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Tilastoimaton peli" textFill="WHITE" />
                   <Button fx:id="tilastoituPeliBtn" alignment="CENTER" mnemonicParsing="false" onAction="#TilastoituPeli" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Tilastoitu peli" textFill="WHITE" />
-                  <Button fx:id="tilastoimatonPeliBtn" alignment="CENTER" mnemonicParsing="false" onAction="#TilastoimatonPeli" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Tilastoimaton peli" textFill="WHITE"/>
-                  <Button fx:id="luoTunnusBtn" alignment="CENTER" mnemonicParsing="false" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Luo tunnus" textFill="WHITE"/>
+                  <Button fx:id="tilastotBtn" alignment="CENTER" mnemonicParsing="false" onAction="#tilastot" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Tilastot" textFill="WHITE" />
+                  <Button fx:id="leaderboardBtn" alignment="CENTER" mnemonicParsing="false" onAction="#leaderboard" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Leaderboard" textFill="WHITE" />
                   <Button fx:id="suljeSobellusBtn" alignment="CENTER" mnemonicParsing="false" onAction="#suljeSovellus" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Sulje sovellus" textFill="WHITE" />
                </children>
                <opaqueInsets>
