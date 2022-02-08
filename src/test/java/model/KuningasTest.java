@@ -142,6 +142,57 @@ class KuningasTest {
 		siirrot = lauta.getSiirrot(4, 4);
 		assertEquals(8, siirrot.size(), "Musta Kuningas palautti liikaa siirtoja");
 	}
+	
+	@Test
+	@DisplayName("Kuningas palauttaa mahdolliset tornitukset siirtoina")
+	public void testaaTornitukset(){
+		lauta.getRuutu(4, 0).setNappula(new Kuningas(NappulanVari.VALKOINEN));
+		lauta.getRuutu(4, 7).setNappula(new Kuningas(NappulanVari.MUSTA));
+		lauta.getRuutu(0, 0).setNappula(new Torni(NappulanVari.VALKOINEN));
+		lauta.getRuutu(7, 0).setNappula(new Torni(NappulanVari.VALKOINEN));
+		lauta.getRuutu(0, 7).setNappula(new Torni(NappulanVari.MUSTA));
+		lauta.getRuutu(7, 7).setNappula(new Torni(NappulanVari.MUSTA));
+		
+		//Tarkastetaan valkoisen tornituksien koordinaatit
+		assertEquals(7, lauta.getRuutu(4, 0).getNappula().getSiirrot(new Ruutu(4,0), lauta.getLauta()).size(), "Valkoinen Kuningas palautti väärän määrän siirtoja");
+		ArrayList<Ruutu> siirrot = lauta.getRuutu(4, 0).getNappula().getSiirrot(new Ruutu(4,0), lauta.getLauta());
+		assertEquals(6, siirrot.get(5).getX(), "Valkoisen oikealla tornituksella väärä x-koordinaatti");
+		assertEquals(0, siirrot.get(5).getY(), "Valkoisen oikealla tornituksella väärä y-koordinaatti");
+		assertEquals(2, siirrot.get(6).getX(), "Valkoisen vasemmalle tornituksella väärä x-koordinaatti");
+		assertEquals(0, siirrot.get(6).getY(), "Valkoisen vasemmalle tornituksella väärä y-koordinaatti");
+
+		//Tarkastetaan mustan tornituksen koordinaatit
+		assertEquals(7, lauta.getRuutu(4, 7).getNappula().getSiirrot(new Ruutu(4,7), lauta.getLauta()).size(), "Musta Kuningas palautti väärän määrän siirtoja");
+		siirrot = lauta.getRuutu(4, 7).getNappula().getSiirrot(new Ruutu(4,7), lauta.getLauta());
+		assertEquals(6, siirrot.get(5).getX(), "Mustan oikealla tornituksella väärä x-koordinaatti");
+		assertEquals(7, siirrot.get(5).getY(), "Mustan oikealla tornituksella väärä y-koordinaatti");
+		assertEquals(2, siirrot.get(6).getX(), "Mustan vasemmalle tornituksella väärä x-koordinaatti");
+		assertEquals(7, siirrot.get(6).getY(), "Mustan vasemmalle tornituksella väärä y-koordinaatti");
+		
+		//Siirretään valkoista tornia
+		lauta.siirra(7, 0, 7, 1);
+		assertEquals(6, lauta.getRuutu(4, 0).getNappula().getSiirrot(new Ruutu(4,0), lauta.getLauta()).size(), "Valkoinen Kuninas palautti väärän määrän siirtoja 2");
+		
+		//Siirretään valkoinen torni takaisin
+		lauta.siirra(7, 0, 7, 0);
+		assertEquals(6, lauta.getRuutu(4, 0).getNappula().getSiirrot(new Ruutu(4,0), lauta.getLauta()).size(), "Valkoinen Kuninas palautti väärän määrän siirtoja 3");
+		
+		//Siirretään valkoista Kuningasta
+		lauta.siirra(4, 0, 5, 0);
+		assertEquals(5, lauta.getRuutu(5, 0).getNappula().getSiirrot(new Ruutu(5,0), lauta.getLauta()).size(), "Valkoinen Kuninas palautti väärän määrän siirtoja 4");
+		
+		//Siirretään valkoinen Kuningas takasin
+		lauta.siirra(5, 0, 4, 0);
+		assertEquals(5, lauta.getRuutu(4, 0).getNappula().getSiirrot(new Ruutu(4,0), lauta.getLauta()).size(), "Valkoinen Kuninas palautti väärän määrän siirtoja 5");
+		
+		//Siirretään mustaa Kuningasta
+		lauta.siirra(4, 7, 5, 7);
+		assertEquals(5, lauta.getRuutu(5, 7).getNappula().getSiirrot(new Ruutu(5,7), lauta.getLauta()).size(), "Musta Kuningas palautti väärän määrän siirtoja 2");
+		
+		//Siirretään musta Kuningas takaisin
+		lauta.siirra(5, 7, 4, 7);
+		assertEquals(5, lauta.getRuutu(4, 7).getNappula().getSiirrot(new Ruutu(4,7), lauta.getLauta()).size(), "Musta Kuningas palautti väärän määrän siirtoja 3");
+	}
 
 	private boolean menikoYli(ArrayList<Ruutu> siirrot) {
 		for (Ruutu ruutu : siirrot) {
