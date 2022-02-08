@@ -66,6 +66,8 @@ public class Shakkipeli implements IShakkipeli {
 		}
 	}
 
+	
+	//tarkista miksi public
 	public boolean siirtyykoOikeaVari(int x, int y) {
 		return this.getRuudunNappula(x, y).getVari() == this.vuorossa;
 	}
