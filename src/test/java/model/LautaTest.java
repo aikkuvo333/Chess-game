@@ -1,7 +1,7 @@
 package model;
 
 /**
-* @author Elmo Vahvaselkä 27.1.2022
+* @author Elmo Vahvaselkä 27.1.2022 & Aivan Vo 9.2.2022
 */
 
 import static org.junit.Assert.assertTrue;
@@ -131,4 +131,23 @@ class LautaTest {
 		return nappuloita;
 	}
 
+	@Test
+	@DisplayName("korotaSotilas -metodin testaus valkoiselle sotilasnappulalle, pitäisi palauttaa Lahetti tilalle")
+	public void korotaValkSotilas() {
+		Sotilas sotilas = new Sotilas(NappulanVari.VALKOINEN);
+		lauta.getLauta()[3][7].setNappula(sotilas);
+		lauta.korotaSotilas(lauta.getLauta()[3][7], sotilas, 3);
+		assertEquals("model.Lahetti", lauta.getLauta()[3][7].getNappula().getClass().getTypeName(), "Sotilaasta ei tullut lähettiä");
+	}
+
+	
+	@Test
+	@DisplayName("korotaSotilas -metodin testaus mustalle sotilasnappulalle, pitäisi palauttaa Kuningatar tilalle")
+	public void korotaMustSotilas() {
+		Sotilas sotilas = new Sotilas(NappulanVari.MUSTA);
+		lauta.getLauta()[3][0].setNappula(sotilas);		
+		lauta.korotaSotilas(lauta.getLauta()[3][0], sotilas, 4);
+		assertEquals("model.Kuningatar", lauta.getLauta()[3][0].getNappula().getClass().getTypeName(), "Sotilaasta ei tullut kuningatarta");
+	}
+	
 }

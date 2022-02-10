@@ -3,15 +3,16 @@ package model;
 import java.util.ArrayList;
 
 /**
- * @author Elmo Vahvaselkä 26.1.2022
+ * @author Elmo Vahvaselkä 26.1.2022 & Aivan Vo 9.2.2022
  */
 
-/*
- * Ei otaa kantaa sääntöihin. Huolehtii, että nappulat ovat siellä, minne
- * Shakkipeliluokka ne haluaa laittaa. Helpottaa testejä, kun laudalla voi tehdä
- * mitä huvittaa.
- */
-
+/* Ei otaa kantaa sääntöihin. 
+ * Huolehtii, että nappulat ovat siellä, 
+ * minne Shakkipeliluokka ne haluaa laittaa.
+ * Helpottaa testejä, kun laudalla voi 
+ * tehdä mitä huvittaa.
+ * */
+ 
 public class Lauta {
 
 	private Ruutu[][] lauta;
@@ -204,4 +205,45 @@ public class Lauta {
 		}
 	}
 
+	public void korotaSotilas(Ruutu ruutu, Sotilas sotilas, int valinta) {
+		ruutu.poistaNappula(); //poista annetusta ruudusta nappula
+		
+		if(sotilas.getVari() == NappulanVari.VALKOINEN && ruutu.getY() == 7) {
+			switch (valinta) {
+			case 1:
+				ruutu.setNappula(new Torni(NappulanVari.VALKOINEN));//luo tyhjälle ruudulle uusi torninappula
+				break;
+			case 2:
+				ruutu.setNappula(new Ratsu(NappulanVari.VALKOINEN));
+				break;
+			case 3:
+				ruutu.setNappula(new Lahetti(NappulanVari.VALKOINEN));
+				break;
+			case 4:
+				ruutu.setNappula(new Kuningatar(NappulanVari.VALKOINEN));
+				break;
+			case 5:
+				ruutu.setNappula(new Sotilas(NappulanVari.VALKOINEN));
+				break;
+			}
+		} else if (sotilas.getVari() == NappulanVari.MUSTA && ruutu.getY() == 0) {
+			switch (valinta) {
+			case 1:
+				ruutu.setNappula(new Torni(NappulanVari.MUSTA));
+				break;
+			case 2:
+				ruutu.setNappula(new Ratsu(NappulanVari.MUSTA));
+				break;
+			case 3:
+				ruutu.setNappula(new Lahetti(NappulanVari.MUSTA));
+				break;
+			case 4:
+				ruutu.setNappula(new Kuningatar(NappulanVari.MUSTA));
+				break;
+			case 5:
+				ruutu.setNappula(new Sotilas(NappulanVari.MUSTA));
+				break;
+			}
+		} 
+	}
 }
