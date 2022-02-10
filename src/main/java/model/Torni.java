@@ -113,6 +113,10 @@ public class Torni extends Nappula {
 	public void ekaSiirtoTehty() {
 		this.ekaSiirto = true;
 	}
+	
+	public void kumoaEkaSiirto() {
+		this.ekaSiirto = false;
+	}
 
 	public boolean getEkaSiirto() {
 		return this.ekaSiirto;

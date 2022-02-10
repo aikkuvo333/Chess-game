@@ -112,7 +112,67 @@ class ShakkipeliTest {
 		assertTrue("Valkoisen tornitus oikean tornin kanssa ei onnistunut", peli.siirra(4, 0, 6, 0));
 		assertTrue("Valkoinen Kuningas ei siirtynyt", peli.getPelitilanne()[6][0].getNappula() instanceof Kuningas);
 		assertTrue("Valkoinen torni ei siirtynyt", peli.getPelitilanne()[5][0].getNappula() instanceof Torni);
+		assertTrue("Mustan tornitus oikean tornin kanssa ei onnistunut", peli.siirra(4, 7, 6, 7));
+		assertTrue("Valkoinen Kuningas ei siirtynyt", peli.getPelitilanne()[6][7].getNappula() instanceof Kuningas);
+		assertTrue("Valkoinen torni ei siirtynyt", peli.getPelitilanne()[5][7].getNappula() instanceof Torni);
+	}
+	
+	@Test
+	@DisplayName("Tornitusta ei voi tehdä niin, että Kuningas vaarantuu")
+	public void kuningastaEiVoiTornittaaKuolemaan() {
+		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(2, 1, 2, 3));
+		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(2, 6, 2, 4));
+		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(3, 1, 3, 3));
+		assertTrue("Musta sotilas ei syönyt valkoista sotlasta", peli.siirra(2, 4, 3, 3));
+		assertEquals(31, laskeNappulat(peli.getPelitilanne()), "Laudalla on väärä määrä nappuloita");
+		assertTrue("Valkoinen lähetti ei siirtynyt", peli.siirra(2, 0, 5, 3));
+		assertTrue("Musta sotila ei siirtynyt", peli.siirra(3, 6, 3, 4));
+		assertTrue("Valkoinen sotila ei syönyt mustaa sotilasta", peli.siirra(2, 3, 3, 4));
+		assertEquals(30, laskeNappulat(peli.getPelitilanne()), "Laudalla on väärä määrä nappuloita 2");
+		assertTrue("Musta lähetti ei siirtynyt", peli.siirra(2, 7, 6, 3));
+		assertTrue("Valkoinen kuningatar ei syönyt mustaa sotilasta", peli.siirra(3, 0, 3, 3));
+		assertEquals(29, laskeNappulat(peli.getPelitilanne()), "Laudalla on väärä määrä nappuloita 3");
+		assertTrue("Musta ratsu ei siirtynyt", peli.siirra(1, 7, 0, 5));
+		assertTrue("Valkoinen ratsu ei siirtynyt", peli.siirra(1, 0, 0, 2));
+		assertTrue("Musta kuningatar ei liikkunut", peli.siirra(3, 7, 2, 6));
+		assertFalse("Valkoisen tornitus onnistui, vaikka kuningatar söisi Kuninkaan", peli.siirra(5, 0, 3, 0));
+		assertTrue("Valkoinen kuningatar ei liikkunut", peli.siirra(3, 3, 2, 3));
+		assertTrue("Musta sotila ei liikkunut", peli.siirra(7, 6, 7, 5));
+		assertTrue("Valkoinen tornitus ei onnistunut", peli.siirra(4, 0, 2, 0));
+		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(7, 5, 7, 4));
+		assertTrue("Valkoinen kuningatar söi musta kuningattaren", peli.siirra(2, 3, 2, 6));
+		assertEquals(28, laskeNappulat(peli.getPelitilanne()), "Laudalla on väärä määrä nappuloita 4");
+		assertFalse("Musta tornitus onnistui, vaikka kuningatar söisi Kuninkaan", peli.siirra(4, 7, 2, 7));
+		assertTrue("Torni ei ole paikallaan", peli.getPelitilanne()[0][7].getNappula() instanceof Torni);
+		    
+		assertTrue("Kuningas ei ole paikallaan", peli.getPelitilanne()[4][7].getNappula() instanceof Kuningas);
+		//WTF?!
+		assertFalse("ruutu ei ole tyhjä 2", peli.getPelitilanne()[2][7].getNappula() instanceof Kuningas);
+
+
+		assertTrue("Musta ratsu söi kuningattaren", peli.siirra(0, 5, 2, 6));
+		assertEquals(27, laskeNappulat(peli.getPelitilanne()), "Laudalla on väärä määrä nappuloita 5");
 		
+		assertTrue("Musta tornitus ei onnistunut", peli.siirra(4, 7, 2, 7));
+	}
+	
+	@Test
+	@DisplayName("Tornituksella voi purkaa shakin")
+	public void tornitusPelastaaKuninkaan() {
+		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(2, 1, 2, 3));
+		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(2, 6, 2, 4));
+		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(3, 1, 3, 3));
+		assertTrue("Musta sotilas ei syönyt valkoista sotlasta", peli.siirra(2, 4, 3, 3));
+		assertEquals(31, laskeNappulat(peli.getPelitilanne()), "Laudalla on väärä määrä nappuloita");
+		assertTrue("Valkoinen lähetti ei siirtynyt", peli.siirra(2, 0, 5, 3));
+		assertTrue("Musta sotila ei siirtynyt", peli.siirra(3, 6, 3, 4));
+		assertTrue("Valkoinen sotila ei syönyt mustaa sotilasta", peli.siirra(2, 3, 3, 4));
+		assertEquals(30, laskeNappulat(peli.getPelitilanne()), "Laudalla on väärä määrä nappuloita 2");
+		assertTrue("Musta lähetti ei siirtynyt", peli.siirra(2, 7, 6, 3));
+		assertTrue("Valkoinen kuningatar ei syönyt mustaa sotilasta", peli.siirra(3, 0, 3, 3));
+		assertEquals(29, laskeNappulat(peli.getPelitilanne()), "Laudalla on väärä määrä nappuloita 3");
+		assertTrue("Musta ratsu ei siirtynyt", peli.siirra(1, 7, 0, 5));
+		assertTrue("Valkoinen ratsu ei siirtynyt", peli.siirra(1, 0, 0, 2));
 	}
 	
 	private int laskeNappulat(Ruutu[][] lauta) {

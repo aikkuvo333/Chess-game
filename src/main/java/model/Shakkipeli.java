@@ -66,9 +66,7 @@ public class Shakkipeli implements IShakkipeli {
 		}
 	}
 
-	
-	//tarkista miksi public
-	public boolean siirtyykoOikeaVari(int x, int y) {
+	private boolean siirtyykoOikeaVari(int x, int y) {
 		return this.getRuudunNappula(x, y).getVari() == this.vuorossa;
 	}
 
@@ -135,7 +133,9 @@ public class Shakkipeli implements IShakkipeli {
 		} else {
 			shakattu = vaarantuukoKuningas(lauta.getMustaKuningas().getX(), lauta.getMustaKuningas().getY());
 		}
-		this.lauta.siirra(mihinX, mihinY, mistaX, mistaY);
+		if (!this.lauta.kumoaTornitus(mistaX, mistaY, mihinX, mihinY)) {
+			this.lauta.siirra(mihinX, mihinY, mistaX, mistaY);
+		}
 	}
 
 	private Nappula getRuudunNappula(int x, int y) {
