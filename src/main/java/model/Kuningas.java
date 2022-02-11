@@ -124,4 +124,10 @@ public class Kuningas extends Nappula {
 	public boolean getEkaSiirto() {
 		return ekaSiirto;
 	}
+
+	@Override
+	public NappulanTyyppi getTyyppi() {
+		// TODO Auto-generated method stub
+		return NappulanTyyppi.KUNINGAS;
+	}
 }

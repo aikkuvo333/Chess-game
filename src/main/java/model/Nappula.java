@@ -10,4 +10,5 @@ public abstract class Nappula {
 	
 	public abstract ArrayList<Ruutu> getSiirrot(Ruutu ruutu, Ruutu[][] lauta);
 	public abstract NappulanVari getVari();
+	public abstract NappulanTyyppi getTyyppi();
 }

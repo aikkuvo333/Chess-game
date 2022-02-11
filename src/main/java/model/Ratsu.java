@@ -129,5 +129,11 @@ public class Ratsu extends Nappula{
 			
 		return siirrot;
 	}
+
+	@Override
+	public NappulanTyyppi getTyyppi() {
+		// TODO Auto-generated method stub
+		return NappulanTyyppi.RATSU;
+	}
 	
 }

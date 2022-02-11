@@ -122,4 +122,10 @@ public class Torni extends Nappula {
 		return this.ekaSiirto;
 	}
 
+	@Override
+	public NappulanTyyppi getTyyppi() {
+		// TODO Auto-generated method stub
+		return NappulanTyyppi.TORNI;
+	}
+
 }

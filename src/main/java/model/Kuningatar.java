@@ -155,4 +155,9 @@ public class Kuningatar extends Nappula{
 	public NappulanVari getVari() {
 		return this.vari; 
 	}
+	@Override
+	public NappulanTyyppi getTyyppi() {
+		// TODO Auto-generated method stub
+		return NappulanTyyppi.KUNINGATAR;
+	}
 }
