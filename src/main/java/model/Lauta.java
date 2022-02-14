@@ -49,9 +49,11 @@ public class Lauta {
 		if (!tornita(mistaX, mistaY, mihinX, mihinY, nappula)) {
 			lauta[mihinX][mihinY].setNappula(nappula);
 		}
+		
 		if (nappula instanceof Kuningas) {
 			paivitaKuninkaanSijainti((Kuningas) nappula, new Ruutu(mihinX, mihinY));
 		}
+		
 		merkitseEkaSiirto(nappula);
 		return true;
 	}
@@ -59,7 +61,7 @@ public class Lauta {
 	public boolean tornita(int mistaX, int mistaY, int mihinX, int mihinY, Nappula nappula) {
 		if (nappula instanceof Kuningas && mistaX == 4 && mistaY == 0 && mihinX == 6 && mihinY == 0) {
 			Nappula torni = lauta[7][0].poistaNappula();
-			lauta[mihinX][mihinY].setNappula(nappula);
+			lauta[6][0].setNappula(nappula);
 			lauta[5][0].setNappula(torni);
 			merkitseEkaSiirto(torni);
 			return true;
@@ -67,7 +69,7 @@ public class Lauta {
 
 		if (nappula instanceof Kuningas && mistaX == 4 && mistaY == 0 && mihinX == 2 && mihinY == 0) {
 			Nappula torni = lauta[0][0].poistaNappula();
-			lauta[mihinX][mihinY].setNappula(nappula);
+			lauta[2][0].setNappula(nappula);
 			lauta[3][0].setNappula(torni);
 			merkitseEkaSiirto(torni);
 			return true;
@@ -75,7 +77,7 @@ public class Lauta {
 
 		if (nappula instanceof Kuningas && mistaX == 4 && mistaY == 7 && mihinX == 6 && mihinY == 7) {
 			Nappula torni = lauta[7][7].poistaNappula();
-			lauta[mihinX][mihinY].setNappula(nappula);
+			lauta[6][7].setNappula(nappula);
 			lauta[5][7].setNappula(torni);
 			merkitseEkaSiirto(torni);
 			return true;
@@ -83,7 +85,7 @@ public class Lauta {
 
 		if (nappula instanceof Kuningas && mistaX == 4 && mistaY == 7 && mihinX == 2 && mihinY == 7) {
 			Nappula torni = lauta[0][7].poistaNappula();
-			lauta[mihinX][mihinY].setNappula(nappula);
+			lauta[2][7].setNappula(nappula);
 			lauta[3][7].setNappula(torni);
 			merkitseEkaSiirto(torni);
 			return true;
@@ -91,25 +93,27 @@ public class Lauta {
 		return false;
 	}
 	
-	//siirron turvallisuuden varmistaja käyttää tätä
+	//siirron turvallisuuden varmistaja Shakkipeliluokasta käyttää tätä
 	public boolean kumoaTornitus(int mistaX, int mistaY, int mihinX, int mihinY) {
 		if (mistaX == 4 && mistaY == 0 && mihinX == 6 && mihinY == 0) {
 			Torni torni = (Torni)lauta[5][0].poistaNappula();
 			lauta[7][0].setNappula(torni);
 			torni.kumoaEkaSiirto();
-			Kuningas kuningas = (Kuningas)lauta[mihinX][mihinY].getNappula();
-			lauta[mistaX][mistaY].setNappula(kuningas);
-			paivitaKuninkaanSijainti((Kuningas) kuningas, new Ruutu(mistaX, mistaY));
+			Kuningas kuningas = (Kuningas)lauta[6][0].poistaNappula();
+			lauta[4][0].setNappula(kuningas);
+			paivitaKuninkaanSijainti((Kuningas) kuningas, new Ruutu(4, 0));
+			kuningas.kumoaEkaSiirto();
 			return true;
 		}
 
 		if (mistaX == 4 && mistaY == 0 && mihinX == 2 && mihinY == 0) {
 			Torni torni = (Torni)lauta[3][0].poistaNappula();
-			lauta[0][0].setNappula(torni);
 			torni.kumoaEkaSiirto();
-			Kuningas kuningas = (Kuningas)lauta[mihinX][mihinY].getNappula();
-			lauta[mistaX][mistaY].setNappula(kuningas);
-			paivitaKuninkaanSijainti((Kuningas) kuningas, new Ruutu(mistaX, mistaY));
+			lauta[0][0].setNappula(torni);
+			Kuningas kuningas = (Kuningas)lauta[2][0].poistaNappula();
+			lauta[4][0].setNappula(kuningas);
+			paivitaKuninkaanSijainti((Kuningas) kuningas, new Ruutu(4, 0));
+			kuningas.kumoaEkaSiirto();
 			return true;
 		}
 
@@ -117,9 +121,10 @@ public class Lauta {
 			Torni torni = (Torni)lauta[5][7].poistaNappula();
 			lauta[7][7].setNappula(torni);
 			torni.kumoaEkaSiirto();
-			Kuningas kuningas = (Kuningas)lauta[mihinX][mihinY].getNappula();
-			lauta[mistaX][mistaY].setNappula(kuningas);
-			paivitaKuninkaanSijainti((Kuningas) kuningas, new Ruutu(mistaX, mistaY));
+			Kuningas kuningas = (Kuningas)lauta[6][7].poistaNappula();
+			lauta[4][7].setNappula(kuningas);
+			paivitaKuninkaanSijainti((Kuningas) kuningas, new Ruutu(4, 7));
+			kuningas.kumoaEkaSiirto();
 			return true;
 		}
 
@@ -127,9 +132,10 @@ public class Lauta {
 			Torni torni = (Torni)lauta[3][7].poistaNappula();
 			lauta[0][7].setNappula(torni);
 			torni.kumoaEkaSiirto();
-			Kuningas kuningas = (Kuningas)lauta[mihinX][mihinY].getNappula();
-			lauta[mistaX][mistaY].setNappula(kuningas);
-			paivitaKuninkaanSijainti((Kuningas) kuningas, new Ruutu(mistaX, mistaY));
+			Kuningas kuningas = (Kuningas)lauta[2][7].poistaNappula();
+			lauta[4][7].setNappula(kuningas);
+			paivitaKuninkaanSijainti((Kuningas) kuningas, new Ruutu(4, 7));
+			kuningas.kumoaEkaSiirto();
 			return true;
 		}
 		return false;

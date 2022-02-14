@@ -8,6 +8,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -124,14 +126,14 @@ class ShakkipeliTest {
 		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(2, 6, 2, 4));
 		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(3, 1, 3, 3));
 		assertTrue("Musta sotilas ei syönyt valkoista sotlasta", peli.siirra(2, 4, 3, 3));
-		assertEquals(31, laskeNappulat(peli.getPelitilanne()), "Laudalla on väärä määrä nappuloita");
+		assertEquals(31, laskeNappulat(peli.getPelitilanne()), "Laudalla ei ole 31 nappulaa");
 		assertTrue("Valkoinen lähetti ei siirtynyt", peli.siirra(2, 0, 5, 3));
 		assertTrue("Musta sotila ei siirtynyt", peli.siirra(3, 6, 3, 4));
 		assertTrue("Valkoinen sotila ei syönyt mustaa sotilasta", peli.siirra(2, 3, 3, 4));
-		assertEquals(30, laskeNappulat(peli.getPelitilanne()), "Laudalla on väärä määrä nappuloita 2");
+		assertEquals(30, laskeNappulat(peli.getPelitilanne()), "Laudalla ei ole 30 nappulaa");
 		assertTrue("Musta lähetti ei siirtynyt", peli.siirra(2, 7, 6, 3));
 		assertTrue("Valkoinen kuningatar ei syönyt mustaa sotilasta", peli.siirra(3, 0, 3, 3));
-		assertEquals(29, laskeNappulat(peli.getPelitilanne()), "Laudalla on väärä määrä nappuloita 3");
+		assertEquals(29, laskeNappulat(peli.getPelitilanne()), "Laudalla ei ole 29 nappulaa");
 		assertTrue("Musta ratsu ei siirtynyt", peli.siirra(1, 7, 0, 5));
 		assertTrue("Valkoinen ratsu ei siirtynyt", peli.siirra(1, 0, 0, 2));
 		assertTrue("Musta kuningatar ei liikkunut", peli.siirra(3, 7, 2, 6));
@@ -141,24 +143,21 @@ class ShakkipeliTest {
 		assertTrue("Valkoinen tornitus ei onnistunut", peli.siirra(4, 0, 2, 0));
 		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(7, 5, 7, 4));
 		assertTrue("Valkoinen kuningatar söi musta kuningattaren", peli.siirra(2, 3, 2, 6));
-		assertEquals(28, laskeNappulat(peli.getPelitilanne()), "Laudalla on väärä määrä nappuloita 4");
+		assertEquals(28, laskeNappulat(peli.getPelitilanne()), "Laudalla ei ole 28 nappulaa");
 		assertFalse("Musta tornitus onnistui, vaikka kuningatar söisi Kuninkaan", peli.siirra(4, 7, 2, 7));
-		assertTrue("Torni ei ole paikallaan", peli.getPelitilanne()[0][7].getNappula() instanceof Torni);
-		    
+		assertTrue("Torni ei ole paikallaan", peli.getPelitilanne()[0][7].getNappula() instanceof Torni);  
 		assertTrue("Kuningas ei ole paikallaan", peli.getPelitilanne()[4][7].getNappula() instanceof Kuningas);
-		//WTF?!
-		assertFalse("ruutu ei ole tyhjä 2", peli.getPelitilanne()[2][7].getNappula() instanceof Kuningas);
-
-
 		assertTrue("Musta ratsu söi kuningattaren", peli.siirra(0, 5, 2, 6));
-		assertEquals(27, laskeNappulat(peli.getPelitilanne()), "Laudalla on väärä määrä nappuloita 5");
-		
+		assertEquals(27, laskeNappulat(peli.getPelitilanne()), "Laudalla ei ole 27 nappulaa");
+		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(7, 1, 7, 2));
 		assertTrue("Musta tornitus ei onnistunut", peli.siirra(4, 7, 2, 7));
+
 	}
 	
 	@Test
 	@DisplayName("Tornituksella voi purkaa shakin")
 	public void tornitusPelastaaKuninkaan() {
+		
 		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(2, 1, 2, 3));
 		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(2, 6, 2, 4));
 		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(3, 1, 3, 3));
@@ -172,7 +171,24 @@ class ShakkipeliTest {
 		assertTrue("Valkoinen kuningatar ei syönyt mustaa sotilasta", peli.siirra(3, 0, 3, 3));
 		assertEquals(29, laskeNappulat(peli.getPelitilanne()), "Laudalla on väärä määrä nappuloita 3");
 		assertTrue("Musta ratsu ei siirtynyt", peli.siirra(1, 7, 0, 5));
-		assertTrue("Valkoinen ratsu ei siirtynyt", peli.siirra(1, 0, 0, 2));
+		assertTrue("Valkoinen ratsu ei siirtynyt", peli.siirra(1, 0, 0, 2));		
+		assertTrue("Musta kuningatar ei siirtynyt shakkaamaan", peli.siirra(3, 7, 0, 4));
+		assertTrue("Valkoinen Kuningas ei tornittanut itseään turvaan", peli.siirra(4, 0, 2, 0));
+		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(7, 6, 7, 5));
+		assertTrue("Valkoinen Kuningatar ei siirtynyt shakkaamaan", peli.siirra(3, 3, 0, 3));
+		assertTrue("Musta Kuningas ei tornittanut itseään turvaan", peli.siirra(4, 7, 2, 7));
+	}
+	
+	@Test
+	@DisplayName("Pikamatti päättää pelin")
+	public void PikamattiPaattiPelin() {
+		assertTrue("Valkoinen sotilas ei siirtynyt 1", peli.siirra(5, 1, 5, 2));
+		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(4, 6, 4, 5));
+		assertTrue("Valkoinen sotilas ei siirtynyt 2", peli.siirra(6, 1, 6, 3));
+		assertTrue("Musta Kuningatar ei siirtynyt ja lopettanut peliä", peli.siirra(3, 7, 7, 3));
+		assertFalse("peli ei päättynyt", peli.getPeliLoppunut());
+		assertEquals(NappulanVari.MUSTA, peli.getVoittaja(), "Musta ei voittanut peliä");
+		assertFalse("Valkoinen sai tehdä siirron", peli.siirra(0, 1, 0, 2));		
 	}
 	
 	private int laskeNappulat(Ruutu[][] lauta) {
