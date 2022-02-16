@@ -191,6 +191,27 @@ class ShakkipeliTest {
 		assertFalse("Valkoinen sai tehdä siirron", peli.siirra(0, 1, 0, 2));		
 	}
 	
+	@Test
+	@DisplayName("Luovuttaminen toimii valkoisella")
+	public void luovutaValkoinen() {
+		assertTrue("Valkoinen ei luovuttanut", peli.luovuta());
+		assertFalse("Valkoinen pystyi liikkumaan luovuttamisen jälkeen", peli.siirra(0, 1, 0, 2));
+		assertFalse("Musta pystyi siirtymään pelin päätyttyä", peli.siirra(0, 6, 0, 5));
+		assertTrue("Musta ei voittanut", peli.getVoittaja() == NappulanVari.MUSTA);
+		assertTrue("Peli on loppunut", peli.getPeliLoppunut() == true);
+	}
+	
+	@Test
+	@DisplayName("Luovuttaminen toimii mustalla")
+	public void luovutaMusta() {
+		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(0, 1, 0, 2));
+		assertTrue("Musta ei luovuttanut", peli.luovuta());
+		assertFalse("Musta pystyi siirtymään pelin päätyttyä", peli.siirra(0, 6, 0, 5));
+		assertFalse("Valkoinen sotilas pysti siirtymään pelin päätyttyä", peli.siirra(1, 1, 1, 2));
+		assertTrue("Valkoinen ei voittanut", peli.getVoittaja() == NappulanVari.VALKOINEN);
+		assertTrue("Peli on loppunut", peli.getPeliLoppunut() == true);
+	}
+	
 	private int laskeNappulat(Ruutu[][] lauta) {
 		int nappuloita = 0;
 		for (int y = 0; y < 8; y++) {
