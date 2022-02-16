@@ -16,4 +16,5 @@ public interface IKontrolleri {
 	public boolean teeSiirto(int mistaX, int mistaY, int mihinX, int mihinY);
 	public void siirtoEiPoistaShakkia();
 	public void siirtoAiheuttiShakin();
+	public void luovuta();
 }

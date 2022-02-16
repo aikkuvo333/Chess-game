@@ -15,7 +15,7 @@ public class Shakkipeli implements IShakkipeli {
 	private NappulanVari vuorossa;
 	private boolean shakattu;
 	private boolean testi;
-	private boolean peliloppunut;
+	private boolean peliLoppunut;
 	private NappulanVari voittaja;
 	
 	public Shakkipeli(IKontrolleri kontrolleri) {
@@ -24,7 +24,7 @@ public class Shakkipeli implements IShakkipeli {
 		this.vuorossa = NappulanVari.VALKOINEN;
 		this.shakattu = false;
 		this.testi = false;
-		this.peliloppunut = false;
+		this.peliLoppunut = false;
 		this.voittaja = null;
 	}
 
@@ -34,7 +34,7 @@ public class Shakkipeli implements IShakkipeli {
 		this.vuorossa = NappulanVari.VALKOINEN;
 		this.shakattu = false;
 		this.testi = true;
-		this.peliloppunut = false;
+		this.peliLoppunut = false;
 		this.voittaja = null;
 	}
 
@@ -43,7 +43,7 @@ public class Shakkipeli implements IShakkipeli {
 	}
 
 	public boolean siirra(int mistaX, int mistaY, int mihinX, int mihinY) {
-		if (siirtyykoOikeaVari(mistaX, mistaY) && onkoSiirtoListalla(mistaX, mistaY, mihinX, mihinY)) {
+		if (siirtyykoOikeaVari(mistaX, mistaY) && onkoSiirtoListalla(mistaX, mistaY, mihinX, mihinY) && !this.peliLoppunut) {
 
 			this.varmistaSiirronTurvallisuus(mistaX, mistaY, mihinX, mihinY);
 
@@ -58,7 +58,7 @@ public class Shakkipeli implements IShakkipeli {
 			this.vaihdaVuoro();
 			
 			if(this.paattyikoPeli()) {
-				this.peliloppunut = false;
+				this.peliLoppunut = false;
 				if(this.vuorossa == NappulanVari.VALKOINEN) {
 					this.voittaja = NappulanVari.MUSTA;
 				} else {
@@ -74,6 +74,16 @@ public class Shakkipeli implements IShakkipeli {
 
 	public ArrayList<Ruutu> getSiirrot(int x, int y) {
 		return this.lauta.getSiirrot(x, y);
+	}
+	
+	public boolean luovuta() {
+		this.peliLoppunut = true;
+		if(this.vuorossa == NappulanVari.VALKOINEN) {
+			this.voittaja = NappulanVari.MUSTA;
+		} else {
+			this.voittaja = NappulanVari.VALKOINEN;
+		}
+		return true;
 	}
 
 	private void vaihdaVuoro() {
@@ -197,7 +207,7 @@ public class Shakkipeli implements IShakkipeli {
 	}
 
 	public boolean getPeliLoppunut() {
-		return this.peliloppunut;
+		return this.peliLoppunut;
 	}
 	
 	public NappulanVari getVoittaja() {

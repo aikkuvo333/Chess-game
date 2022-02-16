@@ -50,4 +50,9 @@ public class Kontrolleri implements IKontrolleri{
 		this.pelinakyma.siirtoAiheuttiShakin();
 	}
 
+	@Override
+	public void luovuta() {
+		peli.luovuta();	
+	}
+
 }
