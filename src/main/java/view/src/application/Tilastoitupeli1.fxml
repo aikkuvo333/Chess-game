@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #661E1E;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.src.application.Tilastoitupeli1_kontrolleri">
+   <children>
+      <AnchorPane prefHeight="56.0" prefWidth="600.0" style="-fx-background-color: #241919;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <StackPane layoutX="263.0" layoutY="12.79" AnchorPane.bottomAnchor="14.299999999999997" AnchorPane.leftAnchor="263.0" AnchorPane.rightAnchor="263.0" AnchorPane.topAnchor="12.7">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Tilastoitu peli" textAlignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </StackPane>
+         </children>
+      </AnchorPane>
+      <Button fx:id="poistuBtn" alignment="CENTER" layoutX="14.0" layoutY="352.0" mnemonicParsing="false" onAction="#poistu" style="-fx-min-width: 70px; -fx-background-color: grey; -fx-background-radius: 4px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Poistu" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+      <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="416.0" prefWidth="605.0">
+               <children>
+                  <VBox alignment="CENTER_LEFT" fillWidth="false" prefHeight="215.0" prefWidth="183.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pelaaja 1" textAlignment="CENTER" wrappingWidth="175.22900390625">
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Valkoiset nappulat" wrappingWidth="175.22900390625">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <MenuButton fx:id="valkVetovalikkoBtn" mnemonicParsing="false" onAction="#valkVetovalikko" prefHeight="28.0" prefWidth="180.0" text="Valitse tunnus">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="testi1" />
+                            <MenuItem mnemonicParsing="false" text="testi2" />
+                          </items>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </MenuButton>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TAI" wrappingWidth="175.22900390625">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Luo uusi tunnus:" wrappingWidth="175.22900390625">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <TextField fx:id="valkTekstikenttaBtn" onAction="#valkTekstikentta" prefHeight="25.0" prefWidth="181.0">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Button fx:id="valkLuotunnusBtn" alignment="CENTER" mnemonicParsing="false" onAction="#valkLuotunnus" style="-fx-min-width: 50px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Luo tunnus" textFill="WHITE" />
+                     </children>
+                  </VBox>
+                  <Button fx:id="aloitaPeliBtn" alignment="CENTER" mnemonicParsing="false" onAction="#aloitaPeli" style="-fx-min-width: 100px; -fx-background-color: yellow; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: black;" text="Aloita peli" textAlignment="CENTER" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets top="250.0" />
+                     </HBox.margin>
+                  </Button>
+                  <VBox alignment="CENTER_RIGHT" prefHeight="400.0" prefWidth="201.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pelaaja 2" textAlignment="CENTER" wrappingWidth="175.22900390625">
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mustat nappulat" wrappingWidth="175.22900390625">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <MenuButton fx:id="mustVetovalikkoBtn" mnemonicParsing="false" onAction="#mustVetovalikko" prefHeight="22.0" prefWidth="182.0" text="Valitse tunnus">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="testi1" />
+                              <MenuItem mnemonicParsing="false" text="testi2" />
+                           </items>
+                           <VBox.margin>
+                              <Insets bottom="20.0" />
+                           </VBox.margin>
+                        </MenuButton>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TAI" wrappingWidth="175.22900390625">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Luo uusi tunnus:" wrappingWidth="175.22900390625">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                        </Text>
+                        <TextField fx:id="mustVetovalikkoBtn" alignment="CENTER_RIGHT" maxWidth="-Infinity" onAction="#mustVetovalikko" prefHeight="25.0" prefWidth="183.0">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <Button fx:id="mustLuotunnusBtn" alignment="CENTER" mnemonicParsing="false" onAction="#mustLuotunnus" style="-fx-min-width: 50px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Luo tunnus" textFill="WHITE" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
