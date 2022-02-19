@@ -6,6 +6,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import model.NappulanVari;
 import model.Ruutu;
 import model.Shakkipeli;
 import view.IPelinakyma;
@@ -41,11 +42,6 @@ public class Kontrolleri implements IKontrolleri{
 	}
 
 	@Override
-	public void siirtoEiPoistaShakkia() {
-		this.pelinakyma.siirtoEiPoistaShakkia();
-	}
-
-	@Override
 	public void siirtoAiheuttiShakin() {
 		this.pelinakyma.siirtoAiheuttiShakin();
 	}
@@ -53,6 +49,11 @@ public class Kontrolleri implements IKontrolleri{
 	@Override
 	public void luovuta() {
 		peli.luovuta();	
+	}
+
+	@Override
+	public void pelinvoitti(NappulanVari voittaja) {
+		this.pelinakyma.pelinVoitti(voittaja);
 	}
 
 }

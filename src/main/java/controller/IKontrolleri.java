@@ -7,6 +7,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import model.NappulanVari;
 import model.Ruutu;
 
 public interface IKontrolleri {
@@ -14,7 +15,7 @@ public interface IKontrolleri {
 	public Ruutu[][] getPelitilanne();
 	public ArrayList<Ruutu> getSiirrotNappulalle(int x, int y);
 	public boolean teeSiirto(int mistaX, int mistaY, int mihinX, int mihinY);
-	public void siirtoEiPoistaShakkia();
 	public void siirtoAiheuttiShakin();
 	public void luovuta();
+	public void pelinvoitti(NappulanVari voittaja);
 }

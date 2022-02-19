@@ -53,7 +53,6 @@ public class Shakkipeli implements IShakkipeli {
 			}
 
 			this.lauta.siirra(mistaX, mistaY, mihinX, mihinY);
-
 			this.tarkistaShakkasiko(mihinX, mihinY);
 			this.vaihdaVuoro();
 			
@@ -64,7 +63,10 @@ public class Shakkipeli implements IShakkipeli {
 				} else {
 					this.voittaja = NappulanVari.VALKOINEN;
 				}
-				//lisää metodi kontrollerin kutsumiseen
+				
+				if(!this.testi) {
+					this.kontrolleri.pelinvoitti(this.voittaja);
+				}
 			}
 			
 			return true;
@@ -157,18 +159,24 @@ public class Shakkipeli implements IShakkipeli {
 	}
 
 	private void varmistaSiirronTurvallisuus(int mistaX, int mistaY, int mihinX, int mihinY) {
+		//Tehdään siirto
 		this.lauta.siirra(mistaX, mistaY, mihinX, mihinY);
+		
 		if (this.vuorossa == NappulanVari.VALKOINEN) {
 			shakattu = vaarantuukoKuningas(lauta.getValkoinenKuningas().getX(), lauta.getValkoinenKuningas().getY());
 		} else {
 			shakattu = vaarantuukoKuningas(lauta.getMustaKuningas().getX(), lauta.getMustaKuningas().getY());
 		}
+		
+		//Kumotaan siirto
 		if (!this.lauta.kumoaTornitus(mistaX, mistaY, mihinX, mihinY)) {
 			this.lauta.siirra(mihinX, mihinY, mistaX, mistaY);
 			Nappula palautettu = this.getRuudunNappula(mistaX, mistaY);
+			
 			if (palautettu instanceof Torni) {
 				((Torni) palautettu).kumoaEkaSiirto();
 			}
+			
 			if (palautettu instanceof Kuningas) {
 				((Kuningas) palautettu).kumoaEkaSiirto();
 			}
