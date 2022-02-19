@@ -395,13 +395,13 @@ public class FXMLController implements IPelinakyma {
 	}
 
 	@Override
-	public void siirtoEiPoistaShakkia() {
+	public void siirtoAiheuttiShakin() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void siirtoAiheuttiShakin() {
+	public void pelinVoitti(NappulanVari voittaja) {
 		// TODO Auto-generated method stub
 		
 	}
