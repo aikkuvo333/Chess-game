@@ -78,8 +78,8 @@ class SotilasTest {
 	@Test
 	@DisplayName("Mustaa sotilasta ei voi siirtää reunan yli")
 	public void mustaSotilasReunanYli() {
-		lauta.getLauta()[0][1].setNappula(new Sotilas(NappulanVari.MUSTA));
-		ArrayList<Ruutu> siirrot = lauta.getSiirrot(0, 1);
+		lauta.getLauta()[0][0].setNappula(new Sotilas(NappulanVari.MUSTA));
+		ArrayList<Ruutu> siirrot = lauta.getSiirrot(0, 0);
 		assertEquals(0, siirrot.size(), "Palautti siirtoja vaikka ei pitäisi");
 	}
 

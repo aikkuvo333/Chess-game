@@ -9,17 +9,19 @@ import java.util.ArrayList;
 public class Sotilas extends Nappula {
 	private NappulanVari vari;
 	private boolean ekaSiirto;
+	private NappulanTyyppi tyyppi;
 
 	public Sotilas(NappulanVari vari) {
 		this.vari = vari;
 		this.ekaSiirto = false;
+		this.tyyppi = NappulanTyyppi.SOTILAS;
 	}
 
 	@Override
 	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu, Ruutu[][] lauta) {
 		ArrayList<Ruutu> siirrot = new ArrayList<>();
 
-		if (vari == NappulanVari.VALKOINEN && ruutu.getY() + 1 < 7) {
+		if (vari == NappulanVari.VALKOINEN && ruutu.getY() < 7) {
 
 			//Onko sotilaan edessä olevassa ruudussa tilaa
 			if (lauta[ruutu.getX()][ruutu.getY() + 1].getNappula() == null) {
@@ -48,7 +50,7 @@ public class Sotilas extends Nappula {
 			}
 		}
 
-		if (vari == NappulanVari.MUSTA && ruutu.getY() - 1 > 0 ) {
+		if (vari == NappulanVari.MUSTA && ruutu.getY() > 0 ) {
 			
 			//Onko sotilaan edessä tilaa
 			if (lauta[ruutu.getX()][ruutu.getY() - 1].getNappula() == null) {
@@ -94,7 +96,6 @@ public class Sotilas extends Nappula {
 
 	@Override
 	public NappulanTyyppi getTyyppi() {
-		// TODO Auto-generated method stub
-		return NappulanTyyppi.SOTILAS;
+		return this.tyyppi;
 	}
 }
