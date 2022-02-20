@@ -7,6 +7,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import model.NappulanTyyppi;
 import model.NappulanVari;
 import model.Ruutu;
 
@@ -18,4 +19,5 @@ public interface IKontrolleri {
 	public void siirtoAiheuttiShakin();
 	public void luovuta();
 	public void pelinvoitti(NappulanVari voittaja);
+	public NappulanTyyppi korota();
 }

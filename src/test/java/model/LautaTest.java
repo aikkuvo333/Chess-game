@@ -132,22 +132,78 @@ class LautaTest {
 	}
 
 	@Test
-	@DisplayName("korotaSotilas -metodin testaus valkoiselle sotilasnappulalle, pitäisi palauttaa Lahetti tilalle")
-	public void korotaValkSotilas() {
-		Sotilas sotilas = new Sotilas(NappulanVari.VALKOINEN);
-		lauta.getLauta()[3][7].setNappula(sotilas);
-		lauta.korotaSotilas(lauta.getLauta()[3][7], sotilas, 3);
-		assertEquals("model.Lahetti", lauta.getLauta()[3][7].getNappula().getClass().getTypeName(), "Sotilaasta ei tullut lähettiä");
+	@DisplayName("Valkoinen sotilas korotetaan lähetiksi")
+	public void korotaValkSotilasLahetiksi() {
+		lauta.getLauta()[3][7].setNappula(new Sotilas(NappulanVari.VALKOINEN));
+		lauta.korota(3, 7, NappulanTyyppi.LAHETTI);
+		assertTrue("Valkoisesta sotilaasta ei tullut lähettiä", lauta.getLauta()[3][7].getNappula().getTyyppi() == NappulanTyyppi.LAHETTI);
+		assertTrue("Lähetti ei ollut valkoinen", lauta.getLauta()[3][7].getNappula().getVari() == NappulanVari.VALKOINEN);
 	}
-
 	
 	@Test
-	@DisplayName("korotaSotilas -metodin testaus mustalle sotilasnappulalle, pitäisi palauttaa Kuningatar tilalle")
-	public void korotaMustSotilas() {
-		Sotilas sotilas = new Sotilas(NappulanVari.MUSTA);
-		lauta.getLauta()[3][0].setNappula(sotilas);		
-		lauta.korotaSotilas(lauta.getLauta()[3][0], sotilas, 4);
-		assertEquals("model.Kuningatar", lauta.getLauta()[3][0].getNappula().getClass().getTypeName(), "Sotilaasta ei tullut kuningatarta");
+	@DisplayName("Valkoinen sotilas korotetaan torniksi")
+	public void korotaValkSotilasTorniksi() {
+		lauta.getLauta()[4][7].setNappula(new Sotilas(NappulanVari.VALKOINEN));
+		lauta.korota(4, 7, NappulanTyyppi.TORNI);
+		assertTrue("Valkoisesta sotilaasta ei tullut tornia", lauta.getLauta()[4][7].getNappula().getTyyppi() == NappulanTyyppi.TORNI);
+		assertTrue("Torni ei ollut valkoien", lauta.getLauta()[4][7].getNappula().getVari() == NappulanVari.VALKOINEN);
+	}
+	
+	@Test
+	@DisplayName("Valkoinen sotilas korotetaan ratsuksi")
+	public void korotaValkSotilasRatsuksi() {
+		lauta.getLauta()[5][7].setNappula(new Sotilas(NappulanVari.VALKOINEN));
+		lauta.korota(5, 7, NappulanTyyppi.RATSU);
+		assertTrue("Valkoisesta sotilaasta ei tullut ratsua", lauta.getLauta()[5][7].getNappula().getTyyppi() == NappulanTyyppi.RATSU);
+		assertTrue("Ratsu ei ollut valkoinen", lauta.getLauta()[5][7].getNappula().getVari() == NappulanVari.VALKOINEN);
+	}
+	
+	@Test
+	@DisplayName("Valkoinen sotilas korotetaan Kuningattareksi")
+	public void korotaValkSoKuningattareksi() {
+		lauta.getLauta()[6][7].setNappula(new Sotilas(NappulanVari.VALKOINEN));
+		lauta.korota(6, 7, NappulanTyyppi.KUNINGATAR);
+		assertTrue("Valkoisesta sotilaasta ei tullut kuningatarta", lauta.getLauta()[6][7].getNappula().getTyyppi() == NappulanTyyppi.KUNINGATAR);
+		assertTrue("Kuningatar ei ollut valkoinen", lauta.getLauta()[6][7].getNappula().getVari() == NappulanVari.VALKOINEN);
+	}
+	
+	@Test
+	@DisplayName("Musta sotilas korotetaan lähetiksi")
+	public void korotaMustaSotilasLahetiksi() {
+		lauta.getLauta()[3][0].setNappula(new Sotilas(NappulanVari.MUSTA));
+		lauta.korota(3, 0, NappulanTyyppi.LAHETTI);
+		assertTrue("Mustasta sotilaasta ei tullut lähettiä", lauta.getLauta()[3][0].getNappula().getTyyppi() == NappulanTyyppi.LAHETTI);
+		assertTrue("Lähetti ei ollut musta", lauta.getLauta()[3][7].getNappula().getVari() == NappulanVari.MUSTA);
+	}
+	
+	@Test
+	@DisplayName("Musta sotilas korotetaan torniksi")
+	public void korotaMustaSotilasTorniksi() {
+		lauta.getLauta()[4][0].setNappula(new Sotilas(NappulanVari.MUSTA));
+		lauta.korota(4, 0, NappulanTyyppi.TORNI);
+		assertTrue("Mustasta sotilaasta ei tullut tornia", lauta.getLauta()[4][0].getNappula().getTyyppi() == NappulanTyyppi.TORNI);
+		assertTrue("Torni ei ollut musta", lauta.getLauta()[4][0].getNappula().getVari() == NappulanVari.MUSTA);
+
+	}
+	
+	@Test
+	@DisplayName("Musta sotilas korotetaan ratsuksi")
+	public void korotaMustaSotilasRatsuksi() {
+		lauta.getLauta()[5][0].setNappula(new Sotilas(NappulanVari.MUSTA));
+		lauta.korota(5, 0, NappulanTyyppi.RATSU);
+		assertTrue("Mustasta sotilaasta ei tullut Ratsua", lauta.getLauta()[5][0].getNappula().getTyyppi() == NappulanTyyppi.RATSU);
+		assertTrue("Ratsu ei ollut musta", lauta.getLauta()[5][0].getNappula().getVari() == NappulanVari.MUSTA);
+
+	}
+	
+	@Test
+	@DisplayName("Musta sotilas korotetaan Kuningattareksi")
+	public void korotaMustaSoKuningattareksi() {
+		lauta.getLauta()[6][0].setNappula(new Sotilas(NappulanVari.MUSTA));
+		lauta.korota(6, 0, NappulanTyyppi.KUNINGATAR);
+		assertTrue("Mustasta sotilaasta ei tullut Kuningatarta", lauta.getLauta()[3][0].getNappula().getTyyppi() == NappulanTyyppi.KUNINGATAR);
+		assertTrue("Kuningatar ei ollut musta", lauta.getLauta()[6][0].getNappula().getVari() == NappulanVari.MUSTA);
+
 	}
 	
 }

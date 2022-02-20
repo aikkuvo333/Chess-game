@@ -211,43 +211,37 @@ public class Lauta {
 		}
 	}
 
-	public void korotaSotilas(Ruutu ruutu, Sotilas sotilas, int valinta) {
-		ruutu.poistaNappula(); //poista annetusta ruudusta nappula
+	public void korota(int x, int y, NappulanTyyppi tyyppi) {
+		Sotilas sotilas = (Sotilas) lauta[x][y].poistaNappula(); //poista annetusta ruudusta nappula
 		
-		if(sotilas.getVari() == NappulanVari.VALKOINEN && ruutu.getY() == 7) {
-			switch (valinta) {
-			case 1:
-				ruutu.setNappula(new Torni(NappulanVari.VALKOINEN));//luo tyhjälle ruudulle uusi torninappula
+		if(sotilas.getVari() == NappulanVari.VALKOINEN) {
+			switch (tyyppi) {
+			case TORNI:
+				lauta[x][y].setNappula(new Torni(NappulanVari.VALKOINEN));//luo tyhjälle ruudulle uusi torninappula
 				break;
-			case 2:
-				ruutu.setNappula(new Ratsu(NappulanVari.VALKOINEN));
+			case RATSU:
+				lauta[x][y].setNappula(new Ratsu(NappulanVari.VALKOINEN));
 				break;
-			case 3:
-				ruutu.setNappula(new Lahetti(NappulanVari.VALKOINEN));
+			case LAHETTI:
+				lauta[x][y].setNappula(new Lahetti(NappulanVari.VALKOINEN));
 				break;
-			case 4:
-				ruutu.setNappula(new Kuningatar(NappulanVari.VALKOINEN));
-				break;
-			case 5:
-				ruutu.setNappula(new Sotilas(NappulanVari.VALKOINEN));
+			case KUNINGATAR:
+				lauta[x][y].setNappula(new Kuningatar(NappulanVari.VALKOINEN));
 				break;
 			}
-		} else if (sotilas.getVari() == NappulanVari.MUSTA && ruutu.getY() == 0) {
-			switch (valinta) {
-			case 1:
-				ruutu.setNappula(new Torni(NappulanVari.MUSTA));
+		} else if (sotilas.getVari() == NappulanVari.MUSTA) {
+			switch (tyyppi) {
+			case TORNI:
+				lauta[x][y].setNappula(new Torni(NappulanVari.MUSTA));
 				break;
-			case 2:
-				ruutu.setNappula(new Ratsu(NappulanVari.MUSTA));
+			case RATSU:
+				lauta[x][y].setNappula(new Ratsu(NappulanVari.MUSTA));
 				break;
-			case 3:
-				ruutu.setNappula(new Lahetti(NappulanVari.MUSTA));
+			case LAHETTI:
+				lauta[x][y].setNappula(new Lahetti(NappulanVari.MUSTA));
 				break;
-			case 4:
-				ruutu.setNappula(new Kuningatar(NappulanVari.MUSTA));
-				break;
-			case 5:
-				ruutu.setNappula(new Sotilas(NappulanVari.MUSTA));
+			case KUNINGATAR:
+				lauta[x][y].setNappula(new Kuningatar(NappulanVari.MUSTA));
 				break;
 			}
 		} 

@@ -1,5 +1,6 @@
 package view;
 
+import model.NappulanTyyppi;
 import model.NappulanVari;
 
 /**
@@ -9,4 +10,5 @@ import model.NappulanVari;
 public interface IPelinakyma {
 	public void siirtoAiheuttiShakin();
 	public void pelinVoitti(NappulanVari voittaja);
+	public NappulanTyyppi korota();
 }

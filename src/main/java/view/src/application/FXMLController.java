@@ -27,6 +27,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 import model.Nappula;
+import model.NappulanTyyppi;
 import model.NappulanVari;
 import model.Ruutu;
 import view.IPelinakyma;
@@ -404,5 +405,11 @@ public class FXMLController implements IPelinakyma {
 	public void pelinVoitti(NappulanVari voittaja) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public NappulanTyyppi korota() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
