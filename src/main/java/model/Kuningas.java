@@ -9,10 +9,12 @@ import java.util.ArrayList;
 public class Kuningas extends Nappula {
 	private NappulanVari vari;
 	private boolean ekaSiirto;
+	private NappulanTyyppi tyyppi;
 
 	public Kuningas(NappulanVari vari) {
 		this.vari = vari;
 		this.ekaSiirto = false;
+		this.tyyppi = NappulanTyyppi.KUNINGAS;
 	}
 
 	@Override
@@ -127,7 +129,6 @@ public class Kuningas extends Nappula {
 
 	@Override
 	public NappulanTyyppi getTyyppi() {
-		// TODO Auto-generated method stub
-		return NappulanTyyppi.KUNINGAS;
+		return this.tyyppi;
 	}
 }
