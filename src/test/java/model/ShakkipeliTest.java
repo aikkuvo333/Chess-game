@@ -8,8 +8,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -151,7 +149,6 @@ class ShakkipeliTest {
 		assertEquals(27, laskeNappulat(peli.getPelitilanne()), "Laudalla ei ole 27 nappulaa");
 		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(7, 1, 7, 2));
 		assertTrue("Musta tornitus ei onnistunut", peli.siirra(4, 7, 2, 7));
-
 	}
 	
 	@Test
@@ -174,9 +171,19 @@ class ShakkipeliTest {
 		assertTrue("Valkoinen ratsu ei siirtynyt", peli.siirra(1, 0, 0, 2));		
 		assertTrue("Musta kuningatar ei siirtynyt shakkaamaan", peli.siirra(3, 7, 0, 4));
 		assertFalse("Valkoinen Kuningas tornitti vaikka oli shakissa", peli.siirra(4, 0, 2, 0));
+		assertTrue("Valkoinen sotilas purki shakin", peli.siirra(1, 1, 1, 3));
 		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(7, 6, 7, 5));
+		assertTrue("Valkoinen Kuningas ei tornittanut", peli.siirra(4, 0, 2, 0));
+		assertTrue("Musta kuningatar ei siirtynyt shakkaamaan", peli.siirra(0, 4, 2, 4));
+		assertTrue("Valkoinen sotilas ei syönyt kuningatarta", peli.siirra(1, 3, 2, 4));
+		assertEquals(28, laskeNappulat(peli.getPelitilanne()), "Laudalla on väärä määrä nappuloita 4");
+		assertTrue("Musta ratsu söi sotilaan", peli.siirra(0, 5, 2, 4));
+		assertEquals(27, laskeNappulat(peli.getPelitilanne()), "Laudalla on väärä määrä nappuloita 5");
 		assertTrue("Valkoinen Kuningatar ei siirtynyt shakkaamaan", peli.siirra(3, 3, 0, 3));
 		assertFalse("Musta Kuniningas tornitti vaikka oli shakissa", peli.siirra(4, 7, 2, 7));
+		assertTrue("Musta ratsu ei purkanut shakkia", peli.siirra(2, 4, 3, 6));
+		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(3, 4, 3, 5));
+		assertTrue("Musta Kuningas ei tornittanut", peli.siirra(4, 7, 2, 7));
 	}
 	
 	@Test

@@ -68,7 +68,26 @@ public class Shakkipeli implements IShakkipeli {
 	}
 
 	public ArrayList<Ruutu> getSiirrot(int x, int y) {
-		return this.lauta.getSiirrot(x, y);
+		ArrayList<Ruutu> siirrot = this.lauta.getSiirrot(x, y);
+		
+		//Jos aikaa jää täydennä tänne siirroon sopivuuksien tarkistus.
+
+		// Tornitusta ei tarjota mikäli shakattu
+		if (getRuudunNappula(x, y).getTyyppi() == NappulanTyyppi.KUNINGAS && shakattu) {
+			if (!((Kuningas) getRuudunNappula(x, y)).getEkaSiirto()) {
+				ArrayList<Ruutu> valiaikainen = new ArrayList<>();
+				for (Ruutu siirto : siirrot) {
+					
+					//Taikanumerot, koska tornittaessa kuningas voi olla vain tietyssä paikassa.
+					if(siirto.getX() - 1 == 4 || siirto.getX() + 1 == 4 || siirto.getX() == 4) {
+						valiaikainen.add(siirto);
+					}
+				}
+				siirrot = valiaikainen;
+			}
+		}
+
+		return siirrot;
 	}
 
 	public boolean luovuta() {
@@ -94,8 +113,7 @@ public class Shakkipeli implements IShakkipeli {
 	}
 
 	private boolean onkoSiirtoListalla(int mistaX, int mistaY, int mihinX, int mihinY) {
-		ArrayList<Ruutu> siirrot = this.getRuudunNappula(mistaX, mistaY).getSiirrot(new Ruutu(mistaX, mistaY),
-				this.getPelitilanne());
+		ArrayList<Ruutu> siirrot = this.getSiirrot(mistaX, mistaY);
 		for (Ruutu siirto : siirrot) {
 			if (siirto.getX() == mihinX && siirto.getY() == mihinY) {
 				return true;
@@ -111,7 +129,7 @@ public class Shakkipeli implements IShakkipeli {
 	private boolean tarkistaShakkasiko(int x, int y) {
 
 		// Haetaan siirretyn nappulan mahdolliset seuraavat siirrot
-		ArrayList<Ruutu> siirrot = this.getRuudunNappula(x, y).getSiirrot(new Ruutu(x, y), this.getPelitilanne());
+		ArrayList<Ruutu> siirrot = this.getSiirrot(x, y);
 
 		// Käydään läpi siirrot ja tarkisteen voiko joku siirto osua vastustajan
 		// kuninkaan päälle.
@@ -188,8 +206,7 @@ public class Shakkipeli implements IShakkipeli {
 						if (this.getRuudunNappula(x, y).getVari() == vuorossa) {
 
 							// Haetaan nappulan siirrot
-							ArrayList<Ruutu> siirrot = this.getRuudunNappula(x, y).getSiirrot(new Ruutu(x, y),
-									this.getPelitilanne());
+							ArrayList<Ruutu> siirrot = this.getSiirrot(x, y);
 
 							// Tarkistetaan voiko joku nappulan siirroista purkaa shakin
 							for (Ruutu siirto : siirrot) {
@@ -219,21 +236,22 @@ public class Shakkipeli implements IShakkipeli {
 			this.kontrolleri.pelinvoitti(this.voittaja);
 		}
 	}
-	
+
 	private void teeMahdollinenKorotus(int x, int y) {
 		NappulanTyyppi tyyppi;
 		if (y == 7 && getRuudunNappula(x, y).getTyyppi() == NappulanTyyppi.SOTILAS) {
-			if(!this.testi) {
+			if (!this.testi) {
 				tyyppi = kontrolleri.korota();
 			} else {
+				// härski viritelmä junit testejä varten.
 				tyyppi = NappulanTyyppi.KUNINGATAR;
 			}
-			
+
 			this.lauta.korota(x, y, tyyppi);
 		}
 
 		if (y == 0 && getRuudunNappula(x, y).getTyyppi() == NappulanTyyppi.SOTILAS) {
-			if(!this.testi) {
+			if (!this.testi) {
 				tyyppi = kontrolleri.korota();
 			} else {
 				tyyppi = NappulanTyyppi.KUNINGATAR;
