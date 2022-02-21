@@ -51,7 +51,7 @@ class LautaTest {
 	@DisplayName("Valkoinen sotilas siirtyy kaksi ruutua ja palauttaa enää vain yhden siirron")
 	public void valkoinenSotilasSiirtyyOiken() {
 		lauta.siirra(0, 1, 0, 3);
-		assertTrue("Sotilas ei siirtynyt sinne minne piti", lauta.getLauta()[0][3].getNappula() instanceof Sotilas);
+		assertTrue("Sotilas ei siirtynyt sinne minne piti", lauta.getLauta()[0][3].getNappula().getTyyppi() == NappulanTyyppi.SOTILAS);
 		assertEquals(1, lauta.getSiirrot(0,3).size(), "Siirtoja palautui väärä määrä");
 		assertTrue("Ruutu josta sotilas lähti on tyhjä", lauta.getLauta()[0][1].getNappula() == null);
 		assertEquals(16, laskeSotilaat(lauta), "Sotilaita on väärä määrä");
