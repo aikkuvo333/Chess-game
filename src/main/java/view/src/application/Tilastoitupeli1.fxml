@@ -107,7 +107,7 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Text>
-                        <TextField fx:id="mustVetovalikkoBtn" alignment="CENTER_RIGHT" maxWidth="-Infinity" onAction="#mustVetovalikko" prefHeight="25.0" prefWidth="183.0">
+                        <TextField fx:id="mustTekstikenttaBtn" alignment="CENTER_RIGHT" maxWidth="-Infinity" onAction="#mustTekstikentta" prefHeight="25.0" prefWidth="183.0">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>

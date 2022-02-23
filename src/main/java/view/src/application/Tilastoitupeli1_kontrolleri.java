@@ -13,7 +13,7 @@ import javafx.scene.control.TextField;
 
 public class Tilastoitupeli1_kontrolleri {
 
-	@FXML
+    @FXML
     private Button poistuBtn;
 
     @FXML
@@ -29,7 +29,10 @@ public class Tilastoitupeli1_kontrolleri {
     private Button aloitaPeliBtn;
 
     @FXML
-    private TextField mustVetovalikkoBtn;
+    private MenuButton mustVetovalikkoBtn;
+
+    @FXML
+    private TextField mustTekstikenttaBtn;
 
     @FXML
     private Button mustLuotunnusBtn;
@@ -41,6 +44,11 @@ public class Tilastoitupeli1_kontrolleri {
 
     @FXML
     void mustLuotunnus(ActionEvent event) {
+
+    }
+
+    @FXML
+    void mustTekstikentta(ActionEvent event) {
 
     }
 
