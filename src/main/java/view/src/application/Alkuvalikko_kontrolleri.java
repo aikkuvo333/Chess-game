@@ -72,7 +72,7 @@ public class Alkuvalikko_kontrolleri {
 
 	@FXML
 	void suljeSovellus(ActionEvent event) {
-		Stage stage = (Stage) suljeSobellusBtn.getScene().getWindow();
+		stage = (Stage) suljeSobellusBtn.getScene().getWindow();
 	    stage.close();
 	}
 
