@@ -50,17 +50,10 @@ public class Alkuvalikko_kontrolleri {
 		loader.setController(controller);
 		root = loader.load();
 		
-		//root = FXMLLoader.load(getClass().getResource("anonyymi-lauta2.fxml"));
 		stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);
 		stage.show();
-		
-		/*
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("main.fxml"));
-		loader.setController(new MainController(path));
-		Pane mainPane = loader.load();
-		*/
 	}
 
 	@FXML
@@ -79,12 +72,17 @@ public class Alkuvalikko_kontrolleri {
 
 	@FXML
 	void suljeSovellus(ActionEvent event) {
-
+		Stage stage = (Stage) suljeSobellusBtn.getScene().getWindow();
+	    stage.close();
 	}
 
 	@FXML
-	void tilastot(ActionEvent event) {
-
+	void tilastot(ActionEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("Tilastot1.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
 	}
 
 }
