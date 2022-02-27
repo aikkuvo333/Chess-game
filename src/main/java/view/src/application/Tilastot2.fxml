@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane style="-fx-background-color: #661E1E;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.src.application.Tilastot2_kontrolleri">
+   <children>
+      <AnchorPane prefHeight="56.0" prefWidth="600.0" style="-fx-background-color: #241919;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <StackPane layoutX="263.0" layoutY="12.796875" AnchorPane.bottomAnchor="14.703125" AnchorPane.leftAnchor="263.0" AnchorPane.rightAnchor="263.5" AnchorPane.topAnchor="12.796875">
+               <children>
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Tilastot" textAlignment="CENTER">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Text>
+               </children>
+            </StackPane>
+            <MenuButton fx:id="pelaajaMenuBtn" layoutX="516.0" layoutY="16.0" mnemonicParsing="false" onAction="#pelaajaMenu" text="PelaajanNimi" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="16.0">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Action 2" />
+              </items>
+            </MenuButton>
+         </children>
+      </AnchorPane>
+      <Button fx:id="poistuBtn" alignment="CENTER" mnemonicParsing="false" onAction="#poistu" style="-fx-min-width: 70px; -fx-background-color: grey; -fx-background-radius: 4px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Poistu" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
+      <VBox alignment="TOP_CENTER" prefHeight="267.0" prefWidth="411.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="91.0" AnchorPane.topAnchor="80.0">
+         <children>
+            <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pelien lkm" textAlignment="CENTER" wrappingWidth="100.05322265625">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="peliLkm" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="99.22900390625" />
+                     </children>
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Voitot" textAlignment="CENTER" wrappingWidth="100.4873046875">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="voitot" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="98.22900390625" />
+                     </children>
+                     <HBox.margin>
+                        <Insets right="50.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Voittoprosentti" textAlignment="CENTER" wrappingWidth="99.5771484375">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Text>
+                        <Text fx:id="voittoProsentti" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="98.22900390625" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <TableView fx:id="tilastotaulu" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="vari" prefWidth="54.0" text="Väri" />
+                <TableColumn fx:id="vastustaja" prefWidth="77.0" text="Vastustaja" />
+                  <TableColumn fx:id="tulos" prefWidth="59.0" text="Tulos" />
+                  <TableColumn fx:id="siirrot" prefWidth="59.0" text="Siirrot" />
+                  <TableColumn fx:id="pvm" prefWidth="71.0" text="Pvm" />
+                  <TableColumn fx:id="kesto" prefWidth="57.0" text="Kesto" />
+                  <TableColumn fx:id="videot" prefWidth="33.0" />
+              </columns>
+            </TableView>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

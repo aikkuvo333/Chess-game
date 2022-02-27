@@ -54,12 +54,12 @@ public class Tilastot1_kontrolleri {
     }
     
     @FXML
-    void naytaTilastot(ActionEvent event) {
-//    	root = FXMLLoader.load(getClass().getResource(".fxml"));
-//        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-//        scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
+    void naytaTilastot(ActionEvent event) throws IOException {
+    	root = FXMLLoader.load(getClass().getResource("Tilastot2.fxml"));
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 }
