@@ -61,5 +61,11 @@ public class Kontrolleri implements IKontrolleri{
 	public NappulanTyyppi korota() {
 		return this.pelinakyma.korota();
 	}
+	
+	@Override
+	public NappulanVari getVuoro() {
+		return peli.getVuoro();
+	}
+
 
 }

@@ -20,4 +20,5 @@ public interface IKontrolleri {
 	public void luovuta();
 	public void pelinvoitti(NappulanVari voittaja);
 	public NappulanTyyppi korota();
+	public NappulanVari getVuoro();
 }

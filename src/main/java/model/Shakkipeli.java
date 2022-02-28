@@ -259,6 +259,10 @@ public class Shakkipeli implements IShakkipeli {
 			this.lauta.korota(x, y, tyyppi);
 		}
 	}
+	
+	public NappulanVari getVuoro() {
+		return vuorossa;
+	}
 
 	public boolean getPeliLoppunut() {
 		return this.peliLoppunut;
