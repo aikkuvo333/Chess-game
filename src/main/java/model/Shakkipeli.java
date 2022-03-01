@@ -195,6 +195,10 @@ public class Shakkipeli implements IShakkipeli {
 	}
 
 	private boolean paattyikoPeli() {
+		
+		//peli ei voi päättyä mikäli Kuningasta ei ole shakattu
+		if (!shakattu) { return false; }
+		
 		if (shakattu) {
 
 			// käydään kaikki pelilaudan ruudut
@@ -204,7 +208,7 @@ public class Shakkipeli implements IShakkipeli {
 					// mikäli ruudussa uhatun kuninkaan maata oleva nappula
 					if (this.getRuudunNappula(x, y) instanceof Nappula) {
 						if (this.getRuudunNappula(x, y).getVari() == vuorossa) {
-
+							
 							// Haetaan nappulan siirrot
 							ArrayList<Ruutu> siirrot = this.getSiirrot(x, y);
 
@@ -225,7 +229,7 @@ public class Shakkipeli implements IShakkipeli {
 	}
 
 	private void julistaVoittaja() {
-		this.peliLoppunut = false;
+		this.peliLoppunut = true;
 		if (this.vuorossa == NappulanVari.VALKOINEN) {
 			this.voittaja = NappulanVari.MUSTA;
 		} else {
