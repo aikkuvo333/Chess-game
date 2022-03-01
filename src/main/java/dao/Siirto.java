@@ -1,5 +1,7 @@
 package dao;
 
+import model.NappulanTyyppi;
+
 /**
 * @author Elmo Vahvaselkä 1.3.2022
 */
@@ -9,12 +11,17 @@ public class Siirto {
 	private int mistaY;
 	private int mihinX;
 	private int mihinY;
+	private NappulanTyyppi korotus;
 	
 	public Siirto(int mistaX, int mistaY, int mihinX, int mihinY) {
 		this.mistaX = mistaX;
 		this.mihinY = mistaY;
 		this.mihinX = mihinX;
 		this.mihinY = mihinY;
+	}
+	
+	public void setKorotus(NappulanTyyppi tyyppi) {
+		this.korotus = tyyppi;
 	}
 
 	public int getMistaX() {
@@ -31,6 +38,10 @@ public class Siirto {
 
 	public int getMihinY() {
 		return mihinY;
+	}
+	
+	public NappulanTyyppi getKorotus() {
+		return korotus;
 	}
 	
 }
