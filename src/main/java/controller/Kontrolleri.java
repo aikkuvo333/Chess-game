@@ -6,6 +6,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import model.IShakkipeli;
 import model.NappulanTyyppi;
 import model.NappulanVari;
 import model.Ruutu;
@@ -13,8 +14,7 @@ import model.Shakkipeli;
 import view.IPelinakyma;
 
 public class Kontrolleri implements IKontrolleri{
-	//private IView
-	private Shakkipeli peli;
+	private IShakkipeli peli;
 	private IPelinakyma pelinakyma;
 	
 	public Kontrolleri(IPelinakyma pelinakyma) {
