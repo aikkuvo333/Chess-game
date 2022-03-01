@@ -1,5 +1,9 @@
 package dao;
 
+/**
+* @author Elmo Vahvaselkä 1.3.2022
+*/
+
 public class Siirto {
 	private int mistaX;
 	private int mistaY;
