@@ -9,14 +9,14 @@ import java.util.ArrayList;
 import model.NappulanVari;
 
 public class PelinTiedot {
-	private String valkoinePelaaja;
+	private String valkoinenPelaaja;
 	private String mustaPelaaja;
 	private NappulanVari voittaja;
 	private double kesto;
 	private ArrayList<Siirto> siirrot;
 	
 	public PelinTiedot (String valkoinenPelaaja, String mustaPelaaja) {
-		this.valkoinePelaaja = valkoinenPelaaja;
+		this.valkoinenPelaaja = valkoinenPelaaja;
 		this.mustaPelaaja = mustaPelaaja;
 		this.siirrot = new ArrayList<Siirto>();
 	}
@@ -41,8 +41,8 @@ public class PelinTiedot {
 		this.kesto = kesto;
 	}
 
-	public String getValkoinePelaaja() {
-		return valkoinePelaaja;
+	public String getValkoinenPelaaja() {
+		return valkoinenPelaaja;
 	}
 
 	public String getMustaPelaaja() {
