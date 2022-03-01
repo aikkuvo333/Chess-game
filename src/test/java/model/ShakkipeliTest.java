@@ -187,13 +187,16 @@ class ShakkipeliTest {
 	}
 	
 	@Test
-	@DisplayName("Pikamatti päättää pelin")
+	@DisplayName("Pelin päättymisen testaaminen pikamatilla")
 	public void PikamattiPaattiPelin() {
+		assertEquals(null, peli.getVoittaja(), "Pelin alussa voittaja ei ollut null");
+		assertFalse("Peli on päättynyt ennen siirtoja", peli.getPeliLoppunut());
 		assertTrue("Valkoinen sotilas ei siirtynyt 1", peli.siirra(5, 1, 5, 2));
+		assertFalse("Peli päättyi ensimmäisen siirron jälkeen", peli.getPeliLoppunut());
 		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(4, 6, 4, 5));
 		assertTrue("Valkoinen sotilas ei siirtynyt 2", peli.siirra(6, 1, 6, 3));
 		assertTrue("Musta Kuningatar ei siirtynyt ja lopettanut peliä", peli.siirra(3, 7, 7, 3));
-		assertFalse("peli ei päättynyt", peli.getPeliLoppunut());
+		assertTrue("peli ei päättynyt", peli.getPeliLoppunut());
 		assertEquals(NappulanVari.MUSTA, peli.getVoittaja(), "Musta ei voittanut peliä");
 		assertFalse("Valkoinen sai tehdä siirron", peli.siirra(0, 1, 0, 2));		
 	}
