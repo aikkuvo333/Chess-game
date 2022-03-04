@@ -11,4 +11,6 @@ public interface IPelinakyma {
 	public void siirtoAiheuttiShakin();
 	public void pelinVoitti(NappulanVari voittaja);
 	public NappulanTyyppi korota();
+	public String getValkoinenPelaaja();
+	public String getMustaPelaaja();
 }

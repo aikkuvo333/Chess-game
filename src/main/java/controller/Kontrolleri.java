@@ -22,8 +22,8 @@ public class Kontrolleri implements IKontrolleri{
 	}
 	
 	@Override
-	public boolean aloitaPeli() {
-		this.peli = new Shakkipeli(this);
+	public boolean aloitaPeli(boolean tilastoitu) {
+		this.peli = new Shakkipeli(this, tilastoitu);
 		return true;
 	}
 
@@ -65,6 +65,16 @@ public class Kontrolleri implements IKontrolleri{
 	@Override
 	public NappulanVari getVuoro() {
 		return peli.getVuoro();
+	}
+
+	@Override
+	public String getValkoinenPelaaja() {
+		return this.pelinakyma.getValkoinenPelaaja();
+	}
+
+	@Override
+	public String getMustaPelaaja() {
+		return this.getMustaPelaaja();
 	}
 
 

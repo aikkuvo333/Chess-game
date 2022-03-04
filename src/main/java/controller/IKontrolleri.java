@@ -12,7 +12,7 @@ import model.NappulanVari;
 import model.Ruutu;
 
 public interface IKontrolleri {
-	public boolean aloitaPeli();
+	public boolean aloitaPeli(boolean tilastoitu);
 	public Ruutu[][] getPelitilanne();
 	public ArrayList<Ruutu> getSiirrotNappulalle(int x, int y);
 	public boolean teeSiirto(int mistaX, int mistaY, int mihinX, int mihinY);
@@ -21,4 +21,6 @@ public interface IKontrolleri {
 	public void pelinvoitti(NappulanVari voittaja);
 	public NappulanTyyppi korota();
 	public NappulanVari getVuoro();
+	public String getValkoinenPelaaja();
+	public String getMustaPelaaja();
 }
