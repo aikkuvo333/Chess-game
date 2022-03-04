@@ -1,7 +1,12 @@
 package view.src.application;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 
 import controller.IKontrolleri;
 import controller.Kontrolleri;
@@ -55,10 +60,12 @@ public class FXMLController implements IPelinakyma {
 	private String valittu = "-fx-background-color: rgba(0, 255, 0, 0.2)";
 	private Pane ruutu;
 	private Node valittuNappula = null;
-	private String vuorossa;
-	public boolean peruutus = false;
+	public boolean peruutus;
 	public boolean peruutusKaynnissa = false;
 	private NappulanTyyppi korotusTyyppi = null;
+	private String nimi1;
+	private String nimi2;
+	private HashMap<NappulanVari, String> pelaajat;
 	
 	// Efektejä
 	private String sound1 = "src/main/resources/sounds/sound1.wav";
@@ -87,10 +94,10 @@ public class FXMLController implements IPelinakyma {
 	private GridPane pelilauta;
 
 	@FXML
-	private Text pelaaja2;
-
+	private Text vuorossa;
+	
 	@FXML
-	private Text pelaaja1;
+	private Text seuraava;
 
 	@FXML
 	private Text aika;
@@ -106,14 +113,13 @@ public class FXMLController implements IPelinakyma {
 
 	@FXML
 	private void handleLuovuta(ActionEvent event) throws IOException {
-		System.out.println("Luovuta");
+		System.out.println("Painettiin: Luovuta");
 		luovuta();
-		//avaaKorotus();
 	}
 
 	@FXML
 	private void handlePeruuta(ActionEvent event) {
-		System.out.println("Peruuta");
+		System.out.println("Painettiin: Peruuta");
 		
 		peruutus = true;
 	}
@@ -122,22 +128,68 @@ public class FXMLController implements IPelinakyma {
 	void handleRuutu(MouseEvent e) {
 
 	}
+	
+	//Tilastoimattoman pelin konstruktori
+	public FXMLController() {
+		peruutus = true;
+	}
+	
+	//Tilastoidun pelin konstruktori
+	public FXMLController(String nimi1, String nimi2) {
+		this.nimi1 = nimi1;
+		this.nimi2 = nimi2;
+		
+		vuorossa.setText(nimi1);
+		seuraava.setText(nimi2);
+		
+		peruutus = false;
+	}
 
 	public void initialize() {
 		kontrolleri = new Kontrolleri(this);
 		kontrolleri.aloitaPeli();
+		
+		pelaajat = new HashMap<NappulanVari, String>();
 
 		varjo = new DropShadow();
 		varjo.setColor(Color.GRAY);
 		varjo.setOffsetY(6);
-
+		
+		vuorossa.setText(nimi1 = nimi1 == null ? "Pelaaja 1" : nimi1);
+		seuraava.setText(nimi2 = nimi2 == null ? "Pelaaja 2" : nimi2);
+		
+		pelaajat.put(NappulanVari.VALKOINEN, nimi1);
+		pelaajat.put(NappulanVari.MUSTA, nimi2);
+		
 		asetaRuudut();
 		asetaNappulat();
 		kaannaLauta();
-
-		System.out.println("initialized");
+		asetaVuoro();
+		
+		if(peruutus == false) {
+			peruuta.setVisible(false);
+		}
+		
 	}
-
+	
+	String getNimiByVari(NappulanVari vari) {
+		return pelaajat.get(vari);
+	}
+	
+	public NappulanVari getVariByNimi(String nimi) {
+		NappulanVari vari = null;
+		
+		if(pelaajat.containsValue(nimi)) {
+			for(Map.Entry<NappulanVari, String> entry : pelaajat.entrySet()) {
+				if(Objects.equals(entry.getValue(), nimi)) {
+					 vari = entry.getKey();
+				}
+			}
+		}
+		
+		return vari;
+	}
+ 
 	// Kääntää laudan
 	public void kaannaLauta() {
 
@@ -181,49 +233,41 @@ public class FXMLController implements IPelinakyma {
 			for (int x = 0; x < 8; x++) {
 				nappula = ruutu[x][y].getNappula();
 				if (nappula != null) {
-					String nappulanTyyppi;
-					String variPNG;
-					String nappulaURI;
-
-					if (nappula.getVari() == NappulanVari.VALKOINEN) {
-						variPNG = "_v.png";
-					} else {
-						variPNG = "_m.png";
-					}
-
+					ImageView nappulaImage;
+					NappulanVari vari = nappula.getVari();
+					
 					switch (nappula.getTyyppi()) {
 					case SOTILAS:
-						nappulanTyyppi = "sotilas";
+						nappulaImage = Kuvakkeet.getSotilas(vari);
 						break;
 
 					case TORNI:
-						nappulanTyyppi = "torni";
+						nappulaImage = Kuvakkeet.getTorni(vari);
 						break;
 
 					case RATSU:
-						nappulanTyyppi = "hevonen";
+						nappulaImage = Kuvakkeet.getRatsu(vari);
 						break;
 
 					case LAHETTI:
-						nappulanTyyppi = "lahetti";
+						nappulaImage = Kuvakkeet.getLahetti(vari);
 						break;
 
 					case KUNINGATAR:
-						nappulanTyyppi = "kuningatar";
+						nappulaImage = Kuvakkeet.getKuningatar(vari);
 						break;
 
 					case KUNINGAS:
-						nappulanTyyppi = "kuningas";
+						nappulaImage = Kuvakkeet.getKuningas(vari);
 						break;
 
 					default:
-						nappulanTyyppi = "null";
+						nappulaImage = null;
 						break;
 					}
 
-					if (!nappulanTyyppi.contains("null")) {
-						nappulaURI = kuvaURI + nappulanTyyppi + variPNG;
-						nappulaKuva = luoNappula(nappulaURI, this.ruutu);
+					if (nappulaImage != null) {
+						nappulaKuva = luoNappula(nappulaImage, this.ruutu);
 						pelilauta.add(nappulaKuva, x, y);
 
 					}
@@ -265,15 +309,14 @@ public class FXMLController implements IPelinakyma {
 	}
 
 	// Tilapäinen ratkaisu kuvan koon asettamiseen laudan ruudun mukaan
-	public ImageView skaalaaKuvake(Image image, Pane pane) {
-
-		ImageView imageView = new ImageView();
-		//imageView.setPreserveRatio(true);
-		//imageView.setCache(true);
+	public ImageView skaalaaKuvake(ImageView imageView, Pane pane) {
 		imageView.setSmooth(true);
-		imageView.fitWidthProperty().bind(pane.widthProperty());
-		imageView.fitHeightProperty().bind(pane.heightProperty());
-		imageView.setImage(image);
+		
+		if(pane != null) {
+			imageView.fitWidthProperty().bind(pane.widthProperty());
+			imageView.fitHeightProperty().bind(pane.heightProperty());
+		}
+		
 		imageView.setScaleX(imageView.getScaleX()*0.8);
 		imageView.setScaleY(imageView.getScaleY()*0.9);
 		
@@ -317,8 +360,8 @@ public class FXMLController implements IPelinakyma {
 		return kuva;
 	}
 
-	public ImageView luoNappula(String kuvanURI, Pane ruutu) {
-		ImageView kuvanView = skaalaaKuvake(new Image(kuvanURI), ruutu);
+	public ImageView luoNappula(ImageView nappulaKuvake, Pane ruutu) {
+		ImageView kuvanView = skaalaaKuvake(nappulaKuvake, ruutu);
 		kuvanView.setMouseTransparent(true);
 
 		return kuvanView;
@@ -333,15 +376,22 @@ public class FXMLController implements IPelinakyma {
 		}
 	}
 
+	//Vaihtaa vuoron ja kääntää lautaa
 	public void vaihdaVuoro() {
-		String pelaaja = pelaaja1.getText();
-		pelaaja1.setText(pelaaja2.getText());
-		pelaaja2.setText(pelaaja);
-
-		vuorossa = pelaaja1.getText();
-		vuoro.setText("Vuoro: " + vuorossa);
-
+		asetaVuoro();
 		kaannaLauta();
+	}
+	
+	//Asettaa vuoron kontrollerin mukaan
+	public void asetaVuoro() {
+		vuoro.setText("Vuoro: " + getNimiByVari(kontrolleri.getVuoro()));
+		vuorossa.setText(getNimiByVari(kontrolleri.getVuoro()));
+		
+		if(kontrolleri.getVuoro() == NappulanVari.VALKOINEN) {
+			seuraava.setText(getNimiByVari(NappulanVari.MUSTA));
+		} else {
+			seuraava.setText(getNimiByVari(NappulanVari.VALKOINEN));
+		}
 	}
 
 	public ArrayList<Node> naytaSiirrot(ArrayList<Ruutu> siirrot) {
@@ -416,9 +466,10 @@ public class FXMLController implements IPelinakyma {
 		}
 	}
 	
-	//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 	public void luovuta() {
 		toggleShadow();
+		
+		ImageView luovutusLogo;
 		Stage stage = (Stage) lautaNakyma.getScene().getWindow();
 		Alert.AlertType type = Alert.AlertType.CONFIRMATION;
 		Alert alert = new Alert(type, "");
@@ -426,17 +477,23 @@ public class FXMLController implements IPelinakyma {
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner(stage);
 		
-		alert.getDialogPane().setContentText("Haluatko varmasti luovuttaa?");
+		alert.getDialogPane().setContentText("Haluatko varmasti luovuttaa, " + getNimiByVari(kontrolleri.getVuoro()) + "?");
 		alert.getDialogPane().setHeaderText("Luovuttaminen");
+		
+		luovutusLogo = Kuvakkeet.getKuningas(kontrolleri.getVuoro());
+		luovutusLogo = skaalaaKuvake(luovutusLogo, null);
+		luovutusLogo.setFitHeight(70);
+		luovutusLogo.setFitWidth(70);
+		alert.getDialogPane().setGraphic(luovutusLogo);
 		
 		Optional<ButtonType> result = alert.showAndWait();
 		
 		if(result.get() == ButtonType.OK) {
 			System.out.println(kontrolleri.getVuoro() + " luovuttaa");
 			if(kontrolleri.getVuoro() == NappulanVari.VALKOINEN) {
-				//pelinVoitti(NappulanVari.MUSTA);
+				pelinVoitti(NappulanVari.MUSTA);
 			} else {
-				//pelinVoitti(NappulanVari.VALKOINEN);
+				pelinVoitti(NappulanVari.VALKOINEN);
 			}
 		} else if (result.get() == ButtonType.CANCEL){
 			System.out.println(kontrolleri.getVuoro() + " ei luovuta");
@@ -475,17 +532,25 @@ public class FXMLController implements IPelinakyma {
 	}
 	
 	public void voittoIkkuna(NappulanVari vari) {
+		ImageView voittoLogo;
 		Stage stage = (Stage) lautaNakyma.getScene().getWindow();
 		Alert.AlertType type = Alert.AlertType.INFORMATION;
 		Alert alert = new Alert(type, "");
 		
+		voittoLogo = Kuvakkeet.getKuningas(vari);
+		voittoLogo = skaalaaKuvake(voittoLogo, null);
+		voittoLogo.setFitHeight(70);
+		voittoLogo.setFitWidth(70);
+		
+		alert.getDialogPane().setGraphic(voittoLogo);
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner(stage);
+		alert.getDialogPane().setHeaderText(getNimiByVari(vari) + " voitti pelin!");
+		alert.getDialogPane().setContentText("Palaa takaisin valikkoon");
 		
-		//alert.getDialogPane().setContentText("Haluatko varmasti luovuttaa?");
-		alert.getDialogPane().setHeaderText(vari + " voitti pelin!");
 		
-		//Optional<ButtonType> result = alert.showAndWait();
+		
+		Optional<ButtonType> result = alert.showAndWait();
 		
 		try {
 			Parent root = FXMLLoader.load(getClass().getResource("Alkuvalikko.fxml"));
@@ -507,16 +572,13 @@ public class FXMLController implements IPelinakyma {
 
 	@Override
 	public void pelinVoitti(NappulanVari voittaja) {
-		System.out.println("PELIN VOITTI " + voittaja + " ASDASDASDASD");
-		//voittoIkkuna(voittaja);
+		System.out.println("PELIN VOITTI " + getNimiByVari(voittaja) + " (" + voittaja + ")");
+		voittoIkkuna(voittaja);
 	}
 
 	@Override
 	public NappulanTyyppi korota() {
-		
-		//KorotusKontrolleri korotusKontrolleri = new KorotusKontrolleri(this, kontrolleri.getVuoro());
 		try {
-			//InitFXML.avaaFxml(korotusKontrolleri, "korotus.fxml", "Sotilaan korotus", Modality.APPLICATION_MODAL);
 			avaaKorotus();
 		} catch (Exception e) {
 			e.printStackTrace();

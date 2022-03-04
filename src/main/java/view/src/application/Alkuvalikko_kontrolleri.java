@@ -45,7 +45,6 @@ public class Alkuvalikko_kontrolleri {
 
 		FXMLController controller = new FXMLController();
 		
-		System.out.println("AAAAAAAAA");
 		loader = new FXMLLoader(getClass().getResource("anonyymi-lauta2.fxml"));
 		loader.setController(controller);
 		root = loader.load();

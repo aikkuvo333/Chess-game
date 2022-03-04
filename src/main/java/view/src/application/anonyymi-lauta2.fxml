@@ -32,12 +32,12 @@
             <RowConstraints minHeight="10.0" percentHeight="50.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <Text fx:id="pelaaja2" layoutX="792.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pelaaja 2" wrappingWidth="150.0" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="151.0">
+      <Text fx:id="seuraava" layoutX="792.0" layoutY="173.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pelaaja 2" wrappingWidth="150.0" AnchorPane.rightAnchor="54.0" AnchorPane.topAnchor="151.0">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="pelaaja1" layoutX="796.0" layoutY="645.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pelaaja 1" wrappingWidth="150.0" AnchorPane.bottomAnchor="149.98046875" AnchorPane.rightAnchor="54.0">
+      <Text fx:id="vuorossa" layoutX="796.0" layoutY="645.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pelaaja 1" wrappingWidth="150.0" AnchorPane.bottomAnchor="149.98046875" AnchorPane.rightAnchor="54.0">
          <font>
             <Font size="20.0" />
          </font>
