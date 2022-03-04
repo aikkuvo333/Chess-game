@@ -2,11 +2,9 @@ package view.src.application;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 
 import controller.IKontrolleri;
 import controller.Kontrolleri;
@@ -25,7 +23,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -73,9 +70,7 @@ public class FXMLController implements IPelinakyma {
 	private DropShadow varjo;
 	private RotateTransition rotate = new RotateTransition();
 	private boolean kaantynyt = false;
-
-	// Kuvan URI
-	private String kuvaURI = "File:src/main/resources/images/";
+	private boolean onkoTilastoitu;
 
 	// Nappulan apumuuttujia
 	private int mistaX;
@@ -131,11 +126,13 @@ public class FXMLController implements IPelinakyma {
 	
 	//Tilastoimattoman pelin konstruktori
 	public FXMLController() {
+		onkoTilastoitu = false;
 		peruutus = true;
 	}
 	
 	//Tilastoidun pelin konstruktori
 	public FXMLController(String nimi1, String nimi2) {
+		onkoTilastoitu = true;
 		this.nimi1 = nimi1;
 		this.nimi2 = nimi2;
 		
@@ -147,7 +144,7 @@ public class FXMLController implements IPelinakyma {
 
 	public void initialize() {
 		kontrolleri = new Kontrolleri(this);
-		kontrolleri.aloitaPeli();
+		kontrolleri.aloitaPeli(onkoTilastoitu);
 		
 		pelaajat = new HashMap<NappulanVari, String>();
 
@@ -589,5 +586,17 @@ public class FXMLController implements IPelinakyma {
 		}
 
 		return korotusTyyppi;
+	}
+
+	@Override
+	public String getValkoinenPelaaja() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getMustaPelaaja() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
