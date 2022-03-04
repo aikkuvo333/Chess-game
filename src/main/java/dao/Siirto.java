@@ -15,7 +15,7 @@ public class Siirto {
 	
 	public Siirto(int mistaX, int mistaY, int mihinX, int mihinY) {
 		this.mistaX = mistaX;
-		this.mihinY = mistaY;
+		this.mistaY = mistaY;
 		this.mihinX = mihinX;
 		this.mihinY = mihinY;
 	}
