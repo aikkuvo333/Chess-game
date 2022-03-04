@@ -46,7 +46,7 @@ public class Shakkipeli implements IShakkipeli {
 		this.peliLoppunut = false;
 		this.voittaja = null;
 		this.tilastoitu = tilastoitu;
-		
+
 		if (this.tilastoitu) {
 			this.pelinTiedot = new PelinTiedot("Sebastian", "Daniel");
 		}
@@ -57,8 +57,7 @@ public class Shakkipeli implements IShakkipeli {
 	}
 
 	public boolean siirra(int mistaX, int mistaY, int mihinX, int mihinY) {
-		if (siirtyykoOikeaVari(mistaX, mistaY) 
-				&& onkoSiirtoListalla(mistaX, mistaY, mihinX, mihinY)
+		if (siirtyykoOikeaVari(mistaX, mistaY) && onkoSiirtoListalla(mistaX, mistaY, mihinX, mihinY)
 				&& !this.peliLoppunut) {
 
 			this.varmistaSiirronTurvallisuus(mistaX, mistaY, mihinX, mihinY);
@@ -95,7 +94,8 @@ public class Shakkipeli implements IShakkipeli {
 	public ArrayList<Ruutu> getSiirrot(int x, int y) {
 		ArrayList<Ruutu> siirrot = this.lauta.getSiirrot(x, y);
 
-		// Jos aikaa jää täydennä tänne siirroon sopivuuksien tarkistus, jotta pelilauta näyttää vain täysin lailliset siirrot
+		// Jos aikaa jää täydennä tänne siirroon sopivuuksien tarkistus, jotta pelilauta
+		// näyttää vain täysin lailliset siirrot
 
 		// Tornitusta ei tarjota mikäli shakattu
 		if (getRuudunNappula(x, y).getTyyppi() == NappulanTyyppi.KUNINGAS && shakattu) {
@@ -195,6 +195,14 @@ public class Shakkipeli implements IShakkipeli {
 	}
 
 	private void varmistaSiirronTurvallisuus(int mistaX, int mistaY, int mihinX, int mihinY) {
+
+		Nappula nappula = null;
+		
+		// Mahdollinen syötävä nappula talteen
+		if (this.lauta.getRuutu(mihinX, mihinY).getNappula() != null) {
+			nappula = this.lauta.getRuutu(mihinX, mihinY).getNappula();
+		}
+		
 		// Tehdään siirto
 		this.lauta.siirra(mistaX, mistaY, mihinX, mihinY);
 
@@ -216,6 +224,11 @@ public class Shakkipeli implements IShakkipeli {
 			if (palautettu instanceof Kuningas) {
 				((Kuningas) palautettu).kumoaEkaSiirto();
 			}
+		}
+
+		//palautetaan mahdollisesti poistettu nappula paikoilleen
+		if (nappula != null) {
+			this.lauta.getRuutu(mihinX, mihinY).setNappula(nappula);
 		}
 	}
 
@@ -259,8 +272,8 @@ public class Shakkipeli implements IShakkipeli {
 		} else {
 			this.voittaja = NappulanVari.VALKOINEN;
 		}
-		
-		if(this.tilastoitu) {
+
+		if (this.tilastoitu) {
 			this.pelinTiedot.setVoittaja(this.voittaja);
 		}
 
