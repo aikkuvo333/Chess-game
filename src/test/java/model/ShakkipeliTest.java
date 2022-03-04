@@ -253,6 +253,24 @@ class ShakkipeliTest {
 		assertTrue("Sotilasta ei korotettu kuningattareksi", peli.getPelitilanne()[0][7].getNappula() instanceof Kuningatar);		
 	}
 	
+	//Testi bugille, joka löydettiin graafisen käyttöliittymän manuaalisessa testaamisessa.
+	@Test
+	@DisplayName("Torni ei katoa, kun se shakkaa kuningasta vierestä")
+	public void torniEiKatoa() {
+		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(7, 1, 7, 3));
+		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(4, 6, 4, 4));
+		assertTrue("Valkoinen torni ei siirtynyt", peli.siirra(7, 0, 7, 2));
+		assertTrue("Musta Kuningas ei siirtynyt", peli.siirra(4, 7, 4, 6));
+		assertTrue("Valkoinen torni ei siirtynyt 2", peli.siirra(7, 2, 5, 2));
+		assertTrue("Musta Kuningas ei siirtynyt 2", peli.siirra(4, 6, 4, 5));
+		assertTrue("Torni siirtyi shakkaamaan kuningasta", peli.siirra(5, 2, 5, 5));
+		assertTrue("Ei shakannut", peli.getShakattu());
+		assertTrue("Musta Kuningas siirtyi turvaan", peli.siirra(4, 5, 3, 4));
+		assertFalse("Shakki purettu", peli.getShakattu());
+		assertTrue("Torni ei siirtynyt shakkaamaan Kuningasta uudestaan", peli.siirra(5, 5, 3, 5));
+		assertTrue("Torni katosi", peli.getPelitilanne()[3][5].getNappula().getTyyppi() == NappulanTyyppi.TORNI);
+	}
+	
 	private int laskeNappulat(Ruutu[][] lauta) {
 		int nappuloita = 0;
 		for (int y = 0; y < 8; y++) {
