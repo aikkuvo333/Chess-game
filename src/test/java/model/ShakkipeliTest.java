@@ -18,7 +18,8 @@ class ShakkipeliTest {
 	
 	@BeforeEach 
 	public void setUp() {
-		peli = new Shakkipeli();
+		//aloitetaan tilastoimaton peli
+		peli = new Shakkipeli(false);
 	}
 	
 	@Test
@@ -143,8 +144,6 @@ class ShakkipeliTest {
 		assertTrue("Valkoinen kuningatar söi musta kuningattaren", peli.siirra(2, 3, 2, 6));
 		assertEquals(28, laskeNappulat(peli.getPelitilanne()), "Laudalla ei ole 28 nappulaa");
 		assertFalse("Musta tornitus onnistui, vaikka kuningatar söisi Kuninkaan", peli.siirra(4, 7, 2, 7));
-		assertTrue("Torni ei ole paikallaan", peli.getPelitilanne()[0][7].getNappula() instanceof Torni);  
-		assertTrue("Kuningas ei ole paikallaan", peli.getPelitilanne()[4][7].getNappula() instanceof Kuningas);
 		assertTrue("Musta ratsu söi kuningattaren", peli.siirra(0, 5, 2, 6));
 		assertEquals(27, laskeNappulat(peli.getPelitilanne()), "Laudalla ei ole 27 nappulaa");
 		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(7, 1, 7, 2));
@@ -153,8 +152,7 @@ class ShakkipeliTest {
 	
 	@Test
 	@DisplayName("Tornituksella ei saa purkaa shakkia")
-	public void tornitusPelastaaKuninkaan() {
-		
+	public void tornituksellaEiSaaPurkaaShakkia() {
 		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(2, 1, 2, 3));
 		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(2, 6, 2, 4));
 		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(3, 1, 3, 3));
@@ -184,6 +182,24 @@ class ShakkipeliTest {
 		assertTrue("Musta ratsu ei purkanut shakkia", peli.siirra(2, 4, 3, 6));
 		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(3, 4, 3, 5));
 		assertTrue("Musta Kuningas ei tornittanut", peli.siirra(4, 7, 2, 7));
+	}
+	
+	@Test
+	@DisplayName("Kuningas ei saa liikkua uhatun ruudun yli tornituksessa")
+	public void kuningasTornituksessaUhatunRuudunYli() {
+		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(2, 1, 2, 3));
+		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(1, 6, 1, 4));
+		assertTrue("Valkoinen sotilas ei syönyt mustaa sotilasta", peli.siirra(2, 3, 1, 4));
+		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(2, 6, 2, 4));
+		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(1, 1, 1, 3));
+		assertTrue("Musta sotilas ei syönyt valkoista sotilasta", peli.siirra(2, 4, 1, 3));
+		assertTrue("Valkoine ratsu ei siirtynyt", peli.siirra(1, 0, 0, 2));
+		assertTrue("Musta sotilas ei syönyt ratsua", peli.siirra(1, 3, 0, 2));
+		assertTrue("Valkoinen lähetti ei syönyt mustaa sotilasta", peli.siirra(2, 0, 0, 2));
+		assertTrue("Musta kuningatar ei liikkunut", peli.siirra(3, 7, 0, 4));
+		assertTrue("Valkoinen kuningatar ei liikkunut", peli.siirra(3, 0, 0, 3));
+		assertTrue("Musta kuningatar ei syönyt valkoista kuningatarta", peli.siirra(0, 4, 0, 3));
+		assertFalse("Kuningas tornitti uhatun ruudun yli", peli.siirra(4, 0, 2, 0));
 	}
 	
 	@Test
