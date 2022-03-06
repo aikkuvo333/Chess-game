@@ -1,6 +1,5 @@
 package dao;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import model.NappulanTyyppi;
 import model.NappulanVari;
 import model.Shakkipeli;
 
@@ -48,5 +48,26 @@ class PelinTiedotTest {
 		PelinTiedot tiedot = peli.getPelinTiedot();
 		assertEquals(4, tiedot.getSiirrot().size(), "Siirtoja ei tallentunut oikea määrä");
 		assertEquals(NappulanVari.MUSTA, tiedot.getVoittaja(), "Voittaja ei ollut musta");
+	}
+	
+	@Test
+	@DisplayName("Korotus tellentuu oikein")
+	public void korotusTallentuuOikein() {
+		//Siirretään nappuloita niin, että valkoinen sotilas korottuu Kuningattareksi
+		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(0, 1, 0, 3));
+		assertTrue("Musta sotilas ei liikkunut", peli.siirra(1, 6, 1, 4));
+		assertTrue("Valkoinen sotilas ei syönyt mustaa sotilasta", peli.siirra(0, 3, 1, 4));
+		assertTrue("Musta sotilas ei liikkunut 2", peli.siirra(0, 6, 0, 4));
+		assertTrue("Valkoinen sotilas ei liikkunut 2", peli.siirra(1, 4, 1, 5));
+		assertTrue("Musta torni ei siirtynyt", peli.siirra(0, 7, 0, 6));
+		assertTrue("Valkoinen sotilas ei syönyt tornia", peli.siirra(1, 5, 0, 6));
+		assertTrue("Musta ratsu ei siirtynyt", peli.siirra(1, 7, 0, 5));
+		assertTrue("Valkoinen sotilas ei siirtynyt laudan reunalle", peli.siirra(0, 6, 0, 7));
+		assertTrue("Sotilasta ei korotettu kuningattareksi", peli.getPelitilanne()[0][7].getNappula().getTyyppi() == NappulanTyyppi.KUNINGATAR);	
+		
+		//Tarkastetaan tellentuneet siirrot
+		PelinTiedot tiedot = peli.getPelinTiedot();
+		assertEquals(9, tiedot.getSiirrot().size(), "Siirtoja ei tallentunut oikea määrä");
+		assertTrue("Korotus ei tallentunut oikein", tiedot.getSiirrot().get(8).getKorotus() == NappulanTyyppi.KUNINGATAR);	
 	}
 }
