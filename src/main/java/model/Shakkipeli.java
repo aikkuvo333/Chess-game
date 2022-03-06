@@ -70,7 +70,6 @@ public class Shakkipeli implements IShakkipeli {
 
 			this.lauta.siirra(mistaX, mistaY, mihinX, mihinY);
 
-
 			//Siirron tallentaminen
 			if (tilastoitu) {
 				this.tallennaSiirto(mistaX, mistaY, mihinX, mihinY);		
