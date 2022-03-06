@@ -69,10 +69,13 @@ public class Shakkipeli implements IShakkipeli {
 			}
 
 			this.lauta.siirra(mistaX, mistaY, mihinX, mihinY);
+			
+			//Korotetun nappulan tyyppi otetaan talteen mahdollista tallentamista varten.
+			NappulanTyyppi korotus = this.teeMahdollinenKorotus(mihinX, mihinY);
 
 			//Siirron tallentaminen
 			if (tilastoitu) {
-				this.tallennaSiirto(mistaX, mistaY, mihinX, mihinY);		
+				this.tallennaSiirto(mistaX, mistaY, mihinX, mihinY, korotus);		
 			}
 
 			this.tarkistaShakkasiko(mihinX, mihinY);
@@ -301,11 +304,9 @@ public class Shakkipeli implements IShakkipeli {
 		return tyyppi;
 	}
 	
-	private void tallennaSiirto(int mistaX, int mistaY, int mihinX, int mihinY) {
-		//Korotetun nappulan tyyppi otetaan talteen mahdollista tallentamista varten.
-		NappulanTyyppi korotus = this.teeMahdollinenKorotus(mihinX, mihinY);
+	private void tallennaSiirto(int mistaX, int mistaY, int mihinX, int mihinY, NappulanTyyppi korotettu) {
 		Siirto siirto = new Siirto(mistaX, mistaY, mihinX, mihinY);
-		siirto.setKorotus(korotus);
+		siirto.setKorotus(korotettu);
 		this.pelinTiedot.lisaaSiirto(siirto);
 	}
 
