@@ -48,7 +48,7 @@ import javax.sound.sampled.*;
  * 
  */
 
-public class FXMLController implements IPelinakyma {
+public class Lauta_kontrolleri implements IPelinakyma {
 
 	private IKontrolleri kontrolleri;
 	private ImageView nappulaKuva;
@@ -125,13 +125,13 @@ public class FXMLController implements IPelinakyma {
 	}
 	
 	//Tilastoimattoman pelin konstruktori
-	public FXMLController() {
-		onkoTilastoitu = false;
+	public Lauta_kontrolleri() {
+		onkoTilastoitu = true;
 		peruutus = true;
 	}
 	
 	//Tilastoidun pelin konstruktori
-	public FXMLController(String nimi1, String nimi2) {
+	public Lauta_kontrolleri(String nimi1, String nimi2) {
 		onkoTilastoitu = true;
 		this.nimi1 = nimi1;
 		this.nimi2 = nimi2;
@@ -510,7 +510,7 @@ public class FXMLController implements IPelinakyma {
 	}
 
 	public void avaaKorotus() throws IOException {
-		InitFXML.avaaFxml(new KorotusKontrolleri(this, kontrolleri.getVuoro()), "korotus.fxml", "Sotilaan korotus", Modality.APPLICATION_MODAL, StageStyle.UNDECORATED, lautaNakyma);
+		InitFXML.avaaFxml(new Korotus_kontrolleri(this, kontrolleri.getVuoro()), "korotus.fxml", "Sotilaan korotus", Modality.APPLICATION_MODAL, StageStyle.UNDECORATED, lautaNakyma);
 	}
 
 	public void valittuKorotus(NappulanTyyppi tyyppi) {

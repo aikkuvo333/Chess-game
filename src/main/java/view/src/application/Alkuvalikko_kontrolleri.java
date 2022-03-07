@@ -43,9 +43,9 @@ public class Alkuvalikko_kontrolleri {
 	@FXML
 	void TilastoimatonPeli(ActionEvent event) throws IOException {
 
-		FXMLController controller = new FXMLController();
+		Lauta_kontrolleri controller = new Lauta_kontrolleri();
 		
-		loader = new FXMLLoader(getClass().getResource("anonyymi-lauta2.fxml"));
+		loader = new FXMLLoader(getClass().getResource("Lauta.fxml"));
 		loader.setController(controller);
 		root = loader.load();
 		

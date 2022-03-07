@@ -18,12 +18,12 @@ import model.NappulanVari;
  * @author Santeri Kuusisto
  * 
  */
-public class KorotusKontrolleri {
+public class Korotus_kontrolleri {
 
 	private Stage stage;
 	private String vaalea = "-fx-background-color: #f1dbb1";
 	private String tumma = "-fx-background-color: #ba9b63";
-	private FXMLController fxmlController;
+	private Lauta_kontrolleri lautaKontrolleri;
 	private NappulanVari vari;
 	private String variPNG;
 	private ImageView nappulaKuva;
@@ -39,13 +39,13 @@ public class KorotusKontrolleri {
 	@FXML
 	private AnchorPane korotus;
 
-	public KorotusKontrolleri(Object object, NappulanVari vari) {
-		fxmlController = (FXMLController) object;
+	public Korotus_kontrolleri(Object object, NappulanVari vari) {
+		lautaKontrolleri = (Lauta_kontrolleri) object;
 		this.vari = vari;
 	}
 
 	public void initialize() {
-		fxmlController.toggleShadow();
+		lautaKontrolleri.toggleShadow();
 		
 		varjo = new DropShadow();
 		varjo.setColor(Color.GRAY);
@@ -141,12 +141,12 @@ public class KorotusKontrolleri {
 
 	public void valitse(NappulanTyyppi tyyppi) {
 		System.out.println(tyyppi);
-		fxmlController.valittuKorotus(tyyppi);
+		lautaKontrolleri.valittuKorotus(tyyppi);
 		poistu();
 	}
 
 	public void poistu() {
-		fxmlController.toggleShadow();
+		lautaKontrolleri.toggleShadow();
 		stage = (Stage) korotus.getScene().getWindow();
 		stage.close();
 	}

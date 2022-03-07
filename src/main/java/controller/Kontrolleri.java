@@ -69,12 +69,14 @@ public class Kontrolleri implements IKontrolleri{
 
 	@Override
 	public String getValkoinenPelaaja() {
+		System.out.println(this.pelinakyma.getValkoinenPelaaja());
 		return this.pelinakyma.getValkoinenPelaaja();
 	}
 
 	@Override
 	public String getMustaPelaaja() {
-		return this.getMustaPelaaja();
+		System.out.println(this.pelinakyma.getMustaPelaaja());
+		return this.pelinakyma.getMustaPelaaja();
 	}
 
 
