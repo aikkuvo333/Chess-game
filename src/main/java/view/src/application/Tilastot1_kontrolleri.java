@@ -2,6 +2,7 @@ package view.src.application;
 
 import java.io.IOException;
 
+import controller.DBKontrolleri;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
+import model.Pelaaja;
 
 /*
  * @author Aivan Vo 25.2.2022
@@ -36,11 +38,15 @@ public class Tilastot1_kontrolleri {
     private ObservableList<String> items = FXCollections.observableArrayList();
     
     public void initialize() {
+    	DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
     	items.removeAll(items);
-    	String a="Tauski";
+    	for (Pelaaja p : dbKontrolleri.getPelaajat()) {
+    		items.add(p.getKayttajaTunnus());
+    	}
+    	/*String a="Tauski";
     	String b="Niilo";
     	String c="Kerttuli";
-    	items.addAll(a,b,c);
+    	items.addAll(a,b,c);*/
     	pelaajaLista.getItems().addAll(items);
     }
 
