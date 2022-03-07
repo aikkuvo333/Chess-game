@@ -31,11 +31,11 @@ class PelinTiedotTest {
 		assertTrue("Valkoisen pelaajan nimi on väärä", tiedot.getValkoinenPelaaja().equals("Sebastian"));
 		assertTrue("Mustan pelaajan nimi on väärä", tiedot.getMustaPelaaja().equals("Daniel"));
 		ArrayList<Siirto> siirrot = tiedot.getSiirrot();
-		assertTrue("MistäX on väärin", siirrot.get(0).getMistaX() == 0);
-		assertTrue("MistäY on väärin", siirrot.get(0).getMistaY() == 1);
-		assertTrue("MihinX on väärin", siirrot.get(0).getMihinX() == 0);
-		assertTrue("MihinY on väärin", siirrot.get(0).getMihinY() == 3);
-		assertTrue("Korotus ei palauttanut null", siirrot.get(0).getKorotus() == null);
+		assertEquals(0, siirrot.get(0).getMistaX(), "MistäX on väärin");
+		assertEquals(1, siirrot.get(0).getMistaY(), "MistäY on väärin");
+		assertEquals(0, siirrot.get(0).getMihinX(),"MihinX on väärin");
+		assertEquals(3, siirrot.get(0).getMihinY(), "MihinY on väärin");
+		assertEquals(null, siirrot.get(0).getKorotus(), "Korotus ei palauttanut null");
 	}
 
 	@Test
@@ -63,11 +63,11 @@ class PelinTiedotTest {
 		assertTrue("Valkoinen sotilas ei syönyt tornia", peli.siirra(1, 5, 0, 6));
 		assertTrue("Musta ratsu ei siirtynyt", peli.siirra(1, 7, 0, 5));
 		assertTrue("Valkoinen sotilas ei siirtynyt laudan reunalle", peli.siirra(0, 6, 0, 7));
-		assertTrue("Sotilasta ei korotettu kuningattareksi", peli.getPelitilanne()[0][7].getNappula().getTyyppi() == NappulanTyyppi.KUNINGATAR);	
+		assertEquals(NappulanTyyppi.KUNINGATAR, peli.getPelitilanne()[0][7].getNappula().getTyyppi(), "Sotilasta ei korotettu kuningattareksi");	
 		
 		//Tarkastetaan tellentuneet siirrot
 		PelinTiedot tiedot = peli.getPelinTiedot();
 		assertEquals(9, tiedot.getSiirrot().size(), "Siirtoja ei tallentunut oikea määrä");
-		assertTrue("Korotus ei tallentunut oikein", tiedot.getSiirrot().get(8).getKorotus() == NappulanTyyppi.KUNINGATAR);	
+		assertEquals(NappulanTyyppi.KUNINGATAR, tiedot.getSiirrot().get(8).getKorotus(), "Korotus ei tallentunut oikein");	
 	}
 }

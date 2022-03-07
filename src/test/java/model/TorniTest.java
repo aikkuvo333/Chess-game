@@ -106,11 +106,9 @@ class TorniTest {
 	public void getVari() {
 		lauta = new Lauta();
 		lauta.getLauta()[4][5].setNappula(new Torni(NappulanVari.VALKOINEN));
-		assertTrue("Valkoinen torni ei palauttanut oikeata variä",
-				((Torni) lauta.getLauta()[4][5].getNappula()).getVari() == NappulanVari.VALKOINEN);
+		assertEquals(NappulanVari.VALKOINEN, ((Torni) lauta.getLauta()[4][5].getNappula()).getVari(), "Valkoinen torni ei palauttanut oikeata variä");
 		lauta.getLauta()[4][5].setNappula(new Torni(NappulanVari.MUSTA));
-		assertTrue("Valkoinen torni ei palauttanut oikeata variä",
-				((Torni) lauta.getLauta()[4][5].getNappula()).getVari() == NappulanVari.MUSTA);
+		assertEquals(NappulanVari.MUSTA, ((Torni) lauta.getLauta()[4][5].getNappula()).getVari(), "Valkoinen torni ei palauttanut oikeata variä");
 	}
 
 	private boolean menikoYli(ArrayList<Ruutu> siirrot) {
