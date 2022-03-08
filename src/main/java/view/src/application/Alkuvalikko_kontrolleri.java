@@ -81,7 +81,7 @@ public class Alkuvalikko_kontrolleri {
 
 	@FXML
 	void tilastot(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("Tilastot1.fxml"));
+		root = FXMLLoader.load(getClass().getResource("Tilastot2.fxml"));
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
