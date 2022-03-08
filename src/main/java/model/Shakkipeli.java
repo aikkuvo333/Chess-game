@@ -21,6 +21,7 @@ public class Shakkipeli implements IShakkipeli {
 	private NappulanVari voittaja;
 	private boolean tilastoitu;
 	private PelinTiedot pelinTiedot;
+	private NappulanTyyppi testiKorotus;
 
 	public Shakkipeli(IKontrolleri kontrolleri, boolean tilastoitu) {
 		this.kontrolleri = kontrolleri;
@@ -46,6 +47,7 @@ public class Shakkipeli implements IShakkipeli {
 		this.peliLoppunut = false;
 		this.voittaja = null;
 		this.tilastoitu = tilastoitu;
+		this.testiKorotus = NappulanTyyppi.KUNINGATAR;
 
 		if (this.tilastoitu) {
 			this.pelinTiedot = new PelinTiedot("Sebastian", "Daniel");
@@ -98,11 +100,16 @@ public class Shakkipeli implements IShakkipeli {
 
 		// Tornitusta ei tarjota mikäli shakattu
 		if (getRuudunNappula(x, y).getTyyppi() == NappulanTyyppi.KUNINGAS && shakattu) {
+			
+			//Tornitus onnistuu vain mikäli kuningas ei ole liikkunut
 			if (!((Kuningas) getRuudunNappula(x, y)).getEkaSiirto()) {
 				ArrayList<Ruutu> valiaikainen = new ArrayList<>();
 				for (Ruutu siirto : siirrot) {
 
-					// Taikanumerot, koska tornittaessa kuningas voi olla vain tietyssä paikassa.
+					/*
+					 * Taikanumerot, koska tornittaessa kuningas voi olla vain tietyssä paikassa.
+					 * Hyväksytään vain ne siirrot, jotka ovat korkeintaan yhden ruudun päässä.
+					 */
 					if (siirto.getX() - 1 == 4 || siirto.getX() + 1 == 4 || siirto.getX() == 4) {
 						valiaikainen.add(siirto);
 					}
@@ -110,7 +117,6 @@ public class Shakkipeli implements IShakkipeli {
 				siirrot = valiaikainen;
 			}
 		}
-
 		return siirrot;
 	}
 
@@ -150,7 +156,7 @@ public class Shakkipeli implements IShakkipeli {
 		return this.shakattu;
 	}
 
-	private boolean tarkistaShakkasiko(int x, int y) {
+	private void tarkistaShakkasiko(int x, int y) {
 
 		// Haetaan siirretyn nappulan mahdolliset seuraavat siirrot
 		ArrayList<Ruutu> siirrot = this.getSiirrot(x, y);
@@ -168,7 +174,6 @@ public class Shakkipeli implements IShakkipeli {
 				}
 			}
 		}
-		return false;
 	}
 
 	// tarkastetaan onko ruutu, johon kuningas on siirtymässä, vastustajan
@@ -288,7 +293,7 @@ public class Shakkipeli implements IShakkipeli {
 				tyyppi = kontrolleri.korota();
 			} else {
 				//Härski viritelmä junit testejä varten.
-				tyyppi = NappulanTyyppi.KUNINGATAR;
+				tyyppi = this.testiKorotus;
 			}
 			this.lauta.korota(x, y, tyyppi);
 		}
@@ -297,7 +302,7 @@ public class Shakkipeli implements IShakkipeli {
 			if (!this.testi) {
 				tyyppi = kontrolleri.korota();
 			} else {
-				tyyppi = NappulanTyyppi.KUNINGATAR;
+				tyyppi = this.testiKorotus;
 			}
 			this.lauta.korota(x, y, tyyppi);
 		}
@@ -328,5 +333,9 @@ public class Shakkipeli implements IShakkipeli {
 
 	public PelinTiedot getPelinTiedot() {
 		return pelinTiedot;
+	}
+	
+	public void setTestiKorotus(NappulanTyyppi tyyppi) {
+		this.testiKorotus = tyyppi;
 	}
 }

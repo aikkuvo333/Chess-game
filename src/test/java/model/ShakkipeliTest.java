@@ -15,33 +15,35 @@ import org.junit.jupiter.api.Test;
 class ShakkipeliTest {
 
 	private Shakkipeli peli;
-	
-	@BeforeEach 
+
+	@BeforeEach
 	public void setUp() {
-		//aloitetaan tilastoimaton peli
+		// aloitetaan tilastoimaton peli
 		peli = new Shakkipeli(false);
 	}
-	
+
 	@Test
 	@DisplayName("Peli ei hyväksy laintonta siirtoa Sotilaalla")
 	public void sotilastaEiSaaSiirtääVaarin() {
 		assertFalse("Siirto ei onnistunut", peli.siirra(0, 1, 0, 5));
 		assertFalse("Sotilas siirtyi", peli.getPelitilanne()[0][5].getNappula() != null);
-		assertTrue("Sotilas ei ole enää alkuruudussa", peli.getPelitilanne()[0][1].getNappula().getTyyppi() == NappulanTyyppi.SOTILAS);
-		assertEquals(2, peli.getSiirrot(0,1).size(), "Siirtoja palautui väärä määrä");
+		assertEquals(NappulanTyyppi.SOTILAS, peli.getPelitilanne()[0][1].getNappula().getTyyppi(), "Sotilas ei ole enää alkuruudussa");
+		assertEquals(2, peli.getSiirrot(0, 1).size(), "Siirtoja palautui väärä määrä");
 	}
-	
+
 	@Test
 	@DisplayName("Peli ei anna siirtää väärää väriä")
 	public void vaaraaVariaEiSaaSiirtaa() {
+		assertEquals(NappulanVari.VALKOINEN, peli.getVuoro(), "Aloituksessa ei ollut valkoisen vuoro");
 		assertFalse("Mustan siirto onnistui aloituksessa", peli.siirra(0, 6, 0, 5));
 		assertTrue("Valkoisen siirto ei onnistunut aloituksessa", peli.siirra(0, 1, 0, 3));
-		assertTrue("Valkoinen Sotilas ei ole oikeassa ruudussa", peli.getPelitilanne()[0][3].getNappula().getTyyppi() == NappulanTyyppi.SOTILAS);
+		assertEquals(NappulanVari.MUSTA, peli.getVuoro(), "Vuoro ei vaihtunut valkoisen siirron jälkeen");
+		assertEquals(NappulanTyyppi.SOTILAS, peli.getPelitilanne()[0][3].getNappula().getTyyppi(),"Valkoinen Sotilas ei ole oikeassa ruudussa");
 		assertFalse("Valkoista siirrettiin kaksi kertaa peräkkäin", peli.siirra(1, 1, 1, 0));
 		assertTrue("Mustan siirto ei onnistunut", peli.siirra(0, 6, 0, 5));
-		assertTrue("Musta sotilas ei ole oikeassa ruudussa", peli.getPelitilanne()[0][5].getNappula().getTyyppi() == NappulanTyyppi.SOTILAS);
+		assertEquals(NappulanTyyppi.SOTILAS, peli.getPelitilanne()[0][5].getNappula().getTyyppi(), "Musta sotilas ei ole oikeassa ruudussa");
 	}
-	
+
 	@Test
 	@DisplayName("Kuningasta ei voi siirtää vastustajan tornin linjalle")
 	public void kuningasEiVoiTapattaaItseansa() {
@@ -52,9 +54,9 @@ class ShakkipeliTest {
 		assertTrue("Valkoinen torni ei siirtynyt 2", peli.siirra(7, 2, 5, 2));
 		assertFalse("Kuningas siirtyi itsetuhoisesti", peli.siirra(4, 6, 5, 5));
 	}
-	
+
 	@Test
-	@DisplayName("Pelaaja ei voi tehdä siirtoa, joka ei poista shakkia")
+	@DisplayName("Shakattuna olevan pelaajan pitää tehdä siirto, joka poistaa shakin")
 	public void pelaajanOnPoisttutavaShakista() {
 		assertFalse("Peli ei ole shakatussa tilassa", peli.getShakattu());
 		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(7, 1, 7, 3));
@@ -66,10 +68,10 @@ class ShakkipeliTest {
 		assertTrue("Torni siirtyi kuninkaan viereen", peli.siirra(5, 2, 5, 5));
 		assertTrue("Torni shakkasi", peli.getShakattu());
 		assertFalse("Kuninkaan siirto ei purkanut shakkia", peli.siirra(4, 5, 3, 5));
-		assertTrue("Musta Kuningas siirtyi turvaan", peli.siirra(4, 5, 3, 4));
+		assertTrue("Musta Kuningas ei siirtynyt turvaan", peli.siirra(4, 5, 3, 4));
 		assertFalse("Shakki purettu", peli.getShakattu());
 	}
-	
+
 	@Test
 	@DisplayName("Shakin purkaminen, kun shakkaava nappula syödään")
 	public void pelaajaSoiItsensaPoisShakista() {
@@ -86,7 +88,7 @@ class ShakkipeliTest {
 		assertEquals(31, laskeNappulat(peli.getPelitilanne()), "Laudalla on väärä määrä nappuloita");
 		assertFalse("Shakki purettu", peli.getShakattu());
 	}
-	
+
 	@Test
 	@DisplayName("Peli ei anna siirtää Kuninkaan suojana olevaa nappulaa")
 	public void kuninkaanLihakilpieaEiSaaLiikuttaa() {
@@ -97,10 +99,11 @@ class ShakkipeliTest {
 		assertTrue("Musta Kuningas ei siirtynyt", peli.siirra(4, 7, 4, 6));
 		assertTrue("Valkoinen torni ei siirtynyt 2", peli.siirra(7, 2, 5, 2));
 		assertTrue("Musta Kuningas ei siirtynyt 2", peli.siirra(4, 6, 3, 5));
-		assertTrue("Valkoinen torni siirtyi mustan sotilaan viereen", peli.siirra(5, 2, 5, 5));;
+		assertTrue("Valkoinen torni siirtyi mustan sotilaan viereen", peli.siirra(5, 2, 5, 5));
+		;
 		assertFalse("Sotilas siirtyi pois suojaamasta Kuningasta", peli.siirra(4, 5, 4, 4));
 	}
-	
+
 	@Test
 	@DisplayName("Tornitus toimii")
 	public void torinitusToimii() {
@@ -111,13 +114,13 @@ class ShakkipeliTest {
 		assertTrue("Valkoinen lahetti ei siirtynyt", peli.siirra(5, 0, 2, 3));
 		assertTrue("Musta lahetti ei siirtynt", peli.siirra(5, 7, 2, 4));
 		assertTrue("Valkoisen tornitus oikean tornin kanssa ei onnistunut", peli.siirra(4, 0, 6, 0));
-		assertTrue("Valkoinen Kuningas ei siirtynyt", peli.getPelitilanne()[6][0].getNappula() instanceof Kuningas);
-		assertTrue("Valkoinen torni ei siirtynyt", peli.getPelitilanne()[5][0].getNappula() instanceof Torni);
+		assertEquals(NappulanTyyppi.KUNINGAS, peli.getPelitilanne()[6][0].getNappula().getTyyppi(), "Valkoinen Kuningas ei siirtynyt");
+		assertEquals(NappulanTyyppi.TORNI, peli.getPelitilanne()[5][0].getNappula().getTyyppi(),"Valkoinen torni ei siirtynyt");
 		assertTrue("Mustan tornitus oikean tornin kanssa ei onnistunut", peli.siirra(4, 7, 6, 7));
-		assertTrue("Valkoinen Kuningas ei siirtynyt", peli.getPelitilanne()[6][7].getNappula() instanceof Kuningas);
-		assertTrue("Valkoinen torni ei siirtynyt", peli.getPelitilanne()[5][7].getNappula() instanceof Torni);
+		assertEquals(NappulanTyyppi.KUNINGAS, peli.getPelitilanne()[6][7].getNappula().getTyyppi(), "Valkoinen Kuningas ei siirtynyt");
+		assertEquals(NappulanTyyppi.TORNI, peli.getPelitilanne()[5][7].getNappula().getTyyppi(),"Valkoinen torni ei siirtynyt");
 	}
-	
+
 	@Test
 	@DisplayName("Tornitusta ei voi tehdä niin, että Kuningas vaarantuu")
 	public void kuningastaEiVoiTornittaaKuolemaan() {
@@ -149,7 +152,7 @@ class ShakkipeliTest {
 		assertTrue("Valkoinen sotilas ei siirtynyt", peli.siirra(7, 1, 7, 2));
 		assertTrue("Musta tornitus ei onnistunut", peli.siirra(4, 7, 2, 7));
 	}
-	
+
 	@Test
 	@DisplayName("Tornituksella ei saa purkaa shakkia")
 	public void tornituksellaEiSaaPurkaaShakkia() {
@@ -166,10 +169,10 @@ class ShakkipeliTest {
 		assertTrue("Valkoinen kuningatar ei syönyt mustaa sotilasta", peli.siirra(3, 0, 3, 3));
 		assertEquals(29, laskeNappulat(peli.getPelitilanne()), "Laudalla on väärä määrä nappuloita 3");
 		assertTrue("Musta ratsu ei siirtynyt", peli.siirra(1, 7, 0, 5));
-		assertTrue("Valkoinen ratsu ei siirtynyt", peli.siirra(1, 0, 0, 2));		
+		assertTrue("Valkoinen ratsu ei siirtynyt", peli.siirra(1, 0, 0, 2));
 		assertTrue("Musta kuningatar ei siirtynyt shakkaamaan", peli.siirra(3, 7, 0, 4));
 		assertFalse("Valkoinen Kuningas tornitti vaikka oli shakissa", peli.siirra(4, 0, 2, 0));
-		assertTrue("Valkoinen sotilas purki shakin", peli.siirra(1, 1, 1, 3));
+		assertTrue("Valkoinen sotilas ei purkanut shakkia", peli.siirra(1, 1, 1, 3));
 		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(7, 6, 7, 5));
 		assertTrue("Valkoinen Kuningas ei tornittanut", peli.siirra(4, 0, 2, 0));
 		assertTrue("Musta kuningatar ei siirtynyt shakkaamaan", peli.siirra(0, 4, 2, 4));
@@ -183,7 +186,7 @@ class ShakkipeliTest {
 		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(3, 4, 3, 5));
 		assertTrue("Musta Kuningas ei tornittanut", peli.siirra(4, 7, 2, 7));
 	}
-	
+
 	@Test
 	@DisplayName("Kuningas ei saa liikkua uhatun ruudun yli tornituksessa")
 	public void kuningasTornituksessaUhatunRuudunYli() {
@@ -201,10 +204,10 @@ class ShakkipeliTest {
 		assertTrue("Musta kuningatar ei syönyt valkoista kuningatarta", peli.siirra(0, 4, 0, 3));
 		assertFalse("Kuningas tornitti uhatun ruudun yli", peli.siirra(4, 0, 2, 0));
 	}
-	
+
 	@Test
-	@DisplayName("Pelin päättymisen testaaminen pikamatilla")
-	public void PikamattiPaattiPelin() {
+	@DisplayName("Valkoinen voittaa pikamatilla")
+	public void valkoinenVoittaaPikamatilla() {
 		assertEquals(null, peli.getVoittaja(), "Pelin alussa voittaja ei ollut null");
 		assertFalse("Peli on päättynyt ennen siirtoja", peli.getPeliLoppunut());
 		assertTrue("Valkoinen sotilas ei siirtynyt 1", peli.siirra(5, 1, 5, 2));
@@ -214,19 +217,21 @@ class ShakkipeliTest {
 		assertTrue("Musta Kuningatar ei siirtynyt ja lopettanut peliä", peli.siirra(3, 7, 7, 3));
 		assertTrue("peli ei päättynyt", peli.getPeliLoppunut());
 		assertEquals(NappulanVari.MUSTA, peli.getVoittaja(), "Musta ei voittanut peliä");
-		assertFalse("Valkoinen sai tehdä siirron", peli.siirra(0, 1, 0, 2));		
+		assertFalse("Valkoinen sai tehdä siirron", peli.siirra(0, 1, 0, 2));
 	}
 	
+	//Musta voittaa nopeasti
+
 	@Test
 	@DisplayName("Luovuttaminen toimii valkoisella")
 	public void luovutaValkoinen() {
 		assertTrue("Valkoinen ei luovuttanut", peli.luovuta());
 		assertFalse("Valkoinen pystyi liikkumaan luovuttamisen jälkeen", peli.siirra(0, 1, 0, 2));
 		assertFalse("Musta pystyi siirtymään pelin päätyttyä", peli.siirra(0, 6, 0, 5));
-		assertTrue("Musta ei voittanut", peli.getVoittaja() == NappulanVari.MUSTA);
-		assertTrue("Peli on loppunut", peli.getPeliLoppunut() == true);
+		assertEquals(NappulanVari.MUSTA, peli.getVoittaja(), "Musta ei voittanut");
+		assertTrue("Peli on loppunut", peli.getPeliLoppunut());
 	}
-	
+
 	@Test
 	@DisplayName("Luovuttaminen toimii mustalla")
 	public void luovutaMusta() {
@@ -234,13 +239,14 @@ class ShakkipeliTest {
 		assertTrue("Musta ei luovuttanut", peli.luovuta());
 		assertFalse("Musta pystyi siirtymään pelin päätyttyä", peli.siirra(0, 6, 0, 5));
 		assertFalse("Valkoinen sotilas pysti siirtymään pelin päätyttyä", peli.siirra(1, 1, 1, 2));
-		assertTrue("Valkoinen ei voittanut", peli.getVoittaja() == NappulanVari.VALKOINEN);
-		assertTrue("Peli on loppunut", peli.getPeliLoppunut() == true);
+		assertEquals(NappulanVari.VALKOINEN, peli.getVoittaja(), "Valkoinen ei voittanut");
+		assertTrue("Peli on loppunut", peli.getPeliLoppunut());
 	}
-	
+
 	@Test
-	@DisplayName("Valkoisen sotilaan korottaminen kuningattareksi onnistuu")
+	@DisplayName("Valkoisen sotilaan korottaminen onnistuu")
 	public void valkoisenSotilaanKorottaminen() {
+		// Kuningattareksi
 		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(0, 1, 0, 3));
 		assertTrue("Musta sotilas ei liikkunut", peli.siirra(1, 6, 1, 4));
 		assertTrue("Valkoinen sotilas ei syönyt mustaa sotilasta", peli.siirra(0, 3, 1, 4));
@@ -250,10 +256,124 @@ class ShakkipeliTest {
 		assertTrue("Valkoinen sotilas ei syönyt tornia", peli.siirra(1, 5, 0, 6));
 		assertTrue("Musta ratsu ei siirtynyt", peli.siirra(1, 7, 0, 5));
 		assertTrue("Valkoinen sotilas ei siirtynyt laudan reunalle", peli.siirra(0, 6, 0, 7));
-		assertTrue("Sotilasta ei korotettu kuningattareksi", peli.getPelitilanne()[0][7].getNappula() instanceof Kuningatar);		
+		assertEquals(NappulanTyyppi.KUNINGATAR, peli.getPelitilanne()[0][7].getNappula().getTyyppi(),
+				"Sotilasta ei korotettu Kuingattareksi");
+
+		// Ratsuksi
+		peli = new Shakkipeli(false);
+		peli.setTestiKorotus(NappulanTyyppi.RATSU);
+		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(0, 1, 0, 3));
+		assertTrue("Musta sotilas ei liikkunut", peli.siirra(1, 6, 1, 4));
+		assertTrue("Valkoinen sotilas ei syönyt mustaa sotilasta", peli.siirra(0, 3, 1, 4));
+		assertTrue("Musta sotilas ei liikkunut 2", peli.siirra(0, 6, 0, 4));
+		assertTrue("Valkoinen sotilas ei liikkunut 2", peli.siirra(1, 4, 1, 5));
+		assertTrue("Musta torni ei siirtynyt", peli.siirra(0, 7, 0, 6));
+		assertTrue("Valkoinen sotilas ei syönyt tornia", peli.siirra(1, 5, 0, 6));
+		assertTrue("Musta ratsu ei siirtynyt", peli.siirra(1, 7, 0, 5));
+		assertTrue("Valkoinen sotilas ei siirtynyt laudan reunalle", peli.siirra(0, 6, 0, 7));
+		assertEquals(NappulanTyyppi.RATSU, peli.getPelitilanne()[0][7].getNappula().getTyyppi(),
+				"Sotilasta ei korotettu ratsuksi");
+
+		// Torniksi
+		peli = new Shakkipeli(false);
+		peli.setTestiKorotus(NappulanTyyppi.TORNI);
+		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(0, 1, 0, 3));
+		assertTrue("Musta sotilas ei liikkunut", peli.siirra(1, 6, 1, 4));
+		assertTrue("Valkoinen sotilas ei syönyt mustaa sotilasta", peli.siirra(0, 3, 1, 4));
+		assertTrue("Musta sotilas ei liikkunut 2", peli.siirra(0, 6, 0, 4));
+		assertTrue("Valkoinen sotilas ei liikkunut 2", peli.siirra(1, 4, 1, 5));
+		assertTrue("Musta torni ei siirtynyt", peli.siirra(0, 7, 0, 6));
+		assertTrue("Valkoinen sotilas ei syönyt tornia", peli.siirra(1, 5, 0, 6));
+		assertTrue("Musta ratsu ei siirtynyt", peli.siirra(1, 7, 0, 5));
+		assertTrue("Valkoinen sotilas ei siirtynyt laudan reunalle", peli.siirra(0, 6, 0, 7));
+		assertEquals(NappulanTyyppi.TORNI, peli.getPelitilanne()[0][7].getNappula().getTyyppi(),
+				"Sotilasta ei korotettu torniksi");
+
+		// Lähetiksi
+		peli = new Shakkipeli(false);
+		peli.setTestiKorotus(NappulanTyyppi.LAHETTI);
+		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(0, 1, 0, 3));
+		assertTrue("Musta sotilas ei liikkunut", peli.siirra(1, 6, 1, 4));
+		assertTrue("Valkoinen sotilas ei syönyt mustaa sotilasta", peli.siirra(0, 3, 1, 4));
+		assertTrue("Musta sotilas ei liikkunut 2", peli.siirra(0, 6, 0, 4));
+		assertTrue("Valkoinen sotilas ei liikkunut 2", peli.siirra(1, 4, 1, 5));
+		assertTrue("Musta torni ei siirtynyt", peli.siirra(0, 7, 0, 6));
+		assertTrue("Valkoinen sotilas ei syönyt tornia", peli.siirra(1, 5, 0, 6));
+		assertTrue("Musta ratsu ei siirtynyt", peli.siirra(1, 7, 0, 5));
+		assertTrue("Valkoinen sotilas ei siirtynyt laudan reunalle", peli.siirra(0, 6, 0, 7));
+		assertEquals(NappulanTyyppi.LAHETTI, peli.getPelitilanne()[0][7].getNappula().getTyyppi(),
+				"Sotilasta ei korotettu lahetiksi");
 	}
-	
-	//Testi bugille, joka löydettiin graafisen käyttöliittymän manuaalisessa testaamisessa.
+
+	@Test
+	@DisplayName("Mustan sotilaan korottaminen onnistuu")
+	public void mustanSotilaanKorottaminen() {
+		// Kuningattareksi
+		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(7, 1, 7, 3));
+		assertTrue("Musta sotilas ei liikkunut", peli.siirra(6, 6, 6, 4));
+		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(6, 1, 6, 2));
+		assertTrue("Musta sotilas ei syönyt valkoista sotilasta", peli.siirra(6, 4, 7, 3));
+		assertTrue("Valkoinen ratsu ei liikkunut", peli.siirra(6, 0, 7, 2));
+		assertTrue("Musta sotilas ei syönyt valkoista sotilasta", peli.siirra(7, 3, 6, 2));
+		assertTrue("Valkoinen torni ei liikkunut", peli.siirra(7, 0, 7, 1));
+		assertTrue("Musta sotilas ei liikkunut", peli.siirra(6, 2, 6, 1));
+		assertTrue("Valkoinen torni ei liikkunut", peli.siirra(7, 1, 7, 0));
+		assertTrue("Musta sotilas ei siirtynyt reunalla", peli.siirra(6, 1, 6, 0));
+		assertEquals(NappulanTyyppi.KUNINGATAR, peli.getPelitilanne()[6][0].getNappula().getTyyppi(),
+				"Mustaa sotilasta ei korotettu kuningattareksi");
+
+		// Ratsuksi
+		peli = new Shakkipeli(false);
+		peli.setTestiKorotus(NappulanTyyppi.RATSU);
+		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(7, 1, 7, 3));
+		assertTrue("Musta sotilas ei liikkunut", peli.siirra(6, 6, 6, 4));
+		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(6, 1, 6, 2));
+		assertTrue("Musta sotilas ei syönyt valkoista sotilasta", peli.siirra(6, 4, 7, 3));
+		assertTrue("Valkoinen ratsu ei liikkunut", peli.siirra(6, 0, 7, 2));
+		assertTrue("Musta sotilas ei syönyt valkoista sotilasta", peli.siirra(7, 3, 6, 2));
+		assertTrue("Valkoinen torni ei liikkunut", peli.siirra(7, 0, 7, 1));
+		assertTrue("Musta sotilas ei liikkunut", peli.siirra(6, 2, 6, 1));
+		assertTrue("Valkoinen torni ei liikkunut", peli.siirra(7, 1, 7, 0));
+		assertTrue("Musta sotilas ei siirtynyt reunalla", peli.siirra(6, 1, 6, 0));
+		assertEquals(NappulanTyyppi.RATSU, peli.getPelitilanne()[6][0].getNappula().getTyyppi(),
+				"Mustaa sotilasta ei korotettu ratsuksi");
+
+		// Torniksi
+		peli = new Shakkipeli(false);
+		peli.setTestiKorotus(NappulanTyyppi.TORNI);
+		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(7, 1, 7, 3));
+		assertTrue("Musta sotilas ei liikkunut", peli.siirra(6, 6, 6, 4));
+		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(6, 1, 6, 2));
+		assertTrue("Musta sotilas ei syönyt valkoista sotilasta", peli.siirra(6, 4, 7, 3));
+		assertTrue("Valkoinen ratsu ei liikkunut", peli.siirra(6, 0, 7, 2));
+		assertTrue("Musta sotilas ei syönyt valkoista sotilasta", peli.siirra(7, 3, 6, 2));
+		assertTrue("Valkoinen torni ei liikkunut", peli.siirra(7, 0, 7, 1));
+		assertTrue("Musta sotilas ei liikkunut", peli.siirra(6, 2, 6, 1));
+		assertTrue("Valkoinen torni ei liikkunut", peli.siirra(7, 1, 7, 0));
+		assertTrue("Musta sotilas ei siirtynyt reunalla", peli.siirra(6, 1, 6, 0));
+		assertEquals(NappulanTyyppi.TORNI, peli.getPelitilanne()[6][0].getNappula().getTyyppi(),
+				"Mustaa sotilasta ei korotettu torniksi");
+
+		// Lähetiksi
+		peli = new Shakkipeli(false);
+		peli.setTestiKorotus(NappulanTyyppi.LAHETTI);
+		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(7, 1, 7, 3));
+		assertTrue("Musta sotilas ei liikkunut", peli.siirra(6, 6, 6, 4));
+		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(6, 1, 6, 2));
+		assertTrue("Musta sotilas ei syönyt valkoista sotilasta", peli.siirra(6, 4, 7, 3));
+		assertTrue("Valkoinen ratsu ei liikkunut", peli.siirra(6, 0, 7, 2));
+		assertTrue("Musta sotilas ei syönyt valkoista sotilasta", peli.siirra(7, 3, 6, 2));
+		assertTrue("Valkoinen torni ei liikkunut", peli.siirra(7, 0, 7, 1));
+		assertTrue("Musta sotilas ei liikkunut", peli.siirra(6, 2, 6, 1));
+		assertTrue("Valkoinen torni ei liikkunut", peli.siirra(7, 1, 7, 0));
+		assertTrue("Musta sotilas ei siirtynyt reunalla", peli.siirra(6, 1, 6, 0));
+		assertEquals(NappulanTyyppi.LAHETTI, peli.getPelitilanne()[6][0].getNappula().getTyyppi(),
+				"Mustaa sotilasta ei korotettu lähetiksi");
+
+	}
+
+	// Testi bugille, joka löydettiin graafisen käyttöliittymän manuaalisessa
+	// testaamisessa.
 	@Test
 	@DisplayName("Torni ei katoa, kun se shakkaa kuningasta vierestä")
 	public void torniEiKatoa() {
@@ -265,17 +385,17 @@ class ShakkipeliTest {
 		assertTrue("Musta Kuningas ei siirtynyt 2", peli.siirra(4, 6, 4, 5));
 		assertTrue("Torni siirtyi shakkaamaan kuningasta", peli.siirra(5, 2, 5, 5));
 		assertTrue("Ei shakannut", peli.getShakattu());
-		assertTrue("Musta Kuningas siirtyi turvaan", peli.siirra(4, 5, 3, 4));
+		assertTrue("Musta Kuningas ei siirtynyt turvaan", peli.siirra(4, 5, 3, 4));
 		assertFalse("Shakki purettu", peli.getShakattu());
 		assertTrue("Torni ei siirtynyt shakkaamaan Kuningasta uudestaan", peli.siirra(5, 5, 3, 5));
-		assertTrue("Torni katosi", peli.getPelitilanne()[3][5].getNappula().getTyyppi() == NappulanTyyppi.TORNI);
+		assertEquals(NappulanTyyppi.TORNI, peli.getPelitilanne()[3][5].getNappula().getTyyppi(), "Torni katosi");
 	}
-	
+
 	private int laskeNappulat(Ruutu[][] lauta) {
 		int nappuloita = 0;
 		for (int y = 0; y < 8; y++) {
 			for (int x = 0; x < 8; x++) {
-				if(lauta[x][y].getNappula() != null) {
+				if (lauta[x][y].getNappula() != null) {
 					nappuloita++;
 				}
 			}
