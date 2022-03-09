@@ -107,7 +107,7 @@ public class Shakkipeli implements IShakkipeli {
 				for (Ruutu siirto : siirrot) {
 
 					/*
-					 * Taikanumerot, koska tornittaessa kuningas voi olla vain tietyssä paikassa.
+					 *  Taikanumerot, koska tornittaessa kuningas voi olla vain tietyssä paikassa.
 					 * Hyväksytään vain ne siirrot, jotka ovat korkeintaan yhden ruudun päässä.
 					 */
 					if (siirto.getX() - 1 == 4 || siirto.getX() + 1 == 4 || siirto.getX() == 4) {
@@ -176,8 +176,6 @@ public class Shakkipeli implements IShakkipeli {
 		}
 	}
 
-	// tarkastetaan onko ruutu, johon kuningas on siirtymässä, vastustajan
-	// syömälinjalla.
 	private boolean vaarantuukoKuningas(int mihinX, int mihinY) {
 		for (int y = 0; y < 8; y++) {
 			for (int x = 0; x < 8; x++) {

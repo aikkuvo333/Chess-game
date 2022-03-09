@@ -78,6 +78,4 @@ public class Kontrolleri implements IKontrolleri{
 		System.out.println(this.pelinakyma.getMustaPelaaja());
 		return this.pelinakyma.getMustaPelaaja();
 	}
-
-
 }

@@ -9,8 +9,6 @@ import java.util.ArrayList;
 /* Ei otaa kantaa sääntöihin. 
  * Huolehtii, että nappulat ovat siellä, 
  * minne Shakkipeliluokka ne haluaa laittaa.
- * Helpottaa testejä, kun laudalla voi 
- * tehdä mitä huvittaa.
  * */
  
 public class Lauta {
@@ -212,12 +210,14 @@ public class Lauta {
 	}
 
 	public void korota(int x, int y, NappulanTyyppi tyyppi) {
-		Sotilas sotilas = (Sotilas) lauta[x][y].poistaNappula(); //poista annetusta ruudusta nappula
+		//poistetaan korotettava nappula
+		Sotilas sotilas = (Sotilas) lauta[x][y].poistaNappula(); 
 		
+		//Korvataan sotilas uudella nappulalla.
 		if(sotilas.getVari() == NappulanVari.VALKOINEN) {
 			switch (tyyppi) {
 			case TORNI:
-				lauta[x][y].setNappula(new Torni(NappulanVari.VALKOINEN));//luo tyhjälle ruudulle uusi torninappula
+				lauta[x][y].setNappula(new Torni(NappulanVari.VALKOINEN));
 				break;
 			case RATSU:
 				lauta[x][y].setNappula(new Ratsu(NappulanVari.VALKOINEN));

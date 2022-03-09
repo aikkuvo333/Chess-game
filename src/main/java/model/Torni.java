@@ -10,10 +10,12 @@ public class Torni extends Nappula {
 
 	private NappulanVari vari;
 	private boolean ekaSiirto;
+	private NappulanTyyppi tyyppi;
 
 	public Torni(NappulanVari vari) {
 		this.vari = vari;
 		this.ekaSiirto = false;
+		this.tyyppi = NappulanTyyppi.TORNI;
 	}
 
 	@Override
@@ -124,8 +126,7 @@ public class Torni extends Nappula {
 
 	@Override
 	public NappulanTyyppi getTyyppi() {
-		// TODO Auto-generated method stub
-		return NappulanTyyppi.TORNI;
+		return this.tyyppi;
 	}
 
 }
