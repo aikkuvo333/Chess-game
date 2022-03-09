@@ -50,6 +50,7 @@ import javax.sound.sampled.*;
 
 public class Lauta_kontrolleri implements IPelinakyma {
 
+	private Asetukset asetukset;
 	private IKontrolleri kontrolleri;
 	private ImageView nappulaKuva;
 	private String vaalea = "-fx-background-color: #f1dbb1";
@@ -57,7 +58,6 @@ public class Lauta_kontrolleri implements IPelinakyma {
 	private String valittu = "-fx-background-color: rgba(0, 255, 0, 0.2)";
 	private Pane ruutu;
 	private Node valittuNappula = null;
-	public boolean peruutus;
 	public boolean peruutusKaynnissa = false;
 	private NappulanTyyppi korotusTyyppi = null;
 	private String nimi1;
@@ -79,6 +79,11 @@ public class Lauta_kontrolleri implements IPelinakyma {
 	private int mihinY;
 	private boolean siirtoAloitettu = false;
 	private ArrayList<Node> mahdSiirrot;
+	
+	// Asetuksia
+	private boolean kaantyminen;
+	private boolean peruutus;
+	private boolean darkMode;
 
 	private boolean stageShadow = false;
 
@@ -105,7 +110,13 @@ public class Lauta_kontrolleri implements IPelinakyma {
 	
 	@FXML
     private Text shakki;
-
+	
+	@FXML
+	void handleLaudanAsetukset(ActionEvent event) throws IOException {
+		System.out.println("Klikattiin asetukset");
+		InitFXML.avaaFxml(new Asetukset_kontrolleri(this, asetukset), "Asetukset.fxml", "Asetukset", Modality.APPLICATION_MODAL, StageStyle.DECORATED, lautaNakyma);
+	}
+	
 	@FXML
 	private void handleLuovuta(ActionEvent event) throws IOException {
 		System.out.println("Painettiin: Luovuta");
@@ -142,7 +153,7 @@ public class Lauta_kontrolleri implements IPelinakyma {
 		peruutus = false;
 	}
 
-	public void initialize() {
+	public void initialize() throws IOException {
 		kontrolleri = new Kontrolleri(this);
 		kontrolleri.aloitaPeli(onkoTilastoitu);
 		
@@ -167,6 +178,10 @@ public class Lauta_kontrolleri implements IPelinakyma {
 			peruuta.setVisible(false);
 		}
 		
+		Asetukset.initConfig();
+		asetukset = new Asetukset();
+		kaantyminen = asetukset.isLaudanAnimaatio();
+		System.out.println("initialize() kaantyminen = " + kaantyminen);
 	}
 	
 	String getNimiByVari(NappulanVari vari) {
@@ -190,12 +205,22 @@ public class Lauta_kontrolleri implements IPelinakyma {
 	// Kääntää laudan
 	public void kaannaLauta() {
 
-		rotate.setDuration(Duration.millis(400));
-		rotate.setCycleCount(1);
-		rotate.setByAngle(180);
-		rotate.setNode(pelilauta);
-		rotate.play();
+		System.out.println("Käännetään lautaa: " + kaantyminen);
+		
+		if(kaantyminen) {
+			rotate.setDuration(Duration.millis(400));
+			rotate.setCycleCount(1);
+			rotate.setByAngle(180);
+			rotate.setNode(pelilauta);
+			rotate.play();
+		}
 
+		if(!kaantynyt && !kaantyminen) {
+			pelilauta.setRotate(180);
+		} else {
+			pelilauta.setRotate(0);
+		}
+		
 		if (!kaantynyt) {
 			for (Node node : pelilauta.getChildren()) {
 				node.setRotate(180);
@@ -559,6 +584,19 @@ public class Lauta_kontrolleri implements IPelinakyma {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void asetaKaantyminen(boolean arvo) {
+		kaantyminen = arvo;
+		System.out.println("LAUDAN KÄÄNTYMINEN: " + kaantyminen);
+	}
+	
+	public void asetaPeruutus(boolean arvo) {
+		peruutus = arvo;
+	}
+	
+	public void asetaDarkMode(boolean arvo) {
+		darkMode = arvo;
 	}
 
 	@Override
