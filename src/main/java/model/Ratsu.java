@@ -132,7 +132,6 @@ public class Ratsu extends Nappula{
 
 	@Override
 	public NappulanTyyppi getTyyppi() {
-		// TODO Auto-generated method stub
 		return NappulanTyyppi.RATSU;
 	}
 	

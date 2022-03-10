@@ -4,14 +4,9 @@ import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 
 
 /*
@@ -19,9 +14,6 @@ import javafx.stage.Stage;
  */
 
 public class Tilastoitupeli1_kontrolleri {
-//	private Stage stage;
-//	private Scene scene;
-//	private Parent root;
 	
     @FXML
     private Button poistuBtn;
@@ -49,7 +41,6 @@ public class Tilastoitupeli1_kontrolleri {
 
     @FXML
     void aloitaPeli(ActionEvent event) {
-    	System.out.println("klick");
     }
 
     @FXML
@@ -70,11 +61,6 @@ public class Tilastoitupeli1_kontrolleri {
     @FXML
     void poistu(ActionEvent event) throws IOException {
     	System.out.println("klikattu");
-//    	root = FXMLLoader.load(getClass().getResource("Alkuvalikko.fxml"));
-//        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-//        scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.show();
     }
 
     @FXML
