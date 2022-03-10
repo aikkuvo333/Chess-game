@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #661E1E;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.src.application.Alkuvalikko_kontrolleri">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.src.application.Alkuvalikko_kontrolleri">
    <children>
       <AnchorPane prefHeight="56.0" prefWidth="600.0" style="-fx-background-color: #241919;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -28,7 +28,7 @@
                <children>
                   <Button fx:id="tilastoimatonPeliBtn" alignment="CENTER" mnemonicParsing="false" onAction="#TilastoimatonPeli" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Tilastoimaton peli" textFill="WHITE" />
                   <Button fx:id="tilastoituPeliBtn" alignment="CENTER" mnemonicParsing="false" onAction="#TilastoituPeli" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Tilastoitu peli" textFill="WHITE" />
-                  <Button fx:id="tilastotBtn" alignment="CENTER" mnemonicParsing="false" onAction="#tilastot" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Tilastot" textFill="WHITE" />
+                  <Button fx:id="tilastotBtn" alignment="CENTER" mnemonicParsing="false" onAction="#tilastot" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Omat tilastot" textFill="WHITE" />
                   <Button fx:id="leaderboardBtn" alignment="CENTER" mnemonicParsing="false" onAction="#leaderboard" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Leaderboard" textFill="WHITE" />
                   <Button fx:id="suljeSobellusBtn" alignment="CENTER" mnemonicParsing="false" onAction="#suljeSovellus" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Sulje sovellus" textFill="WHITE" />
                </children>
