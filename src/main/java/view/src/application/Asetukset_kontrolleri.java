@@ -1,8 +1,5 @@
 package view.src.application;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Properties;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,11 +22,11 @@ public class Asetukset_kontrolleri {
     private RadioButton animaatioAsetus;
 
     @FXML
-    private RadioButton peruutusAsetus;
-
-    @FXML
     private RadioButton darkModeAsetus;
 
+    @FXML
+    private RadioButton aanetAsetus;
+    
     @FXML
     void asetaAnimaatio(ActionEvent event) {
     	asetukset.setLaudanAnimaatio(animaatioAsetus.isSelected());
@@ -42,17 +39,18 @@ public class Asetukset_kontrolleri {
     	asetukset.setDarkMode(darkModeAsetus.isSelected());
     	asetukset.asetaAsetukset();
     }
-
+    
     @FXML
-    void asetaPeruutus(ActionEvent event) {
-    	asetukset.setPeruutus(peruutusAsetus.isSelected());
+    void asetaAanet(ActionEvent event) {
+    	asetukset.setAanet(aanetAsetus.isSelected());
     	asetukset.asetaAsetukset();
+    	lauta_kontrolleri.asetaAanet(aanetAsetus.isSelected());
     }
 
     public void initialize() throws IOException {
     	Asetukset.initConfig();
     	animaatioAsetus.setSelected(asetukset.isLaudanAnimaatio());
-    	peruutusAsetus.setSelected(asetukset.isPeruutus());
     	darkModeAsetus.setSelected(asetukset.isDarkMode());
+    	
     }
 }

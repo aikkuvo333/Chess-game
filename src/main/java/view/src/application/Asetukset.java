@@ -10,9 +10,8 @@ import java.util.Properties;
 public class Asetukset {
 	private static final String CONFIG_FILE = "config.properties";
 	private boolean laudanAnimaatio;
-	private boolean peruutus;
 	private boolean darkMode;
-	
+	private boolean aanet;
 	
 	public Asetukset() {
 		haeAsetukset();
@@ -22,29 +21,30 @@ public class Asetukset {
 		this.laudanAnimaatio = laudanAnimaatio;
 		System.out.println("Laudan animaatio asetettu: " + this.laudanAnimaatio);
 	}
-
-	public void setPeruutus(boolean peruutus) {
-		this.peruutus = peruutus;
-		System.out.println("Peruutus asetettu: " + this.peruutus);
-	}
 	
 	public void setDarkMode(boolean darkMode) {
 		this.darkMode = darkMode;
 		System.out.println("DarkMode asetettu: " + this.darkMode);
 	}
 	
+	public void setAanet(boolean aanet) {
+		this.aanet = aanet;
+		System.out.println("Aanet asetettu: " + this.aanet);
+	}
+	
 	public boolean isLaudanAnimaatio() {
 		return laudanAnimaatio;
-	}
-
-	public boolean isPeruutus() {
-		return peruutus;
 	}
 	
 	public boolean isDarkMode() {
 		return darkMode;
 	}
 	
+	public boolean isAanet() {
+		return aanet;
+	}
+	
+	//Asettaa oletusarvot, jos properties-tiedostoa ei löydy
 	public static void initConfig() throws IOException {
 		Properties properties = new Properties();
 		
@@ -52,8 +52,8 @@ public class Asetukset {
 			ip.close();
 		} catch (FileNotFoundException e) {
 			properties.setProperty("laudanAnimaatio", "true");
-			properties.setProperty("peruutus", "true");
 			properties.setProperty("darkMode", "false");
+			properties.setProperty("aanet", "true");
 			FileWriter writer = new FileWriter("config.properties");
 			properties.store(writer, "Laudan asetukset");
 			writer.close();
@@ -63,16 +63,12 @@ public class Asetukset {
 	private void haeAsetukset() {
 		Properties properties = new Properties();
 		try (FileInputStream ip = new FileInputStream("config.properties")) {
-			System.out.println("Haetaan asetuksia...");
 			properties.load(ip);
-			laudanAnimaatio = Boolean.parseBoolean(properties.getProperty("laudanAnimaatio"));
-			peruutus = Boolean.parseBoolean(properties.getProperty("peruutus"));
-			darkMode = Boolean.parseBoolean(properties.getProperty("darkMode"));
 			
-			System.out.println(Boolean.parseBoolean(properties.getProperty("laudanAnimaatio")));
-			System.out.println(Boolean.parseBoolean(properties.getProperty("peruutus")));
-			System.out.println(Boolean.parseBoolean(properties.getProperty("darkMode")));
-
+			laudanAnimaatio = Boolean.parseBoolean(properties.getProperty("laudanAnimaatio"));
+			darkMode = Boolean.parseBoolean(properties.getProperty("darkMode"));
+			aanet = Boolean.parseBoolean(properties.getProperty("aanet"));
+			
 			ip.close();
 		} catch (Exception e) {
 			e.getStackTrace();
@@ -82,10 +78,12 @@ public class Asetukset {
 	public void asetaAsetukset() {
 		Properties properties = new Properties();
 		try (FileOutputStream op = new FileOutputStream("config.properties")) {
+			
 			properties.setProperty("laudanAnimaatio", String.valueOf(laudanAnimaatio));
-			properties.setProperty("peruutus", String.valueOf(peruutus));
 			properties.setProperty("darkMode", String.valueOf(darkMode));
+			properties.setProperty("aanet", String.valueOf(aanet));
 			properties.store(op, null);
+			
 			op.close();
 		} catch (Exception e) {
 			e.getStackTrace();

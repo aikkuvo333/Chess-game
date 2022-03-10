@@ -81,6 +81,7 @@ public class Tilastot2_kontrolleri {
     }
     @SuppressWarnings("unchecked")
 	void openPelaajaData(Pelaaja p) {
+    	tilastotaulu.getItems().clear();
     	DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
     	voittoProsentti.setText(dbKontrolleri.haeVoittoProsentti(p));
     	voitot.setText(String.valueOf(dbKontrolleri.haeVoittoMaara(p)));

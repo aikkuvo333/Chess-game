@@ -8,12 +8,11 @@ import java.util.Optional;
 
 import controller.IKontrolleri;
 import controller.Kontrolleri;
-import dao.Pelaaja;
-import dao.Ruutu;
 import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
@@ -30,6 +29,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -39,6 +39,8 @@ import javafx.util.Duration;
 import model.Nappula;
 import model.NappulanTyyppi;
 import model.NappulanVari;
+import dao.Pelaaja;
+import dao.Ruutu;
 import view.IPelinakyma;
 import java.io.*;
 import javax.sound.sampled.*;
@@ -85,6 +87,7 @@ public class Lauta_kontrolleri implements IPelinakyma {
 	private boolean kaantyminen;
 	private boolean peruutus;
 	private boolean darkMode;
+	private boolean aanet;
 
 	private boolean stageShadow = false;
 
@@ -127,8 +130,6 @@ public class Lauta_kontrolleri implements IPelinakyma {
 	@FXML
 	private void handlePeruuta(ActionEvent event) {
 		System.out.println("Painettiin: Peruuta");
-		
-		peruutus = true;
 	}
 
 	@FXML
@@ -138,21 +139,35 @@ public class Lauta_kontrolleri implements IPelinakyma {
 	
 	//Tilastoimattoman pelin konstruktori
 	public Lauta_kontrolleri() {
-		onkoTilastoitu = true;
+		onkoTilastoitu = false;
 		peruutus = true;
 	}
 	
 	//Tilastoidun pelin konstruktori
-	public Lauta_kontrolleri(Pelaaja pelaaja1, Pelaaja pelaaja2) {
-		onkoTilastoitu = true;
-		this.nimi1 = pelaaja1.getKayttajaTunnus();
-		this.nimi2 = pelaaja2.getKayttajaTunnus();
-		peruutus = false;
-	}
+		public Lauta_kontrolleri(Pelaaja pelaaja1, Pelaaja pelaaja2) {
+			onkoTilastoitu = true;
+			this.nimi1 = pelaaja1.getKayttajaTunnus();
+			this.nimi2 = pelaaja2.getKayttajaTunnus();
+			peruutus = false;
+		}
+	
+	EventHandler<ActionEvent> lautaHandler = new EventHandler<ActionEvent>() {
+
+		@Override
+		public void handle(ActionEvent event) {
+			pelilauta.widthProperty().addListener((obs, oldVal, newVal) -> {
+				System.out.println("laudan koko muuttui");
+			});
+			
+		}
+		
+	};
 
 	public void initialize() throws IOException {
+		
 		vuorossa.setText(nimi1);
 		seuraava.setText(nimi2);
+		
 		kontrolleri = new Kontrolleri(this);
 		kontrolleri.aloitaPeli(onkoTilastoitu);
 		
@@ -180,10 +195,26 @@ public class Lauta_kontrolleri implements IPelinakyma {
 		Asetukset.initConfig();
 		asetukset = new Asetukset();
 		kaantyminen = asetukset.isLaudanAnimaatio();
-		System.out.println("initialize() kaantyminen = " + kaantyminen);
+		aanet = asetukset.isAanet();
+		darkMode = asetukset.isDarkMode();
+		
+		pelilauta.heightProperty().addListener((obs, oldVal, newVal) -> {
+			pelilauta.setPrefWidth((double) newVal);
+			
+		});
+		
+		peruuta.heightProperty().addListener((obs, oldVal, newVal) -> {
+			//peruuta.resize(100, 100);
+		});
+		
+		lautaNakyma.widthProperty().addListener((obs, oldVal, newVal) -> {
+			lautaNakyma.getChildren().get(0).setLayoutX(((double) newVal/2) - (pelilauta.getWidth()/2));
+		});
+		
+		lautaNakyma.getChildren().get(0).setLayoutX(((double) lautaNakyma.getWidth()/2) - (pelilauta.getWidth()/2));
 	}
 	
-	String getNimiByVari(NappulanVari vari) {
+	public String getNimiByVari(NappulanVari vari) {
 		return pelaajat.get(vari);
 	}
 	
@@ -236,13 +267,15 @@ public class Lauta_kontrolleri implements IPelinakyma {
 	}
 
 	public void aani(String aani) {
-		try {
-			Clip clip = AudioSystem.getClip();
-			clip.open(AudioSystem.getAudioInputStream(new File(aani)));
-			clip.start();
-			Thread.sleep(clip.getMicrosecondLength() / 1000);
-		} catch (Exception e) {
-			e.getStackTrace();
+		if(aanet) {
+			try {
+				Clip clip = AudioSystem.getClip();
+				clip.open(AudioSystem.getAudioInputStream(new File(aani)));
+				clip.start();
+				Thread.sleep(clip.getMicrosecondLength() / 1000);
+			} catch (Exception e) {
+				e.getStackTrace();
+			}
 		}
 	}
 
@@ -298,16 +331,6 @@ public class Lauta_kontrolleri implements IPelinakyma {
 	}
 	
 	public void paivitaLauta() {
-		
-		/*ObservableList<Node> children = pelilauta.getChildren();
-		for(Node node : children) {
-			children.clear();
-			if(node.toString().contains("ImageView")) {
-				System.out.println(node);
-				//children.remove((Node) node);
-			}
-		}
-		*/
 		pelilauta.getChildren().clear();
 		asetaRuudut();
 		asetaNappulat();
@@ -329,7 +352,7 @@ public class Lauta_kontrolleri implements IPelinakyma {
 		System.out.println("Ruudut asetettu");
 	}
 
-	// Tilapäinen ratkaisu kuvan koon asettamiseen laudan ruudun mukaan
+	// Ratkaisu kuvan koon asettamiseen laudan ruudun mukaan
 	public ImageView skaalaaKuvake(ImageView imageView, Pane pane) {
 		imageView.setSmooth(true);
 		
@@ -353,8 +376,6 @@ public class Lauta_kontrolleri implements IPelinakyma {
 		ruutu.setStyle(vari);
 		pelilauta.setAlignment(Pos.CENTER);
 		pelilauta.add(ruutu, colIndex, rowIndex);
-		//ruutu.prefWidthProperty().bind(Bindings.min(lautaNakyma.widthProperty().divide(size), lautaNakyma.heightProperty().divide(size)));
-		//ruutu.prefHeightProperty().bind(Bindings.min(lautaNakyma.widthProperty().divide(size), lautaNakyma.heightProperty().divide(size)));
 
 		// Ruutu clickHandler
 		ruutu.setOnMouseClicked(e -> {
@@ -460,9 +481,6 @@ public class Lauta_kontrolleri implements IPelinakyma {
 			System.out.printf("Siirtopyyntö ruudusta [%d, %d] ruutuun [%d, %d]%n", mistaX, mistaY, mihinX, mihinY);
 
 			if (kontrolleri.teeSiirto(mistaX, mistaY, mihinX, mihinY)) {
-				// pelilauta.getChildren().remove(valittuNappula);
-				// pelilauta.add(valittuNappula, mihinX, mihinY);
-
 				paivitaLauta();
 				aani(sound1);
 				vaihdaVuoro();
@@ -590,12 +608,13 @@ public class Lauta_kontrolleri implements IPelinakyma {
 		System.out.println("LAUDAN KÄÄNTYMINEN: " + kaantyminen);
 	}
 	
-	public void asetaPeruutus(boolean arvo) {
-		peruutus = arvo;
-	}
-	
 	public void asetaDarkMode(boolean arvo) {
 		darkMode = arvo;
+	}
+	
+	public void asetaAanet(boolean arvo) {
+		aanet = arvo;
+		System.out.println("ÄÄNET: " + kaantyminen);
 	}
 
 	@Override
@@ -627,8 +646,7 @@ public class Lauta_kontrolleri implements IPelinakyma {
 
 	@Override
 	public int getValkoinenPelaaja() {
-		// TODO: Fetch user id from database
-		
+		// TODO Auto-generated method stub
 		return 0;
 	}
 

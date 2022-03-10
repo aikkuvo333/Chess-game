@@ -21,7 +21,7 @@
       
       <property name="hibernate.connection.password">
       <!-- VAIHDA OMAKSI MARIADB SALASANAKSI -->
-         Koira
+         thisispassword69
       </property>
       
      <property name="hbm2ddl.auto">update</property>
