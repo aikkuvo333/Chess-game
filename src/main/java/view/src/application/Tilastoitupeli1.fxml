@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #661E1E;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.src.application.Tilastoitupeli1_kontrolleri">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.src.application.Tilastoitupeli1_kontrolleri">
    <children>
       <AnchorPane prefHeight="56.0" prefWidth="600.0" style="-fx-background-color: #241919;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -34,12 +34,15 @@
                <children>
                   <VBox alignment="CENTER_LEFT" fillWidth="false" prefHeight="215.0" prefWidth="183.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pelaaja 1" textAlignment="CENTER" wrappingWidth="175.22900390625">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Valkoinen" textAlignment="CENTER" wrappingWidth="175.22900390625">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
                         </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Valkoiset nappulat" wrappingWidth="175.22900390625">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pelaaja 1" wrappingWidth="175.22900390625">
                            <VBox.margin>
                               <Insets bottom="5.0" />
                            </VBox.margin>
@@ -78,12 +81,15 @@
                   </Button>
                   <VBox alignment="CENTER_RIGHT" prefHeight="400.0" prefWidth="201.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pelaaja 2" textAlignment="CENTER" wrappingWidth="175.22900390625">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Musta" textAlignment="CENTER" wrappingWidth="175.22900390625">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
                         </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mustat nappulat" wrappingWidth="175.22900390625">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Pelaaja 2" wrappingWidth="175.22900390625">
                            <VBox.margin>
                               <Insets bottom="5.0" />
                            </VBox.margin>
