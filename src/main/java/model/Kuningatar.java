@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 /* @author Oliver Hamberg */
 
+import dao.Ruutu;
+
 public class Kuningatar extends Nappula{
 	NappulanVari vari;
 	int x,y;

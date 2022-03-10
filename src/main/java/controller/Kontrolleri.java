@@ -6,10 +6,10 @@ package controller;
 
 import java.util.ArrayList;
 
+import dao.Ruutu;
 import model.IShakkipeli;
 import model.NappulanTyyppi;
 import model.NappulanVari;
-import model.Ruutu;
 import model.Shakkipeli;
 import view.IPelinakyma;
 
@@ -68,14 +68,12 @@ public class Kontrolleri implements IKontrolleri{
 	}
 
 	@Override
-	public String getValkoinenPelaaja() {
-		System.out.println(this.pelinakyma.getValkoinenPelaaja());
+	public int getValkoinenPelaaja() {
 		return this.pelinakyma.getValkoinenPelaaja();
 	}
 
 	@Override
-	public String getMustaPelaaja() {
-		System.out.println(this.pelinakyma.getMustaPelaaja());
+	public int getMustaPelaaja() {
 		return this.pelinakyma.getMustaPelaaja();
 	}
 }

@@ -6,6 +6,8 @@ package model;
 
 import java.util.ArrayList;
 
+import dao.Ruutu;
+
 public class Torni extends Nappula {
 
 	private NappulanVari vari;

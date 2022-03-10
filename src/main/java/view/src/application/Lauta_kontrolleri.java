@@ -8,6 +8,8 @@ import java.util.Optional;
 
 import controller.IKontrolleri;
 import controller.Kontrolleri;
+import dao.Pelaaja;
+import dao.Ruutu;
 import javafx.animation.PauseTransition;
 import javafx.animation.RotateTransition;
 import javafx.collections.ObservableList;
@@ -37,7 +39,6 @@ import javafx.util.Duration;
 import model.Nappula;
 import model.NappulanTyyppi;
 import model.NappulanVari;
-import model.Ruutu;
 import view.IPelinakyma;
 import java.io.*;
 import javax.sound.sampled.*;
@@ -142,18 +143,16 @@ public class Lauta_kontrolleri implements IPelinakyma {
 	}
 	
 	//Tilastoidun pelin konstruktori
-	public Lauta_kontrolleri(String nimi1, String nimi2) {
+	public Lauta_kontrolleri(Pelaaja pelaaja1, Pelaaja pelaaja2) {
 		onkoTilastoitu = true;
-		this.nimi1 = nimi1;
-		this.nimi2 = nimi2;
-		
-		vuorossa.setText(nimi1);
-		seuraava.setText(nimi2);
-		
+		this.nimi1 = pelaaja1.getKayttajaTunnus();
+		this.nimi2 = pelaaja2.getKayttajaTunnus();
 		peruutus = false;
 	}
 
 	public void initialize() throws IOException {
+		vuorossa.setText(nimi1);
+		seuraava.setText(nimi2);
 		kontrolleri = new Kontrolleri(this);
 		kontrolleri.aloitaPeli(onkoTilastoitu);
 		
@@ -627,14 +626,15 @@ public class Lauta_kontrolleri implements IPelinakyma {
 	}
 
 	@Override
-	public String getValkoinenPelaaja() {
-		// TODO Auto-generated method stub
-		return null;
+	public int getValkoinenPelaaja() {
+		// TODO: Fetch user id from database
+		
+		return 0;
 	}
 
 	@Override
-	public String getMustaPelaaja() {
+	public int getMustaPelaaja() {
 		// TODO Auto-generated method stub
-		return null;
+		return 1;
 	}
 }

@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import dao.Ruutu;
+
 /**
  * @author Elmo Vahvaselkä 26.1.2022 & Aivan Vo 9.2.2022
  */

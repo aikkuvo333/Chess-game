@@ -6,6 +6,8 @@ package model;
 
 import java.util.ArrayList;
 
+import dao.Ruutu;
+
 public class Sotilas extends Nappula {
 	private NappulanVari vari;
 	private boolean ekaSiirto;

@@ -2,6 +2,9 @@ package view.src.application;
 
 import java.io.IOException;
 
+import controller.DBKontrolleri;
+import dao.Pelaaja;
+import dao.PelinTiedot;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,10 +13,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+
+import java.util.Date;
+import java.util.List;
 
 /*
  * @author Aivan Vo 27.2.2022
@@ -41,32 +49,52 @@ public class Tilastot2_kontrolleri {
     private Text voittoProsentti;
 
     @FXML
-    private TableView<?> tilastotaulu;
+    private TableView<PelinTiedot> tilastotaulu;
 
     @FXML
-    private TableColumn<?, ?> vari;
+    private TableColumn<PelinTiedot, Integer> mustat;
 
     @FXML
-    private TableColumn<?, ?> vastustaja;
+    private TableColumn<PelinTiedot, Integer> valkoiset;
 
     @FXML
-    private TableColumn<?, ?> tulos;
+    private TableColumn<PelinTiedot, Integer> tulos;
 
     @FXML
-    private TableColumn<?, ?> siirrot;
+    private TableColumn<PelinTiedot, Date> pvm;
 
-    @FXML
-    private TableColumn<?, ?> pvm;
 
-    @FXML
-    private TableColumn<?, ?> kesto;
 
-    @FXML
-    private TableColumn<?, ?> videot;
 
     @FXML
     void pelaajaMenu(ActionEvent event) {
-
+    	DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
+    	for (Pelaaja p : dbKontrolleri.getPelaajat()) {
+    		MenuItem menuItem = new MenuItem(p.getKayttajaTunnus());
+    		menuItem.setOnAction(a -> {
+    			pelaajaMenuBtn.setText(p.getKayttajaTunnus());
+    			openPelaajaData(p);
+    		});
+    		pelaajaMenuBtn.getItems().add(menuItem);
+    	}
+    	
+    }
+    @SuppressWarnings("unchecked")
+	void openPelaajaData(Pelaaja p) {
+    	DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
+    	voittoProsentti.setText(dbKontrolleri.haeVoittoProsentti(p));
+    	voitot.setText(String.valueOf(dbKontrolleri.haeVoittoMaara(p)));
+    	peliLkm.setText(String.valueOf(dbKontrolleri.haePelienMaara(p)));
+    	List<PelinTiedot> tiedot = dbKontrolleri.haePelaajanPelit(p);
+    	mustat.setCellValueFactory(new PropertyValueFactory<>("mustaPelaaja"));
+    	valkoiset.setCellValueFactory(new PropertyValueFactory<>("valkoinenPelaaja"));
+    	tulos.setCellValueFactory(new PropertyValueFactory<>("voittaja"));
+    	pvm.setCellValueFactory(new PropertyValueFactory<>("pvm"));
+    	for(PelinTiedot data : tiedot) {
+    		tilastotaulu.getItems().add(data);
+    	}
+    	System.out.println(tilastotaulu.getColumns());
+    	
     }
 
     @FXML
@@ -78,5 +106,9 @@ public class Tilastot2_kontrolleri {
         stage.show();
     }
 
+    public void initialize() {
+        DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
+        pelaajaMenu(null);
+    }
 }
 

@@ -14,6 +14,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import dao.Ruutu;
+
 class KuningasTest {
 	private Lauta lauta;
 	

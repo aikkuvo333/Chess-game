@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import controller.IKontrolleri;
 import dao.PelinTiedot;
+import dao.Ruutu;
 import dao.Siirto;
 
 //Luokka huolehtii säännösitä
@@ -39,7 +40,8 @@ public class Shakkipeli implements IShakkipeli {
 	}
 
 	//Konstruktori testeille
-	public Shakkipeli(boolean tilastoitu) {
+	/* FIXME: Korjaa
+	 * public Shakkipeli(boolean tilastoitu) {
 		this.lauta = new Lauta();
 		this.vuorossa = NappulanVari.VALKOINEN;
 		this.shakattu = false;
@@ -52,7 +54,7 @@ public class Shakkipeli implements IShakkipeli {
 		if (this.tilastoitu) {
 			this.pelinTiedot = new PelinTiedot("Sebastian", "Daniel");
 		}
-	}
+	}*/
 
 	public Ruutu[][] getPelitilanne() {
 		return this.lauta.getLauta();
@@ -308,8 +310,10 @@ public class Shakkipeli implements IShakkipeli {
 	}
 	
 	private void tallennaSiirto(int mistaX, int mistaY, int mihinX, int mihinY, NappulanTyyppi korotettu) {
-		Siirto siirto = new Siirto(mistaX, mistaY, mihinX, mihinY);
-		siirto.setKorotus(korotettu);
+		Ruutu lahto = new Ruutu(mistaX, mistaY);
+		Ruutu kohde = new Ruutu(mihinX, mihinY);
+		Siirto siirto = new Siirto(lahto, kohde);
+		//siirto.setKorotus(korotettu);
 		this.pelinTiedot.lisaaSiirto(siirto);
 	}
 

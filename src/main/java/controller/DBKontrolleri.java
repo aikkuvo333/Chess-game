@@ -2,11 +2,17 @@ package controller;
 
 import java.util.List;
 
-import model.Pelaaja;
+import javax.persistence.Query;
+import javax.transaction.Transactional;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.internal.build.AllowSysOut;
+
+import dao.Pelaaja;
+import dao.PelinTiedot;
 
 public class DBKontrolleri {
 	private Session ses;
@@ -17,16 +23,6 @@ public class DBKontrolleri {
 			SessionFactory istuntoTehdas = new Configuration().configure().buildSessionFactory();
 			ses = istuntoTehdas.openSession();
 			
-			/*con = DriverManager.getConnection("jdbc:mysql://localhost/?user=root&password=Koira");
-			Statement statement = con.createStatement();
-			statement.executeUpdate("CREATE DATABASE IF NOT EXISTS " + DB_NAME);
-			con.setCatalog(DB_NAME);*/
-			/*
-			statement.executeUpdate(DBSchema.STATEMENT_CREATE_PELAAJA);
-			statement.executeUpdate(DBSchema.STATEMENT_CREATE_PELI);
-			statement.executeUpdate(DBSchema.STATEMENT_CREATE_RUUTU);
-			statement.executeUpdate(DBSchema.STATEMENT_CREATE_SIIRTO);
-			*/
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -39,5 +35,39 @@ public class DBKontrolleri {
 			instance = new DBKontrolleri();
 		}
 		return instance;
+	}
+	
+	@Transactional 
+	public Pelaaja luoPelaaja(String nimi) {
+		ses.beginTransaction();
+		int id = (Integer) ses.save(new Pelaaja(nimi));
+		ses.getTransaction().commit();
+		return new Pelaaja(id, nimi);
+	}
+	public List<PelinTiedot> haePelaajanPelit(Pelaaja p) {
+		@SuppressWarnings("unchecked")
+		List<PelinTiedot> tulokset = ses.createQuery("FROM PelinTiedot WHERE mustaPelaaja = " + p.getPelaajaId() + " OR valkoinenPelaaja =  " + p.getPelaajaId()).getResultList();
+		return tulokset;
+	}
+	public int haeVoittoMaara(Pelaaja p) {
+		List<PelinTiedot> pelit = haePelaajanPelit(p);
+		int voitetut = 0;
+		for(PelinTiedot tiedot: pelit) {
+			if(tiedot.getVoittaja() == p.getPelaajaId()) {
+				voitetut++;
+			}
+		}
+		return voitetut;
+	}
+	public int haePelienMaara(Pelaaja p) {
+		List<PelinTiedot> pelit = haePelaajanPelit(p);
+		int kaikkipelit = 0;
+		for(PelinTiedot tiedot: pelit) {
+			kaikkipelit++;
+		}
+		return kaikkipelit;
+	}
+	public String haeVoittoProsentti(Pelaaja p) {
+		return (double) haeVoittoMaara(p) / (double) haePelienMaara(p) * 100 + "%";
 	}
 }

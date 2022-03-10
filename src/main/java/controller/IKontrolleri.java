@@ -7,9 +7,9 @@ package controller;
 
 import java.util.ArrayList;
 
+import dao.Ruutu;
 import model.NappulanTyyppi;
 import model.NappulanVari;
-import model.Ruutu;
 
 public interface IKontrolleri {
 	public boolean aloitaPeli(boolean tilastoitu);
@@ -21,6 +21,6 @@ public interface IKontrolleri {
 	public void pelinvoitti(NappulanVari voittaja);
 	public NappulanTyyppi korota();
 	public NappulanVari getVuoro();
-	public String getValkoinenPelaaja();
-	public String getMustaPelaaja();
+	public int getValkoinenPelaaja();
+	public int getMustaPelaaja();
 }

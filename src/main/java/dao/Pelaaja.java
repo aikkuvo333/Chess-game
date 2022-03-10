@@ -1,7 +1,8 @@
-package model;
+package dao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -10,6 +11,7 @@ import javax.persistence.Table;
 public class Pelaaja {
 	@Id
 	@Column
+	@GeneratedValue
 	private int pelaajaId;
 
 	@Column
@@ -19,8 +21,13 @@ public class Pelaaja {
 		
 	}
 	
-	public Pelaaja(int pelaajaId, String kayttajaTunnus) {
-		this.pelaajaId = pelaajaId;
+	public Pelaaja(int id, String name) {
+		this.pelaajaId = id;
+		this.kayttajaTunnus = name;
+	}
+	
+	public Pelaaja(String kayttajaTunnus) {
+	
 		this.kayttajaTunnus = kayttajaTunnus;
 	}
 	

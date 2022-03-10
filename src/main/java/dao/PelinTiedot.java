@@ -1,21 +1,34 @@
 package dao;
 
-/**
-* @author Elmo Vahvaselkä 1.3.2022
-*/
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import model.NappulanVari;
 
+@Entity
+@Table
 public class PelinTiedot {
-	private String valkoinenPelaaja;
-	private String mustaPelaaja;
-	private NappulanVari voittaja;
-	private double kesto;
-	private ArrayList<Siirto> siirrot;
-	
-	public PelinTiedot (String valkoinenPelaaja, String mustaPelaaja) {
+	@Id
+	private int peliId;
+	private int valkoinenPelaaja;
+	private int mustaPelaaja;
+	private int voittaja;
+
+
+	private Date pvm;
+	@OneToMany
+	private List<Siirto> siirrot;
+	public PelinTiedot() {
+		
+	}
+	public PelinTiedot (int valkoinenPelaaja, int mustaPelaaja) {
 		this.valkoinenPelaaja = valkoinenPelaaja;
 		this.mustaPelaaja = mustaPelaaja;
 		this.siirrot = new ArrayList<Siirto>();
@@ -25,34 +38,32 @@ public class PelinTiedot {
 		this.siirrot.add(siirto);
 	}
 
-	public NappulanVari getVoittaja() {
+	public int getVoittaja() {
 		return voittaja;
 	}
 
-	public void setVoittaja(NappulanVari voittaja) {
+	public void setVoittaja(int voittaja) {
 		this.voittaja = voittaja;
 	}
 
-	public double getKesto() {
-		return kesto;
-	}
 
-	public void setKesto(double kesto) {
-		this.kesto = kesto;
-	}
-
-	public String getValkoinenPelaaja() {
+	public int getValkoinenPelaaja() {
 		return valkoinenPelaaja;
 	}
 
-	public String getMustaPelaaja() {
+	public int getMustaPelaaja() {
 		return mustaPelaaja;
 	}
 	
-	public ArrayList<Siirto> getSiirrot(){
+	public List<Siirto> getSiirrot(){
 		return this.siirrot;
 	}
-	
+	public Date getPvm() {
+		return pvm;
+	}
+	public void setPvm(Date pvm) {
+		this.pvm = pvm;
+	}
 	
 
 }

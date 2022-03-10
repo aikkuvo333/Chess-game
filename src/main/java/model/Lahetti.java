@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import dao.Ruutu;
+
 //* @author Oliver Hamberg*//
 
 
