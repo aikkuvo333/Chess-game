@@ -14,6 +14,9 @@ Käyttäjälle tarjotaan mahdollisuus tarkastella leaderboardia, jossa pelaajat 
 Sovellus on toteutettu Maven-projektina ja ohjelmoitu Javalla. Graafinen käyttöliittymä on luotu hyödyntäen JavaFX-kirjastoa. Modelin testauksessa on toteutettu JUnit testeillä. Tietokantana toimii MariaDB ja sitä käytetään Hibernate ORM:in avulla. 
 
 ## Käyttöönotto ja konfigurointi
-1.	Lataa projektin repo
-2.	Avaa repo ohjelmointi ympäristössä
-3.	Aja tiedosto Main.java pakkauksesta view.src.application
+Sovelluksen käyttö edellyttää MariaDB SLQ-tietokantaohjelman asentamista.
+1.	Lataa projektin repo osoitteesta: https://gitlab.metropolia.fi/elmov/otp-shakkisovellus.git
+2.	Avaa repo ohjelmointiympäristössä
+3.	Luo MariaDB:llä uusi Shakkipeli niminen tietokanta
+4.	Aseta Hibernate.cfg.xml-tiedostoon tietokantasi sijainti, käyttäjätunnus ja salasana.
+5.	Aja tiedosto Main.java pakkauksesta view.src.application
