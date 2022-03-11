@@ -29,7 +29,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
@@ -86,8 +85,11 @@ public class Lauta_kontrolleri implements IPelinakyma {
 	// Asetuksia
 	private boolean kaantyminen;
 	private boolean peruutus;
-	private boolean darkMode;
 	private boolean aanet;
+	
+	// Lisätään myöhemmin
+	@SuppressWarnings("unused")
+	private boolean darkMode;
 
 	private boolean stageShadow = false;
 
@@ -158,7 +160,6 @@ public class Lauta_kontrolleri implements IPelinakyma {
 			pelilauta.widthProperty().addListener((obs, oldVal, newVal) -> {
 				System.out.println("laudan koko muuttui");
 			});
-			
 		}
 		
 	};
@@ -198,20 +199,24 @@ public class Lauta_kontrolleri implements IPelinakyma {
 		aanet = asetukset.isAanet();
 		darkMode = asetukset.isDarkMode();
 		
+		// Asettaa laudan elementit keskelle ruutua ikkunan venytyksen yhteydessä
+		lautaNakyma.widthProperty().addListener((obs, oldVal, newVal) -> {
+			double x;
+			if(pelilauta.getWidth() != 0) {
+				x = (double) newVal/2 - pelilauta.getWidth()/2;
+				pelilauta.setLayoutX(x);
+				vuoro.setLayoutX(x);
+				vuorossa.setLayoutX((lautaNakyma.getWidth() - (x + pelilauta.getWidth()))/2 + (x + pelilauta.getWidth())-vuorossa.getLayoutBounds().getWidth()/2);
+				seuraava.setLayoutX((lautaNakyma.getWidth() - (x + pelilauta.getWidth()))/2 + (x + pelilauta.getWidth())-seuraava.getLayoutBounds().getWidth()/2);
+			}
+		});
+		
+		// Säilyttää laudan suhteet koon muuttumisen yhteydessä
 		pelilauta.heightProperty().addListener((obs, oldVal, newVal) -> {
 			pelilauta.setPrefWidth((double) newVal);
-			
 		});
 		
-		peruuta.heightProperty().addListener((obs, oldVal, newVal) -> {
-			//peruuta.resize(100, 100);
-		});
-		
-		lautaNakyma.widthProperty().addListener((obs, oldVal, newVal) -> {
-			lautaNakyma.getChildren().get(0).setLayoutX(((double) newVal/2) - (pelilauta.getWidth()/2));
-		});
-		
-		lautaNakyma.getChildren().get(0).setLayoutX(((double) lautaNakyma.getWidth()/2) - (pelilauta.getWidth()/2));
+		System.out.println(vuorossa.getLayoutX());
 	}
 	
 	public String getNimiByVari(NappulanVari vari) {
@@ -462,7 +467,6 @@ public class Lauta_kontrolleri implements IPelinakyma {
 			valittuNappula = getRuudunNappula(mistaX, mistaY);
 			System.out.println("VALITTU NAPPULA: " + valittuNappula);
 			
-			//Värintarkistus puuttuu
 			if (valittuNappula != null) {
 				ArrayList<Ruutu> siirrot = kontrolleri.getSiirrotNappulalle(col, row);
 				mahdSiirrot = naytaSiirrot(siirrot);
@@ -559,9 +563,9 @@ public class Lauta_kontrolleri implements IPelinakyma {
 		korotusTyyppi = tyyppi;
 	}
 
+	//Asettaa lautanäkymään blur-efektin
 	public void toggleShadow() {
 		if (!stageShadow) {
-			//stage = (Stage) lautaNakyma.getScene().getWindow();
 			lautaNakyma.setEffect(new BoxBlur(5, 5, 5));
 		} else {
 			lautaNakyma.setEffect(null);
@@ -587,8 +591,7 @@ public class Lauta_kontrolleri implements IPelinakyma {
 		alert.getDialogPane().setHeaderText(getNimiByVari(vari) + " voitti pelin!");
 		alert.getDialogPane().setContentText("Palaa takaisin valikkoon");
 		
-		
-		
+		@SuppressWarnings("unused")
 		Optional<ButtonType> result = alert.showAndWait();
 		
 		try {
@@ -603,6 +606,7 @@ public class Lauta_kontrolleri implements IPelinakyma {
 
 	}
 	
+	//Asetusten asettaminen lautanäkymään
 	public void asetaKaantyminen(boolean arvo) {
 		kaantyminen = arvo;
 		System.out.println("LAUDAN KÄÄNTYMINEN: " + kaantyminen);

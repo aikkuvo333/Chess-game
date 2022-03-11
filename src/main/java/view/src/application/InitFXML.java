@@ -10,7 +10,13 @@ import javafx.scene.effect.BoxBlur;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+/*
+ * 
+ * @author Santeri Kuusisto
+ * 
+ */
 
+//Huono mutta helpompi tapa avata FXML-tiedosto
 public class InitFXML {
 	
 	public static void avaaFxml(Object object, String uri, String nimi, Modality modality, StageStyle style, Node lauta) throws IOException {

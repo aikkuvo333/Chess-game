@@ -6,7 +6,11 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Properties;
-
+/*
+ * 
+ * @author Santeri Kuusisto
+ * 
+ */
 public class Asetukset {
 	private static final String CONFIG_FILE = "config.properties";
 	private boolean laudanAnimaatio;
@@ -19,17 +23,17 @@ public class Asetukset {
 
 	public void setLaudanAnimaatio(boolean laudanAnimaatio) {
 		this.laudanAnimaatio = laudanAnimaatio;
-		System.out.println("Laudan animaatio asetettu: " + this.laudanAnimaatio);
+		System.out.println("Asetukset setLaudanAnimaatio(): " + this.laudanAnimaatio);
 	}
 	
 	public void setDarkMode(boolean darkMode) {
 		this.darkMode = darkMode;
-		System.out.println("DarkMode asetettu: " + this.darkMode);
+		System.out.println("Asetukset setDarkMode(): " + this.darkMode);
 	}
 	
 	public void setAanet(boolean aanet) {
 		this.aanet = aanet;
-		System.out.println("Aanet asetettu: " + this.aanet);
+		System.out.println("Asetukset setAanet(): " + this.aanet);
 	}
 	
 	public boolean isLaudanAnimaatio() {
