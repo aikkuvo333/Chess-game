@@ -10,6 +10,7 @@ public interface IDaoController {
 	public List<Pelaaja>getPelaajat();
 	public void tallennaPeli(PelinTiedot pelinTiedot);
 	public void luoPelaaja(String nimi);
-	public void haePelaajanPelit(int pelaajaID);
+	public void haePelaajanPelit(int pelaajad);
 	public void haeKaikkipelit();
+	public void poistaPelaaja(int pelaajaId);
 }
