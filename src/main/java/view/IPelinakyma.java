@@ -1,5 +1,6 @@
 package view;
 
+import dao.Pelaaja;
 import model.NappulanTyyppi;
 import model.NappulanVari;
 
@@ -9,7 +10,7 @@ import model.NappulanVari;
 
 public interface IPelinakyma {
 	public void siirtoAiheuttiShakin();
-	public void pelinVoitti(int id);
+	public void pelinVoitti(Pelaaja pelaaja);
 	public NappulanTyyppi korota();
 	public int getValkoinenPelaaja();
 	public int getMustaPelaaja();

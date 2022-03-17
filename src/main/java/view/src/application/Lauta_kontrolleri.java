@@ -44,6 +44,8 @@ import view.IPelinakyma;
 import java.io.*;
 import javax.sound.sampled.*;
 
+import com.sun.xml.bind.v2.model.core.ID;
+
 /*
  * 
  * @author Santeri Kuusisto
@@ -534,9 +536,11 @@ public class Lauta_kontrolleri implements IPelinakyma {
 		if(result.get() == ButtonType.OK) {
 			System.out.println(kontrolleri.getVuoro() + " luovuttaa");
 			if(kontrolleri.getVuoro() == NappulanVari.VALKOINEN) {
-				pelinVoitti(NappulanVari.MUSTA);
+				//pelinVoitti(NappulanVari.MUSTA);
+				
 			} else {
-				pelinVoitti(NappulanVari.VALKOINEN);
+				
+				//pelinVoitti(NappulanVari.VALKOINEN);
 			}
 		} else if (result.get() == ButtonType.CANCEL){
 			System.out.println(kontrolleri.getVuoro() + " ei luovuta");
@@ -627,11 +631,11 @@ public class Lauta_kontrolleri implements IPelinakyma {
 		shakkiHuomautus();
 	}
 
-	@Override
+	/*@Override
 	public void pelinVoitti(NappulanVari voittaja) {
 		System.out.println("PELIN VOITTI " + getNimiByVari(voittaja) + " (" + voittaja + ")");
 		voittoIkkuna(voittaja);
-	}
+	}*/
 
 	@Override
 	public NappulanTyyppi korota() {
@@ -658,5 +662,11 @@ public class Lauta_kontrolleri implements IPelinakyma {
 	public int getMustaPelaaja() {
 		// TODO Auto-generated method stub
 		return 1;
+	}
+
+	@Override
+	public void pelinVoitti(Pelaaja pelaaja) {
+		System.out.println("PELIN VOITTI " + pelaaja.getKayttajaTunnus());
+		voittoIkkuna(getVariByNimi(pelaaja.getKayttajaTunnus()));
 	}
 }

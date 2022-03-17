@@ -7,6 +7,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import dao.Pelaaja;
 import model.Ruutu;
 import model.NappulanTyyppi;
 import model.NappulanVari;
@@ -18,7 +19,7 @@ public interface IKontrolleri {
 	public boolean teeSiirto(int mistaX, int mistaY, int mihinX, int mihinY);
 	public void siirtoAiheuttiShakin();
 	public void luovuta();
-	public void pelinvoitti(int id);
+	public void pelinvoitti(Pelaaja pelaaja);
 	public NappulanTyyppi korota();
 	public NappulanVari getVuoro();
 	public int getValkoinenPelaaja();
