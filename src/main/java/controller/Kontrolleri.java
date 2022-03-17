@@ -69,12 +69,12 @@ public class Kontrolleri implements IKontrolleri{
 	}
 
 	@Override
-	public int getValkoinenPelaaja() {
+	public Pelaaja getValkoinenPelaaja() {
 		return this.pelinakyma.getValkoinenPelaaja();
 	}
 
 	@Override
-	public int getMustaPelaaja() {
+	public Pelaaja getMustaPelaaja() {
 		return this.pelinakyma.getMustaPelaaja();
 	}
 }

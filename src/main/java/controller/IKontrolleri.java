@@ -22,6 +22,6 @@ public interface IKontrolleri {
 	public void pelinvoitti(Pelaaja pelaaja);
 	public NappulanTyyppi korota();
 	public NappulanVari getVuoro();
-	public int getValkoinenPelaaja();
-	public int getMustaPelaaja();
+	public Pelaaja getValkoinenPelaaja();
+	public Pelaaja getMustaPelaaja();
 }
