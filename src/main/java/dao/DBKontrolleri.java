@@ -1,4 +1,4 @@
-package controller;
+package dao;
 
 import java.util.List;
 
@@ -10,9 +10,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.internal.build.AllowSysOut;
-
-import dao.Pelaaja;
-import dao.PelinTiedot;
 
 public class DBKontrolleri {
 	private Session ses;

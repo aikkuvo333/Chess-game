@@ -6,12 +6,8 @@ package model;
 
 import java.util.ArrayList;
 
-import dao.Ruutu;
-
 public class Sotilas extends Nappula {
-	private NappulanVari vari;
 	private boolean ekaSiirto;
-	private NappulanTyyppi tyyppi;
 
 	public Sotilas(NappulanVari vari) {
 		this.vari = vari;
@@ -89,15 +85,5 @@ public class Sotilas extends Nappula {
 
 	public boolean getEkaSiirto() {
 		return this.ekaSiirto;
-	}
-
-	@Override
-	public NappulanVari getVari() {
-		return this.vari;
-	}
-
-	@Override
-	public NappulanTyyppi getTyyppi() {
-		return this.tyyppi;
 	}
 }

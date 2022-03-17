@@ -2,7 +2,7 @@ package view.src.application;
 
 import java.io.IOException;
 
-import controller.DBKontrolleri;
+import dao.DBKontrolleri;
 import dao.Pelaaja;
 import dao.PelinTiedot;
 import javafx.event.ActionEvent;

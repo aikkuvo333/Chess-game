@@ -15,10 +15,10 @@ public class Siirto {
 	private int id;
 	private int pelinId;
 	@ManyToOne
-	private Ruutu lahtoRuutu;
+	private DaoRuutu lahtoRuutu;
 	@ManyToOne
-	private Ruutu kohdeRuutu;
-	public Siirto(Ruutu lahtoRuutu, Ruutu kohdeRuutu) {
+	private DaoRuutu kohdeRuutu;
+	public Siirto(DaoRuutu lahtoRuutu, DaoRuutu kohdeRuutu) {
 		this.lahtoRuutu = lahtoRuutu;
 		this.kohdeRuutu = kohdeRuutu;
 	}
@@ -36,16 +36,16 @@ public class Siirto {
 	public void setPelinId(int pelinId) {
 		this.pelinId = pelinId;
 	}
-	public Ruutu getLahtoRuutu() {
+	public DaoRuutu getLahtoRuutu() {
 		return lahtoRuutu;
 	}
-	public void setLahtoRuutu(Ruutu lahtoRuutu) {
+	public void setLahtoRuutu(DaoRuutu lahtoRuutu) {
 		this.lahtoRuutu = lahtoRuutu;
 	}
-	public Ruutu getKohdeRuutu() {
+	public DaoRuutu getKohdeRuutu() {
 		return kohdeRuutu;
 	}
-	public void setKohdeRuutu(Ruutu kohdeRuutu) {
+	public void setKohdeRuutu(DaoRuutu kohdeRuutu) {
 		this.kohdeRuutu = kohdeRuutu;
 	}
 }

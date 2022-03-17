@@ -6,7 +6,7 @@ package controller;
 
 import java.util.ArrayList;
 
-import dao.Ruutu;
+import model.Ruutu;
 import model.IShakkipeli;
 import model.NappulanTyyppi;
 import model.NappulanVari;
@@ -53,8 +53,8 @@ public class Kontrolleri implements IKontrolleri{
 	}
 
 	@Override
-	public void pelinvoitti(NappulanVari voittaja) {
-		this.pelinakyma.pelinVoitti(voittaja);
+	public void pelinvoitti(int id) {
+		this.pelinakyma.pelinVoitti(id);
 	}
 
 	@Override

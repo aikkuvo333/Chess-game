@@ -2,8 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import dao.Ruutu;
-
 /**
  * @author Elmo Vahvaselkä 26.1.2022 & Aivan Vo 9.2.2022
  */
@@ -211,6 +209,7 @@ public class Lauta {
 		}
 	}
 
+	@SuppressWarnings("incomplete-switch")
 	public void korota(int x, int y, NappulanTyyppi tyyppi) {
 		//poistetaan korotettava nappula
 		Sotilas sotilas = (Sotilas) lauta[x][y].poistaNappula(); 

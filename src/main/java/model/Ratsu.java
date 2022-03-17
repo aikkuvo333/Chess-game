@@ -2,22 +2,14 @@ package model;
 
 import java.util.ArrayList;
 
-import dao.Ruutu;
-
 /**
 * @author Aivan Vo 30.1.2022
 */
 
 public class Ratsu extends Nappula{
-	NappulanVari vari;
-	
 	public Ratsu (NappulanVari vari) {
 		this.vari = vari;
-	}
-
-	@Override
-	public NappulanVari getVari() {
-		return this.vari;
+		this.tyyppi = NappulanTyyppi.RATSU;
 	}
 
 	@Override
@@ -131,10 +123,4 @@ public class Ratsu extends Nappula{
 			
 		return siirrot;
 	}
-
-	@Override
-	public NappulanTyyppi getTyyppi() {
-		return NappulanTyyppi.RATSU;
-	}
-	
 }

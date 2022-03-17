@@ -39,7 +39,7 @@ import model.Nappula;
 import model.NappulanTyyppi;
 import model.NappulanVari;
 import dao.Pelaaja;
-import dao.Ruutu;
+import model.Ruutu;
 import view.IPelinakyma;
 import java.io.*;
 import javax.sound.sampled.*;

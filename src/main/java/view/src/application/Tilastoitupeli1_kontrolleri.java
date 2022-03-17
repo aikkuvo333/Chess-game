@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.stream.Collector;
 
-import controller.DBKontrolleri;
+import dao.DBKontrolleri;
 import dao.Pelaaja;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

@@ -6,17 +6,13 @@ package model;
 
 import java.util.ArrayList;
 
-import dao.Ruutu;
-
 public class Kuningas extends Nappula {
-	private NappulanVari vari;
 	private boolean ekaSiirto;
-	private NappulanTyyppi tyyppi;
 
 	public Kuningas(NappulanVari vari) {
 		this.vari = vari;
 		this.ekaSiirto = false;
-		this.tyyppi = NappulanTyyppi.KUNINGAS;
+		tyyppi = NappulanTyyppi.KUNINGAS;
 	}
 
 	@Override
@@ -125,11 +121,6 @@ public class Kuningas extends Nappula {
 		return siirrot;
 	}
 
-	@Override
-	public NappulanVari getVari() {
-		return this.vari;
-	}
-
 	public void ekaSiirtoTehty() {
 		this.ekaSiirto = true;
 	}
@@ -140,11 +131,6 @@ public class Kuningas extends Nappula {
 
 	public boolean getEkaSiirto() {
 		return ekaSiirto;
-	}
-
-	@Override
-	public NappulanTyyppi getTyyppi() {
-		return this.tyyppi;
 	}
 
 	//Tarkistetaan onko tornituksessa kuninkaan ylitämä ruutu uhattuna

@@ -9,7 +9,7 @@ import model.NappulanVari;
 
 public interface IPelinakyma {
 	public void siirtoAiheuttiShakin();
-	public void pelinVoitti(NappulanVari voittaja);
+	public void pelinVoitti(int id);
 	public NappulanTyyppi korota();
 	public int getValkoinenPelaaja();
 	public int getMustaPelaaja();

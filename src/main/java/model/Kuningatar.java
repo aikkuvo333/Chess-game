@@ -3,13 +3,11 @@ package model;
 import java.util.ArrayList;
 /* @author Oliver Hamberg */
 
-import dao.Ruutu;
-
 public class Kuningatar extends Nappula{
-	NappulanVari vari;
 	int x,y;
 	public Kuningatar(NappulanVari vari) {
 		this.vari = vari;
+		this.tyyppi = NappulanTyyppi.KUNINGATAR;
 	}
 	@Override
 	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu, Ruutu[][] lauta) {
@@ -151,15 +149,5 @@ public class Kuningatar extends Nappula{
 			siirrot.add(new Ruutu(x, y));
 		}
 		return siirrot;
-	}
-
-	@Override
-	public NappulanVari getVari() {
-		return this.vari; 
-	}
-	@Override
-	public NappulanTyyppi getTyyppi() {
-		// TODO Auto-generated method stub
-		return NappulanTyyppi.KUNINGATAR;
 	}
 }

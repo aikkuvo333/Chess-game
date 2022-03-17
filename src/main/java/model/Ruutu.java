@@ -1,26 +1,11 @@
-package dao;
-
-
-
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import model.Nappula;
+package model;
 
 /**
 * @author Elmo Vahvaselkä 26.1.2022
 */
-@Entity
-@Table
 public class Ruutu {
-	@Id
-	private int ruutuId;
 	private int x;
 	private int y;
-	
-	@Transient
 	private Nappula nappula;
 	
 	public Ruutu(int x, int y) {
@@ -52,3 +37,4 @@ public class Ruutu {
 	}
 
 }
+

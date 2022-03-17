@@ -12,8 +12,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import dao.Ruutu;
-
 class ShakkipeliTest {
 
 	private Shakkipeli peli;
@@ -217,7 +215,7 @@ class ShakkipeliTest {
 	@Test
 	@DisplayName("Musta voittaa pikamatilla")
 	public void mustaVoittaaPikamatilla() {
-		assertEquals(null, peli.getVoittaja(), "Pelin alussa voittaja ei ollut null");
+		assertEquals(0, peli.getVoittajaId(), "Pelin alussa voittaja ei ollut nolla");
 		assertFalse("Peli on päättynyt ennen siirtoja", peli.getPeliLoppunut());
 		assertTrue("Valkoinen sotilas ei siirtynyt 1", peli.siirra(5, 1, 5, 2));
 		assertFalse("Peli päättyi ensimmäisen siirron jälkeen", peli.getPeliLoppunut());
@@ -225,21 +223,21 @@ class ShakkipeliTest {
 		assertTrue("Valkoinen sotilas ei siirtynyt 2", peli.siirra(6, 1, 6, 3));
 		assertTrue("Musta Kuningatar ei siirtynyt ja lopettanut peliä", peli.siirra(3, 7, 7, 3));
 		assertTrue("peli ei päättynyt", peli.getPeliLoppunut());
-		assertEquals(NappulanVari.MUSTA, peli.getVoittaja(), "Musta ei voittanut peliä");
+		assertEquals(2, peli.getVoittajaId(), "Musta ei voittanut peliä");
 		assertFalse("Valkoinen sai tehdä siirron", peli.siirra(0, 1, 0, 2));
 	}
 
 	@Test
 	@DisplayName("Valkoine voittaa nopeasti")
 	public void valkoinenVoittaNopeasti() {
-		assertEquals(null, peli.getVoittaja(), "Pelin alussa voittaja ei ollut null");
+		assertEquals(0, peli.getVoittajaId(), "Pelin alussa voittaja ei ollut null");
 		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(4, 1, 4, 2));
 		assertTrue("Musta sotilas ei liikkunut", peli.siirra(6, 6, 6, 4));
 		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(5, 1, 5, 3));
 		assertTrue("Musta sotilas ei liikkunut", peli.siirra(5, 6, 5, 5));
 		assertTrue("Valkoinen kunigatar ei shakannut", peli.siirra(3, 0, 7, 4));
 		assertTrue("peli ei päättynyt", peli.getPeliLoppunut());
-		assertEquals(NappulanVari.VALKOINEN, peli.getVoittaja(), "Musta ei voittanut peliä");
+		assertEquals(1, peli.getVoittajaId(), "Musta ei voittanut peliä");
 		assertFalse("Musta sai tehdä siirron", peli.siirra(7, 1, 7, 2));
 	}
 
@@ -249,7 +247,7 @@ class ShakkipeliTest {
 		assertTrue("Valkoinen ei luovuttanut", peli.luovuta());
 		assertFalse("Valkoinen pystyi liikkumaan luovuttamisen jälkeen", peli.siirra(0, 1, 0, 2));
 		assertFalse("Musta pystyi siirtymään pelin päätyttyä", peli.siirra(0, 6, 0, 5));
-		assertEquals(NappulanVari.MUSTA, peli.getVoittaja(), "Musta ei voittanut");
+		assertEquals(2, peli.getVoittajaId(), "Musta ei voittanut");
 		assertTrue("Peli on loppunut", peli.getPeliLoppunut());
 	}
 
@@ -260,7 +258,7 @@ class ShakkipeliTest {
 		assertTrue("Musta ei luovuttanut", peli.luovuta());
 		assertFalse("Musta pystyi siirtymään pelin päätyttyä", peli.siirra(0, 6, 0, 5));
 		assertFalse("Valkoinen sotilas pysti siirtymään pelin päätyttyä", peli.siirra(1, 1, 1, 2));
-		assertEquals(NappulanVari.VALKOINEN, peli.getVoittaja(), "Valkoinen ei voittanut");
+		assertEquals(1, peli.getVoittajaId(), "Valkoinen ei voittanut");
 		assertTrue("Peli on loppunut", peli.getPeliLoppunut());
 	}
 

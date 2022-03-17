@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import org.junit.Test;
 import org.junit.jupiter.api.*;
 
-import dao.Ruutu;
-
 /* @Author Oliver Hamberg */
 public class LahettiTest {
 	private Lauta lauta = new Lauta(true);

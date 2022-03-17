@@ -2,16 +2,14 @@ package model;
 
 import java.util.ArrayList;
 
-import dao.Ruutu;
-
 //* @author Oliver Hamberg*//
 
 
 public class Lahetti extends Nappula{
-	NappulanVari vari;
 	int x,y;
 	public Lahetti(NappulanVari vari) {
 		this.vari = vari;
+		this.tyyppi = NappulanTyyppi.LAHETTI;
 	}
 	@Override
 	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu, Ruutu[][] lauta) {
@@ -86,16 +84,4 @@ public class Lahetti extends Nappula{
 		}
 		return siirrot;
 	}
-
-	@Override
-	public NappulanVari getVari() {
-		return this.vari; 
-	}
-	@Override
-	public NappulanTyyppi getTyyppi() {
-		// TODO Auto-generated method stub
-		return NappulanTyyppi.LAHETTI;
-	}
-
-
 }

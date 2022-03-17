@@ -6,13 +6,8 @@ package model;
 
 import java.util.ArrayList;
 
-import dao.Ruutu;
-
 public class Torni extends Nappula {
-
-	private NappulanVari vari;
 	private boolean ekaSiirto;
-	private NappulanTyyppi tyyppi;
 
 	public Torni(NappulanVari vari) {
 		this.vari = vari;
@@ -109,11 +104,6 @@ public class Torni extends Nappula {
 
 	}
 
-	@Override
-	public NappulanVari getVari() {
-		return this.vari;
-	}
-
 	public void ekaSiirtoTehty() {
 		this.ekaSiirto = true;
 	}
@@ -125,10 +115,4 @@ public class Torni extends Nappula {
 	public boolean getEkaSiirto() {
 		return this.ekaSiirto;
 	}
-
-	@Override
-	public NappulanTyyppi getTyyppi() {
-		return this.tyyppi;
-	}
-
 }

@@ -6,10 +6,15 @@ package model;
 
 import java.util.ArrayList;
 
-import dao.Ruutu;
-
 public abstract class Nappula {
+	protected NappulanTyyppi tyyppi;
+	protected NappulanVari vari;
+	
 	public abstract ArrayList<Ruutu> getSiirrot(Ruutu ruutu, Ruutu[][] lauta);
-	public abstract NappulanVari getVari();
-	public abstract NappulanTyyppi getTyyppi();
+	public NappulanVari getVari() {
+		return this.vari;
+	};
+	public NappulanTyyppi getTyyppi() {
+		return this.tyyppi;
+	};
 }

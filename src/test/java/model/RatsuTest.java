@@ -9,8 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import dao.Ruutu;
-
 /*
  * @author Aivan Vo 30.1.2022
  * */

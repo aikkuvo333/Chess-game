@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
-import dao.Ruutu;
+import dao.DaoRuutu;
 
 /* @Author Oliver Hamberg */
 public class KuningatarTest {
