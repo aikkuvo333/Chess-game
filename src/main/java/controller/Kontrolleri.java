@@ -50,7 +50,7 @@ public class Kontrolleri implements IKontrolleri{
 
 	@Override
 	public void luovuta() {
-		peli.luovuta();	
+		peli.julistaVoittaja();	
 	}
 
 	@Override

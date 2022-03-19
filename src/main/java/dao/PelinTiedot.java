@@ -1,5 +1,8 @@
 package dao;
 
+/*
+ * @author Oliver Hamberg, Elmo Vahvaselkä 19.3.2022
+ */
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,9 +20,9 @@ import model.NappulanVari;
 public class PelinTiedot {
 	@Id
 	private int peliId;
-	private int valkoinenPelaaja;
-	private int mustaPelaaja;
-	private int voittaja;
+	private Pelaaja valkoinenPelaaja;
+	private Pelaaja mustaPelaaja;
+	private Pelaaja voittaja;
 
 
 	private Date pvm;
@@ -28,7 +31,7 @@ public class PelinTiedot {
 	public PelinTiedot() {
 		
 	}
-	public PelinTiedot (int valkoinenPelaaja, int mustaPelaaja) {
+	public PelinTiedot (Pelaaja valkoinenPelaaja, Pelaaja mustaPelaaja) {
 		this.valkoinenPelaaja = valkoinenPelaaja;
 		this.mustaPelaaja = mustaPelaaja;
 		this.siirrot = new ArrayList<Siirto>();
@@ -38,20 +41,20 @@ public class PelinTiedot {
 		this.siirrot.add(siirto);
 	}
 
-	public int getVoittaja() {
+	public Pelaaja getVoittaja() {
 		return voittaja;
 	}
 
-	public void setVoittaja(int voittaja) {
+	public void setVoittaja(Pelaaja voittaja) {
 		this.voittaja = voittaja;
 	}
 
 
-	public int getValkoinenPelaaja() {
+	public Pelaaja getValkoinenPelaaja() {
 		return valkoinenPelaaja;
 	}
 
-	public int getMustaPelaaja() {
+	public Pelaaja getMustaPelaaja() {
 		return mustaPelaaja;
 	}
 	

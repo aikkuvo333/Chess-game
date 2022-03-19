@@ -7,7 +7,7 @@ import java.util.ArrayList;
 */
 
 import controller.IKontrolleri;
-import dao.DaoRuutu;
+import dao.Pelaaja;
 import dao.PelinTiedot;
 import dao.Siirto;
 
@@ -18,9 +18,8 @@ public class Shakkipeli implements IShakkipeli {
 	private NappulanVari vuorossa;
 	private boolean shakattu;
 	private boolean testi;
-	private boolean peliLoppunut;
-	private int voittajaId;
 	private boolean tilastoitu;
+	private boolean peliLoppunut;
 	private PelinTiedot pelinTiedot;
 	private NappulanTyyppi testiKorotus;
 
@@ -30,12 +29,13 @@ public class Shakkipeli implements IShakkipeli {
 		this.vuorossa = NappulanVari.VALKOINEN;
 		this.shakattu = false;
 		this.testi = false;
-		this.peliLoppunut = false;
-		this.voittajaId = 0;
 		this.tilastoitu = tilastoitu;
+		this.peliLoppunut = false;
 
 		if (tilastoitu) {
 			this.pelinTiedot = new PelinTiedot(kontrolleri.getValkoinenPelaaja(), kontrolleri.getMustaPelaaja());
+		} else {
+			this.pelinTiedot = new PelinTiedot(new Pelaaja("Valkoinen"), new Pelaaja("Musta"));
 		}
 	}
 
@@ -45,14 +45,11 @@ public class Shakkipeli implements IShakkipeli {
 		this.vuorossa = NappulanVari.VALKOINEN;
 		this.shakattu = false;
 		this.testi = true;
+		//tilastoitu false, koska tietoja ei haluta tallentaa tietokantaan
+		this.tilastoitu = false;
 		this.peliLoppunut = false;
-		this.voittajaId = 0;
-		this.tilastoitu = tilastoitu;
 		this.testiKorotus = NappulanTyyppi.KUNINGATAR;
-
-		if (this.tilastoitu) {
-			this.pelinTiedot = new PelinTiedot(1, 2);
-		}
+		this.pelinTiedot = new PelinTiedot(new Pelaaja("Valkoinen"), new Pelaaja("Musta"));
 	}
 
 	public Ruutu[][] getPelitilanne() {
@@ -65,8 +62,7 @@ public class Shakkipeli implements IShakkipeli {
 
 			this.varmistaSiirronTurvallisuus(mistaX, mistaY, mihinX, mihinY);
 
-			// Siirto ei ole kelpo, mikäli shakkaus ei poistunut, kun siirron turvallisuus
-			// varmistettiin
+			// Siirto ei ole kelpo, mikäli shakkaus ei poistunut, kun siirron turvallisuus varmistettiin
 			if (shakattu) {
 				return false;
 			}
@@ -75,18 +71,20 @@ public class Shakkipeli implements IShakkipeli {
 
 			// Korotetun nappulan tyyppi otetaan talteen mahdollista tallentamista varten.
 			NappulanTyyppi korotus = this.teeMahdollinenKorotus(mihinX, mihinY);
-
-			if (tilastoitu) {
-				this.tallennaSiirto(mistaX, mistaY, mihinX, mihinY, korotus);
-			}
+			
+			//Tallennetaan siirto pelin tietoihin
+			this.pelinTiedot.lisaaSiirto(new Siirto(mistaX, mistaY, mihinX, mihinY, korotus));
 
 			this.tarkistaShakkasiko(mihinX, mihinY);
 			this.vaihdaVuoro();
 
 			if (this.paattyikoPeli()) {
 				this.julistaVoittaja();
+				//Tallennus tietokantaan:
+				if(tilastoitu) {
+					//
+				}
 			}
-
 			return true;
 		}
 		return false;
@@ -97,6 +95,7 @@ public class Shakkipeli implements IShakkipeli {
 
 		// Jos aikaa jää täydennä tänne siirroon sopivuuksien tarkistus, jotta pelilauta
 		// näyttää vain täysin lailliset siirrot
+		
 
 		// Tornitusta ei tarjota mikäli shakattu
 		if (getRuudunNappula(x, y).getTyyppi() == NappulanTyyppi.KUNINGAS && shakattu) {
@@ -118,28 +117,6 @@ public class Shakkipeli implements IShakkipeli {
 			}
 		}
 		return siirrot;
-	}
-
-	public boolean luovuta() {
-		this.peliLoppunut = true;
-		if (this.vuorossa == NappulanVari.VALKOINEN) {
-
-			if (tilastoitu) {
-				this.voittajaId = kontrolleri.getMustaPelaaja();
-			} else {
-				this.voittajaId = 2;
-			}
-
-		} else {
-
-			if (tilastoitu) {
-				this.voittajaId = kontrolleri.getValkoinenPelaaja();
-			} else {
-				this.voittajaId = 1;
-
-			}
-		}
-		return true;
 	}
 
 	private void vaihdaVuoro() {
@@ -279,32 +256,16 @@ public class Shakkipeli implements IShakkipeli {
 		return true;
 	}
 
-	private void julistaVoittaja() {
+	public void julistaVoittaja() {
 		this.peliLoppunut = true;
 		if (this.vuorossa == NappulanVari.VALKOINEN) {
-
-			if (tilastoitu) {
-				this.voittajaId = kontrolleri.getMustaPelaaja();
-			} else {
-				this.voittajaId = 2;
-			}
-
+			pelinTiedot.setVoittaja(pelinTiedot.getMustaPelaaja());
 		} else {
-
-			if (tilastoitu) {
-				this.voittajaId = kontrolleri.getValkoinenPelaaja();
-			} else {
-				this.voittajaId = 1;
-
-			}
-		}
-
-		if (this.tilastoitu) {
-			this.pelinTiedot.setVoittaja(this.voittajaId);
+			pelinTiedot.setVoittaja(pelinTiedot.getValkoinenPelaaja());
 		}
 
 		if (!this.testi) {
-			this.kontrolleri.pelinvoitti(this.voittajaId);
+			this.kontrolleri.pelinvoitti(pelinTiedot.getVoittaja());
 		}
 	}
 
@@ -331,14 +292,6 @@ public class Shakkipeli implements IShakkipeli {
 		return tyyppi;
 	}
 
-	private void tallennaSiirto(int mistaX, int mistaY, int mihinX, int mihinY, NappulanTyyppi korotettu) {
-		DaoRuutu lahto = new DaoRuutu(mistaX, mistaY);
-		DaoRuutu kohde = new DaoRuutu(mihinX, mihinY);
-		Siirto siirto = new Siirto(lahto, kohde);
-		// siirto.setKorotus(korotettu);
-		this.pelinTiedot.lisaaSiirto(siirto);
-	}
-
 	public NappulanVari getVuoro() {
 		return vuorossa;
 	}
@@ -347,8 +300,8 @@ public class Shakkipeli implements IShakkipeli {
 		return this.peliLoppunut;
 	}
 
-	public int getVoittajaId() {
-		return this.voittajaId;
+	public Pelaaja getVoittaja() {
+		return this.pelinTiedot.getVoittaja();
 	}
 
 	private Nappula getRuudunNappula(int x, int y) {

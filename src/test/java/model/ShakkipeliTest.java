@@ -215,7 +215,7 @@ class ShakkipeliTest {
 	@Test
 	@DisplayName("Musta voittaa pikamatilla")
 	public void mustaVoittaaPikamatilla() {
-		assertEquals(0, peli.getVoittajaId(), "Pelin alussa voittaja ei ollut nolla");
+		assertEquals(null, peli.getVoittaja(), "Pelin alussa voittaja ei ollut null");
 		assertFalse("Peli on päättynyt ennen siirtoja", peli.getPeliLoppunut());
 		assertTrue("Valkoinen sotilas ei siirtynyt 1", peli.siirra(5, 1, 5, 2));
 		assertFalse("Peli päättyi ensimmäisen siirron jälkeen", peli.getPeliLoppunut());
@@ -223,31 +223,31 @@ class ShakkipeliTest {
 		assertTrue("Valkoinen sotilas ei siirtynyt 2", peli.siirra(6, 1, 6, 3));
 		assertTrue("Musta Kuningatar ei siirtynyt ja lopettanut peliä", peli.siirra(3, 7, 7, 3));
 		assertTrue("peli ei päättynyt", peli.getPeliLoppunut());
-		assertEquals(2, peli.getVoittajaId(), "Musta ei voittanut peliä");
+		assertEquals("Musta", peli.getVoittaja().getKayttajaTunnus(), "Musta ei voittanut peliä");
 		assertFalse("Valkoinen sai tehdä siirron", peli.siirra(0, 1, 0, 2));
 	}
 
 	@Test
 	@DisplayName("Valkoine voittaa nopeasti")
 	public void valkoinenVoittaNopeasti() {
-		assertEquals(0, peli.getVoittajaId(), "Pelin alussa voittaja ei ollut null");
+		assertEquals(null, peli.getVoittaja(), "Pelin alussa voittaja ei ollut null");
 		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(4, 1, 4, 2));
 		assertTrue("Musta sotilas ei liikkunut", peli.siirra(6, 6, 6, 4));
 		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(5, 1, 5, 3));
 		assertTrue("Musta sotilas ei liikkunut", peli.siirra(5, 6, 5, 5));
 		assertTrue("Valkoinen kunigatar ei shakannut", peli.siirra(3, 0, 7, 4));
 		assertTrue("peli ei päättynyt", peli.getPeliLoppunut());
-		assertEquals(1, peli.getVoittajaId(), "Musta ei voittanut peliä");
+		assertEquals("Valkoinen", peli.getVoittaja().getKayttajaTunnus(), "Valkoinen ei voittanut peliä");
 		assertFalse("Musta sai tehdä siirron", peli.siirra(7, 1, 7, 2));
 	}
 
 	@Test
 	@DisplayName("Luovuttaminen toimii valkoisella")
 	public void luovutaValkoinen() {
-		assertTrue("Valkoinen ei luovuttanut", peli.luovuta());
+		peli.julistaVoittaja();
 		assertFalse("Valkoinen pystyi liikkumaan luovuttamisen jälkeen", peli.siirra(0, 1, 0, 2));
 		assertFalse("Musta pystyi siirtymään pelin päätyttyä", peli.siirra(0, 6, 0, 5));
-		assertEquals(2, peli.getVoittajaId(), "Musta ei voittanut");
+		assertEquals("Musta", peli.getVoittaja().getKayttajaTunnus(), "Musta ei voittanut");
 		assertTrue("Peli on loppunut", peli.getPeliLoppunut());
 	}
 
@@ -255,10 +255,10 @@ class ShakkipeliTest {
 	@DisplayName("Luovuttaminen toimii mustalla")
 	public void luovutaMusta() {
 		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(0, 1, 0, 2));
-		assertTrue("Musta ei luovuttanut", peli.luovuta());
+		peli.julistaVoittaja();
 		assertFalse("Musta pystyi siirtymään pelin päätyttyä", peli.siirra(0, 6, 0, 5));
 		assertFalse("Valkoinen sotilas pysti siirtymään pelin päätyttyä", peli.siirra(1, 1, 1, 2));
-		assertEquals(1, peli.getVoittajaId(), "Valkoinen ei voittanut");
+		assertEquals("Valkoinen", peli.getVoittaja().getKayttajaTunnus(), "Valkoinen ei voittanut");
 		assertTrue("Peli on loppunut", peli.getPeliLoppunut());
 	}
 
@@ -391,8 +391,7 @@ class ShakkipeliTest {
 
 	}
 
-	// Testi bugille, joka löydettiin graafisen käyttöliittymän manuaalisessa
-	// testaamisessa.
+	// Testi bugille, joka löydettiin graafisenkäyttöliittymän manuaalisessa testaamisessa.
 	@Test
 	@DisplayName("Torni ei katoa, kun se shakkaa kuningasta vierestä")
 	public void torniEiKatoa() {

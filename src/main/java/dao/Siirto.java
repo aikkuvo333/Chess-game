@@ -1,10 +1,16 @@
 package dao;
 
+/*
+ * @author Oliver Hamberg, Elmo Vahvaselkä 19.3.2022
+ */
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import model.NappulanTyyppi;
 
 
 @Entity
@@ -14,38 +20,60 @@ public class Siirto {
 	@GeneratedValue
 	private int id;
 	private int pelinId;
-	@ManyToOne
-	private DaoRuutu lahtoRuutu;
-	@ManyToOne
-	private DaoRuutu kohdeRuutu;
-	public Siirto(DaoRuutu lahtoRuutu, DaoRuutu kohdeRuutu) {
-		this.lahtoRuutu = lahtoRuutu;
-		this.kohdeRuutu = kohdeRuutu;
+	private int mistaX;
+	private int mistaY;
+	private int mihinX;
+	private int mihinY;
+	private NappulanTyyppi korotus;
+
+	public Siirto(int mistaX, int mistaY, int mihinX, int mihinY, NappulanTyyppi korotus) {
+		this.mistaX = mistaX;
+		this.mistaY = mistaY;
+		this.mihinX = mihinX;
+		this.mihinY = mihinY;
+		this.korotus = korotus;
 	}
 	
 	
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public int getPelinId() {
 		return pelinId;
 	}
+	
 	public void setPelinId(int pelinId) {
 		this.pelinId = pelinId;
 	}
-	public DaoRuutu getLahtoRuutu() {
-		return lahtoRuutu;
+
+
+	public int getMistaX() {
+		return mistaX;
 	}
-	public void setLahtoRuutu(DaoRuutu lahtoRuutu) {
-		this.lahtoRuutu = lahtoRuutu;
+
+
+	public int getMistaY() {
+		return mistaY;
 	}
-	public DaoRuutu getKohdeRuutu() {
-		return kohdeRuutu;
+
+
+	public int getMihinX() {
+		return mihinX;
 	}
-	public void setKohdeRuutu(DaoRuutu kohdeRuutu) {
-		this.kohdeRuutu = kohdeRuutu;
+
+
+	public int getMihinY() {
+		return mihinY;
 	}
+
+
+	public NappulanTyyppi getKorotus() {
+		return korotus;
+	}
+	
 }
