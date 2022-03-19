@@ -6,15 +6,33 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * Luokka <code>Torni</code> määrittelee pelissä käytettävän tornin toiminnalisuuden.
+ */
 public class Torni extends Nappula {
+	/**
+	 * <code>ekaSiirto</code> sisältää tiedon siitä, että onko kyseisen sotilaan ensimmäinen siirto tehty.
+	 */
 	private boolean ekaSiirto;
 
+	/**
+	 * Luo uuden tornin.
+	 * @param vari ilmaisee tornin värin.
+	 */
 	public Torni(NappulanVari vari) {
 		this.vari = vari;
 		this.ekaSiirto = false;
 		this.tyyppi = NappulanTyyppi.TORNI;
 	}
 
+	/**
+	 * Palauttaa tornin mahdolliset siirrot ruutu-olioina. 
+	 * Ei huomioi mahdollisia shakkaamisen tuomia rajotteita.
+	 * 
+	 * @param ruutu ilmoittaa missä ruudussa liikutettava nappula sijaitsee.
+	 * @param lauta välittää nappulalle tiedon koko pelitilanteesta.
+	 * @return <code>ArrayList</code>-olion, johon on listattu mahdolliset siirrot <code>Ruutu</code>-olioina.
+	 */
 	@Override
 	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu, Ruutu[][] lauta) {
 		ArrayList<Ruutu> siirrot = new ArrayList<>();
@@ -104,14 +122,24 @@ public class Torni extends Nappula {
 
 	}
 
+	/**
+	 * Merkitsee tornin ensimmäisen siirron tehdyksi.
+	 */
 	public void ekaSiirtoTehty() {
 		this.ekaSiirto = true;
 	}
 	
+	/**
+	 * Merkitsee tornin ensimmäisen siirron tekemättömäksi.
+	 */
 	public void kumoaEkaSiirto() {
 		this.ekaSiirto = false;
 	}
 
+	/**
+	 * Palauttaa tiedon siitä, että onko ensimmäinen siirto tehty.
+	 * @return <code>Booleanina</code> tiedon siitä, että onko tornin ensimmäinen siirto tehty. 
+	 */
 	public boolean getEkaSiirto() {
 		return this.ekaSiirto;
 	}

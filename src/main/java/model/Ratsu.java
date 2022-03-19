@@ -6,12 +6,28 @@ import java.util.ArrayList;
 * @author Aivan Vo 30.1.2022
 */
 
+
+/**
+ * Luokka <code>Ratsu</code> määrittelee pelissä käytettävän ratsun toiminnallisuuden.
+ */
 public class Ratsu extends Nappula{
+	/**
+	 * Luo uuden ratsun.
+	 * @param vari määrittelee ratsun värin.
+	 */
 	public Ratsu (NappulanVari vari) {
 		this.vari = vari;
 		this.tyyppi = NappulanTyyppi.RATSU;
 	}
 
+	/**
+	 * Palauttaa ratsun mahdolliset siirrot ruutu-olioina. 
+	 * Ei huomioi mahdollisia shakkaamisen tuomia rajotteita.
+	 * 
+	 * @param ruutu ilmoittaa missä ruudussa liikutettava nappula sijaitsee.
+	 * @param lauta välittää nappulalle tiedon koko pelitilanteesta.
+	 * @return <code>ArrayList</code>-olion, johon on listattu mahdolliset siirrot <code>Ruutu</code>-olioina.
+	 */
 	@Override
 	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu, Ruutu[][] lauta) {
 		ArrayList<Ruutu> siirrot = new ArrayList<>();

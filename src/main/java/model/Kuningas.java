@@ -6,15 +6,35 @@ package model;
 
 import java.util.ArrayList;
 
+
+/**
+ * Luokka <code>Kuningas</code> määrittelee pelissä käytettävän kuninkaan toiminnallisuuden.
+ */
 public class Kuningas extends Nappula {
+	/**
+	 * <code>ekaSiirto</code> sisältää tiedon siitä, että onko kyseisen kuninkaan ensimmäinen siirto tehty.
+	 */
 	private boolean ekaSiirto;
 
+	/**
+	 * Luo uuden kuninkaan.
+	 * @param vari määrittelee kuninkaan värin.
+	 */
 	public Kuningas(NappulanVari vari) {
 		this.vari = vari;
 		this.ekaSiirto = false;
 		tyyppi = NappulanTyyppi.KUNINGAS;
 	}
 
+	/**
+	 * 
+	 * Palauttaa kuninkaan mahdolliset siirrot ruutu-olioina. 
+	 * Ei huomioi mahdollisia shakkaamisen tuomia rajotteita.
+	 * 
+	 * @param ruutu ilmoittaa missä ruudussa liikutettava nappula sijaitsee.
+	 * @param lauta välittää nappulalle tiedon koko pelitilanteesta.
+	 * @return <code>ArrayList</code>-olion, johon on listattu mahdolliset siirrot <code>Ruutu</code>-olioina.
+	 */
 	@Override
 	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu, Ruutu[][] lauta) {
 		ArrayList<Ruutu> siirrot = new ArrayList<>();
@@ -121,14 +141,24 @@ public class Kuningas extends Nappula {
 		return siirrot;
 	}
 
+	/**
+	 * Merkitsee kuninkaan ensimmäisen siirron tehdyksi.
+	 */
 	public void ekaSiirtoTehty() {
 		this.ekaSiirto = true;
 	}
 
+	/**
+	 * Merkitsee kuninkaan ensimmäisen siirron tekemättömäksi.
+	 */
 	public void kumoaEkaSiirto() {
 		this.ekaSiirto = false;
 	}
 
+	/**
+	 * Palauttaa tiedon siitä, että onko ensimmäinen siirto tehty.
+	 * @return <code>Booleanina</code> tiedon siitä, että onko kuninkaan ensimmäinen siirto tehty. 
+	 */
 	public boolean getEkaSiirto() {
 		return ekaSiirto;
 	}

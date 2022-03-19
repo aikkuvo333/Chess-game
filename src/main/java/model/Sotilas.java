@@ -6,15 +6,36 @@ package model;
 
 import java.util.ArrayList;
 
+/**
+ * Luokka <code>Sotilas</code> määrittelee shakissa kätettävän sotilaan tominnallisuuden.
+ *
+ */
+
 public class Sotilas extends Nappula {
+	/**
+	 * <code>ekaSiirto</code> sisältää tiedon siitä, että onko kyseisen sotilaan ensimmäinen siirto tehty.
+	 */
 	private boolean ekaSiirto;
 
+	/**
+	 * Luo uuden sotilaan.
+	 * @param vari ilmaisee sotilaan värin.
+	 */
 	public Sotilas(NappulanVari vari) {
 		this.vari = vari;
 		this.ekaSiirto = false;
 		this.tyyppi = NappulanTyyppi.SOTILAS;
 	}
 
+	/**
+	 * 
+	 * Palauttaa sotilaan mahdolliset siirrot ruutu-olioina. 
+	 * Ei huomioi mahdollisia shakkaamisen tuomia rajotteita.
+	 * 
+	 * @param ruutu ilmoittaa missä ruudussa liikutettava nappula sijaitsee.
+	 * @param lauta välittää nappulalle tiedon koko pelitilanteesta.
+	 * @return <code>ArrayList</code>-olion, johon on listattu mahdolliset siirrot <code>Ruutu</code>-olioina.
+	 */
 	@Override
 	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu, Ruutu[][] lauta) {
 		ArrayList<Ruutu> siirrot = new ArrayList<>();
@@ -79,10 +100,17 @@ public class Sotilas extends Nappula {
 		return siirrot;
 	}
 
+	/**
+	 * Merkitsee sotilaan ensimmäisen siirron tehdyksi.
+	 */
 	public void ekaSiirtoTehty() {
 		this.ekaSiirto = true;
 	}
 
+	/**
+	 * Palauttaa tiedon siitä, että onko ensimmäinen siirto tehty.
+	 * @return <code>Booleanina</code> tiedon siitä, että onko sotilaan ensimmäinen siirto tehty. 
+	 */
 	public boolean getEkaSiirto() {
 		return this.ekaSiirto;
 	}
