@@ -6,41 +6,81 @@ import java.util.ArrayList;
  * @author Elmo Vahvaselkä 26.1.2022 & Aivan Vo 9.2.2022
  */
 
-/* Ei otaa kantaa sääntöihin. 
- * Huolehtii, että nappulat ovat siellä, 
- * minne Shakkipeliluokka ne haluaa laittaa.
- * */
- 
+ /**
+  * Luokka <code>Lauta</code> edustaa shakkipelin shakkilautaa ja huolehtii <code>nappuloiden</code> sijanneista  
+  * <code>ruutujen</code> avulla. Säännöistä huolehtiminen ei ole tämän luokan vastuulla.
+  */
 public class Lauta {
-
+	/**
+	 * Kaksiulotteiseen <code>lauta</code> tauluun tallennetaan shakkilaudan ruudut.
+	 */
 	private Ruutu[][] lauta;
+	
+	/**
+	 * Muuttuja <code>valkoinenKuningas</code> on ruutu-olio, jossa tiedot valkoisen kuninkaan sijainnista.
+	 */
 	private Ruutu valkoinenKuningas;
+	
+	/**
+	 * Muuttuja <code>mustaKuningas</code> on ruutu-olio, jossa tiedot musta kuninkaan sijainnista.
+	 */
 	private Ruutu mustaKuningas;
 
+	/**
+	 * Luo uuden <code>lauta</code>-olion samlla luoden kaksiulotteisen taulun. Asettaa tauluun <code>ruudut</code>,
+	 * joihin asetetaan mahdolliset <code>nappulat</code> pelin aloituksen mukaisesti.
+	 */
 	public Lauta() {
 		this.lauta = new Ruutu[8][8];
 		this.luoRuudut();
 		this.asetaNappulat();
 	}
 
-	// Konstruktori testeille, mikäli halutaan käyttää tyhjää lautaa
+	/**
+	 * Konstruktori testeille. Ei aseta <code>nappuloita</code> automaattisesti ruutuihin.
+	 * @param testi <code>boolean</code> arvo, joka voi olla <code>true</code> tai <code>false</code>.
+	 */
 	public Lauta(boolean testi) {
 		this.lauta = new Ruutu[8][8];
 		this.luoRuudut();
 	}
 
+	/**
+	 * Palauttaa kaksiulotteisen taulokon, jossa pelilaudalla olevat <code>ruudut</code>.
+	 * @return <code>Ruutu[][]</code> taulukko, jossa kaikki pelilaudan <code>ruudut</code>.
+	 */
 	public Ruutu[][] getLauta() {
 		return this.lauta;
 	}
 
+	/**
+	 * Palauttaa laudalla olevan tietyn <code>ruudun</code> x- ja y-koordinaattien perusteella.
+	 * @param x kokonaisluku väliltä 0-7, joka edustaa x-koordinaattia.
+	 * @param y kokonaisluku väliltä 0-7, joka edustaa y-koordinaattia.
+	 * @return palauttaa koordinaattien mukaisen <code>ruutu</code>-olion.
+	 */
 	public Ruutu getRuutu(int x, int y) {
 		return this.lauta[x][y];
 	}
 
+	/**
+	 * Palauttaa tietyssä ruudussa olevan nappulan siirrot.
+	 * @param x kokonaisluku väliltä 0-7, joka edustaa x-koordinaattia.
+	 * @param y kokonaisluku väliltä 0-7, joka edustaa y-koordinaattia.
+	 * @return <code>ArrayListin</code>, joka sisältää kaikki <code>ruudut</code>, joihin nappula voi siirtyä.
+	 */
 	public ArrayList<Ruutu> getSiirrot(int x, int y) {
 		return lauta[x][y].getNappula().getSiirrot(new Ruutu(x, y), this.lauta);
 	}
 
+	/**
+	 * Toteuttaa siirron laudalla.
+	 * @param mistaX Siirron lähtökoordinaatti x-akselilla kokonaislukuna väliltä 0-7.
+	 * @param mistaY Siirron lähtökoordinaatti y-akselilla kokonaislukuna väliltä 0-7.
+	 * @param mihinX Siirron kodekoordinaatti x-akselilla kokonaislukuna väliltä 0-7.
+	 * @param mihinY Siirron kodekoordinaatti y-akselilla kokonaislukuna väliltä 0-7.
+	 * @return <code>Boolean</code> arvo siirron onnistumisen mukaan.
+	 */
 	public boolean siirra(int mistaX, int mistaY, int mihinX, int mihinY) {
 		Nappula nappula = lauta[mistaX][mistaY].poistaNappula();
 
@@ -56,6 +96,15 @@ public class Lauta {
 		return true;
 	}
 
+	/**
+	 * Toteuttaa tornituksen laudalla.
+	 * @param mistaX Siirron lähtökoordinaatti x-akselilla kokonaislukuna väliltä 0-7.
+	 * @param mistaY Siirron lähtökoordinaatti y-akselilla kokonaislukuna väliltä 0-7.
+	 * @param mihinX Siirron kodekoordinaatti x-akselilla kokonaislukuna väliltä 0-7.
+	 * @param mihinY Siirron kodekoordinaatti y-akselilla kokonaislukuna väliltä 0-7.
+	 * @param nappula Siirrettävä <code>nappula</code>.
+	 * @return <code>Boolean</code> arvo tornituksen onnistumisesta.
+	 */
 	public boolean tornita(int mistaX, int mistaY, int mihinX, int mihinY, Nappula nappula) {
 		if (nappula instanceof Kuningas && mistaX == 4 && mistaY == 0 && mihinX == 6 && mihinY == 0) {
 			Nappula torni = lauta[7][0].poistaNappula();
@@ -91,7 +140,15 @@ public class Lauta {
 		return false;
 	}
 	
-	//siirron turvallisuuden varmistaja Shakkipeliluokasta käyttää tätä
+	/**
+	 * Kuomaa tehdyn tornituksen. Käytetään siirron turvallisuuden tarkistamiseen 
+	 * <code>Shakkipeli</code>-luokan toimesta.
+	 * @param mistaX Siirron lähtökoordinaatti x-akselilla kokonaislukuna väliltä 0-7.
+	 * @param mistaY Siirron lähtökoordinaatti y-akselilla kokonaislukuna väliltä 0-7.
+	 * @param mihinX Siirron kodekoordinaatti x-akselilla kokonaislukuna väliltä 0-7.
+	 * @param mihinY Siirron kodekoordinaatti y-akselilla kokonaislukuna väliltä 0-7.
+	 * @return <code>Boolean</code> arvo tornituksen purkamisen onnistumisesta.
+	 */
 	public boolean kumoaTornitus(int mistaX, int mistaY, int mihinX, int mihinY) {
 		if (mistaX == 4 && mistaY == 0 && mihinX == 6 && mihinY == 0) {
 			Torni torni = (Torni)lauta[5][0].poistaNappula();
@@ -139,14 +196,28 @@ public class Lauta {
 		return false;
 	}
 
+	/**
+	 * Palautaa <code>Ruudun</code>, jossa valkoinen kuningas on.
+	 * @return <code>Ruudun</code>, jossa valkoinen kuningas on.
+	 */
 	public Ruutu getValkoinenKuningas() {
 		return this.valkoinenKuningas;
 	}
 
+	/**
+	 * Palautaa <code>Ruudun</code>, jossa musta kuningas on.
+	 * @return <code>Ruudun</code>, jossa musta kuningas on.
+	 */
 	public Ruutu getMustaKuningas() {
 		return this.mustaKuningas;
 	}
 
+	/**
+	 * Päivittää kuninkaan sijainnin muuttujaan <code>valkoinenKuningas</code> tai 
+	 * <code>mustaKuningas</code>
+	 * @param kuningas <code>Kuningas</code>, jota on liikutettu.
+	 * @param ruutu <code>Ruutu</code>, johon kuningas on siirretty.
+	 */
 	private void paivitaKuninkaanSijainti(Kuningas kuningas, Ruutu ruutu) {
 		if (kuningas.getVari() == NappulanVari.VALKOINEN) {
 			this.setValkoinenKuningas(ruutu);
@@ -155,14 +226,36 @@ public class Lauta {
 		}
 	}
 
+	/**
+	 * Asettaa <code>valkoinenKuningas</code> muuttujaan <code>ruudun</code>, jossa valkoinen kuningas on.
+	 * @param ruutu <code>Ruutu</code>, johon valkoinen kuningas on asetettu.
+	 */
 	private void setValkoinenKuningas(Ruutu ruutu) {
 		this.valkoinenKuningas = ruutu;
 	}
 
+	/**
+	 * Asettaa <code>mustaKuningas</code> muuttujaan <code>ruudun</code>, jossa musta kuningas on.
+	 * @param ruutu <code>Ruutu<code>, johon musta kuningas on asetettu.
+	 */
 	private void setMustaKuningas(Ruutu ruutu) {
 		this.mustaKuningas = ruutu;
 	}
+	
+	/**
+	 * Luo <code>ruudut</code> laudalle ja asettaa ne taulukkoon.
+	 */
+	private void luoRuudut() {
+		for (int y = 0; y < 8; y++) {
+			for (int x = 0; x < 8; x++) {
+				lauta[x][y] = new Ruutu(x, y);
+			}
+		}
+	}
 
+	/**
+	 * Asettaa <code>nappulat</code> <code>ruutuihin</code> pelin aloituksen mukaisiin sijanteihin.
+	 */
 	private void asetaNappulat() {
 		for (int x = 0; x < 8; x++) {
 			lauta[x][1].setNappula(new Sotilas(NappulanVari.VALKOINEN));
@@ -189,14 +282,10 @@ public class Lauta {
 		lauta[3][7].setNappula(new Kuningatar(NappulanVari.MUSTA));
 	}
 
-	private void luoRuudut() {
-		for (int y = 0; y < 8; y++) {
-			for (int x = 0; x < 8; x++) {
-				lauta[x][y] = new Ruutu(x, y);
-			}
-		}
-	}
-
+	/**
+	 * Merkitsee <code>nappulan</code> ensimmäisen siirron tehdyksi.
+	 * @param nappula <code>Nappula</code>, jota on siirretty.
+	 */
 	private void merkitseEkaSiirto(Nappula nappula) {
 		if (nappula instanceof Sotilas) {
 			((Sotilas) nappula).ekaSiirtoTehty();
@@ -209,6 +298,13 @@ public class Lauta {
 		}
 	}
 
+	/**
+	 * Korottaa <code>nappulan</code> poistamalla <code>sotilaan</code> ja 
+	 * korvaamalla sen valitulla <code>nappulalla</code>.
+	 * @param x korotetun <code>nappulan</code> x-koordinaatti.
+	 * @param y korotetun <code>nappulan</code> y-koordinaatti.
+	 * @param tyyppi <code>NappulanTyyppi</code>, johon <code>sotilas</code> korotetaan.
+	 */
 	@SuppressWarnings("incomplete-switch")
 	public void korota(int x, int y, NappulanTyyppi tyyppi) {
 		//poistetaan korotettava nappula
