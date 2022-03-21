@@ -43,7 +43,7 @@ public class Alkuvalikko_kontrolleri {
 	@FXML
 	void TilastoimatonPeli(ActionEvent event) throws IOException {
 
-		Lauta_kontrolleri controller = new Lauta_kontrolleri();
+		PeliNakyma controller = new PeliNakyma();
 		//Asetukset_kontrolleri asetukset_kontrolleri = new Asetukset_kontrolleri();
 		loader = new FXMLLoader(getClass().getResource("Lauta.fxml"));
 		loader.setController(controller);

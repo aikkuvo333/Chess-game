@@ -59,7 +59,7 @@ public class Tilastoitupeli1_kontrolleri {
   
     @FXML
     void aloitaPeli(ActionEvent event) throws IOException {
-    	Lauta_kontrolleri controller = new Lauta_kontrolleri(musta, valkoinen);
+    	PeliNakyma controller = new PeliNakyma(musta, valkoinen);
 		loader = new FXMLLoader(getClass().getResource("Lauta.fxml"));
 		loader.setController(controller);
 		root = loader.load();

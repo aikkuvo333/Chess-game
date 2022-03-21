@@ -11,29 +11,24 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.internal.build.AllowSysOut;
 
-public class DBKontrolleri {
+public class DBKontrolleri implements IDaoController{
 	private Session ses;
 	private static DBKontrolleri instance;
 	
-	
 	public DBKontrolleri() {
-			SessionFactory istuntoTehdas = new Configuration().configure().buildSessionFactory();
-			ses = istuntoTehdas.openSession();
-			
+		SessionFactory istuntoTehdas = new Configuration().configure().buildSessionFactory();
+		ses = istuntoTehdas.openSession();	
 	}
-	
 	@SuppressWarnings("unchecked")
 	public List<Pelaaja> getPelaajat() {
 		return ses.createQuery("from Pelaaja").getResultList();
 	}
-	
 	public static DBKontrolleri getInstance() {
 		if (instance == null) {
 			instance = new DBKontrolleri();
 		}
 		return instance;
 	}
-	
 	@Transactional 
 	public Pelaaja luoPelaaja(String nimi) {
 		ses.beginTransaction();
@@ -50,7 +45,7 @@ public class DBKontrolleri {
 		List<PelinTiedot> pelit = haePelaajanPelit(p);
 		int voitetut = 0;
 		for(PelinTiedot tiedot: pelit) {
-			if(tiedot.getVoittaja() == p.getPelaajaId()) {
+			if(tiedot.getVoittaja().getPelaajaId() == p.getPelaajaId()) {
 				voitetut++;
 			}
 		}
@@ -66,5 +61,23 @@ public class DBKontrolleri {
 	}
 	public String haeVoittoProsentti(Pelaaja p) {
 		return (double) haeVoittoMaara(p) / (double) haePelienMaara(p) * 100 + "%";
+	}
+
+	@Override
+	public void tallennaPeli(PelinTiedot pelinTiedot) {
+		ses.beginTransaction();
+		ses.save(pelinTiedot);
+		ses.getTransaction().commit();
+	}
+
+	@Override
+	public void haeKaikkipelit() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void poistaPelaaja(int pelaajaId) {
+		// TODO Auto-generated method stub
 	}
 }

@@ -6,6 +6,7 @@ package dao;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -17,7 +18,7 @@ import model.NappulanTyyppi;
 @Table
 public class Siirto {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private int pelinId;
 	private int mistaX;

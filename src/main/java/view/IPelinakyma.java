@@ -1,6 +1,5 @@
 package view;
 
-import dao.IDaoController;
 import dao.Pelaaja;
 import model.NappulanTyyppi;
 
@@ -14,5 +13,4 @@ public interface IPelinakyma {
 	public NappulanTyyppi korota();
 	public Pelaaja getValkoinenPelaaja();
 	public Pelaaja getMustaPelaaja();
-	public IDaoController getDaoKontrolleri();
 }

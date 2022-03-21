@@ -11,6 +11,7 @@ import dao.IDaoController;
 import dao.Pelaaja;
 import dao.PelinTiedot;
 import dao.Siirto;
+import view.src.application.Main;
 
 //Luokka huolehtii säännösitä
 public class Shakkipeli implements IShakkipeli {
@@ -47,7 +48,7 @@ public class Shakkipeli implements IShakkipeli {
 		this.lauta = new Lauta();
 		this.vuorossa = NappulanVari.VALKOINEN;
 		this.shakattu = false;
-		this.testi = true;
+		this.testi = true; 
 		//tilastoitu false, koska testien tietoja ei haluta tallentaa tietokantaan
 		this.tilastoitu = false;
 		this.peliLoppunut = false;
@@ -59,7 +60,14 @@ public class Shakkipeli implements IShakkipeli {
 		return this.lauta.getLauta();
 	}
 
+	public void tallennaPeli() {
+		if (Main.DEBUG) {
+			System.out.println("Tallennetaan peliä");
+		}
+		daoKontrolleri.tallennaPeli(pelinTiedot);
+	}
 	public boolean siirra(int mistaX, int mistaY, int mihinX, int mihinY) {
+		System.out.println(mistaX + " " + mistaY + " " + mihinX + " " + mihinY);
 		if (siirtyykoOikeaVari(mistaX, mistaY) && onkoSiirtoListalla(mistaX, mistaY, mihinX, mihinY)
 				&& !this.peliLoppunut) {
 
@@ -82,10 +90,10 @@ public class Shakkipeli implements IShakkipeli {
 			this.vaihdaVuoro();
 
 			if (this.paattyikoPeli()) {
-				this.julistaVoittaja();
+				this.julistaVoittaja(this.vuorossa);
 				//Tallennus tietokantaan:
 				if(tilastoitu) {
-					daoKontrolleri.tallennaPeli(pelinTiedot);
+					tallennaPeli();
 				}
 			}
 			return true;
@@ -256,12 +264,13 @@ public class Shakkipeli implements IShakkipeli {
 				}
 			}
 		}
+		
 		return true;
 	}
 
-	public void julistaVoittaja() {
+	public void julistaVoittaja(NappulanVari vari) {
 		this.peliLoppunut = true;
-		if (this.vuorossa == NappulanVari.VALKOINEN) {
+		if (vari == NappulanVari.VALKOINEN) {
 			pelinTiedot.setVoittaja(pelinTiedot.getMustaPelaaja());
 		} else {
 			pelinTiedot.setVoittaja(pelinTiedot.getValkoinenPelaaja());

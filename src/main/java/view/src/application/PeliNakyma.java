@@ -38,6 +38,7 @@ import javafx.util.Duration;
 import model.Nappula;
 import model.NappulanTyyppi;
 import model.NappulanVari;
+import dao.IDaoController;
 import dao.Pelaaja;
 import model.Ruutu;
 import view.IPelinakyma;
@@ -52,7 +53,7 @@ import com.sun.xml.bind.v2.model.core.ID;
  * 
  */
 
-public class Lauta_kontrolleri implements IPelinakyma {
+public class PeliNakyma implements IPelinakyma {
 
 	private Asetukset asetukset;
 	private IKontrolleri kontrolleri;
@@ -64,8 +65,8 @@ public class Lauta_kontrolleri implements IPelinakyma {
 	private Node valittuNappula = null;
 	public boolean peruutusKaynnissa = false;
 	private NappulanTyyppi korotusTyyppi = null;
-	private String nimi1;
-	private String nimi2;
+	private Pelaaja pelaaja1;
+	private Pelaaja pelaaja2;
 	private HashMap<NappulanVari, String> pelaajat;
 	
 	// Efektejä
@@ -142,16 +143,16 @@ public class Lauta_kontrolleri implements IPelinakyma {
 	}
 	
 	//Tilastoimattoman pelin konstruktori
-	public Lauta_kontrolleri() {
+	public PeliNakyma() {
 		onkoTilastoitu = false;
 		peruutus = true;
 	}
 	
 	//Tilastoidun pelin konstruktori
-		public Lauta_kontrolleri(Pelaaja pelaaja1, Pelaaja pelaaja2) {
+		public PeliNakyma(Pelaaja pelaaja1, Pelaaja pelaaja2) {
 			onkoTilastoitu = true;
-			this.nimi1 = pelaaja1.getKayttajaTunnus();
-			this.nimi2 = pelaaja2.getKayttajaTunnus();
+			this.pelaaja1 = pelaaja1;
+			this.pelaaja2 = pelaaja2;
 			peruutus = false;
 		}
 	
@@ -168,8 +169,8 @@ public class Lauta_kontrolleri implements IPelinakyma {
 
 	public void initialize() throws IOException {
 		
-		vuorossa.setText(nimi1);
-		seuraava.setText(nimi2);
+		vuorossa.setText(pelaaja1.getKayttajaTunnus());
+		seuraava.setText(pelaaja2.getKayttajaTunnus());
 		
 		kontrolleri = new Kontrolleri(this);
 		kontrolleri.aloitaPeli(onkoTilastoitu);
@@ -180,11 +181,12 @@ public class Lauta_kontrolleri implements IPelinakyma {
 		varjo.setColor(Color.GRAY);
 		varjo.setOffsetY(6);
 		
-		vuorossa.setText(nimi1 = nimi1 == null ? "Pelaaja 1" : nimi1);
-		seuraava.setText(nimi2 = nimi2 == null ? "Pelaaja 2" : nimi2);
+		// Valkoinen aloittaa shakin
+		vuorossa.setText(pelaaja1.getKayttajaTunnus()); //nimi1 = nimi1 == null ? "Pelaaja 1" : nimi1);
+		seuraava.setText(pelaaja2.getKayttajaTunnus()); //nimi2 = nimi2 == null ? "Pelaaja 2" : nimi2);
 		
-		pelaajat.put(NappulanVari.VALKOINEN, nimi1);
-		pelaajat.put(NappulanVari.MUSTA, nimi2);
+		pelaajat.put(NappulanVari.VALKOINEN, pelaaja1.getKayttajaTunnus());
+		pelaajat.put(NappulanVari.MUSTA, pelaaja2.getKayttajaTunnus());
 		
 		asetaRuudut();
 		asetaNappulat();
@@ -510,7 +512,7 @@ public class Lauta_kontrolleri implements IPelinakyma {
 			mahdSiirrot = null;
 		}
 	}
-	
+	 
 	public void luovuta() {
 		toggleShadow();
 		
@@ -535,13 +537,10 @@ public class Lauta_kontrolleri implements IPelinakyma {
 		
 		if(result.get() == ButtonType.OK) {
 			System.out.println(kontrolleri.getVuoro() + " luovuttaa");
-			if(kontrolleri.getVuoro() == NappulanVari.VALKOINEN) {
-				//pelinVoitti(NappulanVari.MUSTA);
-				
-			} else {
-				
-				//pelinVoitti(NappulanVari.VALKOINEN);
-			}
+			kontrolleri.luovuta(kontrolleri.getVuoro() == NappulanVari.MUSTA
+				? NappulanVari.VALKOINEN
+				: NappulanVari.MUSTA
+			);
 		} else if (result.get() == ButtonType.CANCEL){
 			System.out.println(kontrolleri.getVuoro() + " ei luovuta");
 		}
@@ -653,20 +652,19 @@ public class Lauta_kontrolleri implements IPelinakyma {
 	}
 
 	@Override
-	public int getValkoinenPelaaja() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getMustaPelaaja() {
-		// TODO Auto-generated method stub
-		return 1;
-	}
-
-	@Override
 	public void pelinVoitti(Pelaaja pelaaja) {
 		System.out.println("PELIN VOITTI " + pelaaja.getKayttajaTunnus());
 		voittoIkkuna(getVariByNimi(pelaaja.getKayttajaTunnus()));
+	}
+
+	@Override
+	public Pelaaja getValkoinenPelaaja() {
+		return pelaaja1;
+	}
+
+	@Override
+	public Pelaaja getMustaPelaaja() {
+		// TODO Auto-generated method stub
+		return pelaaja2;
 	}
 }

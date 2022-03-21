@@ -1,15 +1,19 @@
 package dao;
 
 /*
- * @author Oliver Hamberg, Elmo Vahvaselkä 19.3.2022
+ * @author Oliver Hamberg
  */
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -19,14 +23,17 @@ import model.NappulanVari;
 @Table
 public class PelinTiedot {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int peliId;
+	@ManyToOne
 	private Pelaaja valkoinenPelaaja;
+	@ManyToOne
 	private Pelaaja mustaPelaaja;
+	@ManyToOne
 	private Pelaaja voittaja;
 
-
 	private Date pvm;
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<Siirto> siirrot;
 	public PelinTiedot() {
 		

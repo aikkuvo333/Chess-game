@@ -23,7 +23,7 @@ public class Korotus_kontrolleri {
 	private Stage stage;
 	private String vaalea = "-fx-background-color: #f1dbb1";
 	private String tumma = "-fx-background-color: #ba9b63";
-	private Lauta_kontrolleri lautaKontrolleri;
+	private PeliNakyma lautaKontrolleri;
 	private NappulanVari vari;
 	private String variPNG;
 	private ImageView nappulaKuva;
@@ -40,7 +40,7 @@ public class Korotus_kontrolleri {
 	private AnchorPane korotus;
 
 	public Korotus_kontrolleri(Object object, NappulanVari vari) {
-		lautaKontrolleri = (Lauta_kontrolleri) object;
+		lautaKontrolleri = (PeliNakyma) object;
 		this.vari = vari;
 	}
 

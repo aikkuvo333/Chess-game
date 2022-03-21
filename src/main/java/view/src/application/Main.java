@@ -11,6 +11,8 @@ import javafx.scene.Scene;
  */
 
 public class Main extends Application {
+	public static boolean DEBUG = true;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		try {

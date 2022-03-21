@@ -1,11 +1,12 @@
 package controller;
 
 /**
-* @author Elmo Vahvaselkä 27.1.2022
+* @author Oliver Hamberg, Elmo Vahvaselkä 27.1.2022
 */
 
 import java.util.ArrayList;
 
+import dao.DBKontrolleri;
 import dao.IDaoController;
 import dao.Pelaaja;
 import model.Ruutu;
@@ -14,13 +15,16 @@ import model.NappulanTyyppi;
 import model.NappulanVari;
 import model.Shakkipeli;
 import view.IPelinakyma;
+import view.src.application.Main;
 
 public class Kontrolleri implements IKontrolleri{
-	private IShakkipeli peli;
-	private IPelinakyma pelinakyma;
+	private IShakkipeli peli; // Game logic
+ 	private IPelinakyma pelinakyma; // View controller
+ 	private IDaoController daoController;
 	
 	public Kontrolleri(IPelinakyma pelinakyma) {
 		this.pelinakyma = pelinakyma;
+		this.daoController = DBKontrolleri.getInstance();
 	}
 	
 	@Override
@@ -50,8 +54,10 @@ public class Kontrolleri implements IKontrolleri{
 	}
 
 	@Override
-	public void luovuta() {
-		peli.julistaVoittaja();	
+	public void luovuta(NappulanVari voittaja) {
+		if (Main.DEBUG) System.out.println("Painettiin luovuta");
+		peli.julistaVoittaja(voittaja);	
+		this.peli.tallennaPeli();
 	}
 
 	@Override
@@ -81,6 +87,6 @@ public class Kontrolleri implements IKontrolleri{
 
 	@Override
 	public IDaoController getDaoKontrolleri() {
-		return this.pelinakyma.getDaoKontrolleri();
+		return this.daoController;
 	}
 }

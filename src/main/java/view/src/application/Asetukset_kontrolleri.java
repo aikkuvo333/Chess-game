@@ -11,10 +11,10 @@ import javafx.scene.control.RadioButton;
  */
 public class Asetukset_kontrolleri {
 	private Asetukset asetukset;
-	private Lauta_kontrolleri lauta_kontrolleri;
+	private PeliNakyma lauta_kontrolleri;
 	private boolean asetus;
 	
-	public Asetukset_kontrolleri(Lauta_kontrolleri lauta_kontrolleri, Asetukset asetukset) {
+	public Asetukset_kontrolleri(PeliNakyma lauta_kontrolleri, Asetukset asetukset) {
 		this.lauta_kontrolleri = lauta_kontrolleri;
 		this.asetukset = asetukset;
 	}

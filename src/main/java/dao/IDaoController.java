@@ -1,7 +1,7 @@
 package dao;
 
 /**
- * @author Elmo Vahvaselkä, Oliver Hamberg 14.3.2022
+ * @author Oliver Hamberg 14.3.2022
  */
 
 import java.util.List;
@@ -9,8 +9,8 @@ import java.util.List;
 public interface IDaoController {
 	public List<Pelaaja>getPelaajat();
 	public void tallennaPeli(PelinTiedot pelinTiedot);
-	public void luoPelaaja(String nimi);
-	public void haePelaajanPelit(int pelaajad);
+	public Pelaaja luoPelaaja(String nimi);
+	public List<PelinTiedot> haePelaajanPelit(Pelaaja p);
 	public void haeKaikkipelit();
 	public void poistaPelaaja(int pelaajaId);
 }

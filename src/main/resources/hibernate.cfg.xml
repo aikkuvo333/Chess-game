@@ -21,13 +21,12 @@
       
       <property name="hibernate.connection.password">
       <!-- VAIHDA OMAKSI MARIADB SALASANAKSI -->
-         thisispassword69
+         Koira
       </property>
       
      <property name="hbm2ddl.auto">update</property>
 
       <mapping class="dao.Pelaaja"/>
-      <mapping class="dao.Ruutu"/>
       <mapping class="dao.PelinTiedot"/>
       <mapping class="dao.Siirto"/>
       

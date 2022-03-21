@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 /**
-* @author Elmo Vahvaselkä 1.3.2022
+* @author Elmo Vahvaselkä, Oliver Hamberg 1.3.2022
 */
 
 public interface IShakkipeli {
@@ -11,6 +11,7 @@ public interface IShakkipeli {
 	public Ruutu[][] getPelitilanne();
 	public ArrayList<Ruutu> getSiirrot(int x, int y);
 	public boolean siirra(int mistaX, int mistaY, int mihinX, int mihinY);
-	public void julistaVoittaja();
+	public void julistaVoittaja(NappulanVari voittaja);
+	public void tallennaPeli();
 	public NappulanVari getVuoro();
 }
