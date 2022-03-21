@@ -11,7 +11,6 @@ public interface IShakkipeli {
 	public Ruutu[][] getPelitilanne();
 	public ArrayList<Ruutu> getSiirrot(int x, int y);
 	public boolean siirra(int mistaX, int mistaY, int mihinX, int mihinY);
-	public void julistaVoittaja(NappulanVari voittaja);
-	public void tallennaPeli();
+	public void julistaVoittaja();
 	public NappulanVari getVuoro();
 }

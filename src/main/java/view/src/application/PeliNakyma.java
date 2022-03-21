@@ -537,9 +537,9 @@ public class PeliNakyma implements IPelinakyma {
 		
 		if(result.get() == ButtonType.OK) {
 			System.out.println(kontrolleri.getVuoro() + " luovuttaa");
-			kontrolleri.luovuta(kontrolleri.getVuoro() == NappulanVari.MUSTA
+			kontrolleri.luovuta(/*kontrolleri.getVuoro() == NappulanVari.MUSTA
 				? NappulanVari.VALKOINEN
-				: NappulanVari.MUSTA
+				: NappulanVari.MUSTA*/
 			);
 		} else if (result.get() == ButtonType.CANCEL){
 			System.out.println(kontrolleri.getVuoro() + " ei luovuta");

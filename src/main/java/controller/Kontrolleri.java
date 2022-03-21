@@ -15,7 +15,6 @@ import model.NappulanTyyppi;
 import model.NappulanVari;
 import model.Shakkipeli;
 import view.IPelinakyma;
-import view.src.application.Main;
 
 public class Kontrolleri implements IKontrolleri{
 	private IShakkipeli peli; // Game logic
@@ -54,10 +53,8 @@ public class Kontrolleri implements IKontrolleri{
 	}
 
 	@Override
-	public void luovuta(NappulanVari voittaja) {
-		if (Main.DEBUG) System.out.println("Painettiin luovuta");
-		peli.julistaVoittaja(voittaja);	
-		this.peli.tallennaPeli();
+	public void luovuta() {
+		peli.julistaVoittaja();	
 	}
 
 	@Override

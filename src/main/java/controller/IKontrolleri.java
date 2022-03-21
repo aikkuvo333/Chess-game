@@ -19,7 +19,7 @@ public interface IKontrolleri {
 	public ArrayList<Ruutu> getSiirrotNappulalle(int x, int y);
 	public boolean teeSiirto(int mistaX, int mistaY, int mihinX, int mihinY);
 	public void siirtoAiheuttiShakin();
-	public void luovuta(NappulanVari voittaja);
+	public void luovuta();
 	public void pelinvoitti(Pelaaja pelaaja);
 	public NappulanTyyppi korota();
 	public NappulanVari getVuoro();
