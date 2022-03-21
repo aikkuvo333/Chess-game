@@ -8,8 +8,6 @@ import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
-import dao.DaoRuutu;
-
 /* @Author Oliver Hamberg */
 public class KuningatarTest {
 private Lauta lauta = new Lauta(true);
