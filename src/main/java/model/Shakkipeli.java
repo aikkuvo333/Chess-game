@@ -7,6 +7,7 @@ import java.util.ArrayList;
 */
 
 import controller.IKontrolleri;
+import dao.IDaoController;
 import dao.Pelaaja;
 import dao.PelinTiedot;
 import dao.Siirto;
@@ -22,6 +23,7 @@ public class Shakkipeli implements IShakkipeli {
 	private boolean peliLoppunut;
 	private PelinTiedot pelinTiedot;
 	private NappulanTyyppi testiKorotus;
+	private IDaoController daoKontrolleri;
 
 	public Shakkipeli(IKontrolleri kontrolleri, boolean tilastoitu) {
 		this.kontrolleri = kontrolleri;
@@ -34,6 +36,7 @@ public class Shakkipeli implements IShakkipeli {
 
 		if (tilastoitu) {
 			this.pelinTiedot = new PelinTiedot(kontrolleri.getValkoinenPelaaja(), kontrolleri.getMustaPelaaja());
+			this.daoKontrolleri = kontrolleri.getDaoKontrolleri();
 		} else {
 			this.pelinTiedot = new PelinTiedot(new Pelaaja("Valkoinen"), new Pelaaja("Musta"));
 		}
@@ -45,7 +48,7 @@ public class Shakkipeli implements IShakkipeli {
 		this.vuorossa = NappulanVari.VALKOINEN;
 		this.shakattu = false;
 		this.testi = true;
-		//tilastoitu false, koska tietoja ei haluta tallentaa tietokantaan
+		//tilastoitu false, koska testien tietoja ei haluta tallentaa tietokantaan
 		this.tilastoitu = false;
 		this.peliLoppunut = false;
 		this.testiKorotus = NappulanTyyppi.KUNINGATAR;
@@ -82,7 +85,7 @@ public class Shakkipeli implements IShakkipeli {
 				this.julistaVoittaja();
 				//Tallennus tietokantaan:
 				if(tilastoitu) {
-					//
+					daoKontrolleri.tallennaPeli(pelinTiedot);
 				}
 			}
 			return true;

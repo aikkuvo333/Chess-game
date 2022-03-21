@@ -7,6 +7,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import dao.IDaoController;
 import dao.Pelaaja;
 import model.Ruutu;
 import model.NappulanTyyppi;
@@ -24,4 +25,5 @@ public interface IKontrolleri {
 	public NappulanVari getVuoro();
 	public Pelaaja getValkoinenPelaaja();
 	public Pelaaja getMustaPelaaja();
+	public IDaoController getDaoKontrolleri();
 }

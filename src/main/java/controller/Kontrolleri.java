@@ -6,6 +6,7 @@ package controller;
 
 import java.util.ArrayList;
 
+import dao.IDaoController;
 import dao.Pelaaja;
 import model.Ruutu;
 import model.IShakkipeli;
@@ -23,7 +24,7 @@ public class Kontrolleri implements IKontrolleri{
 	}
 	
 	@Override
-	public boolean aloitaPeli(boolean tilastoitu) {
+	public boolean aloitaPeli (boolean tilastoitu) {
 		this.peli = new Shakkipeli(this, tilastoitu);
 		return true;
 	}
@@ -76,5 +77,10 @@ public class Kontrolleri implements IKontrolleri{
 	@Override
 	public Pelaaja getMustaPelaaja() {
 		return this.pelinakyma.getMustaPelaaja();
+	}
+
+	@Override
+	public IDaoController getDaoKontrolleri() {
+		return this.pelinakyma.getDaoKontrolleri();
 	}
 }
