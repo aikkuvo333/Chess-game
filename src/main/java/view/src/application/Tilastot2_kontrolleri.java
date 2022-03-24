@@ -32,84 +32,81 @@ public class Tilastot2_kontrolleri {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	
-    @FXML
-    private MenuButton pelaajaMenuBtn;
 
-    @FXML
-    private Button poistuBtn;
+	@FXML
+	private MenuButton pelaajaMenuBtn;
 
-    @FXML
-    private Text peliLkm;
+	@FXML
+	private Button poistuBtn;
 
-    @FXML
-    private Text voitot;
+	@FXML
+	private Text peliLkm;
 
-    @FXML
-    private Text voittoProsentti;
+	@FXML
+	private Text voitot;
 
-    @FXML
-    private TableView<PelinTiedot> tilastotaulu;
+	@FXML
+	private Text voittoProsentti;
 
-    @FXML
-    private TableColumn<PelinTiedot, Integer> mustat;
+	@FXML
+	private TableView<PelinTiedot> tilastotaulu;
 
-    @FXML
-    private TableColumn<PelinTiedot, Integer> valkoiset;
+	@FXML
+	private TableColumn<PelinTiedot, Integer> mustat;
 
-    @FXML
-    private TableColumn<PelinTiedot, Integer> tulos;
+	@FXML
+	private TableColumn<PelinTiedot, Integer> valkoiset;
 
-    @FXML
-    private TableColumn<PelinTiedot, Date> pvm;
+	@FXML
+	private TableColumn<PelinTiedot, Integer> tulos;
 
+	@FXML
+	private TableColumn<PelinTiedot, Date> pvm;
 
+	@FXML
+	void pelaajaMenu(ActionEvent event) {
+		DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
+		for (Pelaaja p : dbKontrolleri.getPelaajat()) {
+			MenuItem menuItem = new MenuItem(p.getKayttajaTunnus());
+			menuItem.setOnAction(a -> {
+				pelaajaMenuBtn.setText(p.getKayttajaTunnus());
+				openPelaajaData(p);
+			});
+			pelaajaMenuBtn.getItems().add(menuItem);
+		}
 
+	}
 
-    @FXML
-    void pelaajaMenu(ActionEvent event) {
-    	DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
-    	for (Pelaaja p : dbKontrolleri.getPelaajat()) {
-    		MenuItem menuItem = new MenuItem(p.getKayttajaTunnus());
-    		menuItem.setOnAction(a -> {
-    			pelaajaMenuBtn.setText(p.getKayttajaTunnus());
-    			openPelaajaData(p);
-    		});
-    		pelaajaMenuBtn.getItems().add(menuItem);
-    	}
-    	
-    }
-    @SuppressWarnings("unchecked")
+	@SuppressWarnings("unchecked")
 	void openPelaajaData(Pelaaja p) {
-    	tilastotaulu.getItems().clear();
-    	DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
-    	voittoProsentti.setText(dbKontrolleri.haeVoittoProsentti(p));
-    	voitot.setText(String.valueOf(dbKontrolleri.haeVoittoMaara(p)));
-    	peliLkm.setText(String.valueOf(dbKontrolleri.haePelienMaara(p)));
-    	List<PelinTiedot> tiedot = dbKontrolleri.haePelaajanPelit(p);
-    	mustat.setCellValueFactory(new PropertyValueFactory<>("mustaPelaaja"));
-    	valkoiset.setCellValueFactory(new PropertyValueFactory<>("valkoinenPelaaja"));
-    	tulos.setCellValueFactory(new PropertyValueFactory<>("voittaja"));
-    	pvm.setCellValueFactory(new PropertyValueFactory<>("pvm"));
-    	for(PelinTiedot data : tiedot) {
-    		tilastotaulu.getItems().add(data);
-    	}
-    	System.out.println(tilastotaulu.getColumns());
-    	
-    }
+		tilastotaulu.getItems().clear();
+		DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
+		voittoProsentti.setText(dbKontrolleri.haeVoittoProsentti(p));
+		voitot.setText(String.valueOf(dbKontrolleri.haeVoittoMaara(p)));
+		peliLkm.setText(String.valueOf(dbKontrolleri.haePelienMaara(p)));
+		List<PelinTiedot> tiedot = dbKontrolleri.haePelaajanPelit(p);
+		mustat.setCellValueFactory(new PropertyValueFactory<>("mustaPelaaja"));
+		valkoiset.setCellValueFactory(new PropertyValueFactory<>("valkoinenPelaaja"));
+		tulos.setCellValueFactory(new PropertyValueFactory<>("voittaja"));
+		pvm.setCellValueFactory(new PropertyValueFactory<>("pvm"));
+		for (PelinTiedot data : tiedot) {
+			tilastotaulu.getItems().add(data);
+		}
+		System.out.println(tilastotaulu.getColumns());
 
-    @FXML
-    void poistu(ActionEvent event) throws IOException {
-    	root = FXMLLoader.load(getClass().getResource("Alkuvalikko.fxml"));
-        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+	}
 
-    public void initialize() {
-        DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
-        pelaajaMenu(null);
-    }
+	@FXML
+	void poistu(ActionEvent event) throws IOException {
+		root = FXMLLoader.load(getClass().getResource("Alkuvalikko.fxml"));
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
+	}
+
+	public void initialize() {
+		DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
+		pelaajaMenu(null);
+	}
 }
-

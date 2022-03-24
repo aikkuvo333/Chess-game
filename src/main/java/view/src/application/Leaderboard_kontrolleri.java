@@ -9,7 +9,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.text.Text;
@@ -24,9 +23,6 @@ public class Leaderboard_kontrolleri {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
-	
-	@FXML
-	private MenuButton pelaajaMenuBtn;
 
 	@FXML
 	private Button poistuBtn;
@@ -54,11 +50,6 @@ public class Leaderboard_kontrolleri {
 
 	@FXML
 	private TableColumn<?, ?> voittoprosentti;
-
-	@FXML
-	void pelaajaMenu(ActionEvent event) {
-
-	}
 
 	@FXML
 	void poistu(ActionEvent event) throws IOException {
