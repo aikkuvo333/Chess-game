@@ -176,11 +176,14 @@ class ShakkipeliTest {
 		assertTrue("Valkoinen kuningatar ei syönyt mustaa sotilasta", peli.siirra(3, 0, 3, 3));
 		assertEquals(29, laskeNappulat(peli.getPelitilanne()), "Laudalla on väärä määrä nappuloita 3");
 		assertTrue("Musta ratsu ei siirtynyt", peli.siirra(1, 7, 0, 5));
-		assertTrue("Valkoinen ratsu ei siirtynyt", peli.siirra(1, 0, 0, 2));
+		assertTrue("Valkoinen ratsu ei siirtynyt", peli.siirra(1, 0, 0, 2)); 
 		assertTrue("Musta kuningatar ei siirtynyt shakkaamaan", peli.siirra(3, 7, 0, 4));
 		assertFalse("Valkoinen Kuningas tornitti vaikka oli shakissa", peli.siirra(4, 0, 2, 0));
+		assertFalse("Valkoisen Kuninkaan ekaSiirto on true2", ((Kuningas)peli.getPelitilanne()[4][0].getNappula()).getEkaSiirto());
 		assertTrue("Valkoinen sotilas ei purkanut shakkia", peli.siirra(1, 1, 1, 3));
+		assertFalse("Peli on shakissa", peli.getShakattu());
 		assertTrue("Musta sotilas ei siirtynyt", peli.siirra(7, 6, 7, 5));
+		assertFalse("Valkoisen Kuninkaan ekaSiirto on true3", ((Kuningas)peli.getPelitilanne()[4][0].getNappula()).getEkaSiirto());
 		assertTrue("Valkoinen Kuningas ei tornittanut", peli.siirra(4, 0, 2, 0));
 		assertTrue("Musta kuningatar ei siirtynyt shakkaamaan", peli.siirra(0, 4, 2, 4));
 		assertTrue("Valkoinen sotilas ei syönyt kuningatarta", peli.siirra(1, 3, 2, 4));

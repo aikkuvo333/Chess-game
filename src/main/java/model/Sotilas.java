@@ -114,4 +114,11 @@ public class Sotilas extends Nappula {
 	public boolean getEkaSiirto() {
 		return this.ekaSiirto;
 	}
+	
+	/**
+	 * Merkitsee sotilaan ensimmäisen siirron tekemättömäksi.
+	 */
+	public void kumoaEkaSiirto() {
+		this.ekaSiirto = false;
+	}
 }

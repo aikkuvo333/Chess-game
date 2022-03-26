@@ -64,7 +64,7 @@ public class Shakkipeli implements IShakkipeli {
 				&& !this.peliLoppunut) {
 
 			this.varmistaSiirronTurvallisuus(mistaX, mistaY, mihinX, mihinY);
-
+			
 			// Siirto ei ole kelpo, mikäli shakkaus ei poistunut, kun siirron turvallisuus varmistettiin
 			if (shakattu) {
 				return false;
@@ -78,12 +78,13 @@ public class Shakkipeli implements IShakkipeli {
 			//Tallennetaan siirto pelin tietoihin
 			this.pelinTiedot.lisaaSiirto(new Siirto(mistaX, mistaY, mihinX, mihinY, korotus));
 
-			this.tarkistaShakkasiko(mihinX, mihinY);
+			this.tarkistaShakkasiko(mihinX, mihinY);			
 			this.vaihdaVuoro();
-
+			
 			if (this.paattyikoPeli()) {
 				this.julistaVoittaja();
 			}
+						
 			return true;
 		}
 		return false;
@@ -95,10 +96,10 @@ public class Shakkipeli implements IShakkipeli {
 		// Jos aikaa jää täydennä tänne siirroon sopivuuksien tarkistus, jotta pelilauta
 		// näyttää vain täysin lailliset siirrot
 		
-
+		
 		// Tornitusta ei tarjota mikäli shakattu
 		if (getRuudunNappula(x, y).getTyyppi() == NappulanTyyppi.KUNINGAS && shakattu) {
-
+			
 			// Tornitus onnistuu vain mikäli kuningas ei ole liikkunut
 			if (!((Kuningas) getRuudunNappula(x, y)).getEkaSiirto()) {
 				ArrayList<Ruutu> valiaikainen = new ArrayList<>();
@@ -108,7 +109,7 @@ public class Shakkipeli implements IShakkipeli {
 					 * Taikanumerot, koska tornittaessa kuningas voi olla vain tietyssä paikassa.
 					 * Hyväksytään vain ne siirrot, jotka ovat korkeintaan yhden ruudun päässä.
 					 */
-					if (siirto.getX() - 1 == 4 || siirto.getX() + 1 == 4 || siirto.getX() == 4) {
+					if (siirto.getX() - 0 == 4 || siirto.getX() + 1 == 4 || siirto.getX() == 4) {
 						valiaikainen.add(siirto);
 					}
 				}
@@ -116,6 +117,7 @@ public class Shakkipeli implements IShakkipeli {
 			}
 		}
 		return siirrot;
+		
 	}
 
 	private void vaihdaVuoro() {
@@ -185,14 +187,32 @@ public class Shakkipeli implements IShakkipeli {
 	}
 
 	private void varmistaSiirronTurvallisuus(int mistaX, int mistaY, int mihinX, int mihinY) {
-
 		Nappula nappula = null;
+		Boolean ekaSiirtoTehty = true;
 
-		// Mahdollinen syötävä nappula talteen
+		
+		if (this.lauta.getRuutu(mistaX, mistaY).getNappula() != null) {
+			Nappula siirrettava = this.lauta.getRuutu(mistaX, mistaY).getNappula();
+			
+			if(siirrettava.getTyyppi() == NappulanTyyppi.SOTILAS) {
+				ekaSiirtoTehty = ((Sotilas) siirrettava).getEkaSiirto();
+			}
+			
+			if(siirrettava.getTyyppi() == NappulanTyyppi.KUNINGAS) {
+				ekaSiirtoTehty = ((Kuningas) siirrettava).getEkaSiirto();
+			}
+			
+			if(siirrettava.getTyyppi() == NappulanTyyppi.TORNI) {
+				ekaSiirtoTehty = ((Torni) siirrettava).getEkaSiirto();
+			}
+		}
+		
+		
+		// Mahdollinen syötävä nappula ja mahdollinen tieto ekasta siirrosta talteen.
 		if (this.lauta.getRuutu(mihinX, mihinY).getNappula() != null) {
 			nappula = this.lauta.getRuutu(mihinX, mihinY).getNappula();
 		}
-
+		
 		// Tehdään siirto
 		this.lauta.siirra(mistaX, mistaY, mihinX, mihinY);
 
@@ -201,18 +221,23 @@ public class Shakkipeli implements IShakkipeli {
 		} else {
 			shakattu = vaarantuukoKuningas(lauta.getMustaKuningas().getX(), lauta.getMustaKuningas().getY());
 		}
-
+		
 		// Kumotaan siirto
 		if (!this.lauta.kumoaTornitus(mistaX, mistaY, mihinX, mihinY)) {
 			this.lauta.siirra(mihinX, mihinY, mistaX, mistaY);
-			Nappula palautettu = this.getRuudunNappula(mistaX, mistaY);
 
-			if (palautettu instanceof Torni) {
+			Nappula palautettu = this.getRuudunNappula(mistaX, mistaY);
+			
+			if (palautettu.getTyyppi() == NappulanTyyppi.TORNI && ekaSiirtoTehty == false) {
 				((Torni) palautettu).kumoaEkaSiirto();
 			}
 
-			if (palautettu instanceof Kuningas) {
+			if (palautettu.getTyyppi() == NappulanTyyppi.KUNINGAS && ekaSiirtoTehty == false) {
 				((Kuningas) palautettu).kumoaEkaSiirto();
+			}
+			
+			if (palautettu.getTyyppi() == NappulanTyyppi.SOTILAS && ekaSiirtoTehty == false) {
+				((Sotilas) palautettu).kumoaEkaSiirto();
 			}
 		}
 
@@ -236,7 +261,6 @@ public class Shakkipeli implements IShakkipeli {
 				// Mikäli ruudussa uhatun kuninkaan maata oleva nappula
 				if (this.getRuudunNappula(x, y) instanceof Nappula) {
 					if (this.getRuudunNappula(x, y).getVari() == vuorossa) {
-
 						// Haetaan nappulan siirrot
 						ArrayList<Ruutu> siirrot = this.getSiirrot(x, y);
 
@@ -252,7 +276,6 @@ public class Shakkipeli implements IShakkipeli {
 				}
 			}
 		}
-		
 		return true;
 	}
 
