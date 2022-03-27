@@ -26,7 +26,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="225.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Button fx:id="tilastoimatonPeliBtn" alignment="CENTER" mnemonicParsing="false" onAction="#TilastoimatonPeli" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Tilastoimaton peli" textFill="WHITE" />
+                  <Button fx:id="tilastoimatonPeliBtn" alignment="CENTER" mnemonicParsing="false" onAction="#TilastoimatonPeli" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Pikapeli" textFill="WHITE" />
                   <Button fx:id="tilastoituPeliBtn" alignment="CENTER" mnemonicParsing="false" onAction="#TilastoituPeli" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Tilastoitu peli" textFill="WHITE" />
                   <Button fx:id="tilastotBtn" alignment="CENTER" mnemonicParsing="false" onAction="#tilastot" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Omat tilastot" textFill="WHITE" />
                   <Button fx:id="leaderboardBtn" alignment="CENTER" mnemonicParsing="false" onAction="#leaderboard" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Leaderboard" textFill="WHITE" />
