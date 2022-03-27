@@ -145,6 +145,8 @@ public class PeliNakyma implements IPelinakyma {
 	//Tilastoimattoman pelin konstruktori
 	public PeliNakyma() {
 		onkoTilastoitu = false;
+		this.pelaaja1 = new Pelaaja("Valkoinen");
+		this.pelaaja2 = new Pelaaja("Musta");
 		peruutus = true;
 	}
 	

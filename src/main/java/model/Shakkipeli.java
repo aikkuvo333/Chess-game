@@ -38,7 +38,7 @@ public class Shakkipeli implements IShakkipeli {
 			this.pelinTiedot = new PelinTiedot(kontrolleri.getValkoinenPelaaja(), kontrolleri.getMustaPelaaja());
 			this.daoKontrolleri = kontrolleri.getDaoKontrolleri();
 		} else {
-			this.pelinTiedot = new PelinTiedot(new Pelaaja("Valkoinen"), new Pelaaja("Musta"));
+			this.pelinTiedot = new PelinTiedot(kontrolleri.getValkoinenPelaaja(), kontrolleri.getMustaPelaaja());
 		}
 	}
 
