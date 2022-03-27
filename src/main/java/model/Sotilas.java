@@ -11,19 +11,14 @@ import java.util.ArrayList;
  *
  */
 
-public class Sotilas extends Nappula {
-	/**
-	 * <code>ekaSiirto</code> sisältää tiedon siitä, että onko kyseisen sotilaan ensimmäinen siirto tehty.
-	 */
-	private boolean ekaSiirto;
-
+public class Sotilas extends NappulaEka {
 	/**
 	 * Luo uuden sotilaan.
 	 * @param vari ilmaisee sotilaan värin.
 	 */
 	public Sotilas(NappulanVari vari) {
 		this.vari = vari;
-		this.ekaSiirto = false;
+		ekaSiirto = false;
 		this.tyyppi = NappulanTyyppi.SOTILAS;
 	}
 
@@ -98,27 +93,5 @@ public class Sotilas extends Nappula {
 			}
 		}
 		return siirrot;
-	}
-
-	/**
-	 * Merkitsee sotilaan ensimmäisen siirron tehdyksi.
-	 */
-	public void ekaSiirtoTehty() {
-		this.ekaSiirto = true;
-	}
-
-	/**
-	 * Palauttaa tiedon siitä, että onko ensimmäinen siirto tehty.
-	 * @return <code>Booleanina</code> tiedon siitä, että onko sotilaan ensimmäinen siirto tehty. 
-	 */
-	public boolean getEkaSiirto() {
-		return this.ekaSiirto;
-	}
-	
-	/**
-	 * Merkitsee sotilaan ensimmäisen siirron tekemättömäksi.
-	 */
-	public void kumoaEkaSiirto() {
-		this.ekaSiirto = false;
 	}
 }

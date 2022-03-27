@@ -10,19 +10,14 @@ import java.util.ArrayList;
 /**
  * Luokka <code>Kuningas</code> määrittelee pelissä käytettävän kuninkaan toiminnallisuuden.
  */
-public class Kuningas extends Nappula {
-	/**
-	 * <code>ekaSiirto</code> sisältää tiedon siitä, että onko kyseisen kuninkaan ensimmäinen siirto tehty.
-	 */
-	private boolean ekaSiirto;
-
+public class Kuningas extends NappulaEka {
 	/**
 	 * Luo uuden kuninkaan.
 	 * @param vari määrittelee kuninkaan värin.
 	 */
 	public Kuningas(NappulanVari vari) {
 		this.vari = vari;
-		this.ekaSiirto = false;
+		ekaSiirto = false;
 		tyyppi = NappulanTyyppi.KUNINGAS;
 	}
 
@@ -139,28 +134,6 @@ public class Kuningas extends Nappula {
 			}
 		}
 		return siirrot;
-	}
-
-	/**
-	 * Merkitsee kuninkaan ensimmäisen siirron tehdyksi.
-	 */
-	public void ekaSiirtoTehty() {
-		this.ekaSiirto = true;
-	}
-
-	/**
-	 * Merkitsee kuninkaan ensimmäisen siirron tekemättömäksi.
-	 */
-	public void kumoaEkaSiirto() {
-		this.ekaSiirto = false;
-	}
-
-	/**
-	 * Palauttaa tiedon siitä, että onko ensimmäinen siirto tehty.
-	 * @return <code>Booleanina</code> tiedon siitä, että onko kuninkaan ensimmäinen siirto tehty. 
-	 */
-	public boolean getEkaSiirto() {
-		return ekaSiirto;
 	}
 
 	//Tarkistetaan onko tornituksessa kuninkaan ylitämä ruutu uhattuna
