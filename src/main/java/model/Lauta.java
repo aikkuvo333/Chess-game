@@ -287,14 +287,8 @@ public class Lauta {
 	 * @param nappula <code>Nappula</code>, jota on siirretty.
 	 */
 	private void merkitseEkaSiirto(Nappula nappula) {
-		if (nappula instanceof Sotilas) {
-			((Sotilas) nappula).ekaSiirtoTehty();
-		}
-		if (nappula instanceof Torni) {
-			((Torni) nappula).ekaSiirtoTehty();
-		}
-		if (nappula instanceof Kuningas) {
-			((Kuningas) nappula).ekaSiirtoTehty();
+		if (nappula instanceof NappulaEka) {
+			((NappulaEka) nappula).ekaSiirtoTehty();
 		}
 	}
 
