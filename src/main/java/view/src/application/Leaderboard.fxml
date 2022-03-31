@@ -38,12 +38,12 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: yellow; -fx-background-radius: 20;">
                      <children>
-                        <Label fx:id="pelaaja3tunnus" text="Label" textAlignment="CENTER">
+                        <Label fx:id="pelaaja3tunnus" textAlignment="CENTER">
                            <VBox.margin>
                               <Insets bottom="10.0" top="5.0" />
                            </VBox.margin>
                         </Label>
-                        <Label fx:id="pelaaja3score" text="Label" />
+                        <Label fx:id="pelaaja3score" />
                      </children>
                      <HBox.margin>
                         <Insets right="50.0" />
@@ -51,12 +51,12 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: yellow; -fx-background-radius: 20;">
                      <children>
-                        <Label fx:id="pelaaja1tunnus" text="Label">
+                        <Label fx:id="pelaaja1tunnus">
                            <VBox.margin>
                               <Insets bottom="10.0" top="5.0" />
                            </VBox.margin>
                         </Label>
-                        <Label fx:id="pelaaja1score" text="Label" />
+                        <Label fx:id="pelaaja1score" />
                      </children>
                      <HBox.margin>
                         <Insets right="50.0" />
@@ -64,12 +64,12 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: yellow; -fx-background-radius: 20;">
                      <children>
-                        <Label fx:id="pelaaja2tunnus" text="Label">
+                        <Label fx:id="pelaaja2tunnus">
                            <VBox.margin>
                               <Insets bottom="10.0" top="5.0" />
                            </VBox.margin>
                         </Label>
-                        <Label fx:id="pelaaja2score" text="Label" />
+                        <Label fx:id="pelaaja2score" />
                      </children>
                      <HBox.margin>
                         <Insets right="50.0" />

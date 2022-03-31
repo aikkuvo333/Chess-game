@@ -1,5 +1,6 @@
 package dao;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -60,7 +61,10 @@ public class DBKontrolleri implements IDaoController{
 		return kaikkipelit;
 	}
 	public String haeVoittoProsentti(Pelaaja p) {
-		return (double) haeVoittoMaara(p) / (double) haePelienMaara(p) * 100 + "%";
+		DecimalFormat df = new DecimalFormat( "#.##" );
+		Double d = (double) haeVoittoMaara(p) / (double) haePelienMaara(p) * 100;
+		String a = df.format(d); //pyöristetään prosentti kahden desimaalitarkkuuteen
+		return a + "%";
 	}
 
 	@Override

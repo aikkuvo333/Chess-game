@@ -90,13 +90,28 @@ public class Leaderboard_kontrolleri {
 		getTop3();
 		getTaulukkotiedot();
 
-		pelaaja1score.setText(lista.get(0).getVoittoprosentti());
-		pelaaja2score.setText(lista.get(1).getVoittoprosentti());
-		pelaaja3score.setText(lista.get(2).getVoittoprosentti());
+		if (lista.size() >= 3) {
+			pelaaja1tunnus.setText(lista.get(0).getKayttajaTunnus());
+			pelaaja2tunnus.setText(lista.get(1).getKayttajaTunnus());
+			pelaaja3tunnus.setText(lista.get(2).getKayttajaTunnus());
 
-		pelaaja1tunnus.setText(lista.get(0).getKayttajaTunnus());
-		pelaaja2tunnus.setText(lista.get(1).getKayttajaTunnus());
-		pelaaja3tunnus.setText(lista.get(2).getKayttajaTunnus());
+			pelaaja1score.setText(lista.get(0).getVoittoprosentti());
+			pelaaja2score.setText(lista.get(1).getVoittoprosentti());
+			pelaaja3score.setText(lista.get(2).getVoittoprosentti());
+		} else if (lista.size() == 2) {
+			pelaaja1tunnus.setText(lista.get(0).getKayttajaTunnus());
+			pelaaja2tunnus.setText(lista.get(1).getKayttajaTunnus());
+
+			pelaaja1score.setText(lista.get(0).getVoittoprosentti());
+			pelaaja2score.setText(lista.get(1).getVoittoprosentti());
+		} else if (lista.size() == 1) {
+			pelaaja1tunnus.setText(lista.get(0).getKayttajaTunnus());
+
+			pelaaja1score.setText(lista.get(0).getVoittoprosentti());
+		} else {
+			System.out.println("Leaderboardiin ei voida hakea arvoja, sillä tietokanta on tyhjä.");
+		}
+
 	}
 
 	private void getTop3() {
@@ -114,6 +129,7 @@ public class Leaderboard_kontrolleri {
 				return p2.getVoittoprosentti().compareTo(p1.getVoittoprosentti());
 			}
 		});
+
 	}
 
 	private void getTaulukkotiedot() {
