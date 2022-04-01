@@ -1,5 +1,7 @@
 package view.src.application;
 	
+import java.util.ResourceBundle;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -11,12 +13,19 @@ import javafx.scene.Scene;
  */
 
 public class Main extends Application {
-	public static boolean DEBUG = true;
+	ValittuKieli valittuKieli = ValittuKieli.getInstance();
 	
 	@Override
 	public void start(Stage primaryStage) {
+		valittuKieli.setSuomi();
+		ResourceBundle bundle = ResourceBundle.getBundle("text/TextResources", valittuKieli.getLocale());
+		
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("Alkuvalikko.fxml"));
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("Alkuvalikko.fxml"));
+			loader.setResources(bundle);
+			//Parent root = loader.load();
+			Parent root = loader.load();
 			Scene scene = new Scene(root);
 			
 			primaryStage.setScene(scene);

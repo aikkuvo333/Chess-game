@@ -14,7 +14,7 @@
          <children>
             <StackPane layoutX="263.0" layoutY="12.796875" AnchorPane.bottomAnchor="14.703125" AnchorPane.leftAnchor="263.0" AnchorPane.rightAnchor="263.5" AnchorPane.topAnchor="12.796875">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Valikko" textAlignment="CENTER">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%PaavalikkoOtsikkoTxt" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -26,11 +26,11 @@
          <children>
             <VBox alignment="CENTER" prefHeight="225.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Button fx:id="tilastoimatonPeliBtn" alignment="CENTER" mnemonicParsing="false" onAction="#TilastoimatonPeli" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Pikapeli" textFill="WHITE" />
-                  <Button fx:id="tilastoituPeliBtn" alignment="CENTER" mnemonicParsing="false" onAction="#TilastoituPeli" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Tilastoitu peli" textFill="WHITE" />
-                  <Button fx:id="tilastotBtn" alignment="CENTER" mnemonicParsing="false" onAction="#tilastot" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Omat tilastot" textFill="WHITE" />
-                  <Button fx:id="leaderboardBtn" alignment="CENTER" mnemonicParsing="false" onAction="#leaderboard" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Leaderboard" textFill="WHITE" />
-                  <Button fx:id="suljeSobellusBtn" alignment="CENTER" mnemonicParsing="false" onAction="#suljeSovellus" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Sulje sovellus" textFill="WHITE" />
+                  <Button fx:id="tilastoimatonPeliBtn" alignment="CENTER" mnemonicParsing="false" onAction="#TilastoimatonPeli" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="%PaavalikkoPikapeliBtn" textFill="WHITE" />
+                  <Button fx:id="tilastoituPeliBtn" alignment="CENTER" mnemonicParsing="false" onAction="#TilastoituPeli" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="%PaavalikkoTilastoituPeliBtn" textFill="WHITE" />
+                  <Button fx:id="tilastotBtn" alignment="CENTER" mnemonicParsing="false" onAction="#tilastot" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="%PaavalikkoPelaajaTilastotBtn" textFill="WHITE" />
+                  <Button fx:id="leaderboardBtn" alignment="CENTER" mnemonicParsing="false" onAction="#leaderboard" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="%PaavalikkoLeaderboardBtn" textFill="WHITE" />
+                  <Button fx:id="suljeSobellusBtn" alignment="CENTER" mnemonicParsing="false" onAction="#suljeSovellus" style="-fx-min-width: 200px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="%PaavalikkoSuljeSovellusBtn" textFill="WHITE" />
                </children>
                <opaqueInsets>
                   <Insets />
