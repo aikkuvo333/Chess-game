@@ -1,6 +1,7 @@
 package view.src.application;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +22,8 @@ public class Alkuvalikko_kontrolleri {
 	private Scene scene;
 	private Parent root;
 	private FXMLLoader loader;
+	private ValittuKieli valittuKieli = ValittuKieli.getInstance();
+	private ResourceBundle bundle = ResourceBundle.getBundle("text/TextResources", valittuKieli.getLocale());
 
 	@FXML
 	private Button tilastotBtn;
@@ -46,6 +49,7 @@ public class Alkuvalikko_kontrolleri {
 		PeliNakyma controller = new PeliNakyma();
 		//Asetukset_kontrolleri asetukset_kontrolleri = new Asetukset_kontrolleri();
 		loader = new FXMLLoader(getClass().getResource("Lauta.fxml"));
+		loader.setResources(bundle);
 		loader.setController(controller);
 		root = loader.load();
 		

@@ -60,26 +60,26 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <Button fx:id="luovuta" layoutX="18.0" layoutY="40.0" mnemonicParsing="false" onAction="#handleLuovuta" text="Luovuta" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="40.0">
+      <Button fx:id="luovuta" layoutX="18.0" layoutY="40.0" mnemonicParsing="false" onAction="#handleLuovuta" text="%PeliLuovutaBtn" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="40.0">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Text fx:id="shakki" layoutX="455.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shakki!" visible="false" AnchorPane.leftAnchor="455.0" AnchorPane.rightAnchor="451.2060546875" AnchorPane.topAnchor="88.626953125">
+      <Text fx:id="shakki" layoutX="455.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="%PeliShakkiTxt" visible="false" AnchorPane.leftAnchor="455.0" AnchorPane.rightAnchor="451.2060546875" AnchorPane.topAnchor="88.626953125">
          <font>
             <Font size="30.0" />
          </font>
       </Text>
       <MenuBar fx:id="menuBar" layoutX="7.0" layoutY="8.0" prefHeight="25.0" prefWidth="980.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
-          <Menu id="asetukset" mnemonicParsing="false" text="Settings">
+          <Menu id="asetukset" mnemonicParsing="false" text="%PeliAsetuksetBtn">
             <items>
-              <MenuItem id="laudanAsetukset" fx:id="laudanAsetukset" mnemonicParsing="false" onAction="#handleLaudanAsetukset" text="Laudan asetukset" />
+              <MenuItem id="laudanAsetukset" fx:id="laudanAsetukset" mnemonicParsing="false" onAction="#handleLaudanAsetukset" text="%PeliLaudanAsetuksetBtn" />
             </items>
           </Menu>
-          <Menu id="apu" mnemonicParsing="false" text="Help">
+          <Menu id="apu" mnemonicParsing="false" text="%PeliOhjeetBtn">
             <items>
-              <MenuItem id="saannot" mnemonicParsing="false" text="Säännöt" />
+              <MenuItem id="saannot" mnemonicParsing="false" text="%PeliSaannotBtn" />
             </items>
           </Menu>
         </menus>

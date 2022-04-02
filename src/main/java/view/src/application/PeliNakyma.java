@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 import controller.IKontrolleri;
 import controller.Kontrolleri;
@@ -95,6 +96,12 @@ public class PeliNakyma implements IPelinakyma {
 	private boolean darkMode;
 
 	private boolean stageShadow = false;
+	
+	//locale
+	private FXMLLoader loader;
+	private ValittuKieli valittuKieli = ValittuKieli.getInstance();
+	private ResourceBundle bundle = ResourceBundle.getBundle("text/TextResources", valittuKieli.getLocale());
+	
 
 	@FXML
 	private AnchorPane lautaNakyma;
@@ -600,7 +607,10 @@ public class PeliNakyma implements IPelinakyma {
 		Optional<ButtonType> result = alert.showAndWait();
 		
 		try {
-			Parent root = FXMLLoader.load(getClass().getResource("Alkuvalikko.fxml"));
+			//Parent root = FXMLLoader.load(getClass().getResource("Alkuvalikko.fxml"));
+			loader = new FXMLLoader(getClass().getResource("Alkuvalikko.fxml"));
+			loader.setResources(bundle);
+			Parent root = loader.load();
 			Scene scene = new Scene(root);
 			
 			stage.setScene(scene);

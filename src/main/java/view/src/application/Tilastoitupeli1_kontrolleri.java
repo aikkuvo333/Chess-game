@@ -2,6 +2,7 @@ package view.src.application;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 import java.util.stream.Collector;
 
 import dao.DBKontrolleri;
@@ -31,6 +32,8 @@ public class Tilastoitupeli1_kontrolleri {
 	private FXMLLoader loader;
 	private Pelaaja musta;
 	private Pelaaja valkoinen;
+	private ValittuKieli valittuKieli = ValittuKieli.getInstance();
+	private ResourceBundle bundle = ResourceBundle.getBundle("text/TextResources", valittuKieli.getLocale());
 	
     @FXML
     private Button poistuBtn;
@@ -61,6 +64,7 @@ public class Tilastoitupeli1_kontrolleri {
     void aloitaPeli(ActionEvent event) throws IOException {
     	PeliNakyma controller = new PeliNakyma(musta, valkoinen);
 		loader = new FXMLLoader(getClass().getResource("Lauta.fxml"));
+		loader.setResources(bundle);
 		loader.setController(controller);
 		root = loader.load();
 		
@@ -109,7 +113,9 @@ public class Tilastoitupeli1_kontrolleri {
 
     @FXML
     void poistu(ActionEvent event) throws IOException {
-    	root = FXMLLoader.load(getClass().getResource("Alkuvalikko.fxml"));
+    	loader.setLocation(getClass().getResource("Alkuvalikko.fxml"));
+		loader.setResources(bundle);
+    	root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
