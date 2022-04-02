@@ -13,7 +13,7 @@ import javafx.scene.Scene;
  */
 
 public class Main extends Application {
-	ValittuKieli valittuKieli = ValittuKieli.getInstance();
+	private ValittuKieli valittuKieli = ValittuKieli.getInstance();
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -24,7 +24,6 @@ public class Main extends Application {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("Alkuvalikko.fxml"));
 			loader.setResources(bundle);
-			//Parent root = loader.load();
 			Parent root = loader.load();
 			Scene scene = new Scene(root);
 			
