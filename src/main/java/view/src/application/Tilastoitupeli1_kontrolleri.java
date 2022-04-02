@@ -32,8 +32,6 @@ public class Tilastoitupeli1_kontrolleri {
 	private FXMLLoader loader;
 	private Pelaaja musta;
 	private Pelaaja valkoinen;
-	private ValittuKieli valittuKieli = ValittuKieli.getInstance();
-	private ResourceBundle bundle = ResourceBundle.getBundle("text/TextResources", valittuKieli.getLocale());
 	
     @FXML
     private Button poistuBtn;
@@ -64,7 +62,7 @@ public class Tilastoitupeli1_kontrolleri {
     void aloitaPeli(ActionEvent event) throws IOException {
     	PeliNakyma controller = new PeliNakyma(musta, valkoinen);
 		loader = new FXMLLoader(getClass().getResource("Lauta.fxml"));
-		loader.setResources(bundle);
+		loader.setResources(ValittuKieli.getInstance().getBundle());
 		loader.setController(controller);
 		root = loader.load();
 		
@@ -114,7 +112,7 @@ public class Tilastoitupeli1_kontrolleri {
     @FXML
     void poistu(ActionEvent event) throws IOException {
     	loader.setLocation(getClass().getResource("Alkuvalikko.fxml"));
-		loader.setResources(bundle);
+		loader.setResources(ValittuKieli.getInstance().getBundle());
     	root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);

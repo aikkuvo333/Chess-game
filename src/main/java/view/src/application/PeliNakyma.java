@@ -99,8 +99,7 @@ public class PeliNakyma implements IPelinakyma {
 	
 	//locale
 	private FXMLLoader loader;
-	private ValittuKieli valittuKieli = ValittuKieli.getInstance();
-	private ResourceBundle bundle = ResourceBundle.getBundle("text/TextResources", valittuKieli.getLocale());
+	private ResourceBundle bundle = ValittuKieli.getInstance().getBundle();
 	
 
 	@FXML
@@ -152,8 +151,8 @@ public class PeliNakyma implements IPelinakyma {
 	//Tilastoimattoman pelin konstruktori
 	public PeliNakyma() {
 		onkoTilastoitu = false;
-		this.pelaaja1 = new Pelaaja("Valkoinen");
-		this.pelaaja2 = new Pelaaja("Musta");
+		this.pelaaja1 = new Pelaaja(bundle.getString("OletusNimiValkoinen"));
+		this.pelaaja2 = new Pelaaja(bundle.getString("OletusNimiMusta"));
 		peruutus = true;
 	}
 	
@@ -444,7 +443,7 @@ public class PeliNakyma implements IPelinakyma {
 	
 	//Asettaa vuoron kontrollerin mukaan
 	public void asetaVuoro() {
-		vuoro.setText("Vuoro: " + getNimiByVari(kontrolleri.getVuoro()));
+		vuoro.setText(bundle.getString("PeliVuorossaTxt") + ": " + getNimiByVari(kontrolleri.getVuoro()));
 		vuorossa.setText(getNimiByVari(kontrolleri.getVuoro()));
 		
 		if(kontrolleri.getVuoro() == NappulanVari.VALKOINEN) {
@@ -533,8 +532,9 @@ public class PeliNakyma implements IPelinakyma {
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner(stage);
 		
-		alert.getDialogPane().setContentText("Haluatko varmasti luovuttaa, " + getNimiByVari(kontrolleri.getVuoro()) + "?");
-		alert.getDialogPane().setHeaderText("Luovuttaminen");
+		alert.getDialogPane().setContentText(bundle.getString("PeliLuovutuksenVarmistaminenTxt"));
+		alert.getDialogPane().setHeaderText(bundle.getString("PeliLuovutuksenVarmistaminen2Txt") + ", " + getNimiByVari(kontrolleri.getVuoro()) + "?");
+		alert.setTitle(bundle.getString("PeliLuovutuksenOtsikkoTxt"));
 		
 		luovutusLogo = Kuvakkeet.getKuningas(kontrolleri.getVuoro());
 		luovutusLogo = skaalaaKuvake(luovutusLogo, null);
@@ -600,8 +600,9 @@ public class PeliNakyma implements IPelinakyma {
 		alert.getDialogPane().setGraphic(voittoLogo);
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner(stage);
-		alert.getDialogPane().setHeaderText(getNimiByVari(vari) + " voitti pelin!");
-		alert.getDialogPane().setContentText("Palaa takaisin valikkoon");
+		alert.getDialogPane().setHeaderText(getNimiByVari(vari) + " " + bundle.getString("PeliVoittoikkunaTxt"));
+		alert.getDialogPane().setContentText(bundle.getString("PeliVoittoikkunaPaluuTxt"));
+		alert.setTitle(bundle.getString("PeliVoittoikkunaOtsikkoTxt"));
 		
 		@SuppressWarnings("unused")
 		Optional<ButtonType> result = alert.showAndWait();

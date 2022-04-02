@@ -12,13 +12,6 @@ import org.junit.jupiter.api.Test;
 
 class ValittuKieliTest {
 	
-	ValittuKieli kieli;
-	
-	@BeforeEach
-	public void setUp() {
-		kieli = ValittuKieli.getInstance();
-	}
-	
 	@Test
 	@DisplayName("Onko singleton")
 	public void onkoSingleton() {
@@ -34,9 +27,15 @@ class ValittuKieliTest {
 	@Test
 	@DisplayName("Kielen vaihtaminen onnistuu englannista suomeen ja päinvastoin")
 	public void kielenVaihto() {
-		kieli.setSuomi();
+		ValittuKieli.getInstance().setSuomi();
 		assertEquals("fi_fi", ValittuKieli.getInstance().getLocale().getLanguage(), "Kieli ei vaihtunut suomeen");
-		kieli.setEnglanti();
+		ValittuKieli.getInstance().setEnglanti();
 		assertEquals("en_us", ValittuKieli.getInstance().getLocale().getLanguage(), "Kieli ei vaihtunut englantiin");
+	}
+	
+	@Test
+	@DisplayName("getBundle toimii oikein")
+	public void getBundle() {
+		assertEquals("text/TextResources", ValittuKieli.getInstance().getBundle().getBaseBundleName());
 	}
 }

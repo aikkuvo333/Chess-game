@@ -1,6 +1,7 @@
 package view.src.application;
 
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * 
@@ -11,9 +12,9 @@ import java.util.Locale;
 public class ValittuKieli {
 	private static ValittuKieli instance;
 	private Locale locale = new Locale("en_US");
+	private ResourceBundle bundle = ResourceBundle.getBundle("text/TextResources", locale);
 
-	private ValittuKieli() {
-	}
+	private ValittuKieli() {}
 
 	public static ValittuKieli getInstance() {
 		if (instance == null) {
@@ -26,12 +27,18 @@ public class ValittuKieli {
 		return locale;
 	}
 
+	public ResourceBundle getBundle() {
+		return bundle;
+	}
+	
 	public void setSuomi() {
 		locale = new Locale("fi_FI");
+		bundle = ResourceBundle.getBundle("text/TextResources", locale);
 	}
 
 	public void setEnglanti() {
 		locale = new Locale("en_US");
+		bundle = ResourceBundle.getBundle("text/TextResources", locale);
 	}
 
 }

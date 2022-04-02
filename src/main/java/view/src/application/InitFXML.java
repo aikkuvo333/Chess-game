@@ -1,6 +1,7 @@
 package view.src.application;
 
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -23,6 +24,7 @@ public class InitFXML {
 		String fxmlUri = uri == null ? object.getClass().getSimpleName()+".fxml" : uri;
 		FXMLLoader loader = new FXMLLoader(object.getClass().getResource(fxmlUri));
 		loader.setController(object);
+		loader.setResources(ValittuKieli.getInstance().getBundle());
 		Parent root = (Parent) loader.load();
 		Scene scene = new Scene(root);
 		Stage stage = new Stage();
