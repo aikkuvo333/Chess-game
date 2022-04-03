@@ -79,7 +79,9 @@ public class Leaderboard_kontrolleri {
 
 	@FXML
 	void poistu(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("Alkuvalikko.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("Alkuvalikko.fxml"));
+		loader.setResources(ValittuKieli.getInstance().getBundle());
+		root = loader.load();
 		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		scene = new Scene(root);
 		stage.setScene(scene);

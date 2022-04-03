@@ -18,7 +18,7 @@
          <children>
             <StackPane layoutX="263.0" layoutY="12.796875" AnchorPane.bottomAnchor="14.703125" AnchorPane.leftAnchor="263.0" AnchorPane.rightAnchor="263.5" AnchorPane.topAnchor="12.796875">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Leaderboard" textAlignment="CENTER">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%LeaderboardOtsikkoTxt" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -27,7 +27,7 @@
             </StackPane>
          </children>
       </AnchorPane>
-      <Button fx:id="poistuBtn" alignment="CENTER" mnemonicParsing="false" onAction="#poistu" style="-fx-min-width: 70px; -fx-background-color: grey; -fx-background-radius: 4px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Poistu" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
+      <Button fx:id="poistuBtn" alignment="CENTER" mnemonicParsing="false" onAction="#poistu" style="-fx-min-width: 70px; -fx-background-color: grey; -fx-background-radius: 4px; -fx-label-padding: 4px; -fx-text-fill: white;" text="%LeaderboardPoistuBtn" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
       <VBox alignment="TOP_CENTER" prefHeight="267.0" prefWidth="411.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="91.0" AnchorPane.topAnchor="80.0">
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TOP 3">
@@ -82,9 +82,9 @@
             </HBox>
             <TableView fx:id="leaderboardtaulu" prefHeight="235.0" prefWidth="481.0">
                <columns>
-                  <TableColumn fx:id="pelaajatunnus" prefWidth="265.0" text="Pelaajatunnus" />
-                  <TableColumn fx:id="voittomaara" prefWidth="97.0" text="Voittomäärä" />
-                  <TableColumn fx:id="voittoprosentti" prefWidth="101.5" text="Voittoprosentti" />
+                  <TableColumn fx:id="pelaajatunnus" prefWidth="265.0" text="%LeaderboardPelaajatunnusTxt" />
+                  <TableColumn fx:id="voittomaara" prefWidth="97.0" text="%LeaderboardVoitotTxt" />
+                  <TableColumn fx:id="voittoprosentti" prefWidth="101.5" text="%LeaderboardVoitoprosenttiTxt" />
                </columns>
             </TableView>
          </children>
