@@ -18,24 +18,24 @@
          <children>
             <StackPane layoutX="263.0" layoutY="12.796875" AnchorPane.bottomAnchor="14.703125" AnchorPane.leftAnchor="263.0" AnchorPane.rightAnchor="263.5" AnchorPane.topAnchor="12.796875">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Tilastot" textAlignment="CENTER">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%TilastotOtsikkoTxt" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Text>
                </children>
             </StackPane>
-            <MenuButton fx:id="pelaajaMenuBtn" layoutX="516.0" layoutY="16.0" mnemonicParsing="false" onAction="#pelaajaMenu" text="Pelaajatunnus" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="16.0" />
+            <MenuButton fx:id="pelaajaMenuBtn" layoutX="516.0" layoutY="16.0" mnemonicParsing="false" onAction="#pelaajaMenu" text="%TilastotPelaajatunnusTxt" AnchorPane.bottomAnchor="16.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="16.0" />
          </children>
       </AnchorPane>
-      <Button fx:id="poistuBtn" alignment="CENTER" mnemonicParsing="false" onAction="#poistu" style="-fx-min-width: 70px; -fx-background-color: grey; -fx-background-radius: 4px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Poistu" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
+      <Button fx:id="poistuBtn" alignment="CENTER" mnemonicParsing="false" onAction="#poistu" style="-fx-min-width: 70px; -fx-background-color: grey; -fx-background-radius: 4px; -fx-label-padding: 4px; -fx-text-fill: white;" text="%TilastotPoistuBtn" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
       <VBox alignment="TOP_CENTER" prefHeight="267.0" prefWidth="411.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="91.0" AnchorPane.topAnchor="80.0">
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="410.0">
                <children>
                   <VBox prefHeight="200.0" prefWidth="91.0" style="-fx-background-color: green;">
                      <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Pelien lkm" textAlignment="CENTER" wrappingWidth="100.05322265625">
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%TilastotPelitTxt" textAlignment="CENTER" wrappingWidth="100.05322265625">
                            <VBox.margin>
                               <Insets bottom="10.0" top="5.0" />
                            </VBox.margin>
@@ -48,7 +48,7 @@
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: green;">
                      <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Voitot" textAlignment="CENTER" wrappingWidth="100.4873046875">
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%TilastotVoitotTxt" textAlignment="CENTER" wrappingWidth="100.4873046875">
                            <VBox.margin>
                               <Insets bottom="10.0" top="5.0" />
                            </VBox.margin>
@@ -61,7 +61,7 @@
                   </VBox>
                   <VBox prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: green;">
                      <children>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Voittoprosentti" textAlignment="CENTER" wrappingWidth="99.5771484375">
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%TilastotVoitotprosenttiTxt" textAlignment="CENTER" wrappingWidth="99.5771484375">
                            <VBox.margin>
                               <Insets bottom="10.0" top="5.0" />
                            </VBox.margin>
@@ -76,12 +76,12 @@
             </HBox>
             <TableView fx:id="tilastotaulu" prefHeight="231.0" prefWidth="417.0">
               <columns>
-                <TableColumn fx:id="vari" prefWidth="54.0" text="Väri" />
-                <TableColumn fx:id="vastustaja" prefWidth="77.0" text="Vastustaja" />
-                  <TableColumn fx:id="tulos" prefWidth="59.0" text="Tulos" />
-                  <TableColumn fx:id="siirrot" prefWidth="59.0" text="Siirrot" />
-                  <TableColumn fx:id="pvm" prefWidth="71.0" text="Pvm" />
-                  <TableColumn fx:id="kesto" prefWidth="57.0" text="Kesto" />
+                <TableColumn fx:id="vari" prefWidth="54.0" text="%TilastotVariTxt" />
+                <TableColumn fx:id="vastustaja" prefWidth="77.0" text="%TilastotVastustajaTxt" />
+                  <TableColumn fx:id="tulos" prefWidth="59.0" text="%TilastotTulosTxt" />
+                  <TableColumn fx:id="siirrot" prefWidth="59.0" text="%TilastotSiirrotTxt" />
+                  <TableColumn fx:id="pvm" prefWidth="71.0" text="%TilastotPvmTxt" />
+                  <TableColumn fx:id="kesto" prefWidth="57.0" text="%TilastotKestoTxt" />
                   <TableColumn fx:id="videot" prefWidth="33.0" />
               </columns>
             </TableView>

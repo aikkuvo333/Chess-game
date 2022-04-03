@@ -22,8 +22,6 @@ public class Alkuvalikko_kontrolleri {
 	private Scene scene;
 	private Parent root;
 	private FXMLLoader loader;
-	private ValittuKieli valittuKieli = ValittuKieli.getInstance();
-	private ResourceBundle bundle = ResourceBundle.getBundle("text/TextResources", valittuKieli.getLocale());
 
 	@FXML
 	private Button tilastotBtn;
@@ -49,7 +47,7 @@ public class Alkuvalikko_kontrolleri {
 		PeliNakyma controller = new PeliNakyma();
 		//Asetukset_kontrolleri asetukset_kontrolleri = new Asetukset_kontrolleri();
 		loader = new FXMLLoader(getClass().getResource("Lauta.fxml"));
-		loader.setResources(bundle);
+		loader.setResources(ValittuKieli.getInstance().getBundle());
 		loader.setController(controller);
 		root = loader.load();
 		
@@ -85,7 +83,9 @@ public class Alkuvalikko_kontrolleri {
 
 	@FXML
 	void tilastot(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("Tilastot2.fxml"));
+		loader = new FXMLLoader(getClass().getResource("Tilastot2.fxml"));
+		loader.setResources(ValittuKieli.getInstance().getBundle());
+		root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
