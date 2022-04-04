@@ -1,7 +1,6 @@
 package view.src.application;
 
 import java.io.IOException;
-import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,14 +32,17 @@ public class Alkuvalikko_kontrolleri {
 	private Button tilastoimatonPeliBtn;
 
 	@FXML
-	private Button luoTunnusBtn;
-
-	@FXML
 	private Button suljeSobellusBtn;
 
 	@FXML
 	private Button leaderboardBtn;
-
+	
+	@FXML
+    private Button finnish;
+	
+	@FXML
+    private Button english;
+	
 	@FXML
 	void TilastoimatonPeli(ActionEvent event) throws IOException {
 
@@ -86,6 +88,34 @@ public class Alkuvalikko_kontrolleri {
 	@FXML
 	void tilastot(ActionEvent event) throws IOException {
 		loader = new FXMLLoader(getClass().getResource("Tilastot2.fxml"));
+		loader.setResources(ValittuKieli.getInstance().getBundle());
+		root = loader.load();
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+	}
+	
+	@FXML
+	void changeLanguageToFin (ActionEvent event) throws IOException {
+		System.out.println("change to FIN");
+		ValittuKieli.getInstance().setSuomi();
+		
+		loader = new FXMLLoader(getClass().getResource("Alkuvalikko.fxml"));
+		loader.setResources(ValittuKieli.getInstance().getBundle());
+		root = loader.load();
+        stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+	}
+	
+	@FXML
+	void changeLanguageToUs (ActionEvent event) throws IOException {
+		System.out.println("change to US");
+		ValittuKieli.getInstance().setEnglanti();
+		
+		loader = new FXMLLoader(getClass().getResource("Alkuvalikko.fxml"));
 		loader.setResources(ValittuKieli.getInstance().getBundle());
 		root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
