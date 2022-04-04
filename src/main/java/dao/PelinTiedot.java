@@ -68,8 +68,8 @@ public class PelinTiedot {
 	}
 
 	public void setVoittaja(Pelaaja voittaja) {
-		//lasketaan peliin kulunut aika minuutteina
-		kesto = (aloitusaika.getTime() - new Date().getTime()) / 1000 / 60 ;
+		//lasketaan peliin kulunut aika sekunteina
+		kesto = ((new Date().getTime()) - aloitusaika.getTime())/ (1000) ;
 		this.voittaja = voittaja;
 	}
 
