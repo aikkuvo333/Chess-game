@@ -20,16 +20,19 @@ public class DBKontrolleri implements IDaoController{
 		SessionFactory istuntoTehdas = new Configuration().configure().buildSessionFactory();
 		ses = istuntoTehdas.openSession();	
 	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Pelaaja> getPelaajat() {
 		return ses.createQuery("from Pelaaja").getResultList();
 	}
+	
 	public static DBKontrolleri getInstance() {
 		if (instance == null) {
 			instance = new DBKontrolleri();
 		}
 		return instance;
 	}
+	
 	@Transactional 
 	public Pelaaja luoPelaaja(String nimi) {
 		ses.beginTransaction();
@@ -37,11 +40,13 @@ public class DBKontrolleri implements IDaoController{
 		ses.getTransaction().commit();
 		return new Pelaaja(id, nimi);
 	}
+	
 	public List<PelinTiedot> haePelaajanPelit(Pelaaja p) {
 		@SuppressWarnings("unchecked")
 		List<PelinTiedot> tulokset = ses.createQuery("FROM PelinTiedot WHERE mustaPelaaja = " + p.getPelaajaId() + " OR valkoinenPelaaja =  " + p.getPelaajaId()).getResultList();
 		return tulokset;
 	}
+	
 	public int haeVoittoMaara(Pelaaja p) {
 		List<PelinTiedot> pelit = haePelaajanPelit(p);
 		int voitetut = 0;
@@ -52,6 +57,7 @@ public class DBKontrolleri implements IDaoController{
 		}
 		return voitetut;
 	}
+	
 	public int haePelienMaara(Pelaaja p) {
 		List<PelinTiedot> pelit = haePelaajanPelit(p);
 		int kaikkipelit = 0;
@@ -60,6 +66,7 @@ public class DBKontrolleri implements IDaoController{
 		}
 		return kaikkipelit;
 	}
+	
 	public String haeVoittoProsentti(Pelaaja p) {
 		DecimalFormat df = new DecimalFormat( "#.##" );
 		Double d = (double) haeVoittoMaara(p) / (double) haePelienMaara(p) * 100;
@@ -67,6 +74,12 @@ public class DBKontrolleri implements IDaoController{
 		return a + "%";
 	}
 
+	public PelaajaTilasto haePelaajanTiedot(Pelaaja p) {
+		PelaajaTilasto tiedot = (PelaajaTilasto)p;
+		tiedot.setPelit(haePelaajanPelit(p));
+		return tiedot;
+	}
+	
 	@Override
 	public void tallennaPeli(PelinTiedot pelinTiedot) {
 		ses.beginTransaction();

@@ -18,10 +18,6 @@ public class Pelaaja {
 	@Column
 	private String kayttajaTunnus;
 	
-	private int voittomaara;
-	
-	private String voittoprosentti;
-	
 	public Pelaaja() {
 		
 	}
@@ -50,18 +46,6 @@ public class Pelaaja {
 
 	public void setKayttajaTunnus(String kayttajaTunnus) {
 		this.kayttajaTunnus = kayttajaTunnus;
-	}
-	
-	public int getVoittomaara() {
-		DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
-		voittomaara = dbKontrolleri.haeVoittoMaara(this);
-		return voittomaara;
-	}
-	
-	public String getVoittoprosentti() {
-		DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
-		voittoprosentti = dbKontrolleri.haeVoittoProsentti(this);
-		return voittoprosentti;
 	}
 	
 }
