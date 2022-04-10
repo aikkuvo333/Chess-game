@@ -1,11 +1,14 @@
 package dao;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table
@@ -17,6 +20,13 @@ public class Pelaaja {
 
 	@Column
 	private String kayttajaTunnus;
+	
+	@Transient
+	private int voitot;
+	
+	@Transient
+	private List<PelinTiedot> pelit;
+	
 	
 	public Pelaaja() {
 		
@@ -46,6 +56,32 @@ public class Pelaaja {
 
 	public void setKayttajaTunnus(String kayttajaTunnus) {
 		this.kayttajaTunnus = kayttajaTunnus;
+	}
+	
+	public void setPelit(List<PelinTiedot> pelit){
+		this.pelit = pelit;
+		voitot = 0;
+		for(PelinTiedot peli: this.pelit) {
+			if(peli.getVoittaja().getPelaajaId() == pelaajaId) {
+				voitot++;
+			}
+		}
+	}
+	
+	public int getVoittoprosentti() {
+		return voitot/pelit.size();
+	}
+	
+	public int getVoitot() {
+		return voitot;
+	}
+	
+	public int getPeleja() {
+		return pelit.size();
+	}
+	
+	public List<PelinTiedot> getPelit(){
+		return pelit;
 	}
 	
 }

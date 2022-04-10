@@ -1,6 +1,7 @@
 package dao;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -23,7 +24,11 @@ public class DBKontrolleri implements IDaoController{
 	
 	@SuppressWarnings("unchecked")
 	public List<Pelaaja> getPelaajat() {
-		return ses.createQuery("from Pelaaja").getResultList();
+		List<Pelaaja> pelaajat = ses.createQuery("from Pelaaja").getResultList();
+		for (Pelaaja pelaaja: pelaajat) {
+			pelaaja.setPelit(haePelaajanPelit(pelaaja));
+		}
+		return pelaajat; 
 	}
 	
 	public static DBKontrolleri getInstance() {
@@ -41,9 +46,9 @@ public class DBKontrolleri implements IDaoController{
 		return new Pelaaja(id, nimi);
 	}
 	
-	public List<PelinTiedot> haePelaajanPelit(Pelaaja p) {
+	public List<PelinTiedot> haePelaajanPelit(Pelaaja p) {		
 		@SuppressWarnings("unchecked")
-		List<PelinTiedot> tulokset = ses.createQuery("FROM PelinTiedot WHERE mustaPelaaja = " + p.getPelaajaId() + " OR valkoinenPelaaja =  " + p.getPelaajaId()).getResultList();
+		List<PelinTiedot> tulokset = ses.createQuery("FROM PelinTiedot WHERE mustaPelaaja = " + p.getPelaajaId() + " OR valkoinenPelaaja =  " + p.getPelaajaId()).getResultList();		
 		return tulokset;
 	}
 	
@@ -72,12 +77,6 @@ public class DBKontrolleri implements IDaoController{
 		Double d = (double) haeVoittoMaara(p) / (double) haePelienMaara(p) * 100;
 		String a = df.format(d); //pyöristetään prosentti kahden desimaalitarkkuuteen
 		return a + "%";
-	}
-
-	public PelaajaTilasto haePelaajanTiedot(Pelaaja p) {
-		PelaajaTilasto tiedot = (PelaajaTilasto)p;
-		tiedot.setPelit(haePelaajanPelit(p));
-		return tiedot;
 	}
 	
 	@Override
