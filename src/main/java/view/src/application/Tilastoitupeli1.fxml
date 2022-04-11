@@ -17,7 +17,7 @@
          <children>
             <StackPane layoutX="263.0" layoutY="12.79" AnchorPane.bottomAnchor="14.299999999999997" AnchorPane.leftAnchor="263.0" AnchorPane.rightAnchor="263.0" AnchorPane.topAnchor="12.7">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Tilastoitu peli" textAlignment="CENTER">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%TilastoitupeliOtsikkoTxt" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -26,14 +26,14 @@
             </StackPane>
          </children>
       </AnchorPane>
-      <Button fx:id="poistuBtn" alignment="CENTER" layoutX="14.0" layoutY="352.0" mnemonicParsing="false" onAction="#poistu" style="-fx-min-width: 70px; -fx-background-color: grey; -fx-background-radius: 4px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Poistu" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+      <Button fx:id="poistuBtn" alignment="CENTER" layoutX="14.0" layoutY="352.0" mnemonicParsing="false" onAction="#poistu" style="-fx-min-width: 70px; -fx-background-color: grey; -fx-background-radius: 4px; -fx-label-padding: 4px; -fx-text-fill: white;" text="%TilastoitupeliPoistuBtn" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
       <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <HBox alignment="CENTER" prefHeight="416.0" prefWidth="605.0">
                <children>
                   <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="215.0" prefWidth="183.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Valkoinen pelaaja" textAlignment="CENTER" wrappingWidth="175.22900390625">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%TilastoitupeliValkoinenPelaajaTxt" textAlignment="CENTER" wrappingWidth="175.22900390625">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin>
@@ -41,7 +41,7 @@
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <MenuButton fx:id="valkVetovalikkoBtn" mnemonicParsing="false" onAction="#valkVetovalikko" prefHeight="28.0" prefWidth="180.0" text="Valitse tunnus">
+                        <MenuButton fx:id="valkVetovalikkoBtn" mnemonicParsing="false" onAction="#valkVetovalikko" prefHeight="28.0" prefWidth="180.0" text="%TilastoitupeliValitseTunnusBtn">
                            <VBox.margin>
                               <Insets bottom="20.0" />
                            </VBox.margin>
@@ -58,7 +58,7 @@
                               <Insets bottom="5.0" />
                            </VBox.margin>
                         </Text>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Luo uusi tunnus:" textAlignment="CENTER" wrappingWidth="175.22900390625">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%TilastoitupeliLuoUusiTunnusTxt" textAlignment="CENTER" wrappingWidth="175.22900390625">
                            <VBox.margin>
                               <Insets bottom="5.0" />
                            </VBox.margin>
@@ -68,8 +68,8 @@
                               <Insets bottom="10.0" />
                            </VBox.margin>
                         </TextField>
-                        <Button fx:id="valkLuotunnusBtn" alignment="CENTER" mnemonicParsing="false" onAction="#valkLuotunnus" style="-fx-min-width: 50px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Luo tunnus" textFill="WHITE" />
-                        <Button fx:id="aloitaPeliBtn" alignment="CENTER" mnemonicParsing="false" onAction="#aloitaPeli" style="-fx-min-width: 100px; -fx-background-color: yellow; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: black;" text="Aloita peli" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="valkLuotunnusBtn" alignment="CENTER" mnemonicParsing="false" onAction="#valkLuotunnus" style="-fx-min-width: 50px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="%TilastoitupeliLuoTunnusBtn" textFill="WHITE" />
+                        <Button fx:id="aloitaPeliBtn" alignment="CENTER" mnemonicParsing="false" onAction="#aloitaPeli" style="-fx-min-width: 100px; -fx-background-color: yellow; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: black;" text="%TilastoitupeliAloitaPeliBtn" textAlignment="CENTER" textFill="WHITE">
                            <VBox.margin>
                               <Insets top="30.0" />
                            </VBox.margin>
@@ -81,7 +81,7 @@
                   </VBox>
                   <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="201.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Musta Pelaaja" textAlignment="CENTER" wrappingWidth="175.22900390625">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="%TilastoitupeliMustaPelaajaTxt" textAlignment="CENTER" wrappingWidth="175.22900390625">
                            <VBox.margin>
                               <Insets bottom="15.0" />
                            </VBox.margin>
@@ -89,7 +89,7 @@
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <MenuButton fx:id="mustVetovalikkoBtn" mnemonicParsing="false" onAction="#mustVetovalikko" prefHeight="22.0" prefWidth="182.0" text="Valitse tunnus">
+                        <MenuButton fx:id="mustVetovalikkoBtn" mnemonicParsing="false" onAction="#mustVetovalikko" prefHeight="22.0" prefWidth="182.0" text="%TilastoitupeliValitseTunnusBtn">
                            <VBox.margin>
                               <Insets bottom="20.0" />
                            </VBox.margin>
