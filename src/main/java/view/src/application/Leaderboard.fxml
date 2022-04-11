@@ -30,49 +30,38 @@
       <Button fx:id="poistuBtn" alignment="CENTER" mnemonicParsing="false" onAction="#poistu" style="-fx-min-width: 70px; -fx-background-color: grey; -fx-background-radius: 4px; -fx-label-padding: 4px; -fx-text-fill: white;" text="%LeaderboardPoistuBtn" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
       <VBox alignment="TOP_CENTER" prefHeight="267.0" prefWidth="411.0" AnchorPane.bottomAnchor="56.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="91.0" AnchorPane.topAnchor="80.0">
          <children>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TOP 3">
-               <font>
-                  <Font size="20.0" />
-               </font></Text>
             <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: yellow; -fx-background-radius: 20;">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="175.0" style="-fx-background-color: green; -fx-background-radius: 20;">
                      <children>
-                        <Label fx:id="pelaaja3tunnus" textAlignment="CENTER">
+                        <Label fx:id="pelaaja3tunnus" text="Eniten voittoja:" textAlignment="CENTER" textFill="WHITE">
                            <VBox.margin>
                               <Insets bottom="10.0" top="5.0" />
                            </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
                         </Label>
-                        <Label fx:id="pelaaja3score" />
+                        <Label fx:id="pelaaja3score" textFill="WHITE" />
                      </children>
                      <HBox.margin>
-                        <Insets right="50.0" />
+                        <Insets left="25.0" right="25.0" />
                      </HBox.margin>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: yellow; -fx-background-radius: 20;">
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="175.0" style="-fx-background-color: green; -fx-background-radius: 20;">
                      <children>
-                        <Label fx:id="pelaaja1tunnus">
+                        <Label fx:id="pelaaja1tunnus" text="Paras voittoprosentti:" textFill="WHITE">
                            <VBox.margin>
                               <Insets bottom="10.0" top="5.0" />
                            </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
                         </Label>
-                        <Label fx:id="pelaaja1score" />
+                        <Label fx:id="pelaaja1score" textFill="WHITE" />
                      </children>
                      <HBox.margin>
-                        <Insets right="50.0" />
-                     </HBox.margin>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: yellow; -fx-background-radius: 20;">
-                     <children>
-                        <Label fx:id="pelaaja2tunnus">
-                           <VBox.margin>
-                              <Insets bottom="10.0" top="5.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label fx:id="pelaaja2score" />
-                     </children>
-                     <HBox.margin>
-                        <Insets right="50.0" />
+                        <Insets left="25.0" right="25.0" />
                      </HBox.margin>
                   </VBox>
                </children>
