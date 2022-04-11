@@ -1,5 +1,6 @@
 package dao;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -27,6 +28,8 @@ public class Pelaaja {
 	@Transient
 	private List<PelinTiedot> pelit;
 	
+	@Transient
+	private double voittoprosentti;
 	
 	public Pelaaja() {
 		
@@ -68,8 +71,9 @@ public class Pelaaja {
 		}
 	}
 	
-	public int getVoittoprosentti() {
-		return voitot/pelit.size();
+	public double getVoittoprosentti() {
+		this.voittoprosentti = (double) getVoitot() / (double) getPeleja() * 100;
+		return voittoprosentti;
 	}
 	
 	public int getVoitot() {

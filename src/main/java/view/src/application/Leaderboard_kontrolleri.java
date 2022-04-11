@@ -1,6 +1,7 @@
 package view.src.application;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -71,7 +72,7 @@ public class Leaderboard_kontrolleri {
 	private TableColumn<Pelaaja, Integer> voittomaara;
 
 	@FXML
-	private TableColumn<Pelaaja, String> voittoprosentti;
+	private TableColumn<Pelaaja, Double> voittoprosentti;
 
 	List<Pelaaja> lista = new ArrayList<Pelaaja>();
 
@@ -97,19 +98,19 @@ public class Leaderboard_kontrolleri {
 			pelaaja2tunnus.setText(lista.get(1).getKayttajaTunnus());
 			pelaaja3tunnus.setText(lista.get(2).getKayttajaTunnus());
 
-			pelaaja1score.setText(lista.get(0).getVoittoprosentti());
-			pelaaja2score.setText(lista.get(1).getVoittoprosentti());
-			pelaaja3score.setText(lista.get(2).getVoittoprosentti());
+//			pelaaja1score.setText(lista.get(0).getVoittoprosentti());
+//			pelaaja2score.setText(lista.get(1).getVoittoprosentti());
+//			pelaaja3score.setText(lista.get(2).getVoittoprosentti());
 		} else if (lista.size() == 2) {
 			pelaaja1tunnus.setText(lista.get(0).getKayttajaTunnus());
 			pelaaja2tunnus.setText(lista.get(1).getKayttajaTunnus());
 
-			pelaaja1score.setText(lista.get(0).getVoittoprosentti());
-			pelaaja2score.setText(lista.get(1).getVoittoprosentti());
+//			pelaaja1score.setText(lista.get(0).getVoittoprosentti());
+//			pelaaja2score.setText(lista.get(1).getVoittoprosentti());
 		} else if (lista.size() == 1) {
 			pelaaja1tunnus.setText(lista.get(0).getKayttajaTunnus());
 
-			pelaaja1score.setText(lista.get(0).getVoittoprosentti());
+//			pelaaja1score.setText(lista.get(0).getVoittoprosentti());
 		} else {
 			System.out.println("Leaderboardiin ei voida hakea arvoja, sillä tietokanta on tyhjä.");
 		}
@@ -127,8 +128,9 @@ public class Leaderboard_kontrolleri {
 
 		// sortataan pelaajalista voittoprosentin perusteella suurimmasta pienimpään
 		Collections.sort(lista, new Comparator<Pelaaja>() {
+			@Override
 			public int compare(Pelaaja p1, Pelaaja p2) {
-				return p2.getVoittoprosentti().compareTo(p1.getVoittoprosentti());
+				return Double.compare(p2.getVoittoprosentti(), p1.getVoittoprosentti());
 			}
 		});
 
@@ -139,8 +141,8 @@ public class Leaderboard_kontrolleri {
 		System.out.println("taulukkotiedot");
 
 		pelaajatunnus.setCellValueFactory(new PropertyValueFactory<Pelaaja, String>("kayttajaTunnus"));
-		voittomaara.setCellValueFactory(new PropertyValueFactory<Pelaaja, Integer>("voittomaara"));
-		voittoprosentti.setCellValueFactory(new PropertyValueFactory<Pelaaja, String>("voittoprosentti"));
+		voittomaara.setCellValueFactory(new PropertyValueFactory<Pelaaja, Integer>("voitot"));
+		voittoprosentti.setCellValueFactory(new PropertyValueFactory<Pelaaja, Double>("voittoprosentti"));
 
 		for (Pelaaja p : dbKontrolleri.getPelaajat()) {
 			taulukkolista.add(p);
