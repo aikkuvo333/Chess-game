@@ -34,15 +34,21 @@
                <children>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="175.0" style="-fx-background-color: green; -fx-background-radius: 20;">
                      <children>
-                        <Label fx:id="pelaaja3tunnus" text="Eniten voittoja:" textAlignment="CENTER" textFill="WHITE">
+                        <Label fx:id="enitenVoittojaOtsikko" text="Eniten voittoja:" textAlignment="CENTER" textFill="WHITE">
                            <VBox.margin>
-                              <Insets bottom="10.0" top="5.0" />
+                              <Insets bottom="5.0" top="5.0" />
                            </VBox.margin>
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="pelaaja3score" textFill="WHITE" />
+                        <Label fx:id="enitenVoittoja" textFill="WHITE">
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
                      </children>
                      <HBox.margin>
                         <Insets left="25.0" right="25.0" />
@@ -50,15 +56,21 @@
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="175.0" style="-fx-background-color: green; -fx-background-radius: 20;">
                      <children>
-                        <Label fx:id="pelaaja1tunnus" text="Paras voittoprosentti:" textFill="WHITE">
+                        <Label fx:id="parasVoittoprosenttiOtsikko" text="Paras voittoprosentti:" textFill="WHITE">
                            <VBox.margin>
-                              <Insets bottom="10.0" top="5.0" />
+                              <Insets bottom="5.0" top="5.0" />
                            </VBox.margin>
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label fx:id="pelaaja1score" textFill="WHITE" />
+                        <Label fx:id="parasVoittoprosentti" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="5.0" />
+                           </VBox.margin></Label>
                      </children>
                      <HBox.margin>
                         <Insets left="25.0" right="25.0" />

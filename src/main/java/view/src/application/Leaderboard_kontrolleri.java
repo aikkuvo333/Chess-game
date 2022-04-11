@@ -39,31 +39,22 @@ public class Leaderboard_kontrolleri {
 	private Button poistuBtn;
 
 	@FXML
-	private Label pelaaja3tunnus;
+	private Label enitenVoittojaOtsikko;
 
 	@FXML
-	private Label pelaaja3score;
+	private Label parasVoittoprosenttiOtsikko;
 
 	@FXML
-	private Label pelaaja1tunnus;
+	private Label enitenVoittoja;
 
 	@FXML
-	private Label pelaaja1score;
-
-	@FXML
-	private Label pelaaja2tunnus;
-
-	@FXML
-	private Label pelaaja2score;
+	private Label parasVoittoprosentti;
 
 	@FXML
 	private Text tunnus;
 
 	@FXML
 	private TableView<Pelaaja> leaderboardtaulu;
-
-//	@FXML
-//	private TableColumn<String, Integer> sijoitus;
 
 	@FXML
 	private TableColumn<Pelaaja, String> pelaajatunnus;
@@ -75,6 +66,8 @@ public class Leaderboard_kontrolleri {
 	private TableColumn<Pelaaja, Double> voittoprosentti;
 
 	List<Pelaaja> lista = new ArrayList<Pelaaja>();
+	
+	DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
 
 	ObservableList<Pelaaja> taulukkolista = FXCollections.observableArrayList();
 
@@ -90,50 +83,47 @@ public class Leaderboard_kontrolleri {
 	}
 
 	public void initialize() {
-		getTop3();
+		
+		parasVoittoprosentti.setText(getParasVoittoprosentti().getKayttajaTunnus());
+		enitenVoittoja.setText(getEnitenVoittoja().getKayttajaTunnus());
 		getTaulukkotiedot();
 
-		if (lista.size() >= 3) {
-			pelaaja1tunnus.setText(lista.get(0).getKayttajaTunnus());
-			pelaaja2tunnus.setText(lista.get(1).getKayttajaTunnus());
-			pelaaja3tunnus.setText(lista.get(2).getKayttajaTunnus());
-
-//			pelaaja1score.setText(lista.get(0).getVoittoprosentti());
-//			pelaaja2score.setText(lista.get(1).getVoittoprosentti());
-//			pelaaja3score.setText(lista.get(2).getVoittoprosentti());
-		} else if (lista.size() == 2) {
-			pelaaja1tunnus.setText(lista.get(0).getKayttajaTunnus());
-			pelaaja2tunnus.setText(lista.get(1).getKayttajaTunnus());
-
-//			pelaaja1score.setText(lista.get(0).getVoittoprosentti());
-//			pelaaja2score.setText(lista.get(1).getVoittoprosentti());
-		} else if (lista.size() == 1) {
-			pelaaja1tunnus.setText(lista.get(0).getKayttajaTunnus());
-
-//			pelaaja1score.setText(lista.get(0).getVoittoprosentti());
-		} else {
-			System.out.println("Leaderboardiin ei voida hakea arvoja, sillä tietokanta on tyhjä.");
-		}
-
 	}
-
-	private void getTop3() {
-		DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
-		System.out.println("top3");
-
-		// tallennetaan pelaajat listaan
-		for (Pelaaja p : dbKontrolleri.getPelaajat()) {
-			lista.add(p);
+	
+	private Pelaaja getParasVoittoprosentti() {
+		System.out.println("Parasvoittoprosentti");
+		
+		List<Pelaaja> pelaajat = dbKontrolleri.getPelaajat();
+		
+		if (pelaajat.size() == 0) {
+			return null;
 		}
 
 		// sortataan pelaajalista voittoprosentin perusteella suurimmasta pienimpään
-		Collections.sort(lista, new Comparator<Pelaaja>() {
+		Collections.sort(pelaajat, new Comparator<Pelaaja>() {
 			@Override
 			public int compare(Pelaaja p1, Pelaaja p2) {
 				return Double.compare(p2.getVoittoprosentti(), p1.getVoittoprosentti());
 			}
 		});
+		
+		return pelaajat.get(0);
+	}
+	
+	private Pelaaja getEnitenVoittoja() {
+		System.out.println("Parasvoittoprosentti");
+		
+		List<Pelaaja> pelaajat = dbKontrolleri.getPelaajat();
 
+		// sortataan pelaajalista voittoprosentin perusteella suurimmasta pienimpään
+		Collections.sort(pelaajat, new Comparator<Pelaaja>() {
+			@Override
+			public int compare(Pelaaja p1, Pelaaja p2) {
+				return Double.compare(p2.getVoitot(), p1.getVoitot());
+			}
+		});
+		
+		return pelaajat.get(0);
 	}
 
 	private void getTaulukkotiedot() {
