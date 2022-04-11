@@ -61,7 +61,9 @@ public class Alkuvalikko_kontrolleri {
 
 	@FXML
 	void TilastoituPeli(ActionEvent event) throws IOException {
-		root = FXMLLoader.load(getClass().getResource("Tilastoitupeli1.fxml"));
+		loader = new FXMLLoader(getClass().getResource("Tilastoitupeli1.fxml"));
+		loader.setResources(ValittuKieli.getInstance().getBundle());
+		root = loader.load();
         stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
