@@ -20,6 +20,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -49,19 +50,25 @@ public class Tilastot2_kontrolleri {
 	private Text voittoProsentti;
 
 	@FXML
-	private TableView<PelinTiedot> tilastotaulu;
+	private TableView<PeliMuutos> tilastotaulu;
 
 	@FXML
-	private TableColumn<PelinTiedot, Integer> mustat;
+	private TableColumn<PeliMuutos, String> vari;
 
 	@FXML
-	private TableColumn<PelinTiedot, Integer> valkoiset;
+	private TableColumn<PeliMuutos, String> vastustaja;
 
 	@FXML
-	private TableColumn<PelinTiedot, Integer> tulos;
+	private TableColumn<PeliMuutos, String> tulos;
+	
+	@FXML
+	private TableColumn<PeliMuutos, String> siirrot;
 
 	@FXML
-	private TableColumn<PelinTiedot, Date> pvm;
+	private TableColumn<PeliMuutos, String> pvm;
+	
+	@FXML
+	private TableColumn<PeliMuutos, String> kesto;
 
 	@FXML
 	void pelaajaMenu(ActionEvent event) {
@@ -84,12 +91,24 @@ public class Tilastot2_kontrolleri {
 		voittoProsentti.setText(dbKontrolleri.haeVoittoProsentti(p));
 		voitot.setText(String.valueOf(dbKontrolleri.haeVoittoMaara(p)));
 		peliLkm.setText(String.valueOf(dbKontrolleri.haePelienMaara(p)));
-		List<PelinTiedot> tiedot = dbKontrolleri.haePelaajanPelit(p);
-		mustat.setCellValueFactory(new PropertyValueFactory<>("mustaPelaaja"));
-		valkoiset.setCellValueFactory(new PropertyValueFactory<>("valkoinenPelaaja"));
-		tulos.setCellValueFactory(new PropertyValueFactory<>("voittaja"));
-		pvm.setCellValueFactory(new PropertyValueFactory<>("pvm"));
-		for (PelinTiedot data : tiedot) {
+		
+		List<PelinTiedot> pelit = dbKontrolleri.haePelaajanPelit(p);
+		List<PeliMuutos> tiedot = new ArrayList<>();
+		
+		for(PelinTiedot peli: pelit) {
+			tiedot.add(new PeliMuutos(peli, p));
+		}
+		
+		
+		vari.setCellValueFactory(new PropertyValueFactory<PeliMuutos, String>("vari"));
+		vastustaja.setCellValueFactory(new PropertyValueFactory<PeliMuutos, String>("vastustaja"));
+		tulos.setCellValueFactory(new PropertyValueFactory<PeliMuutos, String>("tulos"));
+		siirrot.setCellValueFactory(new PropertyValueFactory<PeliMuutos, String>("siirrot"));
+		tulos.setCellValueFactory(new PropertyValueFactory<PeliMuutos, String>("tulos"));
+		pvm.setCellValueFactory(new PropertyValueFactory<PeliMuutos, String>("pvm"));
+		kesto.setCellValueFactory(new PropertyValueFactory<PeliMuutos, String>("kesto"));
+		
+		for (PeliMuutos data : tiedot) {
 			tilastotaulu.getItems().add(data);
 		}
 		System.out.println(tilastotaulu.getColumns());

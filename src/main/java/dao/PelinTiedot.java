@@ -85,9 +85,12 @@ public class PelinTiedot {
 		return this.siirrot;
 	}
 	
-	@SuppressWarnings("deprecation")
-	public Date getPvm() {
-		return new Date(pvm);
+	public String getPvm() {
+		return pvm;
+	}
+	
+	public long getKesto() {
+		return kesto;
 	}
 
 }

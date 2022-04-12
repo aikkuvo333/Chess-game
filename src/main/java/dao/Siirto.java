@@ -27,6 +27,8 @@ public class Siirto {
 	private int mihinY;
 	private NappulanTyyppi korotus;
 
+	public Siirto() {}
+	
 	public Siirto(int mistaX, int mistaY, int mihinX, int mihinY, NappulanTyyppi korotus) {
 		this.mistaX = mistaX;
 		this.mistaY = mistaY;
