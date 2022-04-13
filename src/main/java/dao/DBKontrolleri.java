@@ -2,11 +2,15 @@ package dao;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+
+/**
+ * 
+ * @author Oliver Hamberg, Elmo Vahvaselkä
+ *
+ */
 
 public class DBKontrolleri implements IDaoController{
 	private Session ses;
@@ -54,13 +58,8 @@ public class DBKontrolleri implements IDaoController{
 	}
 
 	@Override
-	public void haeKaikkipelit() {
+	public void poistaPelaaja(Pelaaja pelaaja) {
 		// TODO Auto-generated method stub
-		
 	}
 
-	@Override
-	public void poistaPelaaja(int pelaajaId) {
-		// TODO Auto-generated method stub
-	}
 }
