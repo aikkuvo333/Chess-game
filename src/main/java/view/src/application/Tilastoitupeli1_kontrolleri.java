@@ -2,6 +2,7 @@ package view.src.application;
 
 import java.io.IOException;
 import dao.DBKontrolleri;
+import dao.IDaoController;
 import dao.Pelaaja;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,6 +27,7 @@ public class Tilastoitupeli1_kontrolleri {
 	private FXMLLoader loader;
 	private Pelaaja musta;
 	private Pelaaja valkoinen;
+	private IDaoController dbKontrolleri = DBKontrolleri.getInstance();
 
 	@FXML
 	private Button poistuBtn;
@@ -65,7 +67,6 @@ public class Tilastoitupeli1_kontrolleri {
 	}
 
 	public void lisaaMenuItemit(MenuButton btn, boolean isMusta) {
-		DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
 		for (Pelaaja p : dbKontrolleri.getPelaajat()) {
 			MenuItem menuItem = new MenuItem(p.getKayttajaTunnus());
 			menuItem.setOnAction(a -> {
@@ -98,7 +99,6 @@ public class Tilastoitupeli1_kontrolleri {
 
 	@FXML
 	void valkLuotunnus(ActionEvent event) {
-		DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
 		valkoinen = dbKontrolleri.luoPelaaja(valkTekstikenttaBtn.getText());
 		valkVetovalikko(event);
 	}
