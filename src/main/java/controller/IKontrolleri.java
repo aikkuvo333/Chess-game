@@ -25,5 +25,4 @@ public interface IKontrolleri {
 	public NappulanVari getVuoro();
 	public Pelaaja getValkoinenPelaaja();
 	public Pelaaja getMustaPelaaja();
-	public IDaoController getDaoKontrolleri();
 }

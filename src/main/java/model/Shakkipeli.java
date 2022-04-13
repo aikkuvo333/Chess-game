@@ -7,6 +7,7 @@ import java.util.ArrayList;
 */
 
 import controller.IKontrolleri;
+import dao.DBKontrolleri;
 import dao.IDaoController;
 import dao.Pelaaja;
 import dao.PelinTiedot;
@@ -36,7 +37,7 @@ public class Shakkipeli implements IShakkipeli {
 
 		if (tilastoitu) {
 			this.pelinTiedot = new PelinTiedot(kontrolleri.getValkoinenPelaaja(), kontrolleri.getMustaPelaaja());
-			this.daoKontrolleri = kontrolleri.getDaoKontrolleri();
+			this.daoKontrolleri = DBKontrolleri.getInstance();
 		} else {
 			this.pelinTiedot = new PelinTiedot(kontrolleri.getValkoinenPelaaja(), kontrolleri.getMustaPelaaja());
 		}
