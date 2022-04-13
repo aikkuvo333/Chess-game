@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import dao.DBKontrolleri;
+import dao.IDaoController;
 import dao.Pelaaja;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,7 +27,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /*
- * @author Aivan Vo 7.3.2022
+ * @author Aivan Vo 7.3.2022, Elmo Vahvaselkä
  */
 
 public class Leaderboard_kontrolleri {
@@ -66,8 +67,9 @@ public class Leaderboard_kontrolleri {
 	private TableColumn<Pelaaja, Double> voittoprosentti;
 
 	List<Pelaaja> lista = new ArrayList<Pelaaja>();
-	
-	DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
+
+	IDaoController dbKontrolleri = DBKontrolleri.getInstance();
+	List<Pelaaja> pelaajat = dbKontrolleri.getPelaajat();
 
 	ObservableList<Pelaaja> taulukkolista = FXCollections.observableArrayList();
 
@@ -83,18 +85,16 @@ public class Leaderboard_kontrolleri {
 	}
 
 	public void initialize() {
-		
+
 		parasVoittoprosentti.setText(getParasVoittoprosentti().getKayttajaTunnus());
 		enitenVoittoja.setText(getEnitenVoittoja().getKayttajaTunnus());
 		getTaulukkotiedot();
 
 	}
-	
+
 	private Pelaaja getParasVoittoprosentti() {
 		System.out.println("Parasvoittoprosentti");
-		
-		List<Pelaaja> pelaajat = dbKontrolleri.getPelaajat();
-		
+
 		if (pelaajat.size() == 0) {
 			return null;
 		}
@@ -106,28 +106,25 @@ public class Leaderboard_kontrolleri {
 				return Double.compare(p2.getVoittoprosentti(), p1.getVoittoprosentti());
 			}
 		});
-		
+
 		return pelaajat.get(0);
 	}
-	
-	private Pelaaja getEnitenVoittoja() {
-		System.out.println("Parasvoittoprosentti");
-		
-		List<Pelaaja> pelaajat = dbKontrolleri.getPelaajat();
 
-		// sortataan pelaajalista voittoprosentin perusteella suurimmasta pienimpään
+	private Pelaaja getEnitenVoittoja() {
+		System.out.println("Eniten voittoja");
+
+		// sortataan pelaajalista voittojen määrän perusteella suurimmasta pienimpään
 		Collections.sort(pelaajat, new Comparator<Pelaaja>() {
 			@Override
 			public int compare(Pelaaja p1, Pelaaja p2) {
 				return Double.compare(p2.getVoitot(), p1.getVoitot());
 			}
 		});
-		
+
 		return pelaajat.get(0);
 	}
 
 	private void getTaulukkotiedot() {
-		DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
 		System.out.println("taulukkotiedot");
 
 		pelaajatunnus.setCellValueFactory(new PropertyValueFactory<Pelaaja, String>("kayttajaTunnus"));
