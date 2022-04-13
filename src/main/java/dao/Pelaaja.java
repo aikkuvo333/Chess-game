@@ -28,12 +28,7 @@ public class Pelaaja {
 	@Transient
 	private List<PelinTiedot> pelit;
 	
-	@Transient
-	private double voittoprosentti;
-	
-	public Pelaaja() {
-		
-	}
+	public Pelaaja() {}
 	
 	public Pelaaja(int id, String name) {
 		this.pelaajaId = id;
@@ -72,8 +67,7 @@ public class Pelaaja {
 	}
 	
 	public double getVoittoprosentti() {
-		this.voittoprosentti = (double) getVoitot() / (double) getPeleja() * 100;
-		return voittoprosentti;
+		return (double) getVoitot() / (double) getPeleja() * 100;
 	}
 	
 	public int getVoitot() {

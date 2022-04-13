@@ -87,19 +87,17 @@ public class Tilastot2_kontrolleri {
 	@SuppressWarnings("unchecked")
 	void openPelaajaData(Pelaaja p) {
 		tilastotaulu.getItems().clear();
-		DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
-		voittoProsentti.setText(dbKontrolleri.haeVoittoProsentti(p));
-		voitot.setText(String.valueOf(dbKontrolleri.haeVoittoMaara(p)));
-		peliLkm.setText(String.valueOf(dbKontrolleri.haePelienMaara(p)));
+		voittoProsentti.setText(String.valueOf(p.getVoittoprosentti()));
+		voitot.setText(String.valueOf(p.getVoitot()));
+		peliLkm.setText(String.valueOf(p.getPeleja()));
 		
-		List<PelinTiedot> pelit = dbKontrolleri.haePelaajanPelit(p);
+		List<PelinTiedot> pelit = p.getPelit();
 		List<PeliMuutos> tiedot = new ArrayList<>();
 		
 		for(PelinTiedot peli: pelit) {
 			tiedot.add(new PeliMuutos(peli, p));
 		}
-		
-		
+				
 		vari.setCellValueFactory(new PropertyValueFactory<PeliMuutos, String>("vari"));
 		vastustaja.setCellValueFactory(new PropertyValueFactory<PeliMuutos, String>("vastustaja"));
 		tulos.setCellValueFactory(new PropertyValueFactory<PeliMuutos, String>("tulos"));

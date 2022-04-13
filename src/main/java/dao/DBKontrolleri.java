@@ -1,21 +1,23 @@
 package dao;
 
-import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Query;
 import javax.transaction.Transactional;
 
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.hibernate.internal.build.AllowSysOut;
 
 public class DBKontrolleri implements IDaoController{
 	private Session ses;
 	private static DBKontrolleri instance;
+	
+	public static DBKontrolleri getInstance() {
+		if (instance == null) {
+			instance = new DBKontrolleri();
+		}
+		return instance;
+	}
 	
 	public DBKontrolleri() {
 		SessionFactory istuntoTehdas = new Configuration().configure().buildSessionFactory();
@@ -31,14 +33,6 @@ public class DBKontrolleri implements IDaoController{
 		return pelaajat; 
 	}
 	
-	public static DBKontrolleri getInstance() {
-		if (instance == null) {
-			instance = new DBKontrolleri();
-		}
-		return instance;
-	}
-	
-	@Transactional 
 	public Pelaaja luoPelaaja(String nimi) {
 		ses.beginTransaction();
 		int id = (Integer) ses.save(new Pelaaja(nimi));
@@ -50,33 +44,6 @@ public class DBKontrolleri implements IDaoController{
 		@SuppressWarnings("unchecked")
 		List<PelinTiedot> tulokset = ses.createQuery("FROM PelinTiedot WHERE mustaPelaaja = " + p.getPelaajaId() + " OR valkoinenPelaaja =  " + p.getPelaajaId()).getResultList();		
 		return tulokset;
-	}
-	
-	public int haeVoittoMaara(Pelaaja p) {
-		List<PelinTiedot> pelit = haePelaajanPelit(p);
-		int voitetut = 0;
-		for(PelinTiedot tiedot: pelit) {
-			if(tiedot.getVoittaja().getPelaajaId() == p.getPelaajaId()) {
-				voitetut++;
-			}
-		}
-		return voitetut;
-	}
-	
-	public int haePelienMaara(Pelaaja p) {
-		List<PelinTiedot> pelit = haePelaajanPelit(p);
-		int kaikkipelit = 0;
-		for(PelinTiedot tiedot: pelit) {
-			kaikkipelit++;
-		}
-		return kaikkipelit;
-	}
-	
-	public String haeVoittoProsentti(Pelaaja p) {
-		DecimalFormat df = new DecimalFormat( "#.##" );
-		Double d = (double) haeVoittoMaara(p) / (double) haePelienMaara(p) * 100;
-		String a = df.format(d); //pyöristetään prosentti kahden desimaalitarkkuuteen
-		return a + "%";
 	}
 	
 	@Override
