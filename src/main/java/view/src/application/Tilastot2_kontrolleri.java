@@ -3,6 +3,7 @@ package view.src.application;
 import java.io.IOException;
 
 import dao.DBKontrolleri;
+import dao.IDaoController;
 import dao.Pelaaja;
 import dao.PelinTiedot;
 import javafx.event.ActionEvent;
@@ -33,6 +34,7 @@ public class Tilastot2_kontrolleri {
 	private Stage stage;
 	private Scene scene;
 	private Parent root;
+	IDaoController dbKontrolleri = DBKontrolleri.getInstance();
 
 	@FXML
 	private MenuButton pelaajaMenuBtn;
@@ -72,7 +74,6 @@ public class Tilastot2_kontrolleri {
 
 	@FXML
 	void pelaajaMenu(ActionEvent event) {
-		DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
 		for (Pelaaja p : dbKontrolleri.getPelaajat()) {
 			MenuItem menuItem = new MenuItem(p.getKayttajaTunnus());
 			menuItem.setOnAction(a -> {
@@ -125,7 +126,6 @@ public class Tilastot2_kontrolleri {
 	}
 
 	public void initialize() {
-		DBKontrolleri dbKontrolleri = DBKontrolleri.getInstance();
 		pelaajaMenu(null);
 	}
 }
