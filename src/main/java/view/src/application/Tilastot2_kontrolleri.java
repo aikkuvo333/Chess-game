@@ -88,7 +88,7 @@ public class Tilastot2_kontrolleri {
 	@SuppressWarnings("unchecked")
 	void openPelaajaData(Pelaaja p) {
 		tilastotaulu.getItems().clear();
-		voittoProsentti.setText(String.valueOf(p.getVoittoprosentti()));
+		voittoProsentti.setText(String.format(ValittuKieli.getInstance().getLocale(), "%.1f", p.getVoittoprosentti()));
 		voitot.setText(String.valueOf(p.getVoitot()));
 		peliLkm.setText(String.valueOf(p.getPeleja()));
 		
