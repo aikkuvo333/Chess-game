@@ -32,7 +32,7 @@ public class ValittuKieli {
 	}
 	
 	public void setSuomi() {
-		locale = new Locale("fi_FI");
+		locale = new Locale("FI", "FI");
 		bundle = ResourceBundle.getBundle("text/TextResources", locale);
 	}
 
