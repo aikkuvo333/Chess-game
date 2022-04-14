@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
  */
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import model.NappulanVari;
@@ -26,7 +29,9 @@ import model.NappulanVari;
 @Entity
 @Table
 public class PelinTiedot {
-	@Id @Column @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@Column
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int peliId;
 	@ManyToOne
 	private Pelaaja valkoinenPelaaja;
@@ -36,29 +41,24 @@ public class PelinTiedot {
 	private Pelaaja voittaja;
 
 	@Column
-	private String pvm;
+	@Temporal(TemporalType.DATE)
+	private Date pvm;
 	@Column
 	private long kesto;
-	
-	@Transient
-	private Date aloitusaika;
-	
-	@Transient 
-	SimpleDateFormat muokkain = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-	
-	@OneToMany(cascade=CascadeType.ALL)
+
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<Siirto> siirrot;
-	
-	public PelinTiedot() {}
-	
-	public PelinTiedot (Pelaaja valkoinenPelaaja, Pelaaja mustaPelaaja) {
+
+	public PelinTiedot() {
+	}
+
+	public PelinTiedot(Pelaaja valkoinenPelaaja, Pelaaja mustaPelaaja) {
 		this.valkoinenPelaaja = valkoinenPelaaja;
 		this.mustaPelaaja = mustaPelaaja;
 		this.siirrot = new ArrayList<Siirto>();
-		aloitusaika = new Date();
-		pvm = muokkain.format(aloitusaika);
+		pvm = new Date();
 	}
-	
+
 	public void lisaaSiirto(Siirto siirto) {
 		this.siirrot.add(siirto);
 	}
@@ -68,8 +68,8 @@ public class PelinTiedot {
 	}
 
 	public void setVoittaja(Pelaaja voittaja) {
-		//lasketaan peliin kulunut aika sekunteina
-		kesto = ((new Date().getTime()) - aloitusaika.getTime())/ (1000) ;
+		// lasketaan peliin kulunut aika sekunteina
+		kesto = ((new Date().getTime()) - pvm.getTime()) / (1000);
 		this.voittaja = voittaja;
 	}
 
@@ -80,15 +80,15 @@ public class PelinTiedot {
 	public Pelaaja getMustaPelaaja() {
 		return mustaPelaaja;
 	}
-	
-	public List<Siirto> getSiirrot(){
+
+	public List<Siirto> getSiirrot() {
 		return this.siirrot;
 	}
-	
-	public String getPvm() {
+
+	public Date getPvm() {
 		return pvm;
 	}
-	
+
 	public long getKesto() {
 		return kesto;
 	}

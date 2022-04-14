@@ -27,7 +27,7 @@ public class PeliMuutos {
 		}
 		
 		siirrot = String.valueOf(pelinTiedot.getSiirrot().size());
-		pvm = pelinTiedot.getPvm();;
+		pvm = pelinTiedot.getPvm().toString();
 		kesto = "" + pelinTiedot.getKesto();
 	
 	}
