@@ -10,6 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+/**
+ * 
+ * @author Oliver Hamberg, Elmo vahvaselkä
+ *
+ */
+
 @Entity
 @Table
 public class Pelaaja {
@@ -29,13 +35,7 @@ public class Pelaaja {
 	
 	public Pelaaja() {}
 	
-	public Pelaaja(int id, String name) {
-		this.pelaajaId = id;
-		this.kayttajaTunnus = name;
-	}
-	
-	public Pelaaja(String kayttajaTunnus) {
-	
+	public Pelaaja(String kayttajaTunnus) {	
 		this.kayttajaTunnus = kayttajaTunnus;
 	}
 	
@@ -43,16 +43,8 @@ public class Pelaaja {
 		return pelaajaId;
 	}
 
-	public void setPelaajaId(int pelaajaId) {
-		this.pelaajaId = pelaajaId;
-	}
-
 	public String getKayttajaTunnus() {
 		return kayttajaTunnus;
-	}
-
-	public void setKayttajaTunnus(String kayttajaTunnus) {
-		this.kayttajaTunnus = kayttajaTunnus;
 	}
 	
 	public void setPelit(List<PelinTiedot> pelit){

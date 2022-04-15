@@ -99,8 +99,9 @@ public class Tilastoitupeli1_kontrolleri {
 
 	@FXML
 	void valkLuotunnus(ActionEvent event) {
-		valkoinen = dbKontrolleri.luoPelaaja(valkTekstikenttaBtn.getText());
+		dbKontrolleri.luoPelaaja(valkTekstikenttaBtn.getText());
 		valkVetovalikko(event);
+		mustVetovalikko(event);
 	}
 
 	@FXML

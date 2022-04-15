@@ -37,11 +37,10 @@ public class DBKontrolleri implements IDaoController{
 		return pelaajat; 
 	}
 	
-	public Pelaaja luoPelaaja(String nimi) {
+	public void luoPelaaja(String nimi) {
 		ses.beginTransaction();
-		int id = (Integer) ses.save(new Pelaaja(nimi));
+		ses.save(new Pelaaja(nimi));
 		ses.getTransaction().commit();
-		return new Pelaaja(id, nimi);
 	}
 	
 	public List<PelinTiedot> haePelaajanPelit(Pelaaja p) {		

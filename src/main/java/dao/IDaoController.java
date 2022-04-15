@@ -9,7 +9,7 @@ import java.util.List;
 public interface IDaoController {
 	public List<Pelaaja> getPelaajat();
 	public void tallennaPeli(PelinTiedot pelinTiedot);
-	public Pelaaja luoPelaaja(String nimi);
+	public void luoPelaaja(String nimi);
 	public List<PelinTiedot> haePelaajanPelit(Pelaaja p);
 	public void poistaPelaaja(Pelaaja pelaaja);
 }
