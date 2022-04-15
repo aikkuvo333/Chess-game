@@ -101,10 +101,10 @@ public class Tilastoitupeli1_kontrolleri {
 	@FXML
 	void luoTunnusBtn(ActionEvent event) {
 		dbKontrolleri.luoPelaaja(luoTunnusTekstikentta.getText());
-//		valkVetovalikko(event);
-//		mustVetovalikko(event);
-		lisaaMenuItemit(valkVetovalikko, false);
-		lisaaMenuItemit(mustVetovalikko, true);
+		valkVetovalikko.getItems().clear();
+		mustVetovalikko.getItems().clear();
+		valkVetovalikko(event);
+		mustVetovalikko(event);
 		
 		luoTunnusTekstikentta.clear(); 
 	}
