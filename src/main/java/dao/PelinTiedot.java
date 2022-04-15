@@ -1,13 +1,10 @@
 package dao;
 
-import java.text.SimpleDateFormat;
-
 /*
- * @author Oliver Hamberg
+ * @author Oliver Hamberg, Elmo vahvaselkä
  */
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -22,9 +19,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
-
-import model.NappulanVari;
 
 @Entity
 @Table
