@@ -28,4 +28,11 @@ class PelaajaTest {
 		assertEquals("Valkoinen", peli.getPelinTiedot().getValkoinenPelaaja().getKayttajaTunnus(), "Valkoisen pelaajan nimi oli väärin");
 		assertEquals("Musta", peli.getPelinTiedot().getMustaPelaaja().getKayttajaTunnus(), "Mustan pelaajan nimi oli väärin");
 	}
+	
+	@Test
+	@DisplayName("Parametriton konstrukttori toimii")
+	public void parametritonKonstruktorioimii() {
+		new Pelaaja();
+	}
+	
 }
