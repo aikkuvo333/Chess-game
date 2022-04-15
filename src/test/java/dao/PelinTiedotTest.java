@@ -74,4 +74,10 @@ class PelinTiedotTest {
 		assertTrue("Peli ei kestänyt yli sekunttia", peli.getPelinTiedot().getKesto() > 0);
 		assertTrue("Peli kesti yli 2 sekunttia", peli.getPelinTiedot().getKesto() < 2);
 	}
+	
+	@Test
+	@DisplayName("Parametritön konstruktori toimii")
+	public void parametritonKonstruktoriToimii() {
+		new PelinTiedot();
+	}
 }
