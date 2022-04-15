@@ -6,7 +6,6 @@ package view.src.application;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +27,7 @@ class ValittuKieliTest {
 	@DisplayName("Kielen vaihtaminen onnistuu englannista suomeen ja päinvastoin")
 	public void kielenVaihto() {
 		ValittuKieli.getInstance().setSuomi();
-		assertEquals("fi_fi", ValittuKieli.getInstance().getLocale().getLanguage(), "Kieli ei vaihtunut suomeen");
+		assertEquals("fi", ValittuKieli.getInstance().getLocale().getLanguage(), "Kieli ei vaihtunut suomeen");
 		ValittuKieli.getInstance().setEnglanti();
 		assertEquals("en_us", ValittuKieli.getInstance().getLocale().getLanguage(), "Kieli ei vaihtunut englantiin");
 	}
