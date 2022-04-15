@@ -50,7 +50,7 @@ public class Tilastot2_kontrolleri {
 
 	@FXML
 	private Text voittoProsentti;
-	
+
 	@FXML
 	private Text pelaajanNimi;
 
@@ -65,15 +65,18 @@ public class Tilastot2_kontrolleri {
 
 	@FXML
 	private TableColumn<PeliMuutos, String> tulos;
-	
+
 	@FXML
 	private TableColumn<PeliMuutos, String> siirrot;
 
 	@FXML
 	private TableColumn<PeliMuutos, String> pvm;
-	
+
 	@FXML
 	private TableColumn<PeliMuutos, String> kesto;
+
+	@FXML
+	private Button poistaKayttajaBtn;
 
 	@FXML
 	void pelaajaMenu(ActionEvent event) {
@@ -91,18 +94,19 @@ public class Tilastot2_kontrolleri {
 	@SuppressWarnings("unchecked")
 	void openPelaajaData(Pelaaja p) {
 		tilastotaulu.getItems().clear();
-		voittoProsentti.setText(String.format(ValittuKieli.getInstance().getLocale(), "%.1f%%", p.getVoittoprosentti()));
+		voittoProsentti
+				.setText(String.format(ValittuKieli.getInstance().getLocale(), "%.1f%%", p.getVoittoprosentti()));
 		voitot.setText(String.valueOf(p.getVoitot()));
 		peliLkm.setText(String.valueOf(p.getPeleja()));
 		pelaajanNimi.setText(p.getKayttajaTunnus());
-		
+
 		List<PelinTiedot> pelit = p.getPelit();
 		List<PeliMuutos> tiedot = new ArrayList<>();
-		
-		for(PelinTiedot peli: pelit) {
+
+		for (PelinTiedot peli : pelit) {
 			tiedot.add(new PeliMuutos(peli, p));
 		}
-				
+
 		vari.setCellValueFactory(new PropertyValueFactory<PeliMuutos, String>("vari"));
 		vastustaja.setCellValueFactory(new PropertyValueFactory<PeliMuutos, String>("vastustaja"));
 		tulos.setCellValueFactory(new PropertyValueFactory<PeliMuutos, String>("tulos"));
@@ -110,7 +114,7 @@ public class Tilastot2_kontrolleri {
 		tulos.setCellValueFactory(new PropertyValueFactory<PeliMuutos, String>("tulos"));
 		pvm.setCellValueFactory(new PropertyValueFactory<PeliMuutos, String>("pvm"));
 		kesto.setCellValueFactory(new PropertyValueFactory<PeliMuutos, String>("kesto"));
-		
+
 		for (PeliMuutos data : tiedot) {
 			tilastotaulu.getItems().add(data);
 		}
@@ -131,5 +135,10 @@ public class Tilastot2_kontrolleri {
 
 	public void initialize() {
 		pelaajaMenu(null);
+	}
+
+	@FXML
+	void poistaKayttaja(ActionEvent event) {
+		System.out.println("Poistetaan kayttaja: ");
 	}
 }
