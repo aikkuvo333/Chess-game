@@ -1,7 +1,6 @@
 package view.src.application;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -55,23 +54,25 @@ public class Leaderboard_kontrolleri {
 	private Text tunnus;
 
 	@FXML
-	private TableView<Pelaaja> leaderboardtaulu;
+	private TableView<PelaajaMuutos> leaderboardtaulu;
 
 	@FXML
-	private TableColumn<Pelaaja, String> pelaajatunnus;
+	private TableColumn<PelaajaMuutos, String> pelaajatunnus;
 
 	@FXML
-	private TableColumn<Pelaaja, Integer> voittomaara;
+	private TableColumn<PelaajaMuutos, String> voittomaara;
 
 	@FXML
-	private TableColumn<Pelaaja, Double> voittoprosentti;
-
-	List<Pelaaja> lista = new ArrayList<Pelaaja>();
+	private TableColumn<PelaajaMuutos, String> voittoprosentti;
+	
+	@FXML
+	private TableColumn<PelaajaMuutos, String> peleja;
 
 	IDaoController dbKontrolleri = DBKontrolleri.getInstance();
+	List<Pelaaja> lista = new ArrayList<Pelaaja>();
 	List<Pelaaja> pelaajat = dbKontrolleri.getPelaajat();
 
-	ObservableList<Pelaaja> taulukkolista = FXCollections.observableArrayList();
+	ObservableList<PelaajaMuutos> taulukkolista = FXCollections.observableArrayList();
 
 	@FXML
 	void poistu(ActionEvent event) throws IOException {
@@ -127,12 +128,13 @@ public class Leaderboard_kontrolleri {
 	private void getTaulukkotiedot() {
 		System.out.println("taulukkotiedot");
 
-		pelaajatunnus.setCellValueFactory(new PropertyValueFactory<Pelaaja, String>("kayttajaTunnus"));
-		voittomaara.setCellValueFactory(new PropertyValueFactory<Pelaaja, Integer>("voitot"));
-		voittoprosentti.setCellValueFactory(new PropertyValueFactory<Pelaaja, Double>("voittoprosentti"));
+		pelaajatunnus.setCellValueFactory(new PropertyValueFactory<PelaajaMuutos, String>("kayttajaTunnus"));
+		voittomaara.setCellValueFactory(new PropertyValueFactory<PelaajaMuutos, String>("voitot"));
+		voittoprosentti.setCellValueFactory(new PropertyValueFactory<PelaajaMuutos, String>("voittoprosentti"));
+		peleja.setCellValueFactory(new PropertyValueFactory<PelaajaMuutos, String>("peleja"));
 
 		for (Pelaaja p : dbKontrolleri.getPelaajat()) {
-			taulukkolista.add(p);
+			taulukkolista.add(new PelaajaMuutos(p));
 		}
 
 		leaderboardtaulu.setItems(taulukkolista);
