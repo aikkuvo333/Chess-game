@@ -69,9 +69,7 @@ public class Leaderboard_kontrolleri {
 	private TableColumn<PelaajaMuutos, String> peleja;
 
 	IDaoController dbKontrolleri = DBKontrolleri.getInstance();
-	List<Pelaaja> lista = new ArrayList<Pelaaja>();
 	List<Pelaaja> pelaajat = dbKontrolleri.getPelaajat();
-
 	ObservableList<PelaajaMuutos> taulukkolista = FXCollections.observableArrayList();
 
 	@FXML
