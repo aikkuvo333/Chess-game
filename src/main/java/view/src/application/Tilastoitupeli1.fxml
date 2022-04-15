@@ -41,7 +41,7 @@
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <MenuButton fx:id="valkVetovalikkoBtn" mnemonicParsing="false" onAction="#valkVetovalikko" prefHeight="28.0" prefWidth="180.0" text="%TilastoitupeliValitseTunnusBtn">
+                        <MenuButton fx:id="valkVetovalikko" mnemonicParsing="false" onAction="#valkVetovalikko" prefHeight="28.0" prefWidth="180.0" text="%TilastoitupeliValitseTunnusBtn">
                            <VBox.margin>
                               <Insets bottom="20.0" />
                            </VBox.margin>
@@ -54,7 +54,7 @@
                               <Font size="16.0" />
                            </font>
                         </Text>
-                        <MenuButton fx:id="mustVetovalikkoBtn" mnemonicParsing="false" onAction="#mustVetovalikko" prefHeight="22.0" prefWidth="182.0" text="%TilastoitupeliValitseTunnusBtn">
+                        <MenuButton fx:id="mustVetovalikko" mnemonicParsing="false" onAction="#mustVetovalikko" prefHeight="22.0" prefWidth="182.0" text="%TilastoitupeliValitseTunnusBtn">
                            <VBox.margin>
                               <Insets bottom="25.0" />
                            </VBox.margin>
@@ -72,12 +72,12 @@
                               <Insets bottom="5.0" top="70.0" />
                            </VBox.margin>
                         </Text>
-                        <TextField fx:id="valkTekstikenttaBtn" onAction="#valkTekstikentta" prefHeight="25.0" prefWidth="181.0">
+                        <TextField fx:id="luoTunnusTekstikentta" prefHeight="25.0" prefWidth="181.0">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
                         </TextField>
-                        <Button fx:id="valkLuotunnusBtn" alignment="CENTER" mnemonicParsing="false" onAction="#valkLuotunnus" style="-fx-min-width: 50px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="%TilastoitupeliLuoTunnusBtn" textAlignment="CENTER" textFill="WHITE">
+                        <Button fx:id="luoTunnusBtn" alignment="CENTER" mnemonicParsing="false" onAction="#luoTunnusBtn" style="-fx-min-width: 50px; -fx-background-color: black; -fx-background-radius: 8px; -fx-label-padding: 4px; -fx-text-fill: white;" text="%TilastoitupeliLuoTunnusBtn" textAlignment="CENTER" textFill="WHITE">
                            <VBox.margin>
                               <Insets top="15.0" />
                            </VBox.margin></Button>

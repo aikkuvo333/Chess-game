@@ -33,19 +33,19 @@ public class Tilastoitupeli1_kontrolleri {
 	private Button poistuBtn;
 
 	@FXML
-	private MenuButton valkVetovalikkoBtn;
+	private MenuButton valkVetovalikko;
+	
+	@FXML
+	private MenuButton mustVetovalikko;
 
 	@FXML
-	private TextField valkTekstikenttaBtn;
+	private TextField luoTunnusTekstikentta;
 
 	@FXML
-	private Button valkLuotunnusBtn;
+	private Button luoTunnusBtn;
 
 	@FXML
 	private Button aloitaPeliBtn;
-
-	@FXML
-	private MenuButton mustVetovalikkoBtn;
 
 	@FXML
 	void aloitaPeli(ActionEvent event) throws IOException {
@@ -77,17 +77,18 @@ public class Tilastoitupeli1_kontrolleri {
 					valkoinen = p;
 				}
 			});
+			
 			btn.getItems().add(menuItem);
 		}
 	}
 
 	@FXML
 	void mustVetovalikko(ActionEvent event) {
-		lisaaMenuItemit(mustVetovalikkoBtn, true);
+		lisaaMenuItemit(mustVetovalikko, true);
 	}
 
 	@FXML
-	void poistu(ActionEvent event) throws IOException {
+	void poistu(ActionEvent event) throws IOException { //Ei toimi
 		loader.setLocation(getClass().getResource("Alkuvalikko.fxml"));
 		loader.setResources(ValittuKieli.getInstance().getBundle());
 		root = loader.load();
@@ -98,20 +99,19 @@ public class Tilastoitupeli1_kontrolleri {
 	}
 
 	@FXML
-	void valkLuotunnus(ActionEvent event) {
-		dbKontrolleri.luoPelaaja(valkTekstikenttaBtn.getText());
-		valkVetovalikko(event);
-		mustVetovalikko(event);
-	}
-
-	@FXML
-	void valkTekstikentta(ActionEvent event) {
-
+	void luoTunnusBtn(ActionEvent event) {
+		dbKontrolleri.luoPelaaja(luoTunnusTekstikentta.getText());
+//		valkVetovalikko(event);
+//		mustVetovalikko(event);
+		lisaaMenuItemit(valkVetovalikko, false);
+		lisaaMenuItemit(mustVetovalikko, true);
+		
+		luoTunnusTekstikentta.clear(); 
 	}
 
 	@FXML
 	void valkVetovalikko(ActionEvent event) {
-		lisaaMenuItemit(valkVetovalikkoBtn, false);
+		lisaaMenuItemit(valkVetovalikko, false);
 	}
 
 }
