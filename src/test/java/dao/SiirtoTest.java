@@ -57,5 +57,11 @@ class SiirtoTest {
 		assertEquals(7, siirrot.get(8).getMihinY(), "MihinY oli väärin");
 		assertEquals(NappulanTyyppi.KUNINGATAR, siirrot.get(8).getKorotus(), "Korotus ei ollut Kuningatar");
 	}
+	
+	@Test
+	@DisplayName("Parametriton konstruktori toimii")
+	public void paremetritonKonstruktoriToimii(){
+		new Siirto();
+	}
 
 }
