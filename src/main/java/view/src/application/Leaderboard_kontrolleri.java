@@ -1,7 +1,6 @@
 package view.src.application;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -85,8 +84,8 @@ public class Leaderboard_kontrolleri {
 
 	public void initialize() {
 
-		parasVoittoprosentti.setText(getParasVoittoprosentti().getKayttajaTunnus());
-		enitenVoittoja.setText(getEnitenVoittoja().getKayttajaTunnus());
+		parasVoittoprosentti.setText(getParasVoittoprosentti().getKayttajaTunnus() + " " + getParasVoittoprosentti().getVoittoprosentti() + "%");
+		enitenVoittoja.setText(getEnitenVoittoja().getKayttajaTunnus() + " " + getEnitenVoittoja().getVoitot());
 		getTaulukkotiedot();
 
 	}
