@@ -40,6 +40,15 @@
                   </ImageView>
                </graphic>
             </Button>
+            <Button fx:id="instructions" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="12.0" mnemonicParsing="false" onAction="#openInstructions" style="-fx-background-color: #241919 #241919 #241919;" textAlignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@/images/kysymysmerkki.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children></AnchorPane>
       <StackPane layoutX="195.89999389648438" layoutY="111.9000015258789" AnchorPane.bottomAnchor="63.099998474121094" AnchorPane.leftAnchor="195.89999389648438" AnchorPane.rightAnchor="204.10000610351562" AnchorPane.topAnchor="111.9000015258789">
          <children>
