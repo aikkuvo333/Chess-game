@@ -26,7 +26,7 @@ import java.util.Date;
 import java.util.List;
 
 /*
- * @author Aivan Vo 27.2.2022
+ * @author Aivan Vo 27.2.2022, Elmo Vahvaselkä
  */
 
 public class Tilastot2_kontrolleri {
