@@ -50,6 +50,9 @@ public class Tilastot2_kontrolleri {
 
 	@FXML
 	private Text voittoProsentti;
+	
+	@FXML
+	private Text pelaajanNimi;
 
 	@FXML
 	private TableView<PeliMuutos> tilastotaulu;
@@ -91,6 +94,7 @@ public class Tilastot2_kontrolleri {
 		voittoProsentti.setText(String.format(ValittuKieli.getInstance().getLocale(), "%.1f%%", p.getVoittoprosentti()));
 		voitot.setText(String.valueOf(p.getVoitot()));
 		peliLkm.setText(String.valueOf(p.getPeleja()));
+		pelaajanNimi.setText(p.getKayttajaTunnus());
 		
 		List<PelinTiedot> pelit = p.getPelit();
 		List<PeliMuutos> tiedot = new ArrayList<>();
