@@ -84,13 +84,13 @@ public class Leaderboard_kontrolleri {
 
 	public void initialize() {
 
-		parasVoittoprosentti.setText(getParasVoittoprosentti().getKayttajaTunnus() + " " + getParasVoittoprosentti().getVoittoprosentti() + "%");
-		enitenVoittoja.setText(getEnitenVoittoja().getKayttajaTunnus() + " " + getEnitenVoittoja().getVoitot());
+		parasVoittoprosentti.setText(getParasVoittoprosentti().getKayttajaTunnus() + ": " + getParasVoittoprosentti().getVoittoprosentti());
+		enitenVoittoja.setText(getEnitenVoittoja().getKayttajaTunnus() + ": " + getEnitenVoittoja().getVoitot());
 		getTaulukkotiedot();
 
 	}
 
-	private Pelaaja getParasVoittoprosentti() {
+	private PelaajaMuutos getParasVoittoprosentti() {
 		System.out.println("Parasvoittoprosentti");
 
 		if (pelaajat.size() == 0) {
@@ -105,7 +105,7 @@ public class Leaderboard_kontrolleri {
 			}
 		});
 
-		return pelaajat.get(0);
+		return new PelaajaMuutos(pelaajat.get(0));
 	}
 
 	private Pelaaja getEnitenVoittoja() {
