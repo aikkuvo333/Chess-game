@@ -58,6 +58,9 @@ public class Pelaaja {
 	}
 	
 	public double getVoittoprosentti() {
+		if (getPeleja() == 0) {
+			return 0;
+		}
 		return (double) getVoitot() / (double) getPeleja() * 100;
 	}
 	
