@@ -12,7 +12,7 @@
       </property>
       
       <property name="hibernate.connection.url">
-         jdbc:mariadb:10.114.32.66:3306
+         jdbc:mariadb://10.114.32.66:3306/shakkipeli
       </property>
       
       <property name="hibernate.connection.username">
