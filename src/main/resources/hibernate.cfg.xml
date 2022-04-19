@@ -12,19 +12,19 @@
       </property>
       
       <property name="hibernate.connection.url">
-         jdbc:mariadb://localhost/shakkipeli
+         jdbc:mariadb:10.114.32.66:3306
       </property>
       
       <property name="hibernate.connection.username">
-         root
+         otp
       </property>
       
       <property name="hibernate.connection.password">
       <!-- VAIHDA OMAKSI MARIADB SALASANAKSI -->
-         Koira
+         otp
       </property>
       
-     <property name="hbm2ddl.auto">update</property>
+     <property name="hbm2ddl.auto">validate</property>
 
       <mapping class="dao.Pelaaja"/>
       <mapping class="dao.PelinTiedot"/>
