@@ -76,4 +76,8 @@ public class Pelaaja {
 		return pelit;
 	}
 	
+	public int getId() {
+		return pelaajaId;
+	}
+	
 }

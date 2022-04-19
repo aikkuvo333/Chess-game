@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface IDaoController {
 	public List<Pelaaja> getPelaajat();
-	public void tallennaPeli(PelinTiedot pelinTiedot);
-	public void luoPelaaja(String nimi);
+	public boolean tallennaPeli(PelinTiedot pelinTiedot);
+	public boolean luoPelaaja(String nimi);
 	public List<PelinTiedot> haePelaajanPelit(Pelaaja p);
-	public void poistaPelaaja(Pelaaja pelaaja);
+	public boolean poistaPelaaja(Pelaaja pelaaja);
 }

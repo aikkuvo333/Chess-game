@@ -86,5 +86,9 @@ public class PelinTiedot {
 	public long getKesto() {
 		return kesto;
 	}
+	
+	public int getId() {
+		return peliId;
+	}
 
 }
