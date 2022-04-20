@@ -63,12 +63,6 @@ class DBKontrolleriTest {
 		assertTrue("Pelin poistaminen ei onnistunut", db.poistaPeli(testiPeli));
 		assertFalse("Peli löytyy tietokannasta", onkoPeliListassa());		
 	}
-	
-	@Test
-	@DisplayName("Tietokannas ei olevaa pelaajaa ei voi poistaa")
-	public void pelaajaEiTietokannassa() {
-		assertFalse("Pelaajan positaminen onnistui", db.poistaPelaajaPysyvasti(new Pelaaja("Jorma")));
-	}
 
 	private boolean onkoPelaajaListassa(String nimi) {
 		List<Pelaaja> pelaajat = db.getPelaajat();
