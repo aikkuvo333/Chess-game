@@ -18,7 +18,7 @@ class PelinTiedotTest {
 	@BeforeEach
 	public void setUp() {
 		// aloitetaan tilastoimaton peli
-		peli = new Shakkipeli(false);
+		peli = new Shakkipeli();
 	}
 	
 	@Test

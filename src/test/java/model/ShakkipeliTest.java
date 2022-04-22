@@ -19,7 +19,7 @@ class ShakkipeliTest {
 	@BeforeEach
 	public void setUp() {
 		// aloitetaan tilastoimaton peli
-		peli = new Shakkipeli(false);
+		peli = new Shakkipeli();
 	}
 
 	@Test
@@ -280,7 +280,7 @@ class ShakkipeliTest {
 				"Sotilasta ei korotettu Kuingattareksi");
 
 		// Ratsuksi
-		peli = new Shakkipeli(false);
+		peli = new Shakkipeli();
 		peli.setTestiKorotus(NappulanTyyppi.RATSU);
 		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(0, 1, 0, 3));
 		assertTrue("Musta sotilas ei liikkunut", peli.siirra(1, 6, 1, 4));
@@ -295,7 +295,7 @@ class ShakkipeliTest {
 				"Sotilasta ei korotettu ratsuksi");
 
 		// Torniksi
-		peli = new Shakkipeli(false);
+		peli = new Shakkipeli();
 		peli.setTestiKorotus(NappulanTyyppi.TORNI);
 		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(0, 1, 0, 3));
 		assertTrue("Musta sotilas ei liikkunut", peli.siirra(1, 6, 1, 4));
@@ -310,7 +310,7 @@ class ShakkipeliTest {
 				"Sotilasta ei korotettu torniksi");
 
 		// Lähetiksi
-		peli = new Shakkipeli(false);
+		peli = new Shakkipeli();
 		peli.setTestiKorotus(NappulanTyyppi.LAHETTI);
 		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(0, 1, 0, 3));
 		assertTrue("Musta sotilas ei liikkunut", peli.siirra(1, 6, 1, 4));
@@ -343,7 +343,7 @@ class ShakkipeliTest {
 				"Mustaa sotilasta ei korotettu kuningattareksi");
 
 		// Ratsuksi
-		peli = new Shakkipeli(false);
+		peli = new Shakkipeli();
 		peli.setTestiKorotus(NappulanTyyppi.RATSU);
 		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(7, 1, 7, 3));
 		assertTrue("Musta sotilas ei liikkunut", peli.siirra(6, 6, 6, 4));
@@ -359,7 +359,7 @@ class ShakkipeliTest {
 				"Mustaa sotilasta ei korotettu ratsuksi");
 
 		// Torniksi
-		peli = new Shakkipeli(false);
+		peli = new Shakkipeli();
 		peli.setTestiKorotus(NappulanTyyppi.TORNI);
 		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(7, 1, 7, 3));
 		assertTrue("Musta sotilas ei liikkunut", peli.siirra(6, 6, 6, 4));
@@ -375,7 +375,7 @@ class ShakkipeliTest {
 				"Mustaa sotilasta ei korotettu torniksi");
 
 		// Lähetiksi
-		peli = new Shakkipeli(false);
+		peli = new Shakkipeli();
 		peli.setTestiKorotus(NappulanTyyppi.LAHETTI);
 		assertTrue("Valkoinen sotilas ei liikkunut", peli.siirra(7, 1, 7, 3));
 		assertTrue("Musta sotilas ei liikkunut", peli.siirra(6, 6, 6, 4));
