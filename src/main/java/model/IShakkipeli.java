@@ -21,7 +21,6 @@ public interface IShakkipeli {
 	 * @param x Pelinappulan koordinaatti x-akselilla, jonka arvo on väliltä 0-7.
 	 * @param y Pelinappulan koordinaatti y-akselilla, jonka arvo on väliltä 0-7.
 	 * @return Palauttaa ArrayListin, joka sisältää mahdolliset siirrot Ruutu-olioina;
-	 * @see model.Ruutu
 	 */
 	public ArrayList<Ruutu> getSiirrot(int x, int y);
 	
