@@ -128,12 +128,4 @@ public class Pelaaja {
 		return pelit;
 	}
 	
-	/**
-	 * Getteri pelaaja id:elle.
-	 * @return palauttaa pelaajan id:en integerinä.
-	 */
-	public int getId() {
-		return pelaajaId;
-	}
-	
 }

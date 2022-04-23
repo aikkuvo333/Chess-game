@@ -90,7 +90,7 @@ public class DBKontrolleri implements IDaoController {
 	public boolean poistaPelaajaPysyvasti(Pelaaja pelaaja) {
 		try {
 			ses.beginTransaction();
-			Pelaaja poistettava = (Pelaaja) ses.get(Pelaaja.class, pelaaja.getId());
+			Pelaaja poistettava = (Pelaaja) ses.get(Pelaaja.class, pelaaja.getPelaajaId());
 			ses.delete(poistettava);
 			ses.getTransaction().commit();
 		} catch (Exception e) {
