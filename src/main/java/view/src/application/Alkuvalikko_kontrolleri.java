@@ -1,6 +1,5 @@
 package view.src.application;
 
-import java.awt.Desktop;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
@@ -11,10 +10,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import java.net.URI;
 import java.net.URISyntaxException;
 
-/*
+/**
  * @author Aivan Vo 5.2.2022
  */
 
@@ -106,7 +104,6 @@ public class Alkuvalikko_kontrolleri {
 
 	@FXML
 	void changeLanguageToFin(ActionEvent event) throws IOException {
-		System.out.println("change to FIN");
 		ValittuKieli.getInstance().setSuomi();
 
 		loader = new FXMLLoader(getClass().getResource("Alkuvalikko.fxml"));
@@ -120,7 +117,6 @@ public class Alkuvalikko_kontrolleri {
 
 	@FXML
 	void changeLanguageToUs(ActionEvent event) throws IOException {
-		System.out.println("change to US");
 		ValittuKieli.getInstance().setEnglanti();
 
 		loader = new FXMLLoader(getClass().getResource("Alkuvalikko.fxml"));
@@ -134,8 +130,6 @@ public class Alkuvalikko_kontrolleri {
 
 	@FXML
 	void ohjeet(ActionEvent event) throws IOException, URISyntaxException {
-//		Desktop d = Desktop.getDesktop();
-//		d.browse(new URI("http://www.shakkimatti.net/saannot.php"));
 		loader = new FXMLLoader(getClass().getResource("Ohjeet.fxml"));
 		loader.setResources(ValittuKieli.getInstance().getBundle());
 		root = loader.load();

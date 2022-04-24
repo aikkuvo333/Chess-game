@@ -22,7 +22,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /*
@@ -91,7 +90,6 @@ public class Tilastot2_kontrolleri {
 
 	}
 
-	@SuppressWarnings("unchecked")
 	void openPelaajaData(Pelaaja p) {
 		tilastotaulu.getItems().clear();
 		voittoProsentti

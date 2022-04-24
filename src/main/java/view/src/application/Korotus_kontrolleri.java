@@ -1,6 +1,5 @@
 package view.src.application;
 
-
 import javafx.fxml.FXML;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -46,7 +45,7 @@ public class Korotus_kontrolleri {
 
 	public void initialize() {
 		lautaKontrolleri.toggleShadow();
-		
+
 		varjo = new DropShadow();
 		varjo.setColor(Color.GRAY);
 		varjo.setOffsetY(6);
@@ -131,11 +130,11 @@ public class Korotus_kontrolleri {
 		imageView.fitWidthProperty().bind(pane.widthProperty());
 		imageView.fitHeightProperty().bind(pane.heightProperty());
 		imageView.setImage(image);
-		//imageView.setScaleX(imageView.getScaleX()*0.8);
+		// imageView.setScaleX(imageView.getScaleX()*0.8);
 		imageView.setPreserveRatio(true);
 		imageView.setCache(true);
 		imageView.setSmooth(true);
-		
+
 		return imageView;
 	}
 
@@ -150,7 +149,7 @@ public class Korotus_kontrolleri {
 		stage = (Stage) korotus.getScene().getWindow();
 		stage.close();
 	}
-	
+
 	public void exit() {
 		System.out.println("EXIT");
 	}

@@ -63,7 +63,7 @@ public class Leaderboard_kontrolleri {
 
 	@FXML
 	private TableColumn<PelaajaMuutos, String> voittoprosentti;
-	
+
 	@FXML
 	private TableColumn<PelaajaMuutos, String> peleja;
 
@@ -84,15 +84,14 @@ public class Leaderboard_kontrolleri {
 
 	public void initialize() {
 
-		parasVoittoprosentti.setText(getParasVoittoprosentti().getKayttajaTunnus() + ": " + getParasVoittoprosentti().getVoittoprosentti());
+		parasVoittoprosentti.setText(
+				getParasVoittoprosentti().getKayttajaTunnus() + ": " + getParasVoittoprosentti().getVoittoprosentti());
 		enitenVoittoja.setText(getEnitenVoittoja().getKayttajaTunnus() + ": " + getEnitenVoittoja().getVoitot());
 		getTaulukkotiedot();
 
 	}
 
 	private PelaajaMuutos getParasVoittoprosentti() {
-		System.out.println("Parasvoittoprosentti");
-
 		if (pelaajat.size() == 0) {
 			return null;
 		}
@@ -109,8 +108,6 @@ public class Leaderboard_kontrolleri {
 	}
 
 	private Pelaaja getEnitenVoittoja() {
-		System.out.println("Eniten voittoja");
-
 		// sortataan pelaajalista voittojen määrän perusteella suurimmasta pienimpään
 		Collections.sort(pelaajat, new Comparator<Pelaaja>() {
 			@Override
@@ -123,8 +120,6 @@ public class Leaderboard_kontrolleri {
 	}
 
 	private void getTaulukkotiedot() {
-		System.out.println("taulukkotiedot");
-
 		pelaajatunnus.setCellValueFactory(new PropertyValueFactory<PelaajaMuutos, String>("kayttajaTunnus"));
 		voittomaara.setCellValueFactory(new PropertyValueFactory<PelaajaMuutos, String>("voitot"));
 		voittoprosentti.setCellValueFactory(new PropertyValueFactory<PelaajaMuutos, String>("voittoprosentti"));
