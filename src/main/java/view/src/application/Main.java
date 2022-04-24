@@ -1,6 +1,4 @@
 package view.src.application;
-	
-import java.util.ResourceBundle;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,24 +11,24 @@ import javafx.scene.Scene;
  */
 
 public class Main extends Application {
-	
+
 	@Override
 	public void start(Stage primaryStage) {
-		
+
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("Alkuvalikko.fxml"));
 			loader.setResources(ValittuKieli.getInstance().getBundle());
 			Parent root = loader.load();
 			Scene scene = new Scene(root);
-			
+
 			primaryStage.setScene(scene);
 			primaryStage.show();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		launch(args);
 	}

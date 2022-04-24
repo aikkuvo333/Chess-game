@@ -47,7 +47,7 @@ public class Alkuvalikko_kontrolleri {
 	private Button english;
 
 	@FXML
-	private Button instructions;
+	private Button ohjeetBtn;
 
 	@FXML
 	void TilastoimatonPeli(ActionEvent event) throws IOException {
@@ -133,9 +133,9 @@ public class Alkuvalikko_kontrolleri {
 	}
 
 	@FXML
-	void openInstructions(ActionEvent event) throws IOException, URISyntaxException {
+	void ohjeet(ActionEvent event) throws IOException, URISyntaxException {
 		System.out.println("ohjetta klikattu");
-		
+
 		Desktop d = Desktop.getDesktop();
 		d.browse(new URI("http://www.shakkimatti.net/saannot.php"));
 	}
