@@ -13,7 +13,7 @@
          <children>
             <StackPane layoutX="263.0" layoutY="12.796875" AnchorPane.bottomAnchor="14.703125" AnchorPane.leftAnchor="263.0" AnchorPane.rightAnchor="263.5" AnchorPane.topAnchor="12.796875">
                <children>
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Peliohjeet" textAlignment="CENTER">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="%PeliSaannotOtsikko" textAlignment="CENTER">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -22,7 +22,7 @@
             </StackPane>
          </children>
       </AnchorPane>
-      <Button fx:id="poistuBtn" alignment="CENTER" mnemonicParsing="false" onAction="#poistu" style="-fx-min-width: 70px; -fx-background-color: grey; -fx-background-radius: 4px; -fx-label-padding: 4px; -fx-text-fill: white;" text="Takaisin" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
-      <TextArea fx:id="tekstikentta" layoutX="20.0" layoutY="77.0" prefHeight="360.0" prefWidth="696.0" AnchorPane.bottomAnchor="63.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="77.0" />
+      <Button fx:id="poistuBtn" alignment="CENTER" mnemonicParsing="false" onAction="#poistu" style="-fx-min-width: 70px; -fx-background-color: grey; -fx-background-radius: 4px; -fx-label-padding: 4px; -fx-text-fill: white;" text="%PeliSaannotPoistuBtn" textFill="WHITE" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
+      <TextArea fx:id="tekstikentta" text="%PeliSaannot" layoutX="20.0" layoutY="77.0" prefHeight="360.0" prefWidth="696.0" AnchorPane.bottomAnchor="63.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="77.0" />
    </children>
 </AnchorPane>
