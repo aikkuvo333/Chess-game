@@ -35,5 +35,28 @@ public class Ohjeet_kontrolleri {
 		stage.setScene(scene);
 		stage.show();
 	}
+	
+	public void initialize() {
+		String msg = "SHAKIN SÄÄNNÖT JA PELIOHJEET\n\nValkeilla nappuloilla pelaava aloittaa aina pelin. "
+				+ "\nPelaajat siirtävät vuorotellen aina yhtä omaa nappulaansa (poikkeuksena tornitus)."
+				+ "\nNappulan voi liikkumissääntöjä noudattaen siirtää joko tyhjään ruutuun tai ruutuun, jossa on vastustajan nappula."
+				+ "\nSiirrettäessä nappula jo vastustajan nappulan varaamaan ruutuun tulee vastustajan nappula syödyksi."
+				+ "\nNäin ollen ei samassa ruudussa voi olla kahta nappulaa samanaikaisesti. "
+				+ "\nNappulat eivät voi hyppiä toisten yli ratsua lukuun ottamatta.\n"
+				
+				+ "\nPelin tavoitteena on saattaa vastustajan kuningas torjumattoman uhkauksen alaiseksi. "
+				+ "\nTällaista pelin päättävää tilannetta kutsutaan shakkimatiksi tai yleisemmin matiksi"
+				+ "\nTilannetta, jossa kuningasta uhataan, mutta tilanne ei ole matti, kutsutaan shakiksi. "
+				+ "\nKun kuningas on uhattuna, siirtovuorossa olevan pelaajan on torjuttava tämä uhkaus välittömästi joko"
+				+ "\nsiirtämällä kuningas naapuriruutuun, jossa se ei ole uhattuna,"
+				+ "\nlyömällä uhkaava nappula tai"
+				+ "\nsiirtämällä jokin muu oma nappula uhkaavan nappulan ja oman kuninkaan väliin.\n"
+				
+				+ "\nJos mikään näistä ei ole mahdollista, kyseessä on siis matti ja peli on hävitty. "
+				+ "\nMuutoinkaan kuningasta ei saa siirtää sellaiseen ruutuun, jossa se joutuisi välittömästi uhatuksi, "
+				+ "\neikä muuta nappulaa saa siirtää siten, että oma kuningas joutuisi shakkiin. "
+				+ "\nToisin sanoen kuningas ei saa olla shakattuna vastapelaajan ollessa siirtovuorossa.";
+        tekstikentta.setText(msg);
+    }
 
 }
