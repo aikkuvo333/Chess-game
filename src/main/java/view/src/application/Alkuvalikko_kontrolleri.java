@@ -134,10 +134,15 @@ public class Alkuvalikko_kontrolleri {
 
 	@FXML
 	void ohjeet(ActionEvent event) throws IOException, URISyntaxException {
-		System.out.println("ohjetta klikattu");
-
-		Desktop d = Desktop.getDesktop();
-		d.browse(new URI("http://www.shakkimatti.net/saannot.php"));
+//		Desktop d = Desktop.getDesktop();
+//		d.browse(new URI("http://www.shakkimatti.net/saannot.php"));
+		loader = new FXMLLoader(getClass().getResource("Ohjeet.fxml"));
+		loader.setResources(ValittuKieli.getInstance().getBundle());
+		root = loader.load();
+		stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		scene = new Scene(root);
+		stage.setScene(scene);
+		stage.show();
 	}
 
 }
