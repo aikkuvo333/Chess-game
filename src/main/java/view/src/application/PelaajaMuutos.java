@@ -29,10 +29,10 @@ public class PelaajaMuutos {
 	private String peleja;
 
 	/**
-	 * Konstruktori, joka saa parametrinä Pelaaja-oliona sen pelaajan,
-	 * jonka tiedot halutaan muuttaa. Kaikki Pelaaja-olion tiedot muutetaan
+	 * Konstruktori. Kaikki Pelaaja-olion tiedot muutetaan
 	 * String-olioiksi ja voittoprosentti muokataan localen mukaiseksi.
-	 * @param pelaaja
+	 * @param Saa parametrinä Pelaaja-oliona sen pelaajan,
+	 * jonka tiedot halutaan muuttaa
 	 */
 	public PelaajaMuutos(Pelaaja pelaaja) {
 		kayttajaTunnus = pelaaja.getKayttajaTunnus();

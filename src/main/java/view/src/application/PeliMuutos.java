@@ -9,9 +9,9 @@ import dao.PelinTiedot;
 /**
  * Luokka jota käytetään muuttamaan PelinTiedot-luokan tiedot
  * JavaFX:än TableViewille sopivaan muotoon. PelinTiedot-luokasta
- * poiketen, PeliMuutos-luokan tiedot tietyn pelaajan näkökulmasta.
- * Tarkoittaen, että vari, vastustaja ja tulos päätellään konstruktorin
- * parametrien mukaan.
+ * poiketen, PeliMuutos-luokan tiedot on esitetty tietyn pelaajan 
+ * näkökulmasta. Tarkoittaen, että vari, vastustaja ja tulos 
+ * päätellään konstruktorin parametrien mukaan.
  * @author Elmo Vahvaselkä
  *
  */

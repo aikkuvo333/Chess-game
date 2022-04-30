@@ -43,7 +43,7 @@ public class ValittuKieli {
 
 	/**
 	 * Getteri localelle.
-	 * @return valiton localen Locale-oliona.
+	 * @return valitun localen Locale-oliona.
 	 */
 	public Locale getLocale() {
 		return locale;
