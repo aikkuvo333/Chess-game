@@ -28,28 +28,63 @@ public class Tilastoitupeli1_kontrolleri {
 	private Scene scene;
 	private Parent root;
 	private FXMLLoader loader;
+	
+	/**
+	 * Pelaaja olio, joka pelaa mustilla nappuloilla
+	 */
 	private Pelaaja musta;
+	
+	/**
+	 * Pelaaja olio, joka pelaa valkoisilla nappuloilla
+	 */
 	private Pelaaja valkoinen;
+	
+	/**
+	 * IDaoController rajapintaa toteuttavan DBKontrolleri singletonin kutsuminen
+	 */
 	private IDaoController dbKontrolleri = DBKontrolleri.getInstance();
 
+	/**
+	 * Button olio Poistu- napille
+	 */
 	@FXML
 	private Button poistuBtn;
 
+	/**
+	 * MenuButton olio valkoisen pelaajan pelaajatunnuksen valitsemiselle
+	 */
 	@FXML
 	private MenuButton valkVetovalikko;
 	
+	/**
+	 * MenuButton olio mustan pelaajan pelaajatunnuksen valitsemiselle
+	 */
 	@FXML
 	private MenuButton mustVetovalikko;
 
+	/**
+	 * TextField kenttä johon kirjoitetaan uuden luotavan pelaajatunnuksen nimi
+	 */
 	@FXML
 	private TextField luoTunnusTekstikentta;
 
+	/**
+	 * Button olio Luo tunnus- napille
+	 */
 	@FXML
 	private Button luoTunnusBtn;
 
+	/**
+	 * Button olio Aloita peli- napille
+	 */
 	@FXML
 	private Button aloitaPeliBtn;
 
+	/**
+	 * Aloita peli- Buttonin metodi, jossa sitä napsauttaessa avautuu pelilautanäkymä.
+	 * @param event Aloita peli- Buttonin napsautus
+	 * @throws IOException osoittaa tietojen lukemisen aikana tapahtuvan virheen
+	 */
 	@FXML
 	void aloitaPeli(ActionEvent event) throws IOException {
 		PeliNakyma controller = new PeliNakyma(musta, valkoinen);
@@ -64,11 +99,19 @@ public class Tilastoitupeli1_kontrolleri {
 		stage.show();
 	}
 
+	/**
+	 * Metodi jota kutsutaan kerran, kun siihen liittyvä sisältö on ladattu kokonaan. Metodi asettaa valkoisen ja mustan pelaajatunnuksen valinta MenuButtonin vetovalikoihin null-arvot. 
+	 */
 	public void initialize() {
 		valkVetovalikko(null);
 		mustVetovalikko(null);
 	}
 
+	/**
+	 * Metodi joka lisää uuden pelaajatunnuksen valittuun MenuButtoniin
+	 * @param btn MenuButton olio johon uusi MenuItem lisätään
+	 * @param isMusta boolean arvo joka ollessaan true on musta ja ollessaan false on valkoinen nappulan väri
+	 */
 	public void lisaaMenuItemit(MenuButton btn, boolean isMusta) {
 		for (Pelaaja p : dbKontrolleri.getPelaajat()) {
 			if(!p.getKayttajaTunnus().equals("Anonyymi")) {
@@ -87,13 +130,24 @@ public class Tilastoitupeli1_kontrolleri {
 		}
 	}
 
+	/**
+	 * mustVetovalikko- MenuButtonin metodi, jossa lisätään uusi MenuItem eli pelaajatunnus mustan pelaajan MenuButton valikkoon
+	 * @param event mustVetovalikko- MenuButtonin napsauttaminen
+	 */
 	@FXML
 	void mustVetovalikko(ActionEvent event) {
 		lisaaMenuItemit(mustVetovalikko, true);
 	}
 
+	/**
+	 * Poistu- Buttonin metodi, jossa sitä napsauttaessa palautuu alkuvalikko
+	 * -näkymään
+	 * 
+	 * @param event Poistu- Buttonin napsautus
+	 * @throws IOException osoittaa tietojen lukemisen aikana tapahtuvan virheen
+	 */
 	@FXML
-	void poistu(ActionEvent event) throws IOException { //Ei toimi
+	void poistu(ActionEvent event) throws IOException { 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("Alkuvalikko.fxml"));
 		loader.setResources(ValittuKieli.getInstance().getBundle());
 		root = loader.load();
@@ -103,6 +157,10 @@ public class Tilastoitupeli1_kontrolleri {
 		stage.show();
 	}
 
+	/**
+	 * Luo tunnus- Buttonin metodi, jossa sitä napsauttaessa kutsutaan DBkontrolleri singletonia luomaan uusi pelaaja tietokantaan
+	 * @param event Luo tunnus- Buttonin napsautus
+	 */
 	@FXML
 	void luoTunnusBtn(ActionEvent event) {
 		dbKontrolleri.luoPelaaja(luoTunnusTekstikentta.getText());
@@ -114,6 +172,10 @@ public class Tilastoitupeli1_kontrolleri {
 		luoTunnusTekstikentta.clear(); 
 	}
 
+	/**
+	 * valkVetovalikko- MenuButtonin metodi, jossa lisätään uusi MenuItem eli pelaajatunnus valkoisen pelaajan MenuButton valikkoon
+	 * @param event valkVetovalikko- MenuButtonin napsauttaminen
+	 */
 	@FXML
 	void valkVetovalikko(ActionEvent event) {
 		lisaaMenuItemit(valkVetovalikko, false);
