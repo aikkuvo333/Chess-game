@@ -6,12 +6,18 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
-/*
+/**
+ * 
+ * Sovelluksen käynnistyspääohjelma
+ * 
  * @author Aivan Vo 3.2.2022
  */
 
 public class Main extends Application {
 
+	/**
+	 * Metodi käynnistää sovelluksen käyttöliittymänäkymän
+	 */
 	@Override
 	public void start(Stage primaryStage) {
 
