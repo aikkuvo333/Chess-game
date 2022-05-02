@@ -22,12 +22,23 @@ public class Ohjeet_kontrolleri {
 	private Scene scene;
 	private Parent root;
 
+	/**
+	 * Button olio Poistu -napille
+	 */
 	@FXML
 	private Button poistuBtn;
 
+	/**
+	 * TextArea olio, joka sisältää Shakkipelin ohjesäännöt tekstinä
+	 */
 	@FXML
 	private TextArea tekstikentta;
 
+	/**
+	 * Poistu- Buttonin metodi, jossa sitä napsauttaessa palautuu alkuvalikko -näkymään
+	 * @param event Poistu- Buttonin napsautus
+	 * @throws IOException osoittaa tietojen lukemisen aikana tapahtuvan virheen
+	 */
 	@FXML
 	void poistu(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("Alkuvalikko.fxml"));
