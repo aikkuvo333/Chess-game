@@ -23,12 +23,12 @@ public class InitFXML {
 	/**
 	 * Metodi avaa fxml tiedoston
 	 * 
-	 * @param object
-	 * @param uri
-	 * @param nimi
-	 * @param modality
-	 * @param style
-	 * @param lauta
+	 * @param object   Object
+	 * @param uri      String
+	 * @param nimi     String
+	 * @param modality Modality
+	 * @param style    StageStyle
+	 * @param lauta    Node
 	 * @throws IOException osoittaa tietojen lukemisen aikana tapahtuvan virheen
 	 */
 	public static void avaaFxml(Object object, String uri, String nimi, Modality modality, StageStyle style, Node lauta)
