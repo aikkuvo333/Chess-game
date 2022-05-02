@@ -10,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import java.net.URISyntaxException;
 
 /**
  * Luokka <code>Alkuvalikko_kontrolleri</code> luo käyttöliittymän
@@ -83,7 +82,9 @@ public class Alkuvalikko_kontrolleri {
 	private Button ohjeetBtn;
 
 	/**
-	 * Tilastoimaton peli- Buttonin metodi, jossa sitä napsauttaessa avautuu pelilautanäkymä.
+	 * Tilastoimaton peli- Buttonin metodi, jossa sitä napsauttaessa avautuu
+	 * pelilautanäkymä.
+	 * 
 	 * @param event Tilastoimaton peli- Buttonin napsautus
 	 * @throws IOException osoittaa tietojen lukemisen aikana tapahtuvan virheen
 	 */
@@ -103,7 +104,9 @@ public class Alkuvalikko_kontrolleri {
 	}
 
 	/**
-	 * Tilastoitu peli- Buttonin metodi, jossa sitä napsauttaessa avautuu pelaajatunnuksen valinta-/ ja tunnuksen luontinäkymä.
+	 * Tilastoitu peli- Buttonin metodi, jossa sitä napsauttaessa avautuu
+	 * pelaajatunnuksen valinta-/ ja tunnuksen luontinäkymä.
+	 * 
 	 * @param event Tilastoitu peli- Buttonin napsautus
 	 * @throws IOException osoittaa tietojen lukemisen aikana tapahtuvan virheen
 	 */
@@ -119,7 +122,9 @@ public class Alkuvalikko_kontrolleri {
 	}
 
 	/**
-	 * Leaderboard- Buttonin metodi, jossa sitä napsauttaessa avautuu Leaderboard -näkymä.
+	 * Leaderboard- Buttonin metodi, jossa sitä napsauttaessa avautuu Leaderboard
+	 * -näkymä.
+	 * 
 	 * @param event Leaderboard- Buttonin napsautus
 	 * @throws IOException osoittaa tietojen lukemisen aikana tapahtuvan virheen
 	 */
@@ -136,6 +141,7 @@ public class Alkuvalikko_kontrolleri {
 
 	/**
 	 * Sulje sovellus- Buttonin metodi, jossa sitä napsauttaessa sovellus sulkeutuu.
+	 * 
 	 * @param event Sulje sovellus- Buttonin napsautus
 	 */
 	@FXML
@@ -145,7 +151,9 @@ public class Alkuvalikko_kontrolleri {
 	}
 
 	/**
-	 * Tilastot- Buttonin metodi, jossa sitä napsauttaessa  avautuu Pelaajien tilastot -näkymä.
+	 * Tilastot- Buttonin metodi, jossa sitä napsauttaessa avautuu Pelaajien
+	 * tilastot -näkymä.
+	 * 
 	 * @param event Tilastot- Buttonin napsautus
 	 * @throws IOException osoittaa tietojen lukemisen aikana tapahtuvan virheen
 	 */
@@ -161,7 +169,9 @@ public class Alkuvalikko_kontrolleri {
 	}
 
 	/**
-	 * Finnish - Buttonin metodi, jossa sitä napsauttaessa valituksi kieleksi asetetaan suomen kieli.
+	 * Finnish - Buttonin metodi, jossa sitä napsauttaessa valituksi kieleksi
+	 * asetetaan suomen kieli.
+	 * 
 	 * @param event Finnish- Buttonin napsautus
 	 * @throws IOException osoittaa tietojen lukemisen aikana tapahtuvan virheen
 	 */
@@ -179,7 +189,9 @@ public class Alkuvalikko_kontrolleri {
 	}
 
 	/**
-	 * Englanti - Buttonin metodi, jossa sitä napsauttaessa valituksi kieleksi asetetaan englannin kieli.
+	 * Englanti - Buttonin metodi, jossa sitä napsauttaessa valituksi kieleksi
+	 * asetetaan englannin kieli.
+	 * 
 	 * @param event Englanti- Buttonin napsautus
 	 * @throws IOException osoittaa tietojen lukemisen aikana tapahtuvan virheen
 	 */
@@ -198,6 +210,7 @@ public class Alkuvalikko_kontrolleri {
 
 	/**
 	 * Ohjeet - Buttonin metodi, jossa sitä napsauttaessa avautuu Säännöt -näkymä.
+	 * 
 	 * @param event Ohjeet- Buttonin napsautus
 	 * @throws IOException osoittaa tietojen lukemisen aikana tapahtuvan virheen.
 	 */

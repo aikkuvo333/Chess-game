@@ -35,7 +35,9 @@ public class Ohjeet_kontrolleri {
 	private TextArea tekstikentta;
 
 	/**
-	 * Poistu- Buttonin metodi, jossa sitä napsauttaessa palautuu alkuvalikko -näkymään
+	 * Poistu- Buttonin metodi, jossa sitä napsauttaessa palautuu alkuvalikko
+	 * -näkymään
+	 * 
 	 * @param event Poistu- Buttonin napsautus
 	 * @throws IOException osoittaa tietojen lukemisen aikana tapahtuvan virheen
 	 */
