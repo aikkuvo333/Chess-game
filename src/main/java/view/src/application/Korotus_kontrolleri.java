@@ -12,7 +12,8 @@ import javafx.stage.Stage;
 import model.NappulanTyyppi;
 import model.NappulanVari;
 
-/*
+/**
+ * 
  * 
  * @author Santeri Kuusisto
  * 
@@ -130,7 +131,6 @@ public class Korotus_kontrolleri {
 		imageView.fitWidthProperty().bind(pane.widthProperty());
 		imageView.fitHeightProperty().bind(pane.heightProperty());
 		imageView.setImage(image);
-		// imageView.setScaleX(imageView.getScaleX()*0.8);
 		imageView.setPreserveRatio(true);
 		imageView.setCache(true);
 		imageView.setSmooth(true);

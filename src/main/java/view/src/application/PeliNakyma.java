@@ -39,16 +39,13 @@ import javafx.util.Duration;
 import model.Nappula;
 import model.NappulanTyyppi;
 import model.NappulanVari;
-import dao.IDaoController;
 import dao.Pelaaja;
 import model.Ruutu;
 import view.IPelinakyma;
 import java.io.*;
 import javax.sound.sampled.*;
 
-import com.sun.xml.bind.v2.model.core.ID;
-
-/*
+/**
  * 
  * @author Santeri Kuusisto
  * 
@@ -69,7 +66,7 @@ public class PeliNakyma implements IPelinakyma {
 	private Pelaaja pelaaja1;
 	private Pelaaja pelaaja2;
 	private HashMap<NappulanVari, String> pelaajat;
-	
+
 	// Efektejä
 	private String sound1 = "src/main/resources/sounds/sound1.wav";
 	private String sound2 = "src/main/resources/sounds/sound2.wav";
@@ -85,22 +82,21 @@ public class PeliNakyma implements IPelinakyma {
 	private int mihinY;
 	private boolean siirtoAloitettu = false;
 	private ArrayList<Node> mahdSiirrot;
-	
+
 	// Asetuksia
 	private boolean kaantyminen;
 	private boolean peruutus;
 	private boolean aanet;
-	
+
 	// Lisätään myöhemmin
 	@SuppressWarnings("unused")
 	private boolean darkMode;
 
 	private boolean stageShadow = false;
-	
-	//locale
+
+	// locale
 	private FXMLLoader loader;
 	private ResourceBundle bundle = ValittuKieli.getInstance().getBundle();
-	
 
 	@FXML
 	private AnchorPane lautaNakyma;
@@ -110,7 +106,7 @@ public class PeliNakyma implements IPelinakyma {
 
 	@FXML
 	private Text vuorossa;
-	
+
 	@FXML
 	private Text seuraava;
 
@@ -122,16 +118,17 @@ public class PeliNakyma implements IPelinakyma {
 
 	@FXML
 	private Text vuoro;
-	
+
 	@FXML
-    private Text shakki;
-	
+	private Text shakki;
+
 	@FXML
 	void handleLaudanAsetukset(ActionEvent event) throws IOException {
 		System.out.println("Klikattiin asetukset");
-		InitFXML.avaaFxml(new Asetukset_kontrolleri(this, asetukset), "Asetukset.fxml", "Asetukset", Modality.APPLICATION_MODAL, StageStyle.DECORATED, lautaNakyma);
+		InitFXML.avaaFxml(new Asetukset_kontrolleri(this, asetukset), "Asetukset.fxml", "Asetukset",
+				Modality.APPLICATION_MODAL, StageStyle.DECORATED, lautaNakyma);
 	}
-	
+
 	@FXML
 	private void handleLuovuta(ActionEvent event) throws IOException {
 		System.out.println("Painettiin: Luovuta");
@@ -147,23 +144,30 @@ public class PeliNakyma implements IPelinakyma {
 	void handleRuutu(MouseEvent e) {
 
 	}
-	
-	//Tilastoimattoman pelin konstruktori
+
+	/**
+	 * Tilastoimattoman pelin konstruktori
+	 */
 	public PeliNakyma() {
 		onkoTilastoitu = false;
 		this.pelaaja1 = new Pelaaja(bundle.getString("OletusNimiValkoinen"));
 		this.pelaaja2 = new Pelaaja(bundle.getString("OletusNimiMusta"));
 		peruutus = true;
 	}
-	
-	//Tilastoidun pelin konstruktori
-		public PeliNakyma(Pelaaja pelaaja1, Pelaaja pelaaja2) {
-			onkoTilastoitu = true;
-			this.pelaaja1 = pelaaja1;
-			this.pelaaja2 = pelaaja2;
-			peruutus = false;
-		}
-	
+
+	/**
+	 * Tilastoidun pelin konstruktori
+	 * 
+	 * @param pelaaja1 Pelaaja olio joka osallistuu peliin
+	 * @param pelaaja2 Toinen Pelaaja olio joka osallistuu peliin
+	 */
+	public PeliNakyma(Pelaaja pelaaja1, Pelaaja pelaaja2) {
+		onkoTilastoitu = true;
+		this.pelaaja1 = pelaaja1;
+		this.pelaaja2 = pelaaja2;
+		peruutus = false;
+	}
+
 	EventHandler<ActionEvent> lautaHandler = new EventHandler<ActionEvent>() {
 
 		@Override
@@ -172,89 +176,93 @@ public class PeliNakyma implements IPelinakyma {
 				System.out.println("laudan koko muuttui");
 			});
 		}
-		
+
 	};
 
 	public void initialize() throws IOException {
-		
+
 		vuorossa.setText(pelaaja1.getKayttajaTunnus());
 		seuraava.setText(pelaaja2.getKayttajaTunnus());
-		
+
 		kontrolleri = new Kontrolleri(this);
 		kontrolleri.aloitaPeli(onkoTilastoitu);
-		
+
 		pelaajat = new HashMap<NappulanVari, String>();
 
 		varjo = new DropShadow();
 		varjo.setColor(Color.GRAY);
 		varjo.setOffsetY(6);
-		
+
 		// Valkoinen aloittaa shakin
-		vuorossa.setText(pelaaja1.getKayttajaTunnus()); //nimi1 = nimi1 == null ? "Pelaaja 1" : nimi1);
-		seuraava.setText(pelaaja2.getKayttajaTunnus()); //nimi2 = nimi2 == null ? "Pelaaja 2" : nimi2);
-		
+		vuorossa.setText(pelaaja1.getKayttajaTunnus());
+		seuraava.setText(pelaaja2.getKayttajaTunnus());
+
 		pelaajat.put(NappulanVari.VALKOINEN, pelaaja1.getKayttajaTunnus());
 		pelaajat.put(NappulanVari.MUSTA, pelaaja2.getKayttajaTunnus());
-		
+
 		asetaRuudut();
 		asetaNappulat();
 		kaannaLauta();
 		asetaVuoro();
-		
-		if(peruutus == false) {
+
+		if (peruutus == false) {
 			peruuta.setVisible(false);
 		}
-		
+
 		Asetukset.initConfig();
 		asetukset = new Asetukset();
 		kaantyminen = asetukset.isLaudanAnimaatio();
 		aanet = asetukset.isAanet();
 		darkMode = asetukset.isDarkMode();
-		
+
 		// Asettaa laudan elementit keskelle ruutua ikkunan venytyksen yhteydessä
 		lautaNakyma.widthProperty().addListener((obs, oldVal, newVal) -> {
 			double x;
-			if(pelilauta.getWidth() != 0) {
-				x = (double) newVal/2 - pelilauta.getWidth()/2;
+			if (pelilauta.getWidth() != 0) {
+				x = (double) newVal / 2 - pelilauta.getWidth() / 2;
 				pelilauta.setLayoutX(x);
 				vuoro.setLayoutX(x);
-				vuorossa.setLayoutX((lautaNakyma.getWidth() - (x + pelilauta.getWidth()))/2 + (x + pelilauta.getWidth())-vuorossa.getLayoutBounds().getWidth()/2);
-				seuraava.setLayoutX((lautaNakyma.getWidth() - (x + pelilauta.getWidth()))/2 + (x + pelilauta.getWidth())-seuraava.getLayoutBounds().getWidth()/2);
+				vuorossa.setLayoutX((lautaNakyma.getWidth() - (x + pelilauta.getWidth())) / 2
+						+ (x + pelilauta.getWidth()) - vuorossa.getLayoutBounds().getWidth() / 2);
+				seuraava.setLayoutX((lautaNakyma.getWidth() - (x + pelilauta.getWidth())) / 2
+						+ (x + pelilauta.getWidth()) - seuraava.getLayoutBounds().getWidth() / 2);
 			}
 		});
-		
+
 		// Säilyttää laudan suhteet koon muuttumisen yhteydessä
 		pelilauta.heightProperty().addListener((obs, oldVal, newVal) -> {
 			pelilauta.setPrefWidth((double) newVal);
 		});
-		
+
 		System.out.println(vuorossa.getLayoutX());
 	}
-	
+
 	public String getNimiByVari(NappulanVari vari) {
 		return pelaajat.get(vari);
 	}
-	
+
 	public NappulanVari getVariByNimi(String nimi) {
 		NappulanVari vari = null;
-		
-		if(pelaajat.containsValue(nimi)) {
-			for(Map.Entry<NappulanVari, String> entry : pelaajat.entrySet()) {
-				if(Objects.equals(entry.getValue(), nimi)) {
-					 vari = entry.getKey();
+
+		if (pelaajat.containsValue(nimi)) {
+			for (Map.Entry<NappulanVari, String> entry : pelaajat.entrySet()) {
+				if (Objects.equals(entry.getValue(), nimi)) {
+					vari = entry.getKey();
 				}
 			}
 		}
-		
+
 		return vari;
 	}
- 
-	// Kääntää laudan
+
+	/**
+	 * Metodi joka kääntää laudan
+	 */
 	public void kaannaLauta() {
 
 		System.out.println("Käännetään lautaa: " + kaantyminen);
-		
-		if(kaantyminen) {
+
+		if (kaantyminen) {
 			rotate.setDuration(Duration.millis(400));
 			rotate.setCycleCount(1);
 			rotate.setByAngle(180);
@@ -262,12 +270,12 @@ public class PeliNakyma implements IPelinakyma {
 			rotate.play();
 		}
 
-		if(!kaantynyt && !kaantyminen) {
+		if (!kaantynyt && !kaantyminen) {
 			pelilauta.setRotate(180);
 		} else {
 			pelilauta.setRotate(0);
 		}
-		
+
 		if (!kaantynyt) {
 			for (Node node : pelilauta.getChildren()) {
 				node.setRotate(180);
@@ -284,7 +292,7 @@ public class PeliNakyma implements IPelinakyma {
 	}
 
 	public void aani(String aani) {
-		if(aanet) {
+		if (aanet) {
 			try {
 				Clip clip = AudioSystem.getClip();
 				clip.open(AudioSystem.getAudioInputStream(new File(aani)));
@@ -306,7 +314,7 @@ public class PeliNakyma implements IPelinakyma {
 				if (nappula != null) {
 					ImageView nappulaImage;
 					NappulanVari vari = nappula.getVari();
-					
+
 					switch (nappula.getTyyppi()) {
 					case SOTILAS:
 						nappulaImage = Kuvakkeet.getSotilas(vari);
@@ -346,7 +354,7 @@ public class PeliNakyma implements IPelinakyma {
 			}
 		}
 	}
-	
+
 	public void paivitaLauta() {
 		pelilauta.getChildren().clear();
 		asetaRuudut();
@@ -369,23 +377,34 @@ public class PeliNakyma implements IPelinakyma {
 		System.out.println("Ruudut asetettu");
 	}
 
-	// Ratkaisu kuvan koon asettamiseen laudan ruudun mukaan
+	/**
+	 * Ratkaisu kuvan koon asettamiseen laudan ruudun mukaan
+	 * @param imageView ImageView olio joka halutaan skaalata
+	 * @param pane Pane olio johon Imageview halutaan skaalata
+	 * @return ImageView olio määrätyssä koossa
+	 */
 	public ImageView skaalaaKuvake(ImageView imageView, Pane pane) {
 		imageView.setSmooth(true);
-		
-		if(pane != null) {
+
+		if (pane != null) {
 			imageView.fitWidthProperty().bind(pane.widthProperty());
 			imageView.fitHeightProperty().bind(pane.heightProperty());
 		}
-		
-		imageView.setScaleX(imageView.getScaleX()*0.8);
-		imageView.setScaleY(imageView.getScaleY()*0.9);
-		
+
+		imageView.setScaleX(imageView.getScaleX() * 0.8);
+		imageView.setScaleY(imageView.getScaleY() * 0.9);
+
 		return imageView;
 	}
-	
 
-	// Lisää ruudun GridPaneen
+	/**
+	 * Lisää ruudun GridPaneen
+	 * 
+	 * @param rowIndex rivi indeksi johon ruutu luotaan
+	 * @param colIndex sarake indeksi johon ruutu luodaan
+	 * @param count    luku joka ylläpitää tiedon siitä onko indeksi parillinen vai
+	 *                 pariton
+	 */
 	public void addRuutu(int rowIndex, int colIndex, int count) {
 		ruutu = new Pane();
 		String vari = count % 2 == 0 ? tumma : vaalea;
@@ -435,18 +454,22 @@ public class PeliNakyma implements IPelinakyma {
 		}
 	}
 
-	//Vaihtaa vuoron ja kääntää lautaa
+	/**
+	 * Vaihtaa vuoron ja kääntää lautaa
+	 */
 	public void vaihdaVuoro() {
 		asetaVuoro();
 		kaannaLauta();
 	}
-	
-	//Asettaa vuoron kontrollerin mukaan
+
+	/**
+	 * Asettaa vuoron kontrollerin mukaan
+	 */
 	public void asetaVuoro() {
 		vuoro.setText(bundle.getString("PeliVuorossaTxt") + ": " + getNimiByVari(kontrolleri.getVuoro()));
 		vuorossa.setText(getNimiByVari(kontrolleri.getVuoro()));
-		
-		if(kontrolleri.getVuoro() == NappulanVari.VALKOINEN) {
+
+		if (kontrolleri.getVuoro() == NappulanVari.VALKOINEN) {
 			seuraava.setText(getNimiByVari(NappulanVari.MUSTA));
 		} else {
 			seuraava.setText(getNimiByVari(NappulanVari.VALKOINEN));
@@ -470,7 +493,12 @@ public class PeliNakyma implements IPelinakyma {
 		return nodes;
 	}
 
-	// Tehdään siirto ja lähetetään kontrolleriin
+	/**
+	 * Tehdään nappulan siirto ja lähetetään kontrolleriin
+	 * 
+	 * @param col sarakkeen arvo johon siirto tehdään
+	 * @param row rivin arvo johon siirto tehdään
+	 */
 	public void teeSiirto(int col, int row) {
 
 		if (!siirtoAloitettu) {
@@ -478,16 +506,17 @@ public class PeliNakyma implements IPelinakyma {
 			mistaY = row;
 			valittuNappula = getRuudunNappula(mistaX, mistaY);
 			System.out.println("VALITTU NAPPULA: " + valittuNappula);
-			
+
 			if (valittuNappula != null) {
 				ArrayList<Ruutu> siirrot = kontrolleri.getSiirrotNappulalle(col, row);
 				mahdSiirrot = naytaSiirrot(siirrot);
 				nappulaHighlight(valittuNappula, true);
 				siirtoAloitettu = true;
-				
+
 				aani(sound2);
 				System.out.println(kontrolleri.getPelitilanne()[mistaX][mistaY].getNappula().getTyyppi() + " "
-						+ kontrolleri.getPelitilanne()[mistaX][mistaY].getNappula().getVari() + " " + kontrolleri.getPelitilanne()[mistaX][mistaY].getNappula());
+						+ kontrolleri.getPelitilanne()[mistaX][mistaY].getNappula().getVari() + " "
+						+ kontrolleri.getPelitilanne()[mistaX][mistaY].getNappula());
 			}
 
 		} else if (!(mistaX == col && mistaY == row) && valittuNappula != null) {
@@ -520,62 +549,64 @@ public class PeliNakyma implements IPelinakyma {
 			mahdSiirrot = null;
 		}
 	}
-	 
+
 	public void luovuta() {
 		toggleShadow();
-		
+
 		ImageView luovutusLogo;
 		Stage stage = (Stage) lautaNakyma.getScene().getWindow();
 		Alert.AlertType type = Alert.AlertType.CONFIRMATION;
 		Alert alert = new Alert(type, "");
-		
+
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner(stage);
-		
+
 		alert.getDialogPane().setContentText(bundle.getString("PeliLuovutuksenVarmistaminenTxt"));
-		alert.getDialogPane().setHeaderText(bundle.getString("PeliLuovutuksenVarmistaminen2Txt") + ", " + getNimiByVari(kontrolleri.getVuoro()) + "?");
+		alert.getDialogPane().setHeaderText(bundle.getString("PeliLuovutuksenVarmistaminen2Txt") + ", "
+				+ getNimiByVari(kontrolleri.getVuoro()) + "?");
 		alert.setTitle(bundle.getString("PeliLuovutuksenOtsikkoTxt"));
-		
+
 		luovutusLogo = Kuvakkeet.getKuningas(kontrolleri.getVuoro());
 		luovutusLogo = skaalaaKuvake(luovutusLogo, null);
 		luovutusLogo.setFitHeight(70);
 		luovutusLogo.setFitWidth(70);
 		alert.getDialogPane().setGraphic(luovutusLogo);
-		
+
 		Optional<ButtonType> result = alert.showAndWait();
-		
-		if(result.get() == ButtonType.OK) {
+
+		if (result.get() == ButtonType.OK) {
 			System.out.println(kontrolleri.getVuoro() + " luovuttaa");
-			kontrolleri.luovuta(/*kontrolleri.getVuoro() == NappulanVari.MUSTA
-				? NappulanVari.VALKOINEN
-				: NappulanVari.MUSTA*/
+			kontrolleri.luovuta(/*
+								 * kontrolleri.getVuoro() == NappulanVari.MUSTA ? NappulanVari.VALKOINEN :
+								 * NappulanVari.MUSTA
+								 */
 			);
-		} else if (result.get() == ButtonType.CANCEL){
+		} else if (result.get() == ButtonType.CANCEL) {
 			System.out.println(kontrolleri.getVuoro() + " ei luovuta");
 		}
-		
+
 		toggleShadow();
 	}
-	
+
 	public void shakkiHuomautus() {
 		shakki.setVisible(true);
-		PauseTransition visiblePause = new PauseTransition(
-				Duration.seconds(4)
-				);
-		visiblePause.setOnFinished(
-				event -> shakki.setVisible(false));
+		PauseTransition visiblePause = new PauseTransition(Duration.seconds(4));
+		visiblePause.setOnFinished(event -> shakki.setVisible(false));
 		visiblePause.play();
 	}
 
 	public void avaaKorotus() throws IOException {
-		InitFXML.avaaFxml(new Korotus_kontrolleri(this, kontrolleri.getVuoro()), "korotus.fxml", "Sotilaan korotus", Modality.APPLICATION_MODAL, StageStyle.UNDECORATED, lautaNakyma);
+		InitFXML.avaaFxml(new Korotus_kontrolleri(this, kontrolleri.getVuoro()), "korotus.fxml", "Sotilaan korotus",
+				Modality.APPLICATION_MODAL, StageStyle.UNDECORATED, lautaNakyma);
 	}
 
 	public void valittuKorotus(NappulanTyyppi tyyppi) {
 		korotusTyyppi = tyyppi;
 	}
 
-	//Asettaa lautanäkymään blur-efektin
+	/**
+	 * Asettaa lautanäkymään blur-efektin
+	 */
 	public void toggleShadow() {
 		if (!stageShadow) {
 			lautaNakyma.setEffect(new BoxBlur(5, 5, 5));
@@ -585,35 +616,40 @@ public class PeliNakyma implements IPelinakyma {
 
 		stageShadow = !stageShadow;
 	}
-	
+
+	/**
+	 * Metodi joka luo erillisen ikkunan voittajan ilmoittamiseksi
+	 * 
+	 * @param vari voittajan nappuloiden väri
+	 */
 	public void voittoIkkuna(NappulanVari vari) {
 		ImageView voittoLogo;
 		Stage stage = (Stage) lautaNakyma.getScene().getWindow();
 		Alert.AlertType type = Alert.AlertType.INFORMATION;
 		Alert alert = new Alert(type, "");
-		
+
 		voittoLogo = Kuvakkeet.getKuningas(vari);
 		voittoLogo = skaalaaKuvake(voittoLogo, null);
 		voittoLogo.setFitHeight(70);
 		voittoLogo.setFitWidth(70);
-		
+
 		alert.getDialogPane().setGraphic(voittoLogo);
 		alert.initModality(Modality.APPLICATION_MODAL);
 		alert.initOwner(stage);
 		alert.getDialogPane().setHeaderText(getNimiByVari(vari) + " " + bundle.getString("PeliVoittoikkunaTxt"));
 		alert.getDialogPane().setContentText(bundle.getString("PeliVoittoikkunaPaluuTxt"));
 		alert.setTitle(bundle.getString("PeliVoittoikkunaOtsikkoTxt"));
-		
+
 		@SuppressWarnings("unused")
 		Optional<ButtonType> result = alert.showAndWait();
-		
+
 		try {
-			//Parent root = FXMLLoader.load(getClass().getResource("Alkuvalikko.fxml"));
+			// Parent root = FXMLLoader.load(getClass().getResource("Alkuvalikko.fxml"));
 			loader = new FXMLLoader(getClass().getResource("Alkuvalikko.fxml"));
 			loader.setResources(bundle);
 			Parent root = loader.load();
 			Scene scene = new Scene(root);
-			
+
 			stage.setScene(scene);
 			stage.show();
 		} catch (Exception e) {
@@ -621,17 +657,17 @@ public class PeliNakyma implements IPelinakyma {
 		}
 
 	}
-	
-	//Asetusten asettaminen lautanäkymään
+
+	// Asetusten asettaminen lautanäkymään
 	public void asetaKaantyminen(boolean arvo) {
 		kaantyminen = arvo;
 		System.out.println("LAUDAN KÄÄNTYMINEN: " + kaantyminen);
 	}
-	
+
 	public void asetaDarkMode(boolean arvo) {
 		darkMode = arvo;
 	}
-	
+
 	public void asetaAanet(boolean arvo) {
 		aanet = arvo;
 		System.out.println("ÄÄNET: " + kaantyminen);
@@ -642,12 +678,6 @@ public class PeliNakyma implements IPelinakyma {
 		System.out.println("Shakki!");
 		shakkiHuomautus();
 	}
-
-	/*@Override
-	public void pelinVoitti(NappulanVari voittaja) {
-		System.out.println("PELIN VOITTI " + getNimiByVari(voittaja) + " (" + voittaja + ")");
-		voittoIkkuna(voittaja);
-	}*/
 
 	@Override
 	public NappulanTyyppi korota() {
@@ -664,20 +694,34 @@ public class PeliNakyma implements IPelinakyma {
 		return korotusTyyppi;
 	}
 
+	/**
+	 * Metodi ilmoittaa pelin voittajan erilliseen ikkunaan
+	 * 
+	 * @param pelaaja Pelaaja olio joka on voittanut pelin
+	 */
 	@Override
 	public void pelinVoitti(Pelaaja pelaaja) {
 		System.out.println("PELIN VOITTI " + pelaaja.getKayttajaTunnus());
 		voittoIkkuna(getVariByNimi(pelaaja.getKayttajaTunnus()));
 	}
 
+	/**
+	 * Metodi palauttaa Pelaaja olion joka pelaa valkoisilla nappuloilla.
+	 * 
+	 * @return Pelaaja olio joka pelaa valkoisilla nappuloilla.
+	 */
 	@Override
 	public Pelaaja getValkoinenPelaaja() {
 		return pelaaja1;
 	}
 
+	/**
+	 * Metodi palauttaa Pelaaja olion joka pelaa mustilla nappuloilla.
+	 * 
+	 * @return Pelaaja olio joka pelaa mustilla nappuloilla.
+	 */
 	@Override
 	public Pelaaja getMustaPelaaja() {
-		// TODO Auto-generated method stub
 		return pelaaja2;
 	}
 }
