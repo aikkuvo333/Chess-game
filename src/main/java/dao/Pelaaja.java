@@ -75,6 +75,13 @@ public class Pelaaja {
 	public String getKayttajaTunnus() {
 		return kayttajaTunnus;
 	}
+	/**
+	 * Setteri pelaajan käyttäjätunnukselle
+	 * @param Pelaajan käyttäjätunnus string oliona
+	 */
+	public void setKayttajaTunnus(String tunnus) {
+		kayttajaTunnus = tunnus;
+	}
 	
 	/**
 	 * Metodi jolla asetetaan pelaajan pelaamat pelit.

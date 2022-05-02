@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 /*
  * @author Aivan Vo 3.2.2022
+ * @author OLiver Hamberg
  */
 
 public class Tilastoitupeli1_kontrolleri {
@@ -68,17 +69,19 @@ public class Tilastoitupeli1_kontrolleri {
 
 	public void lisaaMenuItemit(MenuButton btn, boolean isMusta) {
 		for (Pelaaja p : dbKontrolleri.getPelaajat()) {
-			MenuItem menuItem = new MenuItem(p.getKayttajaTunnus());
-			menuItem.setOnAction(a -> {
-				btn.setText(p.getKayttajaTunnus());
-				if (isMusta) {
-					musta = p;
-				} else {
-					valkoinen = p;
-				}
-			});
-			
-			btn.getItems().add(menuItem);
+			if(!p.getKayttajaTunnus().equals("Anonyymi")) {
+				MenuItem menuItem = new MenuItem(p.getKayttajaTunnus());
+				menuItem.setOnAction(a -> {
+					btn.setText(p.getKayttajaTunnus());
+					if (isMusta) {
+						musta = p;
+					} else {
+						valkoinen = p;
+					}
+				});
+				
+				btn.getItems().add(menuItem);
+			}
 		}
 	}
 

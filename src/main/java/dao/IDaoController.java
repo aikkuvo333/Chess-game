@@ -44,4 +44,5 @@ public interface IDaoController {
 	 * @return palauttaa true, jos pelaajan poistaminen onnistui, muuten false.
 	 */
 	public boolean poistaPelaaja(Pelaaja pelaaja);
+	public List<Pelaaja> haePelaaja(String nimi);
 }

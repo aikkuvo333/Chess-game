@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
- * @author Aivan Vo 27.2.2022, Elmo Vahvaselkä
+ * @author Aivan Vo 27.2.2022, Elmo Vahvaselkä, Oliver Hamberg
  */
 
 public class Tilastot2_kontrolleri {
@@ -78,14 +78,16 @@ public class Tilastot2_kontrolleri {
 	private Button poistaKayttajaBtn;
 
 	@FXML
-	void pelaajaMenu(ActionEvent event) {
+	void pelaajaMenu(ActionEvent event) { 
 		for (Pelaaja p : dbKontrolleri.getPelaajat()) {
-			MenuItem menuItem = new MenuItem(p.getKayttajaTunnus());
-			menuItem.setOnAction(a -> {
-				pelaajaMenuBtn.setText(p.getKayttajaTunnus());
-				openPelaajaData(p);
-			});
-			pelaajaMenuBtn.getItems().add(menuItem);
+			if(!p.getKayttajaTunnus().equals("Anonyymi")) {
+				MenuItem menuItem = new MenuItem(p.getKayttajaTunnus());
+				menuItem.setOnAction(a -> {
+					pelaajaMenuBtn.setText(p.getKayttajaTunnus());
+					openPelaajaData(p);
+				});
+				pelaajaMenuBtn.getItems().add(menuItem);
+			}
 		}
 
 	}
@@ -138,5 +140,8 @@ public class Tilastot2_kontrolleri {
 	@FXML
 	void poistaKayttaja(ActionEvent event) {
 		System.out.println("Poistetaan kayttaja: ");
+		for(Pelaaja p : dbKontrolleri.haePelaaja(pelaajanNimi.getText())) {
+			dbKontrolleri.poistaPelaaja(p);
+		}
 	}
 }

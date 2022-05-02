@@ -126,7 +126,9 @@ public class Leaderboard_kontrolleri {
 		peleja.setCellValueFactory(new PropertyValueFactory<PelaajaMuutos, String>("peleja"));
 
 		for (Pelaaja p : dbKontrolleri.getPelaajat()) {
-			taulukkolista.add(new PelaajaMuutos(p));
+			if(!p.getKayttajaTunnus().equals("Anonyymi")) {
+				taulukkolista.add(new PelaajaMuutos(p));
+			}
 		}
 
 		leaderboardtaulu.setItems(taulukkolista);

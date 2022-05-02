@@ -1,10 +1,14 @@
 package dao;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.NativeQuery;
+import org.hibernate.query.Query;
 
 /**
  * 
@@ -54,6 +58,11 @@ public class DBKontrolleri implements IDaoController {
 				+ " OR valkoinenPelaaja =  " + p.getPelaajaId()).getResultList();
 		return tulokset;
 	}
+	public List<Pelaaja> haePelaaja(String nimi) {
+		NativeQuery<Pelaaja> query = ses.createNativeQuery("select * from Pelaaja where kayttajaTunnus = ?", Pelaaja.class); 
+		query.setParameter(1, nimi);  
+		return query.getResultList();
+	}
 
 	@Override
 	public boolean tallennaPeli(PelinTiedot pelinTiedot) {
@@ -69,7 +78,10 @@ public class DBKontrolleri implements IDaoController {
 
 	@Override
 	public boolean poistaPelaaja(Pelaaja pelaaja) {
-		// TODO Auto-generated method stub
+		ses.beginTransaction();
+		pelaaja.setKayttajaTunnus("Anonyymi");
+		SQLQuery sqlQuery = ses.createSQLQuery("UPDATE Pelaaja SET kayttajaTunnus = \"Anonyymi\" WHERE kayttajaTunnus = \""+pelaaja.getKayttajaTunnus() +"\";");
+		sqlQuery.executeUpdate();
 		return false;
 	}
 

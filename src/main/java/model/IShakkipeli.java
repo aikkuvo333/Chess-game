@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Rajapinta Shakkipelin toiminnallisuudella.
 * @author Elmo Vahvaselkä 
-* @author Oliver Hamberg 1.3.2022
+* @author Oliver Hamberg
 */
 
 public interface IShakkipeli {
