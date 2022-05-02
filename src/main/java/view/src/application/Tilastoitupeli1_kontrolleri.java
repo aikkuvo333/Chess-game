@@ -16,7 +16,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-/*
+/**
+ * Luokka <code>Tilastoitupeli1_kontrolleri</code> luo käyttöliittymän Tilastoidun pelin pelaajavalinnan näkymän.
+ * 
  * @author Aivan Vo 3.2.2022
  * @author Oliver Hamberg
  */

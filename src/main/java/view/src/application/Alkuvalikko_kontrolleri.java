@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 import java.net.URISyntaxException;
 
 /**
+ * Luokka <code>Alkuvalikko_kontrolleri</code> luo käyttöliittymän alkuvalikkonäkymän.
+ * 
  * @author Aivan Vo 5.2.2022
  */
 
@@ -23,6 +25,7 @@ public class Alkuvalikko_kontrolleri {
 	private Parent root;
 	private FXMLLoader loader;
 
+	
 	@FXML
 	private Button tilastotBtn;
 

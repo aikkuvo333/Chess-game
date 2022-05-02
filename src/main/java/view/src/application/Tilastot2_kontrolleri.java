@@ -24,7 +24,10 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
+/**
+ * 
+ * Luokka <code>Tilastot2_kontrolleri</code> luo Omat tilastot -käyttöliittymänäkymän.
+ * 
  * @author Aivan Vo 27.2.2022
  * @author Oliver Hamberg
  * @author Elmo Vahvaselkä

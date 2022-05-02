@@ -24,7 +24,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-/*
+/**
+ * 
+ * Luokka <code>Leaderboard_kontrolleri</code> luo käyttöliittymän Leaderboard -näkymän.
+ * 
  * @author Aivan Vo
  * @author Oliver Hamberg
  * @author Elmo Vahvaselkä

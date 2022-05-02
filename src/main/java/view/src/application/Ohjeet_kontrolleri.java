@@ -12,6 +12,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
+/**
+ * Luokka <code>Ohjeet_kontrolleri</code> luo käyttöliittymän Peliohje -näkymän.
+ *
+ */
 public class Ohjeet_kontrolleri {
 
 	private Stage stage;
