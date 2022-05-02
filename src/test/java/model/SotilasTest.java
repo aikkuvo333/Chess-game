@@ -85,7 +85,7 @@ class SotilasTest {
 
 	@Test
 	@DisplayName("Valkoinen palauttaa oikean määrän siirtoja, kun on mahdollista syödä musta")
-	public void valkoinenSyö() {
+	public void valkoinenSyo() {
 		lauta.getLauta()[2][4].setNappula(new Sotilas(NappulanVari.VALKOINEN));
 		((Sotilas) lauta.getLauta()[2][4].getNappula()).ekaSiirtoTehty();
 
@@ -100,7 +100,7 @@ class SotilasTest {
 
 	@Test
 	@DisplayName("Musta palauttaa oikean määrän siirtoja, kun on mahdollista syödä valkoinen")
-	public void mustaSyö() {
+	public void mustaSyo() {
 		lauta.getLauta()[2][5].setNappula(new Sotilas(NappulanVari.MUSTA));
 		((Sotilas) lauta.getLauta()[2][5].getNappula()).ekaSiirtoTehty();
 
