@@ -19,11 +19,7 @@ import javafx.stage.Stage;
  */
 
 /**
- * @author aivanvo
- *
- */
-/**
- * @author aivanvo
+ * @author Aivan Vo
  *
  */
 public class Alkuvalikko_kontrolleri {
