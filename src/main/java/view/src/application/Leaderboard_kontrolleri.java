@@ -25,7 +25,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /*
- * @author Aivan Vo 7.3.2022, Elmo Vahvaselkä
+ * @author Aivan Vo
+ * @author Oliver Hamberg
+ * @author Elmo Vahvaselkä
  */
 
 public class Leaderboard_kontrolleri {

@@ -3,8 +3,8 @@ package dao;
 import java.util.List;
 
 /**
- * Rajapinta, jonka avulla toteutetaan tietokantaan tellentaminen.
- * @author Oliver Hamberg 14.3.2022, 
+ * Rajapinta, jonka avulla toteutetaan tietokantaan tallentaminen.
+ * @author Oliver Hamberg
  * @author Elmo Vahvaselkä
  */
 public interface IDaoController {

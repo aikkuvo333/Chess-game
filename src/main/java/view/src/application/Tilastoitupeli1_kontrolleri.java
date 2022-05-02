@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 
 /*
  * @author Aivan Vo 3.2.2022
- * @author OLiver Hamberg
+ * @author Oliver Hamberg
  */
 
 public class Tilastoitupeli1_kontrolleri {

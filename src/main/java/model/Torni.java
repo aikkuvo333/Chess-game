@@ -1,6 +1,7 @@
 package model;
 
 /**
+ * @author Oliver Hamberg
 * @author Elmo Vahvaselkä 29.1.2022
 */
 
@@ -33,7 +34,7 @@ public class Torni extends NappulaEka {
 		ArrayList<Ruutu> siirrot = new ArrayList<>();
 		{
 
-			// Siirrot tornin ruudusta oikealle
+			/* Tornin kaikki mahdolliset siirrot, kun siirrytään oikealle */
 			int x = ruutu.getX();
 			while (x < 7) {
 				x++;
@@ -53,7 +54,7 @@ public class Torni extends NappulaEka {
 				siirrot.add(new Ruutu(x, ruutu.getY()));
 			}
 
-			// Siirrot tornin ruudusta vasemmalle
+			/* Tornin kaikki mahdolliset siirrot, kun siirrytään vasemmalle */
 			x = ruutu.getX();
 			while (x > 0) {
 				x--;
@@ -73,7 +74,7 @@ public class Torni extends NappulaEka {
 				siirrot.add(new Ruutu(x, ruutu.getY()));
 			}
 
-			// Siirrot tornin ruudusta ylöspäin
+			/* Tornin kaikki mahdolliset siirrot, kun siirrytään ylöspäin */
 			int y = ruutu.getY();
 			while (y < 7) {
 				y++;
@@ -93,7 +94,7 @@ public class Torni extends NappulaEka {
 				siirrot.add(new Ruutu(ruutu.getX(), y));
 			}
 
-			// Siirrot tornin ruudusta alaspäin
+			/* Tornin kaikki mahdolliset siirrot, kun siirrytään alaspäin */
 			y = ruutu.getY();
 			while (y > 0) {
 				y--;

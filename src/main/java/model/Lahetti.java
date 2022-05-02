@@ -2,28 +2,41 @@ package model;
 
 import java.util.ArrayList;
 
-//* @author Oliver Hamberg*//
+/* 
+ * Lähetti-nappulan toiminnallisuus shakkilaudalla
+ * @author Oliver Hamberg
+ * 
+ */
 
 
 public class Lahetti extends Nappula{
 	int x,y;
+	/* Lähetin konstruktori
+	 * @param Nappulan väri
+	 */
 	public Lahetti(NappulanVari vari) {
 		this.vari = vari;
 		this.tyyppi = NappulanTyyppi.LAHETTI;
 	}
+	/* Palauttaa lähetin kaikki mahdolliset siirrot shakkilaudalla 
+	 * @param ruutu sisältää nappulan sijainnin.
+	 * @param lauta sisältää tiedon shakkilaudan tilanteesta.
+	 */
 	@Override
 	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu, Ruutu[][] lauta) {
 		ArrayList<Ruutu> siirrot = new ArrayList<>();
 		
-		//Kun lähetti siirtyy ylös vasemmalle
+		/* Lähetin kaikki mahdolliset siirrot, kun siirrytään viistoon ylös vasemmalle */
 		x = ruutu.getX();
 		y = ruutu.getY();
 		while(x > 0 && y < 7) {
 			x--;
 			y++;
-			//Jos ruudussa on jo jotain
+			/* Jos ruudussa on jo jokin nappula */
 			if(lauta[x][y].getNappula() != null) {
-				//Jos ruudussa on vastustaja
+				/* Jos edessä oleva nappula on eri värinen (vastustaja) kuin tämän Lähetti-nappulan väri
+				 * voimme edetä ja syödä eri värisen nappulan.
+				 */
 				if(lauta[x][y].getNappula().getVari() != this.vari) {
 					siirrot.add(new Ruutu(x, y));
 				}
@@ -32,15 +45,13 @@ public class Lahetti extends Nappula{
 			siirrot.add(new Ruutu(x, y));
 		}
 		
-		//Kun lähetti siirtyy alas oikealle
+		/* Lähetin kaikki mahdolliset siirrot, kun siirrytään viistoon alas oikealle */
 		x = ruutu.getX();
 		y = ruutu.getY();
 		while(x < 7 && y > 0) {
 			x++;
 			y--;
-			//Jos ruudussa on jo jotain
 			if(lauta[x][y].getNappula() != null) {
-				//Jos ruudussa on vastustaja
 				if(lauta[x][y].getNappula().getVari() != this.vari) {
 					siirrot.add(new Ruutu(x, y));
 				}
@@ -49,15 +60,13 @@ public class Lahetti extends Nappula{
 			siirrot.add(new Ruutu(x, y));
 		}
 		
-		//Kun lähetti siirtyy alas vasemmalle
+		/* Lähetin kaikki mahdolliset siirrot, kun siirrytään viistoon alas vasemmalle */
 		x = ruutu.getX();
 		y = ruutu.getY();
 		while(x > 0 && y > 0) {
 			x--;
 			y--;
-			//Jos ruudussa on jo jotain
 			if(lauta[x][y].getNappula() != null) {
-				//Jos ruudussa on vastustaja
 				if(lauta[x][y].getNappula().getVari() != this.vari) {
 					siirrot.add(new Ruutu(x, y));
 				}
@@ -66,15 +75,13 @@ public class Lahetti extends Nappula{
 			siirrot.add(new Ruutu(x, y));
 		}
 		
-		//Kun lähetti siirtyy ylös oikealle
+		/* Lähetin kaikki mahdolliset siirrot, kun siirrytään viistoon ylös oikealle */
 		x = ruutu.getX();
 		y = ruutu.getY();
 		while(x < 7 && y < 7) {
 			x++;
 			y++;
-			//Jos ruudussa on jo jotain
 			if(lauta[x][y].getNappula() != null) {
-				//Jos ruudussa on vastustaja
 				if(lauta[x][y].getNappula().getVari() != this.vari) {
 					siirrot.add(new Ruutu(x, y));
 				}

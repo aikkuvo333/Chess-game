@@ -25,7 +25,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
- * @author Aivan Vo 27.2.2022, Elmo Vahvaselkä, Oliver Hamberg
+ * @author Aivan Vo 27.2.2022
+ * @author Oliver Hamberg
+ * @author Elmo Vahvaselkä
  */
 
 public class Tilastot2_kontrolleri {

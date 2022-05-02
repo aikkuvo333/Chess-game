@@ -1,27 +1,44 @@
 package model;
 
 import java.util.ArrayList;
-/* @author Oliver Hamberg */
+/* 
+ * Kuningatar nappulan toimivuus shakkilaudalla
+ * @author Oliver Hamberg 
+ *
+ */
+
 
 public class Kuningatar extends Nappula{
 	int x,y;
+	
+	/* Konstruktori Kuningatar nappulalle
+	 * @param Nappulan väri
+	 */
 	public Kuningatar(NappulanVari vari) {
 		this.vari = vari;
 		this.tyyppi = NappulanTyyppi.KUNINGATAR;
 	}
+	
+	/* Palauttaa kuningattaren kaikki mahdolliset sirrot shakkilaudalla
+	 * Toimii lähes samalla tavalla kuin lähetti + torni nappulat yhdistettynä.
+	 * @param ruutu sisältää nappulan sijainnin.
+	 * @param lauta sisältää tiedon shakkilaudan tilanteesta.
+	 */
 	@Override
 	public ArrayList<Ruutu> getSiirrot(Ruutu ruutu, Ruutu[][] lauta) {
 		ArrayList<Ruutu> siirrot = new ArrayList<>();
 		
-		//Kun Kuningatar siirtyy ylös vasemmalle
+		/* Kuningattaren mahdolliset siirrot liikuessa viistoon ylös vasemmalle shakkilaudalla */
 		x = ruutu.getX();
 		y = ruutu.getY();
 		while(x > 0 && y < 7) {
 			x--;
 			y++;
-			//Jos ruudussa on jo jotain
+			/* Jos ruudussa on jo jokin nappula */
 			if(lauta[x][y].getNappula() != null) {
-				//Jos ruudussa on vastustaja
+				/* Jos edessä oleva nappula on eri värinen (vastustaja) kuin tämän Kuningatar-nappulan väri
+				 * voimme edetä ja syödä eri värisen nappulan.
+				 */
 				if(lauta[x][y].getNappula().getVari() != this.vari) {
 					siirrot.add(new Ruutu(x, y));
 				}
@@ -30,15 +47,13 @@ public class Kuningatar extends Nappula{
 			siirrot.add(new Ruutu(x, y));
 		}
 		
-		//Kun Kuningatar siirtyy alas oikealle
+		/* Kuningattaren mahdolliset siirrot liikuessa viistoon alas oikealle shakkilaudalla */
 		x = ruutu.getX();
 		y = ruutu.getY();
 		while(x < 7 && y > 0) {
 			x++;
 			y--;
-			//Jos ruudussa on jo jotain
 			if(lauta[x][y].getNappula() != null) {
-				//Jos ruudussa on vastustaja
 				if(lauta[x][y].getNappula().getVari() != this.vari) {
 					siirrot.add(new Ruutu(x, y));
 				}
@@ -47,15 +62,13 @@ public class Kuningatar extends Nappula{
 			siirrot.add(new Ruutu(x, y));
 		}
 		
-		//Kun Kuningatar siirtyy alas vasemmalle
+		/* Kuningattaren mahdolliset siirrot liikuessa viistoon alas vasemmalle shakkilaudalla */
 		x = ruutu.getX();
 		y = ruutu.getY();
 		while(x > 0 && y > 0) {
 			x--;
 			y--;
-			//Jos ruudussa on jo jotain
 			if(lauta[x][y].getNappula() != null) {
-				//Jos ruudussa on vastustaja
 				if(lauta[x][y].getNappula().getVari() != this.vari) {
 					siirrot.add(new Ruutu(x, y));
 				}
@@ -64,15 +77,13 @@ public class Kuningatar extends Nappula{
 			siirrot.add(new Ruutu(x, y));
 		}
 		
-		//Kun Kuningatar siirtyy ylös oikealle
+		/* Kuningattaren mahdolliset siirrot liikuessa viistoon ylös oikealle shakkilaudalla */
 		x = ruutu.getX();
 		y = ruutu.getY();
 		while(x < 7 && y < 7) {
 			x++;
 			y++;
-			//Jos ruudussa on jo jotain
 			if(lauta[x][y].getNappula() != null) {
-				//Jos ruudussa on vastustaja
 				if(lauta[x][y].getNappula().getVari() != this.vari) {
 					siirrot.add(new Ruutu(x, y));
 				}
@@ -81,14 +92,12 @@ public class Kuningatar extends Nappula{
 			siirrot.add(new Ruutu(x, y));
 		}
 		
-		//Kun Kuningatar liikkuu vasemmalle
+		/* Kuningattaren mahdolliset siirrot liikuessa vasemmalle shakkilaudalla */
 		x = ruutu.getX();
 		y = ruutu.getY();
 		while (x > 0) {
 			x--;
-			//Jos ruudussa on jo jotain
 			if (lauta[x][y].getNappula() != null) {
-				//Jos ruudussa on vastustaja
 				if (lauta[x][y].getNappula().getVari() != this.vari) {
 					siirrot.add(new Ruutu(x, y));
 					break;
@@ -98,14 +107,12 @@ public class Kuningatar extends Nappula{
 			siirrot.add(new Ruutu(x, y));
 		}
 		
-		//Kun Kuningatar liikkuu oikealle
+		/* Kuningattaren mahdolliset siirrot liikuessa oikealle shakkilaudalla */
 		x = ruutu.getX();
 		y = ruutu.getY();
 		while (x < 7) {
 			x++;
-			//Jos ruudussa on jo jotain
 			if (lauta[x][y].getNappula() != null) {
-				//Jos ruudussa on vastustaja
 				if (lauta[x][y].getNappula().getVari() != this.vari) {
 					siirrot.add(new Ruutu(x, y));
 					break;
@@ -115,14 +122,12 @@ public class Kuningatar extends Nappula{
 			siirrot.add(new Ruutu(x, y));
 		}
 		
-		//Kun Kuningatar liikkuu ylöspäin
+		/* Kuningattaren mahdolliset siirrot liikuessa ylöspäin shakkilaudalla */
 		x = ruutu.getX();
 		y = ruutu.getY();
 		while (y < 7) {
 			y++;
-			//Jos ruudussa on jo jotain
 			if (lauta[x][y].getNappula() != null) {
-				//Jos ruudussa on vastustaja
 				if (lauta[x][y].getNappula().getVari() != this.vari) {
 					siirrot.add(new Ruutu(x, y));
 					break;
@@ -132,14 +137,12 @@ public class Kuningatar extends Nappula{
 			siirrot.add(new Ruutu(x, y));
 		}
 		
-		//Kun Kuningatar liikkuu alaspäin
+		/* Kuningattaren mahdolliset siirrot liikuessa alaspäin shakkilaudalla */
 		x = ruutu.getX();
 		y = ruutu.getY();
 		while (y > 0) {
 			y--;
-			//Jos ruudussa on jo jotain
 			if (lauta[x][y].getNappula() != null) {
-				//Jos ruudussa on vastustaja
 				if (lauta[x][y].getNappula().getVari() != this.vari) {
 					siirrot.add(new Ruutu(x, y));
 					break;

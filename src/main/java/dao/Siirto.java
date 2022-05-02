@@ -19,6 +19,7 @@ import model.NappulanTyyppi;
 /**
  * Tähän luokkaan talletetaan yksittäiseen siirtoon liittyvät tiedot.
  * @author Elmo Vahvaselkä
+ * @author Oliver Hamberg
  *
  */
 
