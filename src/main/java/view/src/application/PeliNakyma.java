@@ -46,6 +46,8 @@ import java.io.*;
 import javax.sound.sampled.*;
 
 /**
+ * Luokka sisältää käyttöliittymän Pikapeli ja tilastoitu peli -näkymien
+ * toiminnallisuudet
  * 
  * @author Santeri Kuusisto
  * 
@@ -87,10 +89,6 @@ public class PeliNakyma implements IPelinakyma {
 	private boolean kaantyminen;
 	private boolean peruutus;
 	private boolean aanet;
-
-	// Lisätään myöhemmin
-	@SuppressWarnings("unused")
-	private boolean darkMode;
 
 	private boolean stageShadow = false;
 
@@ -213,7 +211,6 @@ public class PeliNakyma implements IPelinakyma {
 		asetukset = new Asetukset();
 		kaantyminen = asetukset.isLaudanAnimaatio();
 		aanet = asetukset.isAanet();
-		darkMode = asetukset.isDarkMode();
 
 		// Asettaa laudan elementit keskelle ruutua ikkunan venytyksen yhteydessä
 		lautaNakyma.widthProperty().addListener((obs, oldVal, newVal) -> {
@@ -237,10 +234,20 @@ public class PeliNakyma implements IPelinakyma {
 		System.out.println(vuorossa.getLayoutX());
 	}
 
+	/**
+	 * Getteri pelaajatunnukselle nappulanvärin perusteella
+	 * @param vari sen pelaajan väri, jonka nimi halutaan
+	 * @return Stringinä halutun värin pelaajan nimen
+	 */
 	public String getNimiByVari(NappulanVari vari) {
 		return pelaajat.get(vari);
 	}
 
+	/**
+	 * Getteri nappulan värille pelaajatunnuksen perusteella
+	 * @param nimi sen pelaajan nimi, jonka väri halutaan
+	 * @return NappulanVari enumina halutun pelaajan värin
+	 */
 	public NappulanVari getVariByNimi(String nimi) {
 		NappulanVari vari = null;
 
@@ -304,6 +311,9 @@ public class PeliNakyma implements IPelinakyma {
 		}
 	}
 
+	/**
+	 * Nappuloiden kuvien asettaminen pelilaudalle
+	 */
 	public void asetaNappulat() {
 		Nappula nappula;
 		Ruutu[][] ruutu = kontrolleri.getPelitilanne();
@@ -361,6 +371,9 @@ public class PeliNakyma implements IPelinakyma {
 		asetaNappulat();
 	}
 
+	/**
+	 * Ruutujen asettaminen laudalle
+	 */
 	public void asetaRuudut() {
 		int col = 8;
 		int row = 8;
@@ -379,8 +392,9 @@ public class PeliNakyma implements IPelinakyma {
 
 	/**
 	 * Ratkaisu kuvan koon asettamiseen laudan ruudun mukaan
+	 * 
 	 * @param imageView ImageView olio joka halutaan skaalata
-	 * @param pane Pane olio johon Imageview halutaan skaalata
+	 * @param pane      Pane olio johon Imageview halutaan skaalata
 	 * @return ImageView olio määrätyssä koossa
 	 */
 	public ImageView skaalaaKuvake(ImageView imageView, Pane pane) {
@@ -421,6 +435,12 @@ public class PeliNakyma implements IPelinakyma {
 
 	}
 
+	/**
+	 * getteri valitulla ruudulla olevalle nappulalle
+	 * @param col ruudun sarake, jonka nappula halutaan hakea
+	 * @param row ruudun rivi, jonka nappula halutaan hakea
+	 * @return Node palauttaa sen nappulan kuvan, joka sijaitsee siinä ruudussa jolta se on pyydetty
+	 */
 	public Node getRuudunNappula(int col, int row) {
 		Node kuva = null;
 		ObservableList<Node> children = pelilauta.getChildren();
@@ -438,6 +458,12 @@ public class PeliNakyma implements IPelinakyma {
 		return kuva;
 	}
 
+	/**
+	 * Nappulakuvan luonti
+	 * @param nappulaKuvake kuva siitä nappulasta joka halutaan luoda
+	 * @param ruutu Pane johon kuva halutaan asettaa
+	 * @return ImageView palauttaa halutun nappulan skaalatun kuvan 
+	 */
 	public ImageView luoNappula(ImageView nappulaKuvake, Pane ruutu) {
 		ImageView kuvanView = skaalaaKuvake(nappulaKuvake, ruutu);
 		kuvanView.setMouseTransparent(true);
@@ -445,6 +471,11 @@ public class PeliNakyma implements IPelinakyma {
 		return kuvanView;
 	}
 
+	/**
+	 * Nappulan napsautuksen ulkonäön muuttaminen  
+	 * @param nappula napsautettu pelinappula
+	 * @param onkoValittu boolean arvo, true jos hiiri on napsauttanut valittua nappulaa
+	 */
 	public void nappulaHighlight(Node nappula, boolean onkoValittu) {
 
 		if (onkoValittu) {
@@ -476,6 +507,11 @@ public class PeliNakyma implements IPelinakyma {
 		}
 	}
 
+	/**
+	 * Palauttaa listan joka sisältää mahdolliset siirrot käyttöliittymänäkymässä
+	 * @param siirrot lista joka sisältää Ruutu oliot
+	 * @return Lista joka sisätää Node oliot mahdollisista siirtopaikoista taulukon arvoina
+	 */
 	public ArrayList<Node> naytaSiirrot(ArrayList<Ruutu> siirrot) {
 		ArrayList<Node> nodes = new ArrayList<Node>();
 		Pane pane;
@@ -550,6 +586,9 @@ public class PeliNakyma implements IPelinakyma {
 		}
 	}
 
+	/**
+	 * Luovutuksen varmistus -ikkunan luonti
+	 */
 	public void luovuta() {
 		toggleShadow();
 
@@ -658,14 +697,13 @@ public class PeliNakyma implements IPelinakyma {
 
 	}
 
-	// Asetusten asettaminen lautanäkymään
+	/**
+	 * Asetusten asettaminen lautanäkymään
+	 * @param arvo 
+	 */
 	public void asetaKaantyminen(boolean arvo) {
 		kaantyminen = arvo;
 		System.out.println("LAUDAN KÄÄNTYMINEN: " + kaantyminen);
-	}
-
-	public void asetaDarkMode(boolean arvo) {
-		darkMode = arvo;
 	}
 
 	public void asetaAanet(boolean arvo) {
