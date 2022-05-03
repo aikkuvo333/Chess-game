@@ -112,6 +112,6 @@
             </TableView>
          </children>
       </VBox>
-      <Button fx:id="poistaKayttajaBtn" layoutX="629.0" layoutY="454.0" mnemonicParsing="false" onAction="#poistaKayttaja" style="-fx-text-fill: white; -fx-label-padding: 4px; -fx-background-radius: 8px; -fx-background-color: red; -fx-min-width: 50px;" text="Poista kayttaja" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+      <Button fx:id="poistaKayttajaBtn" layoutX="629.0" layoutY="454.0" mnemonicParsing="false" onAction="#poistaKayttaja" style="-fx-text-fill: white; -fx-label-padding: 4px; -fx-background-radius: 8px; -fx-background-color: red; -fx-min-width: 50px;" text="%TilastotPoistaKayttajaBtn" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
    </children>
 </AnchorPane>
