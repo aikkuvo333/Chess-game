@@ -1,4 +1,4 @@
-package view.src.application;
+  package view.src.application;
 
 import java.io.IOException;
 
@@ -16,11 +16,6 @@ import javafx.stage.Stage;
  * alkuvalikkonäkymän.
  * 
  * @author Aivan Vo 5.2.2022
- */
-
-/**
- * @author Aivan Vo
- *
  */
 public class Alkuvalikko_kontrolleri {
 
