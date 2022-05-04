@@ -1,7 +1,7 @@
 package model;
 
 import java.util.ArrayList;
-/* 
+/** 
  * Kuningatar nappulan toimivuus shakkilaudalla
  * @author Oliver Hamberg 
  *
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class Kuningatar extends Nappula{
 	int x,y;
 	
-	/* Konstruktori Kuningatar nappulalle
+	/** Konstruktori Kuningatar nappulalle
 	 * @param Nappulan väri
 	 */
 	public Kuningatar(NappulanVari vari) {
@@ -19,7 +19,7 @@ public class Kuningatar extends Nappula{
 		this.tyyppi = NappulanTyyppi.KUNINGATAR;
 	}
 	
-	/* Palauttaa kuningattaren kaikki mahdolliset sirrot shakkilaudalla
+	/** Palauttaa kuningattaren kaikki mahdolliset sirrot shakkilaudalla
 	 * Toimii lähes samalla tavalla kuin lähetti + torni nappulat yhdistettynä.
 	 * @param ruutu sisältää nappulan sijainnin.
 	 * @param lauta sisältää tiedon shakkilaudan tilanteesta.

@@ -2,23 +2,21 @@ package model;
 
 import java.util.ArrayList;
 
-/* 
+/** 
  * Lähetti-nappulan toiminnallisuus shakkilaudalla
  * @author Oliver Hamberg
  * 
  */
-
-
 public class Lahetti extends Nappula{
 	int x,y;
-	/* Lähetin konstruktori
+	/** Lähetin konstruktori
 	 * @param Nappulan väri
 	 */
 	public Lahetti(NappulanVari vari) {
 		this.vari = vari;
 		this.tyyppi = NappulanTyyppi.LAHETTI;
 	}
-	/* Palauttaa lähetin kaikki mahdolliset siirrot shakkilaudalla 
+	/** Palauttaa lähetin kaikki mahdolliset siirrot shakkilaudalla 
 	 * @param ruutu sisältää nappulan sijainnin.
 	 * @param lauta sisältää tiedon shakkilaudan tilanteesta.
 	 */
